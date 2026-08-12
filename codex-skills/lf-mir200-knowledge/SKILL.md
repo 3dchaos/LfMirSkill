@@ -41,6 +41,17 @@ If the root moves, either pass `--root` or set `LF_MIR200_KB_ROOT`.
 7. For code/script edits, preserve original encoding and style, and modify only the requested files.
 8. Validate statically after edits with `validate` and targeted searches.
 
+## Durable Mir200 Rules
+
+- Read Mir200 project text as ANSI by default. If the result is garbled, retry UTF-8. Preserve the original encoding when writing files back.
+- `[@OnKillMob]` requires the target map to include `ONKILLMON` in `MapInfo.txt`.
+- `[@KillMon]` does not require `ONKILLMON`; do not confuse it with `[@OnKillMob]`.
+- Boss or first-kill logic must match the full monster name from `MonGen.txt`. Do not silently ignore numeric, bracketed, or other suffixes.
+- When the same monster name appears on multiple maps, also check the current map and the relevant stage/state variable before changing global progress.
+- In `MapInfo.txt`, lines like `0 308,264 -> 0102 3,7` are map links: stepping on source map `0` at X308 Y264 sends the player to target map `0102` at X3 Y7. Coordinates may be written as `X,Y` or `X Y`; parse both.
+- Map links are directional. Do not assume a return path exists unless a separate reverse link is present, often on a neighboring coordinate.
+- For staged map-opening designs, block every entry path, not only NPC teleport menus: `MapInfo` links, `MAPMOVE`/`MAP`/`MAPS`/`GROUPMAPMOVE`, recall and exchange-map commands, dynamic maps, activities, item teleports, random movement, reconnect/death/respawn paths, robot scripts, and GM/admin bypasses.
+
 ## Training Workflow
 
 Use this loop when the user asks the skill to learn, train, self-upgrade, or extract reusable experience from `样本Mir200`:
@@ -63,6 +74,7 @@ python <skill-dir>\scripts\lf_kb.py update
 python <skill-dir>\scripts\lf_kb.py validate
 python <skill-dir>\scripts\lf_kb.py search "CHECKITEM GIVE 装备回收" --source all --limit 8
 python <skill-dir>\scripts\lf_kb.py search "MAPMOVE" --source sample --limit 5
+python <skill-dir>\scripts\lf_kb.py search "0 308 264 0102" --source mapinfo --limit 5
 python <skill-dir>\scripts\lf_kb.py inspect "knowledge_base/chapters/661-丢弃背包物品前触发.md"
 python <skill-dir>\scripts\lf_kb.py inspect "样本Mir200/Envir/QuestDiary/系统功能/装备转移.txt"
 python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/mir200-thinking.md"

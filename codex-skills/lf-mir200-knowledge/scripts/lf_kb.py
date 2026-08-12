@@ -14,6 +14,7 @@ DOCS_INDEX = "docs.json"
 SAMPLE_INDEX = "sample.json"
 THOUGHTS_INDEX = "thoughts.json"
 TRAINING_INDEX = "training-course.json"
+MAPINFO_LINKS_INDEX = "mapinfo-links.json"
 TEXT_EXTENSIONS = {".md", ".txt", ".ini"}
 SAMPLE_SKIP_EXTENSIONS = {".exe", ".db", ".dat", ".lic"}
 THINKING_SKIP_CATEGORIES = {"ConLog"}
@@ -37,6 +38,7 @@ PATTERN_RULES = [
     ("UI与交互", ["#SAY", "MESSAGEBOX", "OPENMERCHANTBIGDLG", "ITEMBOX", "Text:", "Img:", "Layout:", "MText:"]),
     ("状态回写", ["SET [", "MOV ", "SetOnTimer", "DelTextListLine", "AddTextListEx", "ReturnBoxItem", "UpdateItem", "SetCustomItemText"]),
     ("自动化与定时", ["AutoRun", "OnTimer", "SetOnTimer", "Robot", "Gmexecute", "#CALL"]),
+    ("地图链接", ["->", "MapInfo", "MAPMOVE"]),
 ]
 TRAINING_LESSONS = [
     {
@@ -90,10 +92,14 @@ TRAINING_LESSONS = [
     {
         "id": "lesson-07-world-config",
         "title": "地图、怪物与商人配置",
-        "goal": "学习 MapInfo、MapEvent、MonGen、MerChant、Npcs 等配置文件如何把脚本挂到世界上。",
-        "signals": ["MapInfo", "MapEvent", "MonGen", "MerChant", "Npcs", "NoRecall", "SAFE", "Mongen"],
+        "goal": "学习 MapInfo、MapEvent、MonGen、MerChant、Npcs 等配置文件如何把脚本挂到世界上，特别是 MapInfo 的地图链接行。",
+        "signals": ["MapInfo", "MapEvent", "MonGen", "MerChant", "Npcs", "NoRecall", "SAFE", "Mongen", "->"],
         "categories": ["MapInfo.txt", "MapEvent.txt", "MonGen.txt", "MerChant.txt", "Npcs.txt"],
-        "thinking_focus": ["功能脚本往往不是孤立文件，要从地图/NPC/刷怪配置找到它的挂载点。", "排查问题时同时看脚本内容和配置入口，确认玩家是否真的能触发。"],
+        "thinking_focus": [
+            "功能脚本往往不是孤立文件，要从地图/NPC/刷怪配置找到它的挂载点。",
+            "MapInfo 链接行表示玩家走到源地图源坐标时，被传送到目标地图目标坐标。",
+            "排查问题时同时看脚本内容和配置入口，确认玩家是否真的能触发。",
+        ],
     },
     {
         "id": "lesson-08-combined-systems",
@@ -210,6 +216,62 @@ def build_sample_index(root: Path) -> list[dict[str, str]]:
     return records
 
 
+def parse_mapinfo_link_line(line: str, line_number: int) -> dict[str, object] | None:
+    raw = line.rstrip("\r\n")
+    stripped = raw.strip()
+    if not stripped or stripped.startswith(";") or stripped.startswith("[") or "->" not in stripped:
+        return None
+
+    left, right = stripped.split("->", 1)
+    left_parts = left.replace(",", " ").split()
+    right_parts = right.replace(",", " ").split()
+    if len(left_parts) != 3 or len(right_parts) != 3:
+        return None
+
+    try:
+        source_x = int(left_parts[1])
+        source_y = int(left_parts[2])
+        target_x = int(right_parts[1])
+        target_y = int(right_parts[2])
+    except ValueError:
+        return None
+
+    return {
+        "kind": "map_link",
+        "line_number": line_number,
+        "source_map": left_parts[0],
+        "source_x": source_x,
+        "source_y": source_y,
+        "target_map": right_parts[0],
+        "target_x": target_x,
+        "target_y": target_y,
+        "raw": raw,
+    }
+
+
+def build_mapinfo_link_index(root: Path) -> list[dict[str, object]]:
+    mapinfo = root / "样本Mir200" / "Envir" / "MapInfo.txt"
+    if not mapinfo.exists():
+        return []
+
+    records: list[dict[str, object]] = []
+    for line_number, line in enumerate(read_text(mapinfo).splitlines(), start=1):
+        parsed = parse_mapinfo_link_line(line, line_number)
+        if not parsed:
+            continue
+        source = f"{parsed['source_map']}({parsed['source_x']},{parsed['source_y']})"
+        target = f"{parsed['target_map']}({parsed['target_x']},{parsed['target_y']})"
+        parsed["title"] = f"{source} -> {target}"
+        parsed["relative_path"] = f"{normalize_rel(mapinfo.relative_to(root))}:{line_number}"
+        parsed["text"] = (
+            f"MapInfo 地图链接规则: 当玩家走到源地图 {parsed['source_map']} 的 "
+            f"X{parsed['source_x']} Y{parsed['source_y']}，进入目标地图 {parsed['target_map']} 的 "
+            f"X{parsed['target_x']} Y{parsed['target_y']}。原始行: {parsed['raw']}"
+        )
+        records.append(parsed)
+    return records
+
+
 def detect_patterns(text: str) -> list[dict[str, object]]:
     upper = text.upper()
     results = []
@@ -312,6 +374,7 @@ def build_thought_summary(records: list[dict[str, str]]) -> dict[str, object]:
         "NPC 脚本常把问答、跳转、奖励和退出放在同一条线里处理。",
         "任务脚本常把 UI 交互、背包检测、物品流转和反馈消息绑定在一起。",
         "地图事件与自动化脚本常靠定时器、全局变量和场景条件驱动。",
+        "MapInfo 中的 `源地图 源X,源Y -> 目标地图 目标X,目标Y` 是地图链接；玩家踩到源坐标后进入目标坐标。",
     ]
     return {
         "principles": principles,
@@ -462,10 +525,12 @@ def write_indexes(root: Path, skill_dir: Path | None = None) -> dict[str, int]:
     out_dir.mkdir(parents=True, exist_ok=True)
     docs = build_docs_index(root)
     sample = build_sample_index(root)
+    mapinfo_links = build_mapinfo_link_index(root)
     thought = build_thought_summary(sample)
     course = build_training_course(sample)
     (out_dir / DOCS_INDEX).write_text(json.dumps(docs, ensure_ascii=False, indent=2), encoding="utf-8")
     (out_dir / SAMPLE_INDEX).write_text(json.dumps(sample, ensure_ascii=False, indent=2), encoding="utf-8")
+    (out_dir / MAPINFO_LINKS_INDEX).write_text(json.dumps(mapinfo_links, ensure_ascii=False, indent=2), encoding="utf-8")
     (out_dir / THOUGHTS_INDEX).write_text(json.dumps(thought, ensure_ascii=False, indent=2), encoding="utf-8")
     (out_dir / TRAINING_INDEX).write_text(json.dumps(course, ensure_ascii=False, indent=2), encoding="utf-8")
 
@@ -479,6 +544,7 @@ def write_indexes(root: Path, skill_dir: Path | None = None) -> dict[str, int]:
     return {
         "docs": len(docs),
         "sample": len(sample),
+        "mapinfo_links": len(mapinfo_links),
         "thoughts": len(thought.get("patterns", [])),
         "lessons": len(course.get("lessons", [])),
     }
@@ -538,6 +604,7 @@ def snippet(text: str, terms: list[str], radius: int = 90) -> str:
 def validate_root(root: Path) -> dict[str, object]:
     docs_index = root / INDEX_DIR / DOCS_INDEX
     sample_index = root / INDEX_DIR / SAMPLE_INDEX
+    mapinfo_links_index = root / INDEX_DIR / MAPINFO_LINKS_INDEX
     thought_index = root / INDEX_DIR / THOUGHTS_INDEX
     training_index = root / INDEX_DIR / TRAINING_INDEX
     report = {
@@ -547,10 +614,12 @@ def validate_root(root: Path) -> dict[str, object]:
         "sample_mir200_dir": (root / "样本Mir200").exists(),
         "docs_index": docs_index.exists(),
         "sample_index": sample_index.exists(),
+        "mapinfo_links_index": mapinfo_links_index.exists(),
         "thoughts": thought_index.exists(),
         "training_course": training_index.exists(),
         "docs_index_records": 0,
         "sample_index_records": 0,
+        "mapinfo_link_records": 0,
         "thought_patterns": 0,
         "training_lessons": 0,
     }
@@ -561,6 +630,8 @@ def validate_root(root: Path) -> dict[str, object]:
         report["sample_index_records"] = len(sample_records)
         report["thought_patterns"] = len(build_thought_summary(sample_records)["patterns"])
         report["training_lessons"] = len(build_training_course(sample_records)["lessons"])
+    if mapinfo_links_index.exists():
+        report["mapinfo_link_records"] = len(json.loads(mapinfo_links_index.read_text(encoding="utf-8")))
     report["ok"] = all(
         [
             report["knowledge_base_index"],
@@ -568,6 +639,7 @@ def validate_root(root: Path) -> dict[str, object]:
             report["sample_mir200_dir"],
             report["docs_index"],
             report["sample_index"],
+            report["mapinfo_links_index"],
             report["thoughts"],
             report["training_course"],
         ]
@@ -586,6 +658,8 @@ def cmd_search(root: Path, query: str, source: str, limit: int) -> None:
         records.extend(load_index(root, DOCS_INDEX))
     if source in ("all", "sample"):
         records.extend(load_index(root, SAMPLE_INDEX))
+    if source in ("all", "mapinfo"):
+        records.extend(load_index(root, MAPINFO_LINKS_INDEX))
     print(json.dumps(search_records(records, query, limit), ensure_ascii=False, indent=2))
 
 
@@ -607,7 +681,7 @@ def main() -> None:
 
     search = sub.add_parser("search", help="Search local docs and sample scripts.")
     search.add_argument("query")
-    search.add_argument("--source", choices=["all", "docs", "sample"], default="all")
+    search.add_argument("--source", choices=["all", "docs", "sample", "mapinfo"], default="all")
     search.add_argument("--limit", type=int, default=8)
 
     inspect = sub.add_parser("inspect", help="Print a local knowledge file by relative path.")

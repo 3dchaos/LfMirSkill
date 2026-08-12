@@ -5,7 +5,7 @@ Generated from the live `样本Mir200` scripts.
 - Method: 按真实脚本信号抽样，从简单入口到组合系统逐层学习。
 - Lessons: 8
 - Example files: 20
-- Sample records considered: 1053
+- Sample records considered: 417
 
 ## How To Train
 
@@ -127,13 +127,14 @@ Generated from the live `样本Mir200` scripts.
 ### 地图、怪物与商人配置
 
 - ID: `lesson-07-world-config`
-- Goal: 学习 MapInfo、MapEvent、MonGen、MerChant、Npcs 等配置文件如何把脚本挂到世界上。
-- Signals: MapInfo, MapEvent, MonGen, MerChant, Npcs, NoRecall, SAFE, Mongen
+- Goal: 学习 MapInfo、MapEvent、MonGen、MerChant、Npcs 等配置文件如何把脚本挂到世界上，特别是 MapInfo 的地图链接行。
+- Signals: MapInfo, MapEvent, MonGen, MerChant, Npcs, NoRecall, SAFE, Mongen, ->
 - Thinking focus:
   - 功能脚本往往不是孤立文件，要从地图/NPC/刷怪配置找到它的挂载点。
+  - MapInfo 链接行表示玩家走到源地图源坐标时，被传送到目标地图目标坐标。
   - 排查问题时同时看脚本内容和配置入口，确认玩家是否真的能触发。
 - Examples:
-  - `样本Mir200/Envir/MapInfo.txt` (NoRecall, SAFE)
+  - `样本Mir200/Envir/MapInfo.txt` (NoRecall, SAFE, ->)
   - `样本Mir200/Envir/Market_def/盟重城/雪域世界-3.txt` (MonGen, MerChant, Mongen)
   - `样本Mir200/Envir/Market_def/比奇城/火龙将军-0.txt` (MonGen, MerChant, Mongen)
   - `样本Mir200/Envir/Market_def/初级雪域管理员.txt` (MonGen, Mongen)

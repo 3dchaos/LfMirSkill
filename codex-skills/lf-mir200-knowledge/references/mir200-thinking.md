@@ -8,18 +8,19 @@ Generated from the live `样本Mir200` scripts.
 - NPC 脚本常把问答、跳转、奖励和退出放在同一条线里处理。
 - 任务脚本常把 UI 交互、背包检测、物品流转和反馈消息绑定在一起。
 - 地图事件与自动化脚本常靠定时器、全局变量和场景条件驱动。
+- MapInfo 中的 `源地图 源X,源Y -> 目标地图 目标X,目标Y` 是地图链接；玩家踩到源坐标后进入目标坐标。
 
 ## Patterns
 
-- 入口与分发 (316): [@main], @main, @Startup, @Help, @start
+- 入口与分发 (315): [@main], @main, @Startup, @Help, @start
   - Example: `样本Mir200/Envir/Market_def/比奇城/书店-0104.txt` ([@main], @main, @Help)
   - Example: `样本Mir200/Envir/Market_def/比奇城/武馆教头-0.txt` ([@main], @main, @start)
   - Example: `样本Mir200/Envir/Market_def/比奇城/武馆教头-0137.txt` ([@main], @main, @start)
-- 条件守门 (340): #IF, CHECK, LARGE , SMALL , EQUAL , RANDOM , COMPARETEXT, CHECKMAPNAME
+- 条件守门 (292): #IF, CHECK, LARGE , SMALL , EQUAL , RANDOM , COMPARETEXT, CHECKMAPNAME
   - Example: `样本Mir200/Envir/Market_def/QFunction-0.txt` (#IF, CHECK, EQUAL , RANDOM , COMPARETEXT, CHECKMAPNAME)
   - Example: `样本Mir200/Envir/Market_def/其它区域/踏云尊者-yssd.txt` (#IF, CHECK, LARGE , SMALL , EQUAL , RANDOM )
   - Example: `样本Mir200/Envir/Market_def/盟重城/药店-0160.txt` (#IF, CHECK, LARGE , SMALL , EQUAL , RANDOM )
-- 动作执行 (299): #ACT, GIVE , TAKE , GAMEGOLD, GAMEGIRD, MAPMOVE, MonGen, GOTO, BREAK
+- 动作执行 (284): #ACT, GIVE , TAKE , GAMEGOLD, GAMEGIRD, MAPMOVE, MonGen, GOTO, BREAK
   - Example: `样本Mir200/Envir/Market_def/白日门/季正-D10061.txt` (#ACT, GIVE , TAKE , MAPMOVE, MonGen, GOTO)
   - Example: `样本Mir200/Envir/Market_def/其它区域/石墓_合成师-R001.txt` (#ACT, GIVE , TAKE , MonGen, GOTO, BREAK)
   - Example: `样本Mir200/Envir/Market_def/盟重城/雪域世界-3.txt` (#ACT, TAKE , GAMEGOLD, MAPMOVE, MonGen, GOTO)
@@ -31,21 +32,24 @@ Generated from the live `样本Mir200` scripts.
   - Example: `样本Mir200/Envir/MapQuest_def/QManage.txt` (SET [, MOV , SetOnTimer, DelTextListLine, AddTextListEx)
   - Example: `样本Mir200/Envir/QuestDiary/系统功能/老登辅助/辅助.txt` (SET [, MOV , SetOnTimer, ReturnBoxItem, UpdateItem)
   - Example: `样本Mir200/Envir/QuestDiary/系统功能/老登辅助/邮箱.txt` (MOV , DelTextListLine, AddTextListEx, UpdateItem, SetCustomItemText)
-- 自动化与定时 (89): AutoRun, OnTimer, SetOnTimer, Robot, Gmexecute, #CALL
+- 自动化与定时 (47): AutoRun, OnTimer, SetOnTimer, Robot, Gmexecute, #CALL
   - Example: `样本Mir200/Envir/MapQuest_def/QManage.txt` (OnTimer, SetOnTimer, Gmexecute, #CALL)
   - Example: `样本Mir200/Envir/QuestDiary/系统功能/老登辅助/辅助.txt` (OnTimer, SetOnTimer, Gmexecute, #CALL)
   - Example: `样本Mir200/Envir/Market_def/QFunction-0.txt` (Gmexecute, #CALL)
+- 地图链接 (58): ->, MAPMOVE
+  - Example: `样本Mir200/Envir/Market_def/其它区域/神秘老人-Q011.txt` (->, MAPMOVE)
+  - Example: `样本Mir200/Envir/MapInfo.txt` (->)
+  - Example: `样本Mir200/Envir/Npc_def/公告牌-GM001.txt` (MAPMOVE)
 
 ## Dominant Categories
 
 - Market_def: 308
-- MonItems: 65
 - QuestDiary: 46
-- SmartMonster: 9
-- UserData: 9
 - Npc_def: 7
-- Log: 4
 - Robot_def: 2
+- MapInfo.txt: 1
+- MapQuest_def: 1
+- Robot.txt: 1
 
 ## Reading Discipline
 

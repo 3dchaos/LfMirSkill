@@ -9,9 +9,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "codex-skills" / "l
 
 from lf_kb import (
     build_docs_index,
+    build_mapinfo_link_index,
     build_sample_index,
     build_thought_summary,
     build_training_course,
+    parse_mapinfo_link_line,
     read_text,
     search_records,
     validate_root,
@@ -51,6 +53,51 @@ class LfKnowledgeBaseTests(unittest.TestCase):
         self.assertEqual(records[0]["category"], "Market_def")
         self.assertIn("MAPMOVE", records[0]["text"])
 
+    def test_parse_mapinfo_link_accepts_comma_and_space_coordinates(self):
+        comma = parse_mapinfo_link_line("0\t308,264\t->\t0102\t3,7", line_number=10)
+        spaced = parse_mapinfo_link_line("0108 4 15 -> 0109 7 6", line_number=11)
+
+        self.assertEqual(
+            comma,
+            {
+                "kind": "map_link",
+                "line_number": 10,
+                "source_map": "0",
+                "source_x": 308,
+                "source_y": 264,
+                "target_map": "0102",
+                "target_x": 3,
+                "target_y": 7,
+                "raw": "0\t308,264\t->\t0102\t3,7",
+            },
+        )
+        self.assertEqual(spaced["source_map"], "0108")
+        self.assertEqual((spaced["source_x"], spaced["source_y"]), (4, 15))
+        self.assertEqual(spaced["target_map"], "0109")
+        self.assertEqual((spaced["target_x"], spaced["target_y"]), (7, 6))
+
+    def test_build_mapinfo_link_index_ignores_map_definitions_and_comments(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            mapinfo = root / "样本Mir200" / "Envir" / "MapInfo.txt"
+            mapinfo.parent.mkdir(parents=True)
+            mapinfo.write_text(
+                "; comment\n"
+                "[0 比奇省] DARK\n"
+                "0 308,264 -> 0102 3,7\n"
+                "0102 3 8 -> 0 308 265\n",
+                encoding="utf-8",
+            )
+
+            records = build_mapinfo_link_index(root)
+
+        self.assertEqual(len(records), 2)
+        self.assertEqual(records[0]["source_map"], "0")
+        self.assertEqual(records[0]["target_map"], "0102")
+        self.assertEqual(records[1]["source_x"], 3)
+        self.assertEqual(records[1]["target_y"], 265)
+        self.assertIn("MapInfo.txt:3", records[0]["relative_path"])
+
     def test_search_records_scores_title_path_and_text(self):
         records = [
             {"title": "装备回收", "relative_path": "a.md", "text": "GAMEGOLD GIVE"},
@@ -71,6 +118,7 @@ class LfKnowledgeBaseTests(unittest.TestCase):
             index_dir.mkdir(parents=True)
             (index_dir / "docs.json").write_text(json.dumps([{"title": "a"}]), encoding="utf-8")
             (index_dir / "sample.json").write_text(json.dumps([{"title": "b"}]), encoding="utf-8")
+            (index_dir / "mapinfo-links.json").write_text(json.dumps([{"title": "0(308,264) -> 0102(3,7)"}]), encoding="utf-8")
             (index_dir / "thoughts.json").write_text(json.dumps({"principles": [], "patterns": []}), encoding="utf-8")
             (index_dir / "training-course.json").write_text(json.dumps({"lessons": []}), encoding="utf-8")
 
@@ -79,6 +127,7 @@ class LfKnowledgeBaseTests(unittest.TestCase):
         self.assertTrue(report["ok"])
         self.assertEqual(report["docs_index_records"], 1)
         self.assertEqual(report["sample_index_records"], 1)
+        self.assertEqual(report["mapinfo_link_records"], 1)
 
     def test_build_thought_summary_extracts_script_thinking_patterns(self):
         records = [
@@ -199,17 +248,24 @@ class LfKnowledgeBaseTests(unittest.TestCase):
             (root / "knowledge_base" / "index.md").write_text("# index", encoding="utf-8")
             (root / "样本Mir200" / "Envir" / "QuestDiary").mkdir(parents=True)
             (root / "样本Mir200" / "Envir" / "QuestDiary" / "demo.txt").write_text("@main #IF #ACT", encoding="utf-8")
+            (root / "样本Mir200" / "Envir" / "MapInfo.txt").write_text(
+                "0 308,264 -> 0102 3,7\n",
+                encoding="utf-8",
+            )
 
             from lf_kb import write_indexes
 
             write_indexes(root, skill_dir=root / "skill-out")
             thought_path = root / ".codex-kb" / "indexes" / "thoughts.json"
             course_path = root / ".codex-kb" / "indexes" / "training-course.json"
+            mapinfo_path = root / ".codex-kb" / "indexes" / "mapinfo-links.json"
             data = thought_path.read_text(encoding="utf-8")
             course_exists = course_path.exists()
+            mapinfo_exists = mapinfo_path.exists()
         self.assertIn("principles", data)
         self.assertIn("patterns", data)
         self.assertTrue(course_exists)
+        self.assertTrue(mapinfo_exists)
 
 
 if __name__ == "__main__":

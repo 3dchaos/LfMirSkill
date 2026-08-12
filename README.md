@@ -37,6 +37,7 @@ tests/test_lf_kb.py                # 静态工具测试
 - 查询 LF/LFM2/Mir200 说明书中的命令、参数和规则。
 - 检索真实 `样本Mir200` 脚本中的可用写法。
 - 分析 NPC、QuestDiary、MapInfo、MonGen、MerChant、Robot_def、Market_def 等脚本结构。
+- 解析 `MapInfo.txt` 地图链接规则，例如 `0 308,264 -> 0102 3,7` 表示踩到地图 `0` 的 X308 Y264 后进入地图 `0102` 的 X3 Y7。
 - 从样本脚本中总结入口、条件、动作、状态写回、失败路径等通用经验。
 - 生成并维护 `mir200-thinking.md` 和 `mir200-training.md`，让 skill 可以随着样本持续升级。
 
@@ -83,6 +84,7 @@ Copy-Item -Recurse -Force "codex-skills\lf-mir200-knowledge" "$env:USERPROFILE\.
 python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root . validate
 python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root . update
 python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root . search "CHECKITEM GIVE 装备回收" --source all --limit 8
+python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root . search "0 308 264 0102" --source mapinfo --limit 5
 python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root . inspect "codex-skills/lf-mir200-knowledge/references/mir200-thinking.md"
 ```
 
@@ -91,8 +93,8 @@ python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root . inspect "codex
 | 命令 | 用途 |
 | --- | --- |
 | `validate` | 静态检查知识根、说明书索引、样本索引和训练文件是否可用 |
-| `update` | 根据当前说明书和样本脚本重建索引、思维总结、训练课程 |
-| `search` | 在说明书、样本脚本或全部来源中检索关键词 |
+| `update` | 根据当前说明书和样本脚本重建索引、地图链接索引、思维总结、训练课程 |
+| `search` | 在说明书、样本脚本、地图链接或全部来源中检索关键词 |
 | `inspect` | 安全读取指定文件，便于 Codex 引用和分析 |
 
 ## 自我升级方式
