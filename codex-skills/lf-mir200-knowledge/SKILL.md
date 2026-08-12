@@ -33,13 +33,14 @@ If the root moves, either pass `--root` or set `LF_MIR200_KB_ROOT`.
 ## Standard Workflow
 
 1. Run `update` when the manual, sample scripts, or indexes may be stale.
-2. Search the manual for command syntax and official behavior.
-3. Search `样本Mir200` for working examples.
-4. Read `references/mir200-training.md` when learning or improving the skill from examples.
-5. Read `references/mir200-thinking.md` for the current local script-thinking summary.
-6. Inspect the most relevant files before making claims or edits.
-7. For code/script edits, preserve original encoding and style, and modify only the requested files.
-8. Validate statically after edits with `validate` and targeted searches.
+2. In a real project repo, read the nearest `AGENTS.md` / `CLAUDE.md` / `GEMINI.md` first, then relevant project docs such as `docs/*.md` named by the user or matching the feature.
+3. Search the manual for command syntax and official behavior.
+4. Search `样本Mir200` for working examples.
+5. Read `references/mir200-training.md` when learning or improving the skill from examples.
+6. Read `references/mir200-thinking.md` for the current local script-thinking summary.
+7. Inspect the most relevant project files before making claims or edits.
+8. For code/script edits, preserve original encoding and style, and modify only the requested files.
+9. Validate statically after edits with `validate` and targeted searches.
 
 ## Durable Mir200 Rules
 
@@ -48,20 +49,52 @@ If the root moves, either pass `--root` or set `LF_MIR200_KB_ROOT`.
 - `[@KillMon]` does not require `ONKILLMON`; do not confuse it with `[@OnKillMob]`.
 - Boss or first-kill logic must match the full monster name from `MonGen.txt`. Do not silently ignore numeric, bracketed, or other suffixes.
 - When the same monster name appears on multiple maps, also check the current map and the relevant stage/state variable before changing global progress.
+- When classifying monsters as Bosses from project data, cross-check `MonGen.txt` spawn density with the monster database (commonly `Mud2/DB/GEEM2.db`, table `Monster`). Treat the result as a heuristic unless the project has an explicit Boss list.
+- A strong Boss candidate is usually in the top one or two level tiers on its map, has scarce spawns or long refresh, and has high HP/attack/defense relative to other monsters on that map. Names containing `教主`, `魔王`, `恶魔`, `尸王`, `[BOSS]`, `暗之`, `触龙神`, `黄泉`, `双头`, `蛛王`, `地藏王`, `重装使者`, or `王` are supporting evidence, not proof by themselves.
+- Keep a separate "elite/head" bucket for high-level scarce monsters such as `卫士`, `将军`, `祭司`, `[精英]`, `[头目]`, `[狂化]`, or region variants. Do not automatically apply Boss-only balancing to these unless map context confirms they are the top rare encounter.
+- Exclude obvious functional or guard monsters from Boss inference, such as city `弓箭守卫`, `恶魔弓箭手`, trainer/test monsters, and other non-hunting utility actors, even if their level is high.
+- When balancing monster stats, classify by exact monster name as stored in the DB and spawned in `MonGen.txt`; do not merge suffix variants such as `牛魔王`, `牛魔王8`, `沃玛教主`, and `沃玛教主1`.
 - In `MapInfo.txt`, lines like `0 308,264 -> 0102 3,7` are map links: stepping on source map `0` at X308 Y264 sends the player to target map `0102` at X3 Y7. Coordinates may be written as `X,Y` or `X Y`; parse both.
 - Map links are directional. Do not assume a return path exists unless a separate reverse link is present, often on a neighboring coordinate.
+- For dynamic map links, prefer documented engine commands over guessed syntax. The local manual documents `ADDMAPGATE`, `DELMAPGATE`, and `GETMAPGATE` in `knowledge_base/chapters/049-动态地图连接.md`; use that chapter before generating dynamic links.
 - For staged map-opening designs, block every entry path, not only NPC teleport menus: `MapInfo` links, `MAPMOVE`/`MAP`/`MAPS`/`GROUPMAPMOVE`, recall and exchange-map commands, dynamic maps, activities, item teleports, random movement, reconnect/death/respawn paths, robot scripts, and GM/admin bypasses.
+
+## Project Knowledge Workflow
+
+When working inside a Mir200 repo, build a small project model before editing:
+
+1. Read the repo instruction file, usually `AGENTS.md`, for encoding, compile/run limits, ownership boundaries, and static checks.
+2. Read user-mentioned design docs, then search `docs/` for nearby specs if the request references a feature name.
+3. Extract durable facts into the working notes: stage variables, map groups, key entry scripts, trigger labels, manual chapters, and validation commands.
+4. If those facts are reusable beyond one task, update this skill or a reference file with the rule, not the session narrative.
+
+For this repository pattern, remember these reusable lessons:
+
+- `Mir200/Envir/**/*.txt` is commonly GBK/ANSI and must be edited with encoding-preserving tools.
+- `AGENTS.md`, `docs/`, and knowledge Markdown are maintained as UTF-8.
+- For staged map opening with `G0`, natural `MapInfo.txt` links from lower-stage maps to higher-stage maps are potential bypasses; parse them directionally.
+- Dynamic replacement links should be cleaned before regeneration (`DELMAPGATE`), then rebuilt only for stages allowed by the current `G0` (`ADDMAPGATE`).
+- Startup or environment initialization may affect global variables, so dynamic stage-dependent links should be refreshed after initialization and after successful stage progression.
+- For monster strengthening tasks, inspect `Monster` DB schema before updating values. In `GEEM2.db`, useful fields include `Lvl`, `HP`, `AC`, `MAC`, `DC`, `DCMAX`, `MC`, `SC`, `SPEED`, `WALK_SPD`, and `ATTACK_SPD`.
+
+## Efficient Editing Guidance
+
+- Prefer reusable repo tools for GBK-safe Mir200 edits when they exist, especially for batch replacements, `MapInfo` parsing, stage checks, monster DB inspection, Boss classification, and encoding checks.
+- If tools do not exist yet and the task repeats, propose or create small `tools/` scripts instead of expanding one-off PowerShell blocks.
+- Use ordinary patch editing for UTF-8 Markdown, JSON, and small ASCII-safe config changes.
+- For generated Mir200 script blocks, verify command counts, label uniqueness, `#CALL` targets, and remaining bypass paths with targeted static searches.
 
 ## Training Workflow
 
-Use this loop when the user asks the skill to learn, train, self-upgrade, or extract reusable experience from `样本Mir200`:
+Use this loop when the user asks the skill to learn, train, self-upgrade, or extract reusable experience from `样本Mir200` or a real Mir200 project:
 
 1. Run `update` to rebuild indexes, thinking, and the training course.
 2. Inspect `references/mir200-training.md`.
 3. Pick one lesson at a time, starting from entry/dispatch and ending at combined systems.
 4. Inspect the listed sample files and write down: entry, guards, actions, state writeback, failure path.
 5. Compare command syntax with the Markdown manual before turning observations into advice.
-6. Update the generated summary by running `update`; make manual SKILL.md changes only for durable workflow rules.
+6. For real projects, also inspect `AGENTS.md` and relevant `docs/*.md`; extract repo-specific rules as project facts and only promote durable cross-project lessons into this skill.
+7. Update the generated summary by running `update`; make manual SKILL.md changes only for durable workflow rules.
 
 Do not treat runtime logs or binary/server files as training material. Prefer `Envir/Market_def`, `QuestDiary`, `MapQuest_def`, `Robot_def`, `MapInfo`, `MapEvent`, `MerChant`, `Npcs`, and `MonGen` files.
 
