@@ -1,0 +1,16 @@
+# Codex knowledge workspace
+chm_extracted/
+knowledge_base/
+样本Mir200/
+.codex-kb/
+__pycache__/
+*.pyc
+*.tmp
+*.log
+*.exe
+*.db
+*.dat
+*.lic
+*.CHM
+*.chm
+*.rar

@@ -1,0 +1,7 @@
+interface:
+  display_name: "LF Mir200 Knowledge"
+  short_description: "LF引擎说明书与Mir200脚本本地知识库"
+  default_prompt: "Use $lf-mir200-knowledge to answer LF/Mir200 engine scripting questions with local docs and sample scripts."
+
+policy:
+  allow_implicit_invocation: true
