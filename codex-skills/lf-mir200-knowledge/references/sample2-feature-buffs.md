@@ -113,6 +113,16 @@ When reproducing this style, always pair:
 - close label: clear marker + target recalculation
 - anti-stacking guard: check existing target marker or counter before adding again
 
+
+### Equipment-Slot Driven Persistent Buffs
+
+For buffs driven by an equipped item slot rather than a consumable timer, separate state, UI, and proc feedback.
+
+- Use `CHECKUSEITEM <pos>` plus `GetItemFieldValue <pos> name S$...` before opening or refreshing the buff, and repeat the same confirmation inside combat callbacks before any high-value proc.
+- Treat unequip, death, item drop, durability exhaustion, and script-side item removal as the same cleanup problem: close the module, clear markers, close the icon, and let short-duration stat changes expire naturally.
+- For the main self icon, the official `SetArrBuff` manual says parameter 5 is countdown time; `-1` means button/persistent icon and values above 0 mean countdown. Use `SetArrBuff ... -1 0 0 0 <tooltip>` when the user expects a non-counting persistent status icon.
+- Do not print proc messages merely because a direction branch was reached. Have the module set a success marker such as `N$...触发成功 1` only after an actual damage change, state change, target marker, or heal runs, then let the dispatcher send `SENDMSG` if the user's quiet flag is not set.
+- Item remarks for slot-driven buffs should disclose the runtime contract: equipped slot, refresh triggers, cleanup cases, temporary-stat refresh interval, combat trigger hook, actual skill/effect list, and quality unlocks. `ItemDescList.txt` remains display text, so validate it against the script/config source.
 ### Consumable Social Buffs And Curses
 
 Some sample states are used as social/interactive items, not only combat procs:
