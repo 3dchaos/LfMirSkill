@@ -121,8 +121,30 @@ For buffs driven by an equipped item slot rather than a consumable timer, separa
 - Use `CHECKUSEITEM <pos>` plus `GetItemFieldValue <pos> name S$...` before opening or refreshing the buff, and repeat the same confirmation inside combat callbacks before any high-value proc.
 - Treat unequip, death, item drop, durability exhaustion, and script-side item removal as the same cleanup problem: close the module, clear markers, close the icon, and let short-duration stat changes expire naturally.
 - For the main self icon, the official `SetArrBuff` manual says parameter 5 is countdown time; `-1` means button/persistent icon and values above 0 mean countdown. Use `SetArrBuff ... -1 0 0 0 <tooltip>` when the user expects a non-counting persistent status icon.
+- Close auto-arranged icons by button number, not by group plus button. If the icon was opened as `SetArrBuff 1 87 ...`, the project-verified close command is `CloseArrBuff 87`; `CloseArrBuff 1 87` can leave the icon visible in this pattern.
+- Cleanup labels should close the icon and stop the refresh timer before clearing current state. Refresh labels should make "no equipped item" an absolute terminal branch that calls cleanup and then `BREAK`, so later refresh logic cannot recreate the stale icon.
 - Do not print proc messages merely because a direction branch was reached. Have the module set a success marker such as `N$...触发成功 1` only after an actual damage change, state change, target marker, or heal runs, then let the dispatcher send `SENDMSG` if the user's quiet flag is not set.
-- Item remarks for slot-driven buffs should disclose the runtime contract: equipped slot, refresh triggers, cleanup cases, temporary-stat refresh interval, combat trigger hook, actual skill/effect list, and quality unlocks. `ItemDescList.txt` remains display text, so validate it against the script/config source.
+- Item remarks for slot-driven buffs should disclose the player contract: equipped slot, build direction, trigger skills or trigger moments, visible effect, quality unlocks, and player feedback. Keep developer contract details such as refresh timers, temporary stat duration, audit/recheck wording, cleanup internals, script recovery, and diagnostic records in implementation docs or comments, not in player-facing `ItemDescList.txt` or buff hover text.
+- Validate generated item remarks against the runtime script/config source. `ItemDescList.txt` remains display text: it can explain a feature, but it is not proof that the feature is enforced.
+
+#### 老登军鼓 Reference Pattern
+
+For the 老登 project's 14-slot 军鼓 system, the reusable chain is:
+
+1. `QFunction-0.txt` equipment callbacks refresh or clear the 14-slot feature.
+2. `QuestDiary/系统功能/军鼓流派配置.txt` maps exact item names to job, direction, quality, stage, conflict group, and module.
+3. `QuestDiary/系统功能/军鼓BUFF.txt` owns lifecycle state, icon refresh, combat confirmation, and feedback dispatch.
+4. `QuestDiary/系统功能/军鼓流派/*.txt` modules set temporary stats and proc success markers.
+5. `ItemDescList.txt` gives player-facing remarks only.
+
+Reusable rules from that pattern:
+
+- Match all equipment names exactly through the config table. Do not fuzzy-match quality or direction names.
+- Before any combat proc, re-read slot 14 and compare the item name against the current cached name. If the item is missing or changed, call refresh/cleanup and stop the proc.
+- For the persistent self icon, use `SetArrBuff 1 87 ... -1 ...` and close with `CloseArrBuff 87`.
+- Use the local quiet flag for this feature's chat surface. In this project, 军鼓 trigger printing uses `[63]`.
+- Player-facing buff text should say what the player can act on: name, class, direction, quality, gameplay, and trigger effects. Keep safety/audit wording out of the hover text.
+- Player-facing item text should say position, build direction, trigger skills, visible effect, and quality unlocks. Avoid terms like "复核", "清理", "基础", "机制", "安全", "记录", "2秒定时", "3秒短时", "脚本回收", or "确认14号位仍是当前物品".
 ### Consumable Social Buffs And Curses
 
 Some sample states are used as social/interactive items, not only combat procs:
@@ -187,6 +209,7 @@ Do not infer runtime behavior from tooltip text alone. Preserve every `|` placeh
 - Use exact names. Flow names, skill names, item names, and buff labels are string-matched; do not normalize variants.
 - Make one central recalculation surface per attribute family. Feature scripts should mutate state and call readers, not duplicate all math.
 - Pair every timed buff with close cleanup. If a `SetArrBuff` changes stats, `CloseArrBuffX` must clear the marker and rerun affected readers.
+- Pair every equipment-slot persistent icon with explicit close commands on all equipment-disappearance paths. For auto-arranged self icons, prefer the project-verified `CloseArrBuff <buttonNo>` form, such as `CloseArrBuff 87`.
 - Store long-lived timed state in saved variables and rehydrate on login. UI icons alone are not state.
 - Use target-prefixed commands deliberately. Debuffs on victims need `M.` or named-player prefixes and victim-side recalculation.
 - Treat rich item remarks as discovery clues. Confirm actual enforcement in scripts, custom property commands, set tables, item rules, and QFunction callbacks.
@@ -197,7 +220,9 @@ Do not infer runtime behavior from tooltip text alone. Preserve every `|` placeh
 
 - Search all feature names in `QuestDiary`, `Market_Def/QFunction-0.txt`, `ItemDescList.txt`, `CustomMagic`, and set/skill-power tables.
 - For every `SetArrBuff` affecting stats, find the matching `[@CloseArrBuffX]`.
+- For every equipment-slot persistent `SetArrBuff`, statically verify a close path for login refresh, timer refresh, unequip, drop, durability loss, script removal, and death checks. Search for stale `CloseArrBuff <group> <button>` forms when the local project expects `CloseArrBuff <button>`.
 - For every target-side `M.SetArrBuff`, verify `M.` marker writes and target recalculation labels.
 - For every player-facing hidden-property remark, locate a runtime source: custom item property table, item new-value command, attack trigger, set table, or skill-power table.
+- For player-facing remarks and buff hover text, grep for developer-only terms such as `复核`, `清理`, `基础`, `机制`, `安全`, `记录`, refresh intervals, temporary-duration internals, and script-recovery wording.
 - For every flow-school branch, confirm `BREAK` after the intended action and no accidental fall-through into later `#IF` blocks.
 - For every skill replacement, preserve shortcut keys before `DELSKILL` and restore them after the replacement when the sample pattern does so.
