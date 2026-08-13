@@ -38,9 +38,10 @@ If the root moves, either pass `--root` or set `LF_MIR200_KB_ROOT`.
 4. Search `样本Mir200` for working examples.
 5. Read `references/mir200-training.md` when learning or improving the skill from examples.
 6. Read `references/mir200-thinking.md` for the current local script-thinking summary.
-7. Inspect the most relevant project files before making claims or edits.
-8. For code/script edits, preserve original encoding and style, and modify only the requested files.
-9. Validate statically after edits with `validate` and targeted searches.
+7. Read `references/script-deep-dives.md` when the user names a specific script to study deeply.
+8. Inspect the most relevant project files before making claims or edits.
+9. For code/script edits, preserve original encoding and style, and modify only the requested files.
+10. Validate statically after edits with `validate` and targeted searches.
 
 ## Durable Mir200 Rules
 
@@ -69,6 +70,17 @@ When working inside a Mir200 repo, build a small project model before editing:
 3. Extract durable facts into the working notes: stage variables, map groups, key entry scripts, trigger labels, manual chapters, and validation commands.
 4. If those facts are reusable beyond one task, update this skill or a reference file with the rule, not the session narrative.
 
+## Script Deep Dive Workflow
+
+When the user names one Mir200 sample script for deep learning:
+
+1. Run `learn-script` on that file first.
+2. Read the report in this order: labels, calls, flags, input controls, item boxes, timers, variables, manual topics, learning notes.
+3. Cross-check every reported manual topic against the official chapter before turning it into advice.
+4. Promote only repeated findings into `mir200-thinking.md` or this skill.
+5. Record script-specific observations in `references/script-deep-dives.md`.
+6. Keep the training artifact small and reusable; do not copy the full script into the skill.
+
 For this repository pattern, remember these reusable lessons:
 
 - `Mir200/Envir/**/*.txt` is commonly GBK/ANSI and must be edited with encoding-preserving tools.
@@ -78,6 +90,25 @@ For this repository pattern, remember these reusable lessons:
 - Startup or environment initialization may affect global variables, so dynamic stage-dependent links should be refreshed after initialization and after successful stage progression.
 - `Robot.txt` only binds a robot name to `Envir\Robot_def\AutoRunRobot.txt`; `AutoRunRobot.txt` entries are resolved through `Envir\Robot_def\RobotManage.txt`, so a new scheduled tag needs a matching `[@tag]` in `RobotManage.txt` that then `#CALL`s the real script.
 - For dynamic NPCs created by `CreateNPC`, keep the script in `Market_def`. If the last argument is `1`, the script file name omits the map suffix (`英雄引路人.txt`); if it is `0`, the script file name keeps the suffix (`英雄引路人-3.txt`).
+- LF script #IF starts an independent condition block. A following #IF is not automatically protected by the previous failed condition; failed prerequisite checks must use #ELSEACT BREAK (and optional #ELSESAY) to stop fall-through. For paid random attempts, write one block for CHECKITEM with failure reason and BREAK, put TAKE in that block's success #ACT, then start a separate #IF RANDOM ... block.
+- Do not invent variable prefixes. Before using a custom form, confirm the variable family from the manual or samples first; `R$...` is not a documented list variable in the current evidence.
+- Variable scope and persistence come from `628-程序变量说明.md`: `G`/`A` are global and saved, `I` is global but reset on restart, `P`/`D`/`M`/`N`/`S` are private temporary families with different reset points, and `U`/`T`/`J`/`Z` are private saved or daily-reset families. Choose the family by required lifetime, not by name convenience.
+- `S$...` and `N$...` are documented extended character/number variables in `788-扩展字符变量S和数字变量N.md`. Use `<$STR(S$变量名)>` / `<$STR(N$变量名)>` when passing their values as command parameters.
+- `L$...` is the documented array/list variable family in `192-多元数组元素变量.md`. Assign whole arrays with brackets, for example `MOV L$地图列表 [0,1,D1002]`; read with `<$STR(L$地图列表[0])>`; read by dynamic index with `<$STR(L$地图列表[<$STR(N$下标)>])>`.
+- For random in-script list choice, use `MOVR` to generate an index, then read `L$` by that index. The sample `样本Mir200/Envir/Market_def/酒馆/翔天-3.txt` uses `MOV L$合英雄 [...]`, `MOVR N$抽44 0 5`, then `GIVE <$STR(L$合英雄[<$STR(N$抽44)>])> 1`.
+- `RANDOM n` is a condition/probability gate, not a value assignment tool. Use it in `#IF`; use `MOVR` when a numeric random value must be stored.
+- `GetRandomText` is for file-backed random lines into documented `S`/`A` variables, per `438-取得随机字符串.md`. Prefer `L$` when the candidates are an in-script static list; prefer `GetRandomText` only when the candidates belong in a text file.
+- For feature panels like `样本Mir200/Envir/QuestDiary/系统功能/老登辅助/辅助.txt`, read UI flags and action labels as one map: `<$flag(n)>` renders current state, `check [n]` chooses the toggle branch, `SET [n]` writes the state, and `reset [start] count` can clear a contiguous flag range.
+- For parameterized labels such as `@召唤配置(骷髅,1)`, treat `<$SCRIPTPARAM*>` as label-local. The manual chapter `787-扩展NPC脚本点击触发带参数-NPC标签带参数.md` warns parameters can be cleared after jumps, so copy them to variables before any flow that may `GOTO` or trigger another label.
+- For mirror-map scripts like `样本Mir200/Envir/Market_def/比奇城/火龙将军-0.txt`, treat `AddMirrorMap`'s last argument as a variable name, not a value; pair it with explicit cleanup and stage flags before rebuilding instances.
+- For dynamic NPC creation, keep the script file in `Market_def` and match the `CreateNPC` suffix rule to the map flag: `1` means one shared script name, `0` means map-suffixed script files.
+- For party travel, use `GROUPMAPMOVE` when the whole group must move together; do not replace it with scattered teleport branches when map ownership or stage checks matter.
+- For rebirth/class-reset flows like `样本Mir200/Envir/Market_def/云隐宗师.txt`, copy parameters to variables first, then verify hero state, bag space, level caps, and resource items before `CHANGEJOB`, `RENEWLEVEL`, `CLEARSKILL`, or storage deletion.
+- Hero-side commands often need the `H.` prefix, such as `H.RENEWLEVEL`, `H.CLEARSKILL`, and `H.TAKEBAGITEM`; check the relevant manual chapter before assuming the player-side command applies to the hero.
+- For batch reward loops like `样本Mir200/Envir/QuestDiary/系统功能/冶炼金矿.txt`, initialize loop counters before `While`, keep the guard branch separate from the reward branch, and write each reward counter explicitly.
+- For persistent list editors like `样本Mir200/Envir/QuestDiary/系统功能/老登辅助/存仓.txt`, use `L$` for in-memory list work and text files for durable per-player storage; render text into `S$` separately from the stored list.
+- For personal timers, pair `SetOnTimer n seconds` / `SetOffTimer n` in the feature script with `[@OnTimer<n>]` in `MapQuest_def/QManage.txt`. Do not change one side without checking the other.
+- For `ITEMBOX` / `BOXITEM` flows, verify item ownership lifecycle: check the box item exists, bind it with `SetUpgradeItem`, mutate it, call `UpdateItem`, then `ReturnBoxItem`; every failure path that leaves an item in the box should return it.
 - For monster strengthening tasks, inspect `Monster` DB schema before updating values. In `GEEM2.db`, useful fields include `Lvl`, `HP`, `AC`, `MAC`, `DC`, `DCMAX`, `MC`, `SC`, `SPEED`, `WALK_SPD`, and `ATTACK_SPD`.
 - `QMission-0.txt` task pages should prefer direct labels over dispatcher labels. For progress pages such as `[@世界当前进度]`, repeat `#IF EQUAL G0 n` / `#SAY ...` / `#ACT BREAK` in the same label and keep fixed detail pages reachable by `<文本/@标签>` links.
 
@@ -110,6 +141,7 @@ Run from any directory under the knowledge root, or pass `--root`.
 ```powershell
 python <skill-dir>\scripts\lf_kb.py update
 python <skill-dir>\scripts\lf_kb.py validate
+python <skill-dir>\scripts\lf_kb.py learn-script "样本Mir200/Envir/QuestDiary/系统功能/老登辅助/辅助.txt"
 python <skill-dir>\scripts\lf_kb.py search "CHECKITEM GIVE 装备回收" --source all --limit 8
 python <skill-dir>\scripts\lf_kb.py search "MAPMOVE" --source sample --limit 5
 python <skill-dir>\scripts\lf_kb.py search "0 308 264 0102" --source mapinfo --limit 5
@@ -117,6 +149,7 @@ python <skill-dir>\scripts\lf_kb.py inspect "knowledge_base/chapters/661-丢弃�
 python <skill-dir>\scripts\lf_kb.py inspect "样本Mir200/Envir/QuestDiary/系统功能/装备转移.txt"
 python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/mir200-thinking.md"
 python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/mir200-training.md"
+python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/script-deep-dives.md"
 ```
 
 ## Search Guidance
@@ -152,5 +185,5 @@ Use `references/mir200-training.md` as the course map for continued improvement.
 - Distinguish official manual behavior from inference based on sample scripts.
 - Mention when no matching manual entry exists and the answer is sample-derived.
 - When the answer relies on repeated script patterns, explain the pattern in plain Mir200 terms, not only the command list.
-- Do not invent command syntax. Search for it.
+- Do not invent command syntax. Search for it. When a feature looks like a list/array problem, first check whether `L$` already exists before falling back to file-backed text lists.
 - Do not edit binary/runtime files such as `.exe`, `.db`, `.dat`, `.lic`.

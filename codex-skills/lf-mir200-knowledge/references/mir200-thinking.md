@@ -34,6 +34,9 @@ Generated from the live `样本Mir200` scripts.
   - Example: `样本Mir200/Envir/QuestDiary/系统功能/老登辅助/辅助.txt` (SET [, MOV , SetOnTimer, ReturnBoxItem, UpdateItem)
   - Example: `样本Mir200/Envir/QuestDiary/系统功能/老登辅助/邮箱.txt` (MOV , DelTextListLine, AddTextListEx, UpdateItem, SetCustomItemText)
 - 自动化与定时 (47): AutoRun, OnTimer, SetOnTimer, Robot, Gmexecute, #CALL
+  - LF script `#IF` starts an independent condition block; use `#ELSEACT BREAK` to stop failed prerequisites from falling through into the next `#IF` block.
+  - Variable classes are distinct. `L$` is the documented array/list family: assign with brackets (`MOV L$列表 [0,1,D1002]`), count/search with `GetListVarCount` / `CheckVarInList`, and read with `<$STR(L$列表[<$STR(N$下标)>])>`. `S$` and `N$` are extended string/number variables; `A` is a documented global string family often accepted by file/text commands. Confirm the family before inventing a prefix.
+  - Random selection has two patterns: use `RANDOM n` only as a `#IF` probability condition, and use `MOVR` when a random numeric value must be stored. For an in-script candidate list, use `MOVR N$下标 0 最大下标` plus `L$数组[<$STR(N$下标)>]`; for a file-backed list, use `GetRandomText 文件路径 S/A变量`.
   - Example: `样本Mir200/Envir/MapQuest_def/QManage.txt` (OnTimer, SetOnTimer, Gmexecute, #CALL)
   - Example: `样本Mir200/Envir/QuestDiary/系统功能/老登辅助/辅助.txt` (OnTimer, SetOnTimer, Gmexecute, #CALL)
   - Example: `样本Mir200/Envir/Market_def/QFunction-0.txt` (Gmexecute, #CALL)
@@ -54,7 +57,7 @@ Generated from the live `样本Mir200` scripts.
 
 ## Reading Discipline
 
-- Treat the manual as syntax authority and `样本Mir200` as practical usage authority.
+- Treat the manual as syntax authority and `样本Mir200` as practical usage authority. For arrays, the strongest evidence is `knowledge_base/chapters/192-多元数组元素变量.md` plus sample scripts such as `样本Mir200/Envir/Market_def/酒馆/翔天-3.txt` and `样本Mir200/Envir/Market_def/其它区域/踏云尊者-yssd.txt`.
 - For any script, write down: entry, guards, actions, state writeback, failure path.
 - If a pattern appears in multiple examples, prefer the repeated local style over a one-off shortcut.
 

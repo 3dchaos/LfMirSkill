@@ -8,6 +8,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "codex-skills" / "lf-mir200-knowledge" / "scripts"))
 
 from lf_kb import (
+    analyze_script_learning,
     build_docs_index,
     build_mapinfo_link_index,
     build_sample_index,
@@ -266,6 +267,97 @@ class LfKnowledgeBaseTests(unittest.TestCase):
         self.assertIn("patterns", data)
         self.assertTrue(course_exists)
         self.assertTrue(mapinfo_exists)
+
+    def test_analyze_script_learning_extracts_calls_flags_inputs_and_manual_topics(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            script = root / "样本Mir200" / "Envir" / "QuestDiary" / "系统功能" / "老登辅助" / "辅助.txt"
+            script.parent.mkdir(parents=True)
+            script.write_text(
+                "[@辅助功能]\n"
+                "#IF\n"
+                "ISADMIN\n"
+                "#ACT\n"
+                "MOV N$边框色值1 255\n"
+                "MOV A687 <$USERNAME>\n"
+                "MOV G3 1\n"
+                "OPENMERCHANTBIGDLG 0 19 1 0 0 0 1 575 24\n"
+                "#SAY\n"
+                "<Img:#L04~:8<$flag(68)>:0:50:48|7#勾选自动召唤/@自动召唤>\n"
+                "<INPUTNUM:3:0:2:80:15:0:249:255:1:100:必须输入1-100之间的数字:输入血量百分比:160>\n"
+                "<text:关闭/@召唤配置(骷髅,0)>\n"
+                "[@召唤配置]\n"
+                "#IF\n"
+                "EQUAL <$SCRIPTPARAM1> 骷髅\n"
+                "#ACT\n"
+                "MOV N13 <$SCRIPTPARAM2>\n"
+                "GOTO @挂机自动召唤\n"
+                "[@自动召唤]\n"
+                "#IF\n"
+                "CHECKJOB taoist\n"
+                "#ELSEACT\n"
+                "SET [68] 0\n"
+                "BREAK\n"
+                "[@存储仆从]\n"
+                "#IF\n"
+                "#CALL [系统功能\\老登辅助\\存储仆从.txt] @存储仆从1\n"
+                "[@装备锁定]\n"
+                "#SAY\n"
+                "<ITEMBOX:0:1:730:250:160:45:45:*,11:254#请放入道具>\n"
+                "[@开始锁定]\n"
+                "#IF\n"
+                "NOT Equal <$BOXITEM[0].NAME>\n"
+                "#ACT\n"
+                "SetUpgradeItem 0\n"
+                "UpdateItem boxitem0\n"
+                "ReturnBoxItem 0\n"
+                "[@定时维修]\n"
+                "#ACT\n"
+                "SetOnTimer 10 600\n"
+                "SetOffTimer 10\n",
+                encoding="utf-8",
+            )
+
+            report = analyze_script_learning(root, "样本Mir200/Envir/QuestDiary/系统功能/老登辅助/辅助.txt")
+
+        self.assertEqual(report["relative_path"], "样本Mir200/Envir/QuestDiary/系统功能/老登辅助/辅助.txt")
+        self.assertIn("辅助功能", report["labels"])
+        self.assertEqual(report["calls"][0]["path"], "系统功能\\老登辅助\\存储仆从.txt")
+        self.assertIn("68", report["flags"])
+        self.assertIn("3", report["npc_inputs"])
+        self.assertIn("N$边框色值1", report["variables"]["N$"])
+        self.assertIn("N13", report["variables"]["N"])
+        self.assertIn("A687", report["variables"]["A"])
+        self.assertIn("G3", report["variables"]["G"])
+        self.assertEqual(report["timers"][0]["id"], "10")
+        self.assertEqual(report["item_boxes"][0]["id"], "0")
+        self.assertIn("knowledge_base/chapters/787-扩展NPC脚本点击触发带参数-NPC标签带参数.md", report["manual_topics"])
+        self.assertTrue(any("入口" in note for note in report["learning_notes"]))
+
+    def test_cmd_learn_script_prints_static_learning_report(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            script = root / "样本Mir200" / "Envir" / "QuestDiary" / "系统功能" / "老登辅助" / "辅助.txt"
+            script.parent.mkdir(parents=True)
+            script.write_text(
+                "[@辅助功能]\n"
+                "#CALL [系统功能\\老登辅助\\存储仆从.txt] @存储仆从1\n"
+                "SetOnTimer 10 600\n",
+                encoding="utf-8",
+            )
+
+            from io import StringIO
+            import contextlib
+            from lf_kb import cmd_learn_script
+
+            buffer = StringIO()
+            with contextlib.redirect_stdout(buffer):
+                cmd_learn_script(root, "样本Mir200/Envir/QuestDiary/系统功能/老登辅助/辅助.txt")
+            data = json.loads(buffer.getvalue())
+
+        self.assertEqual(data["calls"][0]["label"], "@存储仆从1")
+        self.assertEqual(data["timers"][0]["id"], "10")
+        self.assertIn("knowledge_base/chapters/028-CallEx支持多个同样的@地址.md", data["manual_topics"])
 
 
 if __name__ == "__main__":

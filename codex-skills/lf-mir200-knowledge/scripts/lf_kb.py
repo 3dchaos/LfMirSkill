@@ -4,6 +4,7 @@ import argparse
 import json
 import os
 import re
+import sys
 from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
@@ -110,6 +111,63 @@ TRAINING_LESSONS = [
         "thinking_focus": ["复杂脚本不要从头读到尾硬啃，先按职责切块。", "每次改动前写出输入、条件、成本、成功副作用、失败副作用和恢复路径。"],
     },
 ]
+SCRIPT_LEARNING_MANUAL_TOPICS = [
+    (
+        "call",
+        ["#CALL", "#CALLEX"],
+        "knowledge_base/chapters/028-CallEx支持多个同样的@地址.md",
+    ),
+    (
+        "script-params",
+        ["$SCRIPTPARAM", "SCRIPTPARAM", "CHECKSCRIPTPARAM"],
+        "knowledge_base/chapters/787-扩展NPC脚本点击触发带参数-NPC标签带参数.md",
+    ),
+    (
+        "goto-return",
+        ["GOTO", "RETURN"],
+        "knowledge_base/chapters/163-GOTO将传递参数返回值保存到变量-脚本参数回调.md",
+    ),
+    (
+        "npc-input",
+        ["INPUTTEXT", "INPUTNUM", "$NPCINPUT", "NPCINPUT"],
+        "knowledge_base/chapters/624-NPC对话框内默认输入框.md",
+    ),
+    (
+        "timers",
+        ["SETONTIMER", "SETOFFTIMER", "ONTIMER"],
+        "knowledge_base/chapters/205-个人定时器.md",
+    ),
+    (
+        "flags",
+        ["SET [", "RESET [", "CHECK [", "$FLAG"],
+        "knowledge_base/chapters/608-扩展check支持批量检测.md",
+    ),
+    (
+        "variables",
+        ["MOV ", "INC ", "DEC ", "$STR("],
+        "knowledge_base/chapters/628-程序变量说明.md",
+    ),
+    (
+        "arrays",
+        ["L$", "GETLISTVAR", "CHECKVARINLIST", "SORTLIST"],
+        "knowledge_base/chapters/192-多元数组元素变量.md",
+    ),
+    (
+        "big-dialog",
+        ["OPENMERCHANTBIGDLG", "LAYOUT:", "IMG:", "IMGEX:", "TEXT:", "MTEXT:"],
+        "knowledge_base/chapters/782-脚本中使用图标功能.md",
+    ),
+]
+EXTRA_THINKING_PRINCIPLES = [
+    "`QMission-0.txt` 这类任务页展示脚本不要用 `GOTO @标签` 做当前进度页分发；菜单用 `<文本/@标签>` 直连，进度页把 `#IF / #SAY / #ACT BREAK` 直接写在目标标签里。",
+]
+EXTRA_PATTERN_NOTES = {
+    "自动化与定时": [
+        "LF script `#IF` starts an independent condition block; use `#ELSEACT BREAK` to stop failed prerequisites from falling through into the next `#IF` block.",
+        "Variable classes are distinct. `L$` is the documented array/list family: assign with brackets (`MOV L$列表 [0,1,D1002]`), count/search with `GetListVarCount` / `CheckVarInList`, and read with `<$STR(L$列表[<$STR(N$下标)>])>`. `S$` and `N$` are extended string/number variables; `A` is a documented global string family often accepted by file/text commands. Confirm the family before inventing a prefix.",
+        "Random selection has two patterns: use `RANDOM n` only as a `#IF` probability condition, and use `MOVR` when a random numeric value must be stored. For an in-script candidate list, use `MOVR N$下标 0 最大下标` plus `L$数组[<$STR(N$下标)>]`; for a file-backed list, use `GetRandomText 文件路径 S/A变量`.",
+    ],
+}
 
 
 @dataclass
@@ -126,6 +184,14 @@ def read_text(path: Path) -> str:
         except UnicodeDecodeError:
             continue
     return data.decode("gb18030", errors="replace")
+
+
+def print_json(data: object) -> None:
+    text = json.dumps(data, ensure_ascii=False, indent=2)
+    if hasattr(sys.stdout, "buffer"):
+        sys.stdout.buffer.write((text + "\n").encode("utf-8"))
+    else:
+        print(text)
 
 
 def normalize_rel(path: Path) -> str:
@@ -246,6 +312,208 @@ def parse_mapinfo_link_line(line: str, line_number: int) -> dict[str, object] | 
         "target_x": target_x,
         "target_y": target_y,
         "raw": raw,
+    }
+
+
+def _extract_script_labels(text: str) -> list[str]:
+    labels = []
+    for match in re.finditer(r"\[@([^\]\r\n]+)\]", text):
+        label = match.group(1).strip()
+        if label and label not in labels:
+            labels.append(label)
+    return labels
+
+
+def _scan_script_patterns(text: str, signals: list[str]) -> list[str]:
+    upper = text.upper()
+    seen = []
+    for signal in signals:
+        if signal.upper() in upper and signal not in seen:
+            seen.append(signal)
+    return seen
+
+
+def _find_script_lines(text: str, keywords: list[str], limit: int = 12) -> list[dict[str, object]]:
+    lines = []
+    for lineno, raw in enumerate(text.splitlines(), start=1):
+        upper = raw.upper()
+        if any(keyword.upper() in upper for keyword in keywords):
+            lines.append({"line": lineno, "text": raw.strip()})
+    return lines[:limit]
+
+
+def _collect_variables(text: str) -> dict[str, list[str]]:
+    families: dict[str, list[str]] = {
+        "N$": [],
+        "S$": [],
+        "T$": [],
+        "U$": [],
+        "L$": [],
+        "A$": [],
+        "G$": [],
+        "N": [],
+        "S": [],
+        "T": [],
+        "U": [],
+        "D": [],
+        "P": [],
+        "A": [],
+        "G": [],
+        "I": [],
+        "J": [],
+        "Z": [],
+    }
+    patterns = {
+        "N$": r"\bN\$[A-Za-z0-9_\u4e00-\u9fff]+",
+        "S$": r"\bS\$[A-Za-z0-9_\u4e00-\u9fff]+",
+        "T$": r"\bT\$[A-Za-z0-9_\u4e00-\u9fff]+",
+        "U$": r"\bU\$[A-Za-z0-9_\u4e00-\u9fff]+",
+        "L$": r"\bL\$[A-Za-z0-9_\u4e00-\u9fff]+",
+        "A$": r"\bA\$[A-Za-z0-9_\u4e00-\u9fff]+",
+        "G$": r"\bG\$[A-Za-z0-9_\u4e00-\u9fff]+",
+        "N": r"(?<![A-Z$])N\d{1,3}\b",
+        "S": r"(?<![A-Z$])S\d{1,3}\b",
+        "T": r"(?<![A-Z$])T\d{1,3}\b",
+        "U": r"(?<![A-Z$])U\d{1,3}\b",
+        "D": r"(?<![A-Z$])D\d{1,3}\b",
+        "P": r"(?<![A-Z$])P\d{1,3}\b",
+        "A": r"(?<![A-Z$])A\d{1,3}\b",
+        "G": r"(?<![A-Z$])G\d{1,3}\b",
+        "I": r"(?<![A-Z$])I\d{1,3}\b",
+        "J": r"(?<![A-Z$])J\d{1,3}\b",
+        "Z": r"(?<![A-Z$])Z\d{1,3}\b",
+    }
+    for family, pattern in patterns.items():
+        matches = []
+        for match in re.findall(pattern, text, flags=re.IGNORECASE):
+            if match not in matches:
+                matches.append(match)
+        families[family] = matches
+    return families
+
+
+def _collect_timers(text: str) -> list[dict[str, str]]:
+    timers = []
+    for lineno, raw in enumerate(text.splitlines(), start=1):
+        match = re.search(r"\bSETONTIMER(EX)?\s+(\d+)\s+([^\s]+)", raw, flags=re.IGNORECASE)
+        if not match:
+            match = re.search(r"\bSETOFFTIMER(EX)?\s+(\d+)", raw, flags=re.IGNORECASE)
+            if match:
+                timers.append({"line": str(lineno), "op": "SETOFFTIMER", "id": match.group(2)})
+            continue
+        timers.append({"line": str(lineno), "op": "SETONTIMEREX" if match.group(1) else "SETONTIMER", "id": match.group(2), "interval": match.group(3)})
+    return timers
+
+
+def _collect_calls(text: str) -> list[dict[str, str]]:
+    calls = []
+    for lineno, raw in enumerate(text.splitlines(), start=1):
+        match = re.search(r"#CALL(?:EX)?\s+\[([^\]]+)\]\s+(@[^\s]+)", raw, flags=re.IGNORECASE)
+        if match:
+            calls.append({"line": str(lineno), "path": match.group(1), "label": match.group(2)})
+    return calls
+
+
+def _collect_itemboxes(text: str) -> list[dict[str, str]]:
+    boxes = []
+    for lineno, raw in enumerate(text.splitlines(), start=1):
+        match = re.search(r"<ITEMBOX:([^:>]+):", raw, flags=re.IGNORECASE)
+        if match:
+            boxes.append({"line": str(lineno), "id": match.group(1)})
+    return boxes
+
+
+def _collect_input_controls(text: str) -> list[dict[str, str]]:
+    inputs = []
+    for lineno, raw in enumerate(text.splitlines(), start=1):
+        for kind in ("INPUTTEXT", "INPUTNUM"):
+            match = re.search(rf"<{kind}:([^:>]+):", raw, flags=re.IGNORECASE)
+            if match:
+                inputs.append({"line": str(lineno), "kind": kind, "id": match.group(1)})
+    return inputs
+
+
+def _collect_flags(text: str) -> list[str]:
+    flags = []
+    for match in re.finditer(r"\$FLAG\((\d+)\)|\b(?:SET|CHECK)\s+\[(\d+)\]", text, flags=re.IGNORECASE):
+        value = match.group(1) or match.group(2)
+        if value and value not in flags:
+            flags.append(value)
+    return flags
+
+
+def _manual_topics_for_script(text: str) -> list[str]:
+    topics = []
+    upper = text.upper()
+    for _name, signals, manual_path in SCRIPT_LEARNING_MANUAL_TOPICS:
+        if any(signal.upper() in upper for signal in signals):
+            topics.append(manual_path)
+    return topics
+
+
+def _learning_notes_for_script(labels: list[str], calls: list[dict[str, str]], text: str) -> list[str]:
+    notes = []
+    if labels:
+        notes.append("先按标签画流程图，再分别看入口、守门、动作和返回路径。")
+    if calls:
+        notes.append("有 #CALL/#CALLEX 的地方先确认被调用文件，再回看调用点是否只是派发。")
+    if "GOTO" in text.upper():
+        notes.append("遇到 GOTO 先确认它是在跳分支还是跳回主菜单。")
+    if any(signal in text.upper() for signal in ("INPUTTEXT", "INPUTNUM", "$NPCINPUT")):
+        notes.append("输入框要顺着输入ID查回写变量和失败提示。")
+    if any(signal in text.upper() for signal in ("SETONTIMER", "SETOFFTIMER", "ONTIMER")):
+        notes.append("定时器要一起看开启点、关闭点和触发标签。")
+    if any(signal in text.upper() for signal in ("ITEMBOX", "BOXITEM", "RETURNBOXITEM", "SETUPGRADEITEM")):
+        notes.append("物品框脚本要同时检查取物、改名、刷新和归还。")
+    if any(signal in text.upper() for signal in ("L$", "GETLISTVAR", "CHECKVARINLIST")):
+        notes.append("数组处理要先确认是否已有 L$ 方案，再决定是否需要文本列表。")
+    return notes
+
+
+def analyze_script_learning(root: Path, rel_path: str) -> dict[str, object]:
+    path = (root / rel_path).resolve()
+    if root.resolve() not in [path, *path.parents]:
+        raise ValueError("Path escapes knowledge root.")
+    text = read_text(path)
+    labels = _extract_script_labels(text)
+    calls = _collect_calls(text)
+    inputs = _collect_input_controls(text)
+    boxes = _collect_itemboxes(text)
+    timers = _collect_timers(text)
+    flags = _collect_flags(text)
+    variables = _collect_variables(text)
+    manual_topics = _manual_topics_for_script(text)
+    notes = _learning_notes_for_script(labels, calls, text)
+    return {
+        "relative_path": normalize_rel(path.relative_to(root)),
+        "labels": labels,
+        "calls": calls,
+        "flags": flags,
+        "npc_inputs": [item["id"] for item in inputs],
+        "item_boxes": boxes,
+        "timers": timers,
+        "variables": variables,
+        "manual_topics": manual_topics,
+        "learning_notes": notes,
+        "line_hits": _find_script_lines(text, ["#CALL", "#CALLEX", "GOTO", "INPUTTEXT", "INPUTNUM", "SETONTIMER", "SETOFFTIMER", "ITEMBOX", "RETURNBOXITEM", "UPDATEITEM", "MOV ", "SET [", "CHECK [", "$FLAG", "L$"]),
+        "script_signals": _scan_script_patterns(
+            text,
+            [
+                "OPENMERCHANTBIGDLG",
+                "ITEMBOX",
+                "INPUTTEXT",
+                "INPUTNUM",
+                "#CALL",
+                "GOTO",
+                "SETONTIMER",
+                "SETOFFTIMER",
+                "MOV ",
+                "SET [",
+                "CHECK [",
+                "$FLAG",
+                "L$",
+            ],
+        ),
     }
 
 
@@ -433,10 +701,14 @@ def render_thoughts_markdown(summary: dict[str, object], root: Path) -> str:
     ]
     for item in summary.get("principles", []):
         lines.append(f"- {item}")
+    for item in EXTRA_THINKING_PRINCIPLES:
+        lines.append(f"- {item}")
     lines.extend(["", "## Patterns", ""])
     for pattern in summary.get("patterns", []):
         signals = ", ".join(pattern.get("signals", []))
         lines.append(f"- {pattern.get('name')} ({pattern.get('count', 0)}): {signals}")
+        for note in EXTRA_PATTERN_NOTES.get(str(pattern.get("name")), []):
+            lines.append(f"  - {note}")
         for example in pattern.get("examples", [])[:3]:
             example_signals = ", ".join(example.get("signals", []))
             lines.append(f"  - Example: `{example.get('relative_path')}` ({example_signals})")
@@ -448,7 +720,7 @@ def render_thoughts_markdown(summary: dict[str, object], root: Path) -> str:
             "",
             "## Reading Discipline",
             "",
-            "- Treat the manual as syntax authority and `样本Mir200` as practical usage authority.",
+            "- Treat the manual as syntax authority and `样本Mir200` as practical usage authority. For arrays, the strongest evidence is `knowledge_base/chapters/192-多元数组元素变量.md` plus sample scripts such as `样本Mir200/Envir/Market_def/酒馆/翔天-3.txt` and `样本Mir200/Envir/Market_def/其它区域/踏云尊者-yssd.txt`.",
             "- For any script, write down: entry, guards, actions, state writeback, failure path.",
             "- If a pattern appears in multiple examples, prefer the repeated local style over a one-off shortcut.",
         ]
@@ -649,7 +921,7 @@ def validate_root(root: Path) -> dict[str, object]:
 
 def cmd_update(root: Path) -> None:
     counts = write_indexes(root, skill_root())
-    print(json.dumps({"ok": True, "root": str(root), **counts}, ensure_ascii=False, indent=2))
+    print_json({"ok": True, "root": str(root), **counts})
 
 
 def cmd_search(root: Path, query: str, source: str, limit: int) -> None:
@@ -660,7 +932,7 @@ def cmd_search(root: Path, query: str, source: str, limit: int) -> None:
         records.extend(load_index(root, SAMPLE_INDEX))
     if source in ("all", "mapinfo"):
         records.extend(load_index(root, MAPINFO_LINKS_INDEX))
-    print(json.dumps(search_records(records, query, limit), ensure_ascii=False, indent=2))
+    print_json(search_records(records, query, limit))
 
 
 def cmd_inspect(root: Path, rel_path: str, max_chars: int) -> None:
@@ -669,6 +941,11 @@ def cmd_inspect(root: Path, rel_path: str, max_chars: int) -> None:
         raise ValueError("Path escapes knowledge root.")
     text = read_text(path)
     print(text[:max_chars])
+
+
+def cmd_learn_script(root: Path, rel_path: str) -> None:
+    report = analyze_script_learning(root, rel_path)
+    print_json(report)
 
 
 def main() -> None:
@@ -688,16 +965,21 @@ def main() -> None:
     inspect.add_argument("relative_path")
     inspect.add_argument("--max-chars", type=int, default=12000)
 
+    learn = sub.add_parser("learn-script", help="Build a static learning report for a sample Mir200 script.")
+    learn.add_argument("relative_path")
+
     args = parser.parse_args()
     root = find_root(explicit_root=args.root).root
     if args.command == "update":
         cmd_update(root)
     elif args.command == "validate":
-        print(json.dumps(validate_root(root), ensure_ascii=False, indent=2))
+        print_json(validate_root(root))
     elif args.command == "search":
         cmd_search(root, args.query, args.source, args.limit)
     elif args.command == "inspect":
         cmd_inspect(root, args.relative_path, args.max_chars)
+    elif args.command == "learn-script":
+        cmd_learn_script(root, args.relative_path)
 
 
 if __name__ == "__main__":
