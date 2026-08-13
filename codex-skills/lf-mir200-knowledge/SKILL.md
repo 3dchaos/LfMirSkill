@@ -39,9 +39,11 @@ If the root moves, either pass `--root` or set `LF_MIR200_KB_ROOT`.
 5. Read `references/mir200-training.md` when learning or improving the skill from examples.
 6. Read `references/mir200-thinking.md` for the current local script-thinking summary.
 7. Read `references/script-deep-dives.md` when the user names a specific script to study deeply.
-8. Inspect the most relevant project files before making claims or edits.
-9. For code/script edits, preserve original encoding and style, and modify only the requested files.
-10. Validate statically after edits with `validate` and targeted searches.
+8. Read `references/envir-config-rules.md` when the request involves `Envir` `.txt` / `.ini` configuration tables rather than only NPC dialog scripts.
+9. Read `references/envir-config-deep-dives.md` when the user names a specific `Envir` configuration file to study deeply.
+10. Inspect the most relevant project files before making claims or edits.
+11. For code/script edits, preserve original encoding and style, and modify only the requested files.
+12. Validate statically after edits with `validate` and targeted searches.
 
 ## Durable Mir200 Rules
 
@@ -60,6 +62,13 @@ If the root moves, either pass `--root` or set `LF_MIR200_KB_ROOT`.
 - For dynamic map links, prefer documented engine commands over guessed syntax. The local manual documents `ADDMAPGATE`, `DELMAPGATE`, and `GETMAPGATE` in `knowledge_base/chapters/049-动态地图连接.md`; use that chapter before generating dynamic links.
 - For staged map-opening designs, block every entry path, not only NPC teleport menus: `MapInfo` links, `MAPMOVE`/`MAP`/`MAPS`/`GROUPMAPMOVE`, recall and exchange-map commands, dynamic maps, activities, item teleports, random movement, reconnect/death/respawn paths, robot scripts, and GM/admin bypasses.
 - `Market_def/QMission-0.txt` is a special task-page display script. Do not build current-state display pages by `GOTO @label` dispatch; in this context `GOTO` can fail to show the target content. Use menu links like `<当前世界进度/@世界当前进度>` and put each conditional `#SAY` branch directly under the selected label, ending matched branches with `#ACT` / `BREAK`.
+- `Envir` `.txt` and `.ini` files are not one grammar. Before parsing or editing, classify the file family: map table, monster spawn table, NPC placement table, map event table, robot schedule, drop list, allow/deny list, sectioned recipe, wide item-rule row, or INI section/key file.
+- In configuration tables, path and file name often carry runtime meaning. Do not guess target scripts or data files from display names alone; follow `MerChant.txt`, `Npcs.txt`, `Robot.txt`, `AutoRunRobot.txt`, `MapEvent.txt`, `MonItems/<monster>.txt`, `SmartMonster/<monster>.ini`, and `UserData/CustomSkill/<id>.ini` registration rules.
+- Preserve optional-field positions in whitespace tables such as `MonGen.txt`. If a later optional field is needed, keep placeholder values for earlier optional fields instead of shifting columns left.
+- Treat semicolon comments in config files as inactive data but useful schema hints. Empty list files and empty config directories can be intentional placeholders; do not remove them or infer a feature is impossible solely because the sample has no active rows.
+- `TzItemDescList.txt` controls player-facing set remarks, not the actual set effects. Cross-check `GroupItemList.txt` before claiming required pieces or numeric effects; parenthesized comma groups in remarks are same-slot alternatives, not additional required pieces.
+- `GroupItemList.txt` and `GroupItemSkillPowerList.txt` are the runtime set-bonus sources. Preserve every `|` zero placeholder in their fixed arrays, link skill-power sections by set ID, and use `TzItemDescList.txt` only as display cross-check.
+- `ItemRuleList.txt` is the runtime item-rule table behind M2 `列表信息2 -> 物品规则`; `ItemDescList.txt` is player-facing item remark text. Do not infer trade/drop/repair/storage restrictions from remarks alone; cross-check the rule table, script triggers, and project deny lists.
 
 ## Project Knowledge Workflow
 
@@ -98,6 +107,9 @@ For this repository pattern, remember these reusable lessons:
 - For random in-script list choice, use `MOVR` to generate an index, then read `L$` by that index. The sample `样本Mir200/Envir/Market_def/酒馆/翔天-3.txt` uses `MOV L$合英雄 [...]`, `MOVR N$抽44 0 5`, then `GIVE <$STR(L$合英雄[<$STR(N$抽44)>])> 1`.
 - `RANDOM n` is a condition/probability gate, not a value assignment tool. Use it in `#IF`; use `MOVR` when a numeric random value must be stored.
 - `GetRandomText` is for file-backed random lines into documented `S`/`A` variables, per `438-取得随机字符串.md`. Prefer `L$` when the candidates are an in-script static list; prefer `GetRandomText` only when the candidates belong in a text file.
+- In `QFunction-0.txt`, treat labels as engine callbacks: `@ButtonClickX` from `ADDBUTTON`, `@CustomButtonClick` from reserved UI buttons, `@MinMapCustomButtonClickX` from minimap buttons, `@StdModeFuncX` from item `AniCount`, `@ItemUpgrade` from gem upgrade, and `@AddBag` from items entering the bag. Do not rename or repurpose them without checking the official trigger chapter.
+- The official `667-物品进入背包触发.md` warns not to write recycling logic directly inside `@AddBag`; dispatch to guarded helper scripts and keep pickup/link/update behavior narrow.
+- Millisecond timers started by `SetOnTimerEx` fire `[@OnTimerExX]` in `MapQuest_def/QManage.txt`; ordinary `SetOnTimer` fires `[@OnTimerX]`. Audit both the start point and the QManage handler before changing timer IDs or intervals.
 - For feature panels like `样本Mir200/Envir/QuestDiary/系统功能/老登辅助/辅助.txt`, read UI flags and action labels as one map: `<$flag(n)>` renders current state, `check [n]` chooses the toggle branch, `SET [n]` writes the state, and `reset [start] count` can clear a contiguous flag range.
 - For parameterized labels such as `@召唤配置(骷髅,1)`, treat `<$SCRIPTPARAM*>` as label-local. The manual chapter `787-扩展NPC脚本点击触发带参数-NPC标签带参数.md` warns parameters can be cleared after jumps, so copy them to variables before any flow that may `GOTO` or trigger another label.
 - For mirror-map scripts like `样本Mir200/Envir/Market_def/比奇城/火龙将军-0.txt`, treat `AddMirrorMap`'s last argument as a variable name, not a value; pair it with explicit cleanup and stage flags before rebuilding instances.
@@ -109,6 +121,14 @@ For this repository pattern, remember these reusable lessons:
 - For persistent list editors like `样本Mir200/Envir/QuestDiary/系统功能/老登辅助/存仓.txt`, use `L$` for in-memory list work and text files for durable per-player storage; render text into `S$` separately from the stored list.
 - For personal timers, pair `SetOnTimer n seconds` / `SetOffTimer n` in the feature script with `[@OnTimer<n>]` in `MapQuest_def/QManage.txt`. Do not change one side without checking the other.
 - For `ITEMBOX` / `BOXITEM` flows, verify item ownership lifecycle: check the box item exists, bind it with `SetUpgradeItem`, mutate it, call `UpdateItem`, then `ReturnBoxItem`; every failure path that leaves an item in the box should return it.
+- For two-slot transfer flows like `样本Mir200/Envir/QuestDiary/系统功能/装备转移.txt`, audit both boxes as one transaction: verify compatible `<$BOXITEM[n].STDMODE>`, charge costs before random success, read old add-values/new-element values, clear the source, apply to the target, copy item states/custom text deliberately, `UpdateItem` both boxes, then `ReturnBoxItem` or `DelBoxItem` on every terminal path.
+- Per `397-自定义OK框.md`, avoid reusing custom OK-box IDs between QFunction and NPC scripts in the same interaction surface. If a script serializes equipment, copy normal add-values, element values, source fields, and custom text as separate ranges, then update or clear the linked item explicitly.
+- For `INPUTTEXT` / `INPUTNUM` controls, trace the input ID to `<$NPCINPUT(id)>` and any submit button that names that ID. The official input chapter still tells scripts to validate submitted data server-side, so do not trust only the client-side min/max or prompt text.
+- For worn-item service costs like `样本Mir200/Envir/QuestDiary/系统功能/老登辅助/探测.txt`, combine `CHECKITEMW` with position-specific mutation: check the equipped item, run the action, `ChangeItemDura <pos> - value`, `UpdateItem <pos>`, then remove with `TakePosW <pos>` only after a follow-up durability check confirms it is exhausted.
+- `FindMonPoint` returns the nearest matching monster on the specified map. For locator panels, initialize every display variable to a known fallback such as `未知`, then overwrite only successful matches; for suffix variants, write explicit `#OR` checks or use documented count commands with suffix-ignore options only when that is intended.
+- Treat admin/helper menus such as `样本Mir200/Envir/QuestDiary/系统功能/帮助菜单.txt` as mixed surfaces. Separate real player-facing entry points from `ISADMIN`-guarded GM probes, commented test calls, and temporary repair labels before promoting their patterns into production advice.
+- For pet/slave storage like `样本Mir200/Envir/QuestDiary/系统功能/老登辅助/存储仆从.txt`, derive capacity from official skill state (`GetMagicInfo`) and current slave count before mutating state. Validate names with `CHECKSLAVENAME`, kill stored pets with `KillCallMob`, persist the `L$` list back to a saved variable or text file, and use `RECALLMOB` with an explicit owning skill type when restoring.
+- Robot scheduled labels in `RobotManage.txt` should be treated as environment automation, not NPC dialog. Gate stage-dependent spawns with project state such as `G0`, check existing monster counts before `MonGenEx`, clean maps or lists deliberately (`CLEARMAPMON`, `CLEARNAMELIST`), and end each scheduled branch with `BREAK` after the intended action.
 - For monster strengthening tasks, inspect `Monster` DB schema before updating values. In `GEEM2.db`, useful fields include `Lvl`, `HP`, `AC`, `MAC`, `DC`, `DCMAX`, `MC`, `SC`, `SPEED`, `WALK_SPD`, and `ATTACK_SPD`.
 - `QMission-0.txt` task pages should prefer direct labels over dispatcher labels. For progress pages such as `[@世界当前进度]`, repeat `#IF EQUAL G0 n` / `#SAY ...` / `#ACT BREAK` in the same label and keep fixed detail pages reachable by `<文本/@标签>` links.
 
@@ -130,7 +150,8 @@ Use this loop when the user asks the skill to learn, train, self-upgrade, or ext
 4. Inspect the listed sample files and write down: entry, guards, actions, state writeback, failure path.
 5. Compare command syntax with the Markdown manual before turning observations into advice.
 6. For real projects, also inspect `AGENTS.md` and relevant `docs/*.md`; extract repo-specific rules as project facts and only promote durable cross-project lessons into this skill.
-7. Update the generated summary by running `update`; make manual SKILL.md changes only for durable workflow rules.
+7. When continuing open-ended sample training, score candidates by command diversity, trigger coverage, state writes, and manual cross-check value; avoid repeatedly studying near-duplicate shop/storage scripts.
+8. Update the generated summary by running `update`; make manual SKILL.md changes only for durable workflow rules.
 
 Do not treat runtime logs or binary/server files as training material. Prefer `Envir/Market_def`, `QuestDiary`, `MapQuest_def`, `Robot_def`, `MapInfo`, `MapEvent`, `MerChant`, `Npcs`, and `MonGen` files.
 
@@ -150,6 +171,8 @@ python <skill-dir>\scripts\lf_kb.py inspect "样本Mir200/Envir/QuestDiary/系�
 python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/mir200-thinking.md"
 python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/mir200-training.md"
 python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/script-deep-dives.md"
+python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/envir-config-rules.md"
+python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/envir-config-deep-dives.md"
 ```
 
 ## Search Guidance

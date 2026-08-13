@@ -194,6 +194,15 @@ def print_json(data: object) -> None:
         print(text)
 
 
+def print_text(text: str) -> None:
+    if hasattr(sys.stdout, "buffer"):
+        sys.stdout.buffer.write(text.encode("utf-8", errors="replace"))
+        if not text.endswith("\n"):
+            sys.stdout.buffer.write(b"\n")
+    else:
+        print(text)
+
+
 def normalize_rel(path: Path) -> str:
     return path.as_posix()
 
@@ -940,7 +949,7 @@ def cmd_inspect(root: Path, rel_path: str, max_chars: int) -> None:
     if root.resolve() not in [path, *path.parents]:
         raise ValueError("Path escapes knowledge root.")
     text = read_text(path)
-    print(text[:max_chars])
+    print_text(text[:max_chars])
 
 
 def cmd_learn_script(root: Path, rel_path: str) -> None:

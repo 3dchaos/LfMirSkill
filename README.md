@@ -40,6 +40,7 @@ tests/test_lf_kb.py                # 静态工具测试
 - 解析 `MapInfo.txt` 地图链接规则，例如 `0 308,264 -> 0102 3,7` 表示踩到地图 `0` 的 X308 Y264 后进入地图 `0102` 的 X3 Y7。
 - 从样本脚本中总结入口、条件、动作、状态写回、失败路径等通用经验。
 - 生成并维护 `mir200-thinking.md` 和 `mir200-training.md`，让 skill 可以随着样本持续升级。
+- 学习并沉淀 `Envir` 配置文本的读取规则，例如套装备注、套装属性、特效表、物品规则、物品备注等。
 
 这个 skill 不用于：
 
@@ -118,6 +119,18 @@ python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root . validate
 3. 对照说明书确认命令语法。
 4. 再从样本中总结入口、条件、动作、状态写回和失败分支。
 5. 可复用经验沉淀到 `mir200-thinking.md`，稳定规则再沉淀到 `SKILL.md`。
+
+## 近期训练沉淀
+
+本轮训练重点补强了 `样本Mir200\Envir` 下的配置文本读取规则：
+
+- `TzItemDescList.txt`：套装备注是玩家可见说明，不是实际套装效果来源。
+- `GroupItemList.txt` / `GroupItemSkillPowerList.txt`：运行时套装属性与套装技能威力配置，需按套装 ID 和固定数组位置交叉读取。
+- `EffectImageList.txt` / `EffectItemList.txt` / `EffectList.txt`：特效资源、物品默认特效、脚本可调用特效之间需要分层验证。
+- `ItemRuleList.txt`：M2 `列表信息2 -> 物品规则` 导出的运行时规则表，样本中表现为 `物品名 + 40 个规则位 + | + 10 个扩展位`。
+- `ItemDescList.txt`：物品悬浮备注显示表，支持颜色、多行和图片/动画标记，但备注文字不等于真实限制。
+
+沉淀后的通用原则：凡是涉及“是否可交易、可丢弃、可修理、可升级、是否触发 QFunction、套装是否真正生效”的判断，必须交叉验证运行时配置、脚本触发和官方说明；不能只看备注文本。
 
 ## 静态分析约束
 
