@@ -41,9 +41,10 @@ If the root moves, either pass `--root` or set `LF_MIR200_KB_ROOT`.
 7. Read `references/script-deep-dives.md` when the user names a specific script to study deeply.
 8. Read `references/envir-config-rules.md` when the request involves `Envir` `.txt` / `.ini` configuration tables rather than only NPC dialog scripts.
 9. Read `references/envir-config-deep-dives.md` when the user names a specific `Envir` configuration file to study deeply.
-10. Inspect the most relevant project files before making claims or edits.
-11. For code/script edits, preserve original encoding and style, and modify only the requested files.
-12. Validate statically after edits with `validate` and targeted searches.
+10. Read `references/sample2-feature-buffs.md` when the request involves `样本2Mir200`, feature buffs, awakening seals, flow-school builds, inscription-like custom properties, pet contracts, special hidden attributes, or build-oriented buff systems.
+11. Inspect the most relevant project files before making claims or edits.
+12. For code/script edits, preserve original encoding and style, and modify only the requested files.
+13. Validate statically after edits with `validate` and targeted searches.
 
 ## Durable Mir200 Rules
 
@@ -69,6 +70,11 @@ If the root moves, either pass `--root` or set `LF_MIR200_KB_ROOT`.
 - `TzItemDescList.txt` controls player-facing set remarks, not the actual set effects. Cross-check `GroupItemList.txt` before claiming required pieces or numeric effects; parenthesized comma groups in remarks are same-slot alternatives, not additional required pieces.
 - `GroupItemList.txt` and `GroupItemSkillPowerList.txt` are the runtime set-bonus sources. Preserve every `|` zero placeholder in their fixed arrays, link skill-power sections by set ID, and use `TzItemDescList.txt` only as display cross-check.
 - `ItemRuleList.txt` is the runtime item-rule table behind M2 `列表信息2 -> 物品规则`; `ItemDescList.txt` is player-facing item remark text. Do not infer trade/drop/repair/storage restrictions from remarks alone; cross-check the rule table, script triggers, and project deny lists.
+- In `样本2Mir200`, feature buffs are usually a chain rather than a single file: `MerChant.txt` entry -> flow/feature NPC -> `QFunction-0.txt` callback -> `QuestDiary/游戏登陆/登陆脚本.txt` recalculation label -> attack/skill trigger -> item/set display table. Follow that chain before claiming a buff, inscription, or hidden property is active.
+- For `样本2Mir200` flow-school and awakening systems, treat `QuestDiary/游戏登陆/流派BUFF读取.txt` as dispatch and `QuestDiary/游戏登陆/登陆脚本.txt` as the stat recalculation hub. Feature scripts should mutate state, then call only the affected readers such as `@_@元素读取`, `@_@攻魔道读取`, `@_@HPMP读取`, `@_@防御读取`, `@_@攻速读取`, `@_@施法速度`, `@_@吸血读取`, `@_@技能等级读取`, `@_@技能威力读取`, or `@_@BB读取`.
+- For `样本2Mir200` timed buffs and debuffs, pair every stat-affecting `SetArrBuff` with a `[@CloseArrBuffX]` cleanup that clears the marker/counter and reruns affected readers. Persistent buffs such as `苹果`, `满江红`, and `幸运药水` store expiry state and rebuild icons after login; the icon itself is not the source of truth.
+- For target-side debuffs in `样本2Mir200`, use the target prefix consistently (`M.` or named-player prefix), write a target-side marker such as `S$咒蛊术`, show the target-side buff icon, and force target-side recalculation. Sample patterns include `咒蛊术`, `体态压迫`, `撕裂`, `失心锁`, and `邪爆符`.
+- In `样本2Mir200`, "铭文" or hidden-property analysis must cross-check at least `CustomItemPropertyTextVarList.txt`, `ItemDescList.txt`, relevant NPC scripts, `QFunction-0.txt`, attack triggers, `GroupItemList.txt`, `GroupItemSkillPowerList.txt`, and `SkillPowerItemList.txt`. `ItemDescList.txt` is a discovery surface, not proof of runtime effect.
 
 ## Project Knowledge Workflow
 
@@ -173,6 +179,7 @@ python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/re
 python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/script-deep-dives.md"
 python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/envir-config-rules.md"
 python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/envir-config-deep-dives.md"
+python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/sample2-feature-buffs.md"
 ```
 
 ## Search Guidance
@@ -184,6 +191,7 @@ Use both Chinese feature names and script command keywords:
 - Maps and NPCs: `MapInfo`, `MerChant`, `Npcs`, `MAPMOVE`, `MonGen`
 - Timers and automation: `Robot_def`, `AutoRunRobot`, `RobotManage`
 - UI/dialog extensions: `OPENMERCHANTBIGDLG`, `ITEMBOX`, `Text`, `Img`
+- Sample2 feature systems: `流派`, `觉醒之印`, `神剑BUFF`, `SetArrBuff`, `CloseArrBuff`, `BUFF检测`, `元素读取`, `五维读取`, `攻魔道读取`, `HPMP读取`, `防御读取`, `攻速读取`, `施法速度`, `吸血读取`, `技能威力读取`, `技能等级读取`, `BB读取`, `咒蛊术`, `体态压迫`, `撕裂`, `失心锁`, `苗疆蛊毒`, `苹果`, `满江红`, `幸运药水`, `远古契约`, `先祖契约`, `毒龙之殇`, `浴血狂攻`
 
 When a query returns too many hits, search the manual with exact command names and search samples with the feature name or folder name.
 
