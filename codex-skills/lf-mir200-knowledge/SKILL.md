@@ -58,6 +58,7 @@ If the root moves, either pass `--root` or set `LF_MIR200_KB_ROOT`.
 - Map links are directional. Do not assume a return path exists unless a separate reverse link is present, often on a neighboring coordinate.
 - For dynamic map links, prefer documented engine commands over guessed syntax. The local manual documents `ADDMAPGATE`, `DELMAPGATE`, and `GETMAPGATE` in `knowledge_base/chapters/049-动态地图连接.md`; use that chapter before generating dynamic links.
 - For staged map-opening designs, block every entry path, not only NPC teleport menus: `MapInfo` links, `MAPMOVE`/`MAP`/`MAPS`/`GROUPMAPMOVE`, recall and exchange-map commands, dynamic maps, activities, item teleports, random movement, reconnect/death/respawn paths, robot scripts, and GM/admin bypasses.
+- `Market_def/QMission-0.txt` is a special task-page display script. Do not build current-state display pages by `GOTO @label` dispatch; in this context `GOTO` can fail to show the target content. Use menu links like `<当前世界进度/@世界当前进度>` and put each conditional `#SAY` branch directly under the selected label, ending matched branches with `#ACT` / `BREAK`.
 
 ## Project Knowledge Workflow
 
@@ -75,7 +76,10 @@ For this repository pattern, remember these reusable lessons:
 - For staged map opening with `G0`, natural `MapInfo.txt` links from lower-stage maps to higher-stage maps are potential bypasses; parse them directionally.
 - Dynamic replacement links should be cleaned before regeneration (`DELMAPGATE`), then rebuilt only for stages allowed by the current `G0` (`ADDMAPGATE`).
 - Startup or environment initialization may affect global variables, so dynamic stage-dependent links should be refreshed after initialization and after successful stage progression.
+- `Robot.txt` only binds a robot name to `Envir\Robot_def\AutoRunRobot.txt`; `AutoRunRobot.txt` entries are resolved through `Envir\Robot_def\RobotManage.txt`, so a new scheduled tag needs a matching `[@tag]` in `RobotManage.txt` that then `#CALL`s the real script.
+- For dynamic NPCs created by `CreateNPC`, keep the script in `Market_def`. If the last argument is `1`, the script file name omits the map suffix (`英雄引路人.txt`); if it is `0`, the script file name keeps the suffix (`英雄引路人-3.txt`).
 - For monster strengthening tasks, inspect `Monster` DB schema before updating values. In `GEEM2.db`, useful fields include `Lvl`, `HP`, `AC`, `MAC`, `DC`, `DCMAX`, `MC`, `SC`, `SPEED`, `WALK_SPD`, and `ATTACK_SPD`.
+- `QMission-0.txt` task pages should prefer direct labels over dispatcher labels. For progress pages such as `[@世界当前进度]`, repeat `#IF EQUAL G0 n` / `#SAY ...` / `#ACT BREAK` in the same label and keep fixed detail pages reachable by `<文本/@标签>` links.
 
 ## Efficient Editing Guidance
 
@@ -83,6 +87,7 @@ For this repository pattern, remember these reusable lessons:
 - If tools do not exist yet and the task repeats, propose or create small `tools/` scripts instead of expanding one-off PowerShell blocks.
 - Use ordinary patch editing for UTF-8 Markdown, JSON, and small ASCII-safe config changes.
 - For generated Mir200 script blocks, verify command counts, label uniqueness, `#CALL` targets, and remaining bypass paths with targeted static searches.
+- When touching `QMission-0.txt`, statically search new display labels for `GOTO @...`; avoid it inside task-page display flow unless an existing working example in that same file proves the engine context supports it.
 
 ## Training Workflow
 
