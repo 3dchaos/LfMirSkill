@@ -42,9 +42,10 @@ If the root moves, either pass `--root` or set `LF_MIR200_KB_ROOT`.
 8. Read `references/envir-config-rules.md` when the request involves `Envir` `.txt` / `.ini` configuration tables rather than only NPC dialog scripts.
 9. Read `references/envir-config-deep-dives.md` when the user names a specific `Envir` configuration file to study deeply.
 10. Read `references/sample2-feature-buffs.md` when the request involves `样本2Mir200`, feature buffs, awakening seals, flow-school builds, inscription-like custom properties, pet contracts, special hidden attributes, or build-oriented buff systems.
-11. Inspect the most relevant project files before making claims or edits.
-12. For code/script edits, preserve original encoding and style, and modify only the requested files.
-13. Validate statically after edits with `validate` and targeted searches.
+11. Read `references/mir200-256-colors.md` when the request involves color values, `0-255` palettes, `/SCOLOR`, `{text|color}`, equipment name colors, item remarks, set remarks, custom item text colors, custom attributes, progress bars, monster name colors, or low-to-high rarity color presets.
+12. Inspect the most relevant project files before making claims or edits.
+13. For code/script edits, preserve original encoding and style, and modify only the requested files.
+14. Validate statically after edits with `validate` and targeted searches.
 
 ## Durable Mir200 Rules
 
@@ -79,6 +80,9 @@ If the root moves, either pass `--root` or set `LF_MIR200_KB_ROOT`.
 - For feature proc chat feedback, use the project quiet flag that already controls similar player notices. In the 老登 project,军鼓 proc printing uses flag `[63]`; do not accidentally reuse unrelated quiet flags such as `[61]` without checking local helper scripts.
 - For target-side debuffs in `样本2Mir200`, use the target prefix consistently (`M.` or named-player prefix), write a target-side marker such as `S$咒蛊术`, show the target-side buff icon, and force target-side recalculation. Sample patterns include `咒蛊术`, `体态压迫`, `撕裂`, `失心锁`, and `邪爆符`.
 - In `样本2Mir200`, "铭文" or hidden-property analysis must cross-check at least `CustomItemPropertyTextVarList.txt`, `ItemDescList.txt`, relevant NPC scripts, `QFunction-0.txt`, attack triggers, `GroupItemList.txt`, `GroupItemSkillPowerList.txt`, and `SkillPowerItemList.txt`. `ItemDescList.txt` is a discovery surface, not proof of runtime effect.
+- Mir200 color values are numeric palette IDs from `0-255`, not arbitrary RGB input. For color work, use `references/mir200-256-colors.md` and the official color-related chapters before choosing numbers.
+- The local `256色值` source skips color `32`; do not use `32` for new scripts unless another official project source confirms its meaning. Color `255` appears as a white final table cell without explicit HTML `bgColor`, so prefer confirmed `246`/`254` when exact white text is not required.
+- Sample-backed readable presets include `218` for item remarks, `223,249` for active/inactive set remark states, `116` for equipment or set item names, `250` for positive/success values, `249` for danger/inactive/Boss warning, `251` for yellow headlines or timers, `253` for magenta rare callouts, and `254` for cyan labels.
 
 ## Project Knowledge Workflow
 
@@ -186,6 +190,7 @@ python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/re
 python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/envir-config-rules.md"
 python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/envir-config-deep-dives.md"
 python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/sample2-feature-buffs.md"
+python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/mir200-256-colors.md"
 ```
 
 ## Search Guidance
@@ -197,6 +202,7 @@ Use both Chinese feature names and script command keywords:
 - Maps and NPCs: `MapInfo`, `MerChant`, `Npcs`, `MAPMOVE`, `MonGen`
 - Timers and automation: `Robot_def`, `AutoRunRobot`, `RobotManage`
 - UI/dialog extensions: `OPENMERCHANTBIGDLG`, `ITEMBOX`, `Text`, `Img`
+- Colors and rarity palettes: `颜色值列表`, `256色值`, `SCOLOR`, `/SCOLOR`, `{文字|250}`, `{文字内容|文字颜色0-255}`, `SetCustomItemTextColor`, `SetCustomItemAbil`, `TzItemDescList`, `ItemDescList`, `BossNameColor`, `TZNoActiveItemColor`, `223,249`, `218`, `116`, `249`, `250`, `251`, `253`, `254`
 - Sample2 feature systems: `流派`, `觉醒之印`, `神剑BUFF`, `SetArrBuff`, `CloseArrBuff`, `BUFF检测`, `元素读取`, `五维读取`, `攻魔道读取`, `HPMP读取`, `防御读取`, `攻速读取`, `施法速度`, `吸血读取`, `技能威力读取`, `技能等级读取`, `BB读取`, `咒蛊术`, `体态压迫`, `撕裂`, `失心锁`, `苗疆蛊毒`, `苹果`, `满江红`, `幸运药水`, `远古契约`, `先祖契约`, `毒龙之殇`, `浴血狂攻`
 
 When a query returns too many hits, search the manual with exact command names and search samples with the feature name or folder name.

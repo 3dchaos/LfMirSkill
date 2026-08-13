@@ -1,4 +1,5 @@
 import json
+import re
 import tempfile
 import unittest
 from pathlib import Path
@@ -22,6 +23,54 @@ from lf_kb import (
 
 
 class LfKnowledgeBaseTests(unittest.TestCase):
+    def test_skill_documents_256_color_reference_and_presets(self):
+        root = Path(__file__).resolve().parents[1]
+        skill_dir = root / "codex-skills" / "lf-mir200-knowledge"
+        reference = skill_dir / "references" / "mir200-256-colors.md"
+        skill_text = (skill_dir / "SKILL.md").read_text(encoding="utf-8")
+
+        self.assertIn("references/mir200-256-colors.md", skill_text)
+
+        content = reference.read_text(encoding="utf-8")
+        rows = {
+            int(match.group(1)): match.group(2)
+            for match in re.finditer(r"^\|\s*(\d{1,3})\s*\|\s*([^|]+?)\s*\|", content, re.MULTILINE)
+        }
+        ids = set(rows)
+
+        self.assertEqual(ids, set(range(256)))
+        source_html = root / "chm_extracted" / "256色值.htm"
+        if source_html.exists():
+            source_text = source_html.read_text(encoding="gb2312", errors="replace")
+            source_rows = {
+                int(match.group(2)): match.group(1).upper()
+                for match in re.finditer(
+                    r"bgColor=(#[0-9a-fA-F]{6}).*?<STRONG>(\d+)</STRONG>",
+                    source_text,
+                    re.DOTALL,
+                )
+            }
+            self.assertEqual(len(source_rows), 254)
+            for color_id, hex_value in source_rows.items():
+                self.assertEqual(rows[color_id], hex_value)
+
+        for line in [
+            "| 0 | #000000 | black",
+            "| 116 | #EFAD21 | gold",
+            "| 146 | #44DDFF | bright-cyan",
+            "| 223 | #00EE00 | active-green",
+            "| 249 | #FF0000 | pure-red",
+            "| 250 | #00FF00 | pure-green",
+            "| 251 | #FFFF00 | pure-yellow",
+            "| 254 | #00FFFF | pure-cyan",
+            "| 255 | #FFFFFF | inferred-white",
+        ]:
+            self.assertIn(line, content)
+        self.assertIn("| 32 | n/a | source-gap | missing from local HTML and Markdown grids", content)
+        self.assertIn("final white cell has no HTML bgColor", content)
+        self.assertIn("## Low-To-High Preset Library", content)
+        self.assertIn("common -> high -> rare -> epic -> legendary -> mythic -> divine", content)
+
     def test_read_text_decodes_gbk_sample_scripts(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "npc.txt"
