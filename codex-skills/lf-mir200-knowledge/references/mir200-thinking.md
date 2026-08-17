@@ -33,10 +33,14 @@ Generated from the live `样本Mir200` scripts.
   - Example: `样本Mir200/Envir/MapQuest_def/QManage.txt` (SET [, MOV , SetOnTimer, DelTextListLine, AddTextListEx)
   - Example: `样本Mir200/Envir/QuestDiary/系统功能/老登辅助/辅助.txt` (SET [, MOV , SetOnTimer, ReturnBoxItem, UpdateItem)
   - Example: `样本Mir200/Envir/QuestDiary/系统功能/老登辅助/邮箱.txt` (MOV , DelTextListLine, AddTextListEx, UpdateItem, SetCustomItemText)
+  - `ChangeState` 是给当前脚本主体加/清人物状态的命令；先判断当前回调主体是谁，再决定是否需要 `M.`、`H.`、`FS.`、`BB.` 等前缀。被打触发里的裸 `ChangeState` 通常落在被打者自己身上。
 - 自动化与定时 (47): AutoRun, OnTimer, SetOnTimer, Robot, Gmexecute, #CALL
   - LF script `#IF` starts an independent condition block; use `#ELSEACT BREAK` to stop failed prerequisites from falling through into the next `#IF` block.
   - Variable classes are distinct. `L$` is the documented array/list family: assign with brackets (`MOV L$列表 [0,1,D1002]`), count/search with `GetListVarCount` / `CheckVarInList`, and read with `<$STR(L$列表[<$STR(N$下标)>])>`. `S$` and `N$` are extended string/number variables; `A` is a documented global string family often accepted by file/text commands. Confirm the family before inventing a prefix.
-  - Random selection has two patterns: use `RANDOM n` only as a `#IF` probability condition, and use `MOVR` when a random numeric value must be stored. For an in-script candidate list, use `MOVR N$下标 0 最大下标` plus `L$数组[<$STR(N$下标)>]`; for a file-backed list, use `GetRandomText 文件路径 S/A变量`.
+  - 金币条件用 `CHECKGOLD 数量`，例如 `CHECKGOLD 20000`；失败分支写在 `#ELSEACT`。扣金币可沿用本地脚本里的 `GOLDCOUNT - 数量` 风格。不要把金币当普通背包物品用 `CHECKITEM 金币` 检查，也不要在能用 `CHECKGOLD` 的 guard 中传播临时的 `<$GOLDCOUNT>` 数值比较。
+  - Random logic has three separate patterns. Use `RANDOM n` only for Mir-style `1/n` condition gates; larger `n` means lower chance. Use documented `RANDOMEX 子 母` for positive percent-style gates, for example `RANDOMEX <$STR(N$触发几率)> 100` when `N$触发几率` stores `15/25/35/45`. Use `MOVR` when a random numeric value must be stored. For an in-script candidate list, use `MOVR N$下标 0 最大下标` plus `L$数组[<$STR(N$下标)>]`; for a file-backed list, use `GetRandomText 文件路径 S/A变量`.
+  - 角色级挂机保护这类付费开关用保存型私人变量（如 `U10`）承载状态，辅助面板负责开关和金币门槛，定时器只做扣费/自动关闭。若复用 `TimerEx7` 等已有毫秒级个人定时器，不要随手改原间隔；用计数器把 300ms tick 聚合成约 900ms 或其他目标频率。
+  - 攻击触发中读取“被攻击目标”的角色级保护状态时，先用 `CHECKCURRTARGETRACE = 0` 确认目标是人物，再用 `C.` 当前目标语法读取，如 `EQUAL <$C.STR(U10)> 1`。全局变量只适合全服开关，不适合玩家个人保护。
   - Example: `样本Mir200/Envir/MapQuest_def/QManage.txt` (OnTimer, SetOnTimer, Gmexecute, #CALL)
   - Example: `样本Mir200/Envir/QuestDiary/系统功能/老登辅助/辅助.txt` (OnTimer, SetOnTimer, Gmexecute, #CALL)
   - Example: `样本Mir200/Envir/Market_def/QFunction-0.txt` (Gmexecute, #CALL)
