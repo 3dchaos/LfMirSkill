@@ -126,6 +126,17 @@ Use this file for compact lessons learned from one named script. Keep each entry
 - Lesson: the source item's normal add-values and element/new-item values are separate ranges. Read both, clear both from the source, write both to the target, then explicitly copy item states/custom text if the design requires them.
 - Static caution: after `GOTO @其他属性`, lines below that jump in the same `#ACT` block may be unreachable depending on engine flow. When editing similar scripts, verify whether refresh/return happens after the jumped label or must be moved before the jump.
 
+## 老登项目 / 偷窃.txt
+
+- Source: `老登四合一GitHub/Mir200/Envir/QuestDiary/系统功能/偷窃.txt`, with entry/teaching context in `Market_def/盟重城/肉店-3.txt`, task hint in `Market_def/QMission-0.txt`, helper policy in `QuestDiary/系统功能/老登辅助/辅助.txt`, and launcher display files `登录器/ItemHint.ini` / `登录器/ItemHintText.ini`.
+- Shape: unlockable NPC-side feature. `QMission-0.txt` tells the player where to learn, the meat-shop NPC checks level/materials and sets flag `[69]`, the shared steal script rechecks `[69]` at the action entry, then performs random settlement, PK punishment, gold/equipment reward, and final crime check.
+- Official chapters to cross-check: `192-多元数组元素变量.md`, `263-扩展MOVR使用方法.md`, `257-脚本调整人物PK点.md`, `536-检测人物PK值.md`, `342-调整声望点.md`, `653-物品来源相关.md`, `172-绑定给予的装备进行命令操作.md`, `315-刷新当前装备属性到客户端.md`.
+- Lesson: unlock flags are part of the security model, not only UI state. Menu visibility, task-page display, and the real action label should all agree on the same `CHECK [n]` / `SET [n]` flag.
+- Lesson: for tunable risk systems, initialize thresholds and penalties once near entry with `N$` variables, then reference those variables in `CHECKPKPOINTEX`, `CHANGEPKPOINT`, and final punishment branches. Player-facing messages can describe the result without exposing every numeric tuning value.
+- Lesson: a stored random value plus ordered `LARGE` branches creates ranges. In this project pattern, `MOVR N$偷窃随机 1 100`, then `LARGE 39`, `LARGE 19`, `LARGE 2`, and fallback map to 40-100, 20-39, 3-19, and 1-2 respectively.
+- Lesson: when `GIVE` creates an equipment reward and the source should show in the client tooltip, mutate the linked just-given item with `LINKGIVEITEM`, `SetItemFrom -1 ...`, `updateitem -1`, then always `clearLinkItem`. Confirm the launcher has an `[ItemFrom]` block and `ItemFrom*` labels so the source field is actually visible.
+- Static caution: source code `7` in the official `SetItemFrom` table is the box/treasure source bucket; this project relabels `ItemFromBox` in `登录器/ItemHintText.ini` as "偷窃获取". When reusing a source code for custom semantics, update the launcher hint text deliberately and document that it is a project-level display override.
+
 ## 存储仆从 / 存储仆从.txt
 
 - Source: `样本Mir200/Envir/QuestDiary/系统功能/老登辅助/存储仆从.txt`
