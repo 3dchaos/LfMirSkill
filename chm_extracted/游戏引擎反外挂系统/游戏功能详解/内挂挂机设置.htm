@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>内挂挂机设置</TITLE>
+</HEAD>
+<BODY>
+<P><STRONG><FONT 
+size=5>内挂挂机设置</FONT></STRONG></P>
+
+
+
+<B>内挂自动挂机使用说明：</B></br>
+使用快捷键CTRL+ALT+X或点击挂机按钮会触发QF里的[@StartAutoOnline]</br>
+点停止挂机按钮时；触发QF里的[@StopAutoOnline]</br></br></br>
+
+<B>命令:</B></br>
+;开始挂机命令</br>
+StartAutoPlayGame </br></br>
+;停止挂机命令</br>
+StopAutoPlayGame</br></br></br></br>
+
+
+;点开始挂机触发</br>
+[@StartAutoOnline]</br>
+#IF</br>
+CHECKMAPNAME 0</br>
+#ACT</br>
+SENDMSG 6 当前地图禁止挂机</br>
+#ELSEACT</br>
+StartAutoPlayGame</br>
+SENDMSG 6 开始挂机，使用快捷键“CTRL+ALT+X”停止挂机</br></br></br></br>
+
+
+
+;—————————————————————————————————————————脚本命令停止挂机—————————</br></br>
+
+;点停止挂机触发</br>
+[@StopAutoOnline]</br>
+#IF</br>
+#ACT</br>
+StopAutoPlayGame</br>
+SENDMSG 6 命令停止挂机，使用快捷键“CTRL+ALT+X”开始挂机</br></br></br>
+
+
+注：内挂物品设置“特殊”的物品，打怪完成后优先捡，捡完才会捡未设置“特殊”的可拾取物品！背包满或负重满停止捡物品</br></br>
+
+内挂挂机为优先打怪，周围无怪打才会去捡物品</br></br></br></br>
+;—————————————————————————————————————————检测角色是否正在内挂挂机中—————————</br></b></br></br>
+[@检测是否在挂机]</br>
+#IF</br>
+CheckAutoPlayGame</br>
+#ACT</br>
+SendMsg 5 挂机</br>
+#elseact</br>
+SendMsg 5 没有挂机</br></br></br></br></br>
+
+
+<P><FONT size=2>
+</BODY>
+</HTML>
+

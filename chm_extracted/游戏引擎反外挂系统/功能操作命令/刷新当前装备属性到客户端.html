@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>刷新当前装备属性到客户端</title>
+</head>
+
+<body>
+
+
+</br></br>
+绑定给予的装备进行命令操作:</br></br>
+;======================================================</br>
+
+格式：updateitem  位置</br></br></br></br>
+
+
+绑定脚本给的物品进行命令操作，只绑定最后一个给的物品，比如GIVE 屠龙 10 ，一次给10把屠龙，只对最后一把生效！</br></br>
+
+#IF</br>
+#ACT</br>
+give 屠龙 1</br>
+;给屠龙1把</br>
+LINKGIVEITEM</br>
+;绑定屠龙下面的操作只对绑定的装备生效</br>
+ChangeItemNameColor -1 253</br>
+;调整武器颜色</br>
+updateitem -1</br>
+;刷新到客户端</br>
+clearLinkItem</br>
+;解除绑定，不然刷新包裹物品不刷新
+break</br>
+</br></br></br></br>
+
+
+注：位置 -1是普通OK框，其他装备位置阅读说明书！</br></br>
+
+</br>
+注意：clearLinkItem 因为绑定必须给物品一个位置，目前以下2个命令强行绑定到OK框，请加上解除绑定命令，不然不能及时刷新背包物品属性，需要小退生效，加上后及时生效！！！</br>
+主要是解决绑定到-1后，alt+R刷新包裹和捡起触发改名不刷新的问题，，身上或自定义OK框或者OK框只要有装备位置的不需要增加clearLinkItem，因为背包是没位置的所以需要增加！！！</br>
+特别注意：如果不解绑的情况下，会出现修改过属性的物品丢失，本命令绑定和解绑必须配套使用，只要绑定了，脚本执行不管成功还是失败，只要用了绑定就都必须解绑，切记！！！</BR>
+
+
+
+
+
+</br></br>
+</br></br>
+</br></br>
+
+
+
+
+
+</br></br>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

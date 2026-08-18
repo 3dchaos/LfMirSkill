@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>取指定排行榜指定排名的玩家名字和检测人物在指定排行榜中的名次</title>
+</head>
+
+<body>
+
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>&nbsp;&nbsp;&nbsp; 
+取指定排行榜指定排名的玩家名字和 检测人物在指定排行榜中的名次。</FONT></P>
+
+★★★★★★★★★ 使用以下npc命令，请勾选：选项——》功能设置——》其他控制——》其他控制一——》从DBServer刷新排名数据<br><br><br>
+
+根据名次取玩家名<br>
+  GetRankNameByNo (排行榜 1-等级榜 2-战士榜 3-法师榜 4-道士榜) 名次 玩家名变量<br><br><br>
+
+取指定玩家的名次<br>
+  GetRankNoByName (排行榜 1-等级榜 2-战士榜 3-法师榜 4-道士榜) 玩家名 名次变量<br>
+<br><br><br><br>
+#ACT<br>
+GetRankNameByNo 1 1 S1<br>
+SENDMSG 6 等级榜排行第一的是：&lt;$str(S1)&gt;<br>
+GetRankNoByName 1 &lt;$UserName&gt; N1<br>
+SENDMSG 6 我在等级榜中的排名是：&lt;$str(N1)&gt;<br><br>
+<br><br>
+
+检测人物在指定排行榜中的名次。
+  CheckSelfRankNo &gt;&lt;= 榜单(1-等级榜\2-战士榜\3-法师榜\4-道士榜) 名次<br><br><br>
+
+
+#if<br>
+CheckSelfRankNo < 1 4<br>
+#act<br>
+SENDMSG 6 我的排名在前3<br>
+#elseact<br>
+SENDMSG 6 我的排名不在前3<br><br><br><br>
+
+;--------------------------------------2020-10-28新增以下--------------------------------------<br><br><br>
+
+根据排名获取等级:<br>
+GetRankLevelByNo (排行榜 1-等级榜 2-战士榜 3-法师榜 4-道士榜) 名次 玩家等级变量<br><br>
+
+
+
+#act<br>
+GetRankNameByNo 1 5 S1<br>
+GetRankLevelByNo 1 5 N1<br>
+sendmsg 6 个人榜第5名的人是：&lt;$STR(S1)&gt;，等级为&lt;$STR(N1)&gt;<br><br><br><br><br><br>
+
+
+根据玩家名称获取排名中的等级:<br>
+GetRankLevelByName (排行榜 1-等级榜 2-战士榜 3-法师榜 4-道士榜) 玩家名称 玩家等级变量<br><br>
+#act<br>
+GetRankNoByName 1 dddd N1<br>
+GetRankLevelByName 1 dddd  N2<br>
+sendmsg 6 dddd在个人榜中的排名为：&lt;$STR(N1)&gt;，等级为&lt;$STR(N2)&gt;<br><br><br><br><br><br><br>
+
+</body>
+
+</html>

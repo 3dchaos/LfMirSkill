@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>获取背包中某物品的数量[!]</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>获取背包中某物品的数量.</FONT></FONT></P>
+
+
+格式: GetBagItemCount 物品名称  保存变量   排除OK框中的物品(0或空:计算OK框的物品，1：不算OK框中的物品)   是否判断满持久(0:或空不判断； 1：判断）</P>
+
+
+<P>示列：<br>
+
+
+
+
+<P>[@mail]<br>
+#ACT<br>
+GetBagItemCount 屠龙 N1<br>
+SENDMSG 6 你的背包中共有&lt;$STR(N1)&gt;把屠龙<br><br><br><br>
+
+
+</P>
+</BODY>
+</HTML>

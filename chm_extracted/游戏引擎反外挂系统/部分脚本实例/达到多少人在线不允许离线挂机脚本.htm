@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>达到多少人在线不允许离线挂机脚本 </TITLE>
+</HEAD>
+<BODY>
+<P>达到多少人在线不允许离线挂机脚本 </P>
+<P>[@离线挂机]<BR>{<BR>#IF<BR>checklevelex &lt; 35<BR>#act<BR>MessageBox 
+等级35级以上才能使用离线挂机功能!<BR>break<BR><BR>#if<BR>ISONMAP 0<BR>#act<BR>goto 
+@HumanCount0<BR>break<BR><BR>#if<BR>ISONMAP 3<BR>#act<BR>goto 
+@HumanCount3<BR>break<BR><BR>#if<BR>ISONMAP 5<BR>#act<BR>goto 
+@HumanCount5<BR>break<BR><BR>#elseact<BR>MessageBox 
+此地图无法使用离线挂机功能!<BR>break<BR><BR>[@HumanCount0]<BR>#IF<BR>checkhum 0 
+300<BR>#act<BR>MessageBox 此地图挂机人数已满，请选择其他地图挂机!<BR>break<BR>#elseact<BR>goto 
+@开始离线挂机<BR><BR>[@HumanCount3]<BR>#IF<BR>checkhum 3 300<BR>#act<BR>MessageBox 
+此地图挂机人数已满，请选择其他地图挂机!<BR>break<BR>#elseact<BR>goto 
+@开始离线挂机<BR><BR>[@HumanCount5]<BR>#IF<BR>checkhum 5 300<BR>#act<BR>MessageBox 
+此地图挂机人数已满，请选择其他地图挂机!<BR>break<BR>#elseact<BR>goto 
+@开始离线挂机<BR><BR>[@开始离线挂机]<BR>目前您只需要花费30万金币即可享受挂机涨经验,泡点的服务\<BR>点击下面的挂机功能后即可回家睡觉了,人物自动挂在安全区泡\<BR>经验.能量及泡红名,还可设置自动回复信息,给好友留言！ 
+\ <BR>&lt;注意:&gt;在游戏中输入指令[@挂机].同样可以享受挂机服务!\ 
+<BR>原则上本区不发展挂机，不希望活死人现象，开区一定成形后\<BR>将逐渐销减离线挂机成分，努力做到让大家聊天有个伴，PK有对象！\<BR>&lt;我要挂机/@@offlinemsg&gt;　&lt;--点击后输入留言给好友留言.&gt;\ 
+\ <BR>&lt;关闭/@exit&gt;<BR><BR>[@@offlinemsg]<BR>#if<BR>checkgold 
+300000<BR>#act<BR>take 金币 300000<BR>OFFLINE 60 2000<BR>#elseACT<BR>MessageBox 
+对不起您的金币不够30万，无法启用离线挂机功能!<BR>break<BR><BR>}<BR></P>
+</BODY>
+</HTML>
+
+ 

@@ -1,0 +1,18 @@
+<title>调整英雄的忠诚度</title><p>调整英雄的忠诚度</p>
+<p>  格式: ChangeHeroLoyal 操作符(+ - =) 数值(0 -- 10000)<br />
+  注意: 第二个参数+1那么英雄增加0.01点忠诚+100那么英雄增加1点忠诚</p>
+<p>例子: 增加英雄1点忠诚<br />
+  #IF<br />
+ CHECKHEROONLINE<br />
+  #ACT<br />
+  ChangeHeroLoyal + 100<br />
+  SendMsg 5 您的英雄忠诚度增加[1]<br />
+</p>
+<p>功能: 检测英雄当前的忠诚度<br />
+  格式: CheckHeroLoyal 操作符(&lt; = &gt;) 数值(0 -- 100)</p>
+<p>例子:<br />
+  #IF<br />
+  CHECKHEROONLINE<br />
+  CheckHeroLoyal &gt; 50<br />
+  #ACT<br />
+  SendMsg 5 您的英雄忠诚度大于50%.</p>

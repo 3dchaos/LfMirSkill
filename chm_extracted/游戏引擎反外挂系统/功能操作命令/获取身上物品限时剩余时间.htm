@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>获取身上物品限时剩余时间</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font size="5">获取身上物品限时剩余时间</font></strong> </p>
+<font size="2"><span class="STYLE2"><strong>功能：</strong>获取身上限时物品剩余时间</span><br />
+<strong>获取身上物品限时剩余时间格式：</strong>GetItemRemainingTime 物品位置  保存变量(为-1时，表示非限时装备)<br />
+<strong>获取身上称号限时剩余时间格式：</strong>GetFengHaoRemainingTime  称号名称  保存变量(为-1时，表示非限时装备)<br /><br />
+
+------------------------------------------------<br /><br />
+<p><font face="楷体" color="#ff0000" size="4"><strong>*获取身上物品限时剩余时间</strong></font></p>
+格式：GetItemRemainingTime 物品位置  保存变量(为-1时，表示非限时装备)<br />
+GetItemRemainingTime 1 N1<br /><br />
+
+
+[@获取限时时间]<br />
+#IF<br />
+CheckUseItem 1<br />
+#ACT<br />
+GetItemRemainingTime 1 N1<br />
+;时间为-1时，表示非限时物品<br />
+SendMsg 6 武器剩余时间为：&lt;$STR(N1)&gt;分钟<br /><br /><br /><br />
+
+
+
+<p><font face="楷体" color="#ff0000" size="4"><strong>*获取身上称号限时剩余时间</strong></font></p>
+格式：GetFengHaoRemainingTime  称号名称  保存变量(为-1时，表示非限时装备)<br />
+GetFengHaoRemainingTime 沙巴克城主 N1<br /><br />
+
+[@获取称号限时时间]<br />
+#IF<br />
+CheckFengHao 沙巴克城主<br />
+#ACT<br />
+GetFengHaoRemainingTime 沙巴克城主 N1<br />
+;时间为-1时，表示非限时物品<br />
+SendMsg 6 沙巴克城主剩余时间为：&lt;$STR(N1)&gt;分钟<br /><br /><br /><br />
+
+
+
+
+
+</br></br></br></br>
+</body>
+
+</html>

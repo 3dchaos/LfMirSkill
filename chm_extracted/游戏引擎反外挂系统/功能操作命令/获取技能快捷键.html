@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>获取技能快捷键、设置技能快捷键</title>
+</head>
+
+<body>
+</br></br></br></br>
+
+获取技能快捷键：GetSkillKey 技能名称  变量</br></br>
+变量的结果为数字，对应于下:</br>
+;49~56:    F1~F8</br>
+;69~76:    Ctrl+F1 ~ Ctrl + F8</br>
+;97~122:  A-Z</br></br></br></br>
+
+
+[@获取烈火快捷键]</br>
+#if</br>
+#act</br>
+GetSkillKey 烈火剑法 N1</br>
+sendmsg 6 你的烈火剑法设置快捷键为&lt;$STR(N1)&gt;</br></br></br></br>
+
+------------------------------------------------------------------------------</br></br></br></br>
+
+设置技能快捷键：SetSkillKey 技能名称  快捷键值</br></br>
+[@设置烈火快捷键]</br>
+#if</br>
+#act</br>
+SetSkillKey 烈火剑法 76</br>
+sendmsg 6 你的烈火剑法设置快捷键为Ctrl+F8</br></br>
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

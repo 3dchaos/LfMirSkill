@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>修改地图内怪物属性,修改怪物属性(在原属性的基本上进行加减操作）</title>
+</head>
+
+<body>
+<p>修改地图内怪物属性 (在原属性的基本上进行加减操作）</p>
+<p>格式:格式: ChangeMonAbility 地图名(self：当前所在地图) 怪物名(*：所有怪物) 参数类型 操作符(+/-/=) 参数值  值类型(0:点;1:百分比)  坐标X 坐标Y 范围 (当坐标及范围均为空时，表示为整个地图，非必要请不要整个地图修改属性，因为消耗性能)</p>
+<p>功能说明: 刷新地图内怪物属性</br>
+<p>格式: RecalcMonAbility 地图名(self:当前所在地图) 怪物名(*:所有怪物) X坐标 Y坐标 范围 (当坐标及范围均为空的时候，表示为整个地图，非必要请不要整个地图修改属性，因为消耗性能)</p>
+<p><font face="楷体" color="#ff0000" size="5"><strong>*PS:当参数中坐标和范围全部为空时则修改整个地图怪物，仅范围为空或等于0时为修改坐标上的怪物，大于0则是坐标为中心半径范围内的怪物</strong></font></p>
+</br></br>
+
+
+设置修改后怪物属性有效时间 </br>
+ChangeMonAbility 地图名(self：当前所在地图) 怪物名(*：所有怪物) 参数类型 操作符(+/=)  参数值（秒，空或0表示不检测时间） </br>
+参数1表示值：</br>
+0: HP； 1: MaxHP； 2:MP； 3:MaxMP； 4:AC1； 5:AC2； 6:MAC1； 7:MAC2； 8:DC1； 9:DC2； 10:MC1； 11:MC2； 12:SC1； 13:SC2 14:攻击速度 15:移动间隔 30:属性有效时间（秒，空或0表示不检测时间）</br></br></br>
+
+
+
+
+
+
+*****************; 特别提醒 ： 非必要请不要整个地图修改属性，因为消耗性能，推荐使用范围。建议使用原子钟测试，超过1000微秒基本属于高消耗*******************</br></br>
+
+示范脚本：</br></br>
+
+
+
+[@Test]</br>
+#IF</br>
+#ACT</br>
+;减白野猪50%的MaxHP</br>
+ChangeMonAbility 3 白野猪 1 = -50 1  325 323  10 </br>
+;减白野猪10点的防御下限</br>
+ChangeMonAbility 3 白野猪 4 = -10 0  325 323  10 </br>
+;减白野猪10点的防御上限</br>
+ChangeMonAbility 3 白野猪 5 = -10 0  325 323  10 </br>
+;加白野猪50点的攻击下限</br>
+ChangeMonAbility 3 白野猪 8 = 50 0  325 323  10 </br>
+;加白野猪50点的攻击上限</br>
+ChangeMonAbility 3 白野猪 9 = 50 0  325 323  10 </br>
+;设置有效时间</br>
+ChangeMonAbility 3 白野猪 30 + 20 </br>
+;重算怪物属性 </br>
+RecalcMonAbility 3 白野猪 325 323  10  </br>
+sendmsg 6 土城坐标325 323范围10格内的白野猪属性已经刷新 有效时间20秒！ </br>
+break </br> </br> </br>
+
+
+
+
+
+[@Test1]</br>
+#IF</br>
+#ACT</br>
+;减白野猪50%的MaxHP</br>
+ChangeMonAbility 3 白野猪 1 = -50 1  325 323  10 </br>
+;减白野猪10点的防御下限</br>
+ChangeMonAbility 3 白野猪 4 = -10 0  325 323  10 </br>
+;减白野猪10点的防御上限</br>
+ChangeMonAbility 3 白野猪 5 = -10 0  325 323  10 </br>
+;加白野猪50点的攻击下限</br>
+ChangeMonAbility 3 白野猪 8 = 50 0  325 323  10 </br>
+;加白野猪50点的攻击上限</br>
+ChangeMonAbility 3 白野猪 9 = 50 0  325 323  10 </br>
+;重算怪物属性 </br>
+RecalcMonAbility 3 白野猪 325 323  10  </br>
+sendmsg 6 土城坐标325 323范围10格内的白野猪属性已经刷新！ </br>
+break </br> </br> </br>
+
+
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

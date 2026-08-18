@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>离线挂机[!]</TITLE>
+</HEAD>
+<BODY>
+<P><STRONG>离线挂机</STRONG></P>
+<P>(@@offlinemsg)<BR>[@main]<BR>欢迎使用我提供的挂机功能，使用此功能可以让你不必开电脑，\<BR>就可以进行泡点。\<BR>点击开始挂机后，可输入一段留言信息给你的朋友。\<BR>&lt;开始挂机<A>/@@offlinemsg</A>&gt;<BR>[@@offlinemsg]<BR>#if<BR>
+  ISDUPMODE<BR>#say<BR>请找一个空位置，不能与别人站在一起。\ 
+\<BR>&lt;返回<A>/@main</A>&gt;<BR>#act<BR>
+break</P>
+<P>#if<BR>
+INSAFEZONE<BR>
+#elseact<BR>
+break<BR>
+#elsesay<BR>请在安全区找一个位置站好，不能会被人杀的。\ 
+\<BR>&lt;返回<A>/@main</A>&gt;</P>
+<P>#IF<BR>
+checklevelex &gt; 0<BR>
+#act<BR>
+OFFLINEPLAY 100 100  100<BR>
+;命令  秒  经验  分钟 （挂机多少秒获得多少经验，挂机多少分钟后踢出游戏）<BR>
+</P>
+------------------------------------------------------------------------------------------------------------------------------------<BR>
+<P><FONT face=Arial size=2><FONT face=Fixedsys>功能: 挂机命令</FONT></FONT></P>
+<P>格式:ISDUPMODE (0或空时检测所有对象，1只检测人物)</P>
+<P>范例地址：<FONT face=Arial size=2><FONT face=Fixedsys><a href="../部分脚本实例/离线挂机[!].htm">挂机范例脚本</a></FONT></FONT><BR>
+</P>
+<P></P>
+</BODY>
+</html>
+
+</BODY>
+</HTML>
+
+ 

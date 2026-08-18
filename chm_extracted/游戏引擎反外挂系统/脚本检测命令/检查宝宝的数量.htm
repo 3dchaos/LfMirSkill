@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>检查宝宝数量</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>&nbsp;&nbsp;&nbsp; 
+可以检查玩家所带宠物的数量。</FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT><BR></STRONG>CHECKSLAVECOUNT&nbsp; 控制符&nbsp; 
+&lt;.=.&gt;&nbsp; 
+数量</FONT></P>
+<P><FONT size=2>CHECKBBCOUNT 控制符&nbsp; 
+&lt;.=.&gt;&nbsp; 
+数量 ；也是检查宝宝的命令自己试试把 <BR>
+  <BR>
+  ;==========================================<BR>
+  ;检查宝宝数量是否为指定数量<BR>
+  [@checkslavecount0]<BR>
+  #IF<BR>
+  #ACT<BR>
+  &nbsp; 
+  CHECKSLAVECOUNT = 
+  5<BR>
+  #SAY<BR>
+  你的宝宝数量为5个。<BR>
+  #ELSESAY<BR>
+  你的宝宝数量不为5个。<BR>
+  ;==========================================<BR>
+  <BR>
+  ;==========================================<BR>
+  ;检查宝宝数量是否为大于数量<BR>
+  [@checkslavecount1]<BR>
+  #IF<BR>
+  #ACT<BR>
+  &nbsp; 
+  CHECKSLAVECOUNT &gt; 
+  5<BR>
+  #SAY<BR>
+  你的宝宝数量超过5个。<BR>
+  #ELSESAY<BR>
+  你的宝宝数量不超过5个。<BR>
+  ;==========================================<BR>
+  <BR>
+  ;==========================================<BR>
+  ;检查宝宝数量是否为小于数量<BR>
+  [@checkslavecount2]<BR>
+  #IF<BR>
+  #ACT<BR>
+  &nbsp; 
+  CHECKSLAVECOUNT &lt; 
+  5<BR>
+  #SAY<BR>
+  你的宝宝数量小于5个。<BR>
+  #ELSESAY<BR>
+  你的宝宝数量不小于5个。<BR>
+  ;==========================================</FONT></P><BR><BR>
+
+;******************************2018-05-12进行扩展**************************************************<BR><BR><BR>
+
+.可以检查玩家所带宝宝的数量扩展。<BR>
+格式：<BR>
+CHECKSLAVECOUNT  控制符  &lt;.=.&gt;  数量<BR><BR>
+
+扩展,可以检查相同名字宝宝的数量(不带宝宝名字则为检查所有宝宝)<BR>
+CHECKSLAVECOUNT  控制符  &lt;.=.&gt;  数量 宝宝名字 是否检查名称数字(0:不检查名称数字[骷髅1,骷髅2都按包骷髅算], 1:算数字)<BR><BR><BR><BR><BR><BR>
+</BODY>
+</HTML>
+
+ 

@@ -1,0 +1,46 @@
+<title>背包扩展、包裹扩展</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+<p><strong><font size="5">背包扩展、包裹扩展</font></strong></p>
+<p>-----------------------------------背包扩展、包裹扩展---------------------------<br /><br /><br /><br /><br />
+
+
+功能说明：扩展角色背包<br /><br /><br />
+
+
+
+
+扩展背包页数：<br />
+ExtBagPageCount 操作符(=+-) 页数<br /><br />
+
+
+扩展背包开启格数<br />
+;每一页背包最多可加40格<br />
+ExtBagOpenItemCount 操作符(=+-) 格数<br /><br /><br />
+
+
+
+变量：<br />
+获取背包扩展页数：&lt;$ExtBagPageCount&gt;<br />
+获取扩展背包已开启格数：&lt;$ExtBagOpenItemCount&gt;<br />
+获取扩展背包未开启格数：&lt;$ExtBagCloseItemCount&gt;
+<br /><br />
+
+触发:<br />
+双击背包中未开启的格子（有个锁图标的），触发QF中的[@ClosedBagItemClick]<br /><br />
+
+
+[@ClosedBagItemClick]<br />
+#if <br />
+Large &lt;$ExtBagCloseItemCount&gt; 0<br />
+#act<br />
+mov n1 &lt;$ExtBagOpenItemCount&gt;<br />
+ExtBagOpenItemCount + 1<br />
+SENDMSG 7 你的扩展背包已从&lt;$STR(n1)&gt;格扩展到&lt;$ExtBagOpenItemCount&gt;格<br />
+
+
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

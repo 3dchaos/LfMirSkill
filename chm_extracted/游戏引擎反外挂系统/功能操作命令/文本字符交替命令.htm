@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>文本字符交替命令</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>文本字符交替/文本字符替换，可以将文本进行排名，交替换位置，一般用于捐献榜、拍行榜脚本</FONT></FONT></P><BR><BR><BR>
+
+<P><FONT size=2><FONT color=#0000ff><STRONG>说明：</STRONG></FONT><BR>
+交换行数1和行数2中的内容（大于0：指定行；小于0：取倒数第几行）<BR>
+<P><FONT size=2><FONT color=#0000ff><STRONG>格式：</STRONG></FONT><BR>
+ExchangeLineText 文件名(有盘符是绝对路径) 行数1  变量1  行数2  变量2<BR>
+CacheExchangeLineText 文件名(有盘符是绝对路径)  行数1  变量1  行数2  变量2<BR><BR><BR><BR>
+
+
+
+
+
+
+
+
+[@测试]<BR>
+#IF<BR>
+#ACT<BR>
+ExchangeLineText d:\a.txt 1 S1 -1 S2<BR>
+SendMsg 6 已经将d:\a.txt中的第1行和最后1行进行交换，交行后：第1行的值为&lt;$STR(S1)&gt;,最后一行的值为&lt;$STR(S2)&gt;<BR><BR>
+
+<BR>
+;高频脚本请使用缓存命令CacheExchangeLineText  更高效<BR><BR><BR>
+
+</BODY>
+</HTML>

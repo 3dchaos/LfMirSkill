@@ -1,0 +1,16 @@
+检测坐标范围</br>
+用于地图事件触发CheckInMapRange </P>
+
+如：</BR>
+<P>[@OnTimer12]</br>
+#IF</br>
+CheckInMapRange 3 354 337 0</br>
+;检测是否在地图3 坐标354 337 为中心，范围0</br>
+#elseact</br>
+SetOffTimer 12</br>
+break</br>
+#IF</br>
+CheckInMapRange 3 354 337 0</br>
+#ACT</br>
+CHANGEEXP + 200000</br>
+break</P></br>

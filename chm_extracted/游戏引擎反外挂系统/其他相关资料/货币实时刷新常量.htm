@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>货币实时刷新常量</title>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<body><FONT face=Arial size=2>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT color=#0000ff>功能说明:</FONT> 
+货币实时刷新常量，用于对话框实时显示货币动态<BR><BR></FONT></FONT></P>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT 
+color=#0000ff>说明：</FONT>实时显示最新货币值动态<BR></FONT></FONT></P>
+<P><FONT face=Fixedsys size=2></br></br>
+
+
+</br></br>
+
+--------------------------------------------------------</br></br>
+比普通的变量多一个$符号，用于实时刷新显示货币数量</br></br>
+[@Main]</br>
+元宝：&lt;$$GameGold&gt;\</br>
+游戏点：&lt;$$GamePoint&gt;\</br>
+金币：&lt;$$GoldCount&gt;\</br>
+金刚石：&lt;$$GameDiamond&gt;\</br>
+灵符：&lt;$$GameGird&gt;    &lt;TEXT:$$GameGird{FCOLOR=250}&gt;\</br>
+声望：&lt;$$CreditPoint&gt;\</br>
+荣誉：&lt;$$GameGlory&gt;\</br></br></br></br>
+
+按需使用，一般用于NPC对话框实时显示最新货币数量</br></br>
+
+--------------------------------------------------------</br></br>
+
+
+
+★★★★注意：</br>
+&lt;$GameGold&gt;是服务器变量，加上&lt;&gt;</br>
+$$GAMEGOLD是实时变量（也就是客户端变量），不加&lt;&gt;</br>
+具体自己测试，当变量值显示存在时表示不需要加&lt;&gt;，显示不出来就是需要加&lt;&gt;</br></br></br>
+
+
+示范脚本：</br></br>
+[@Main]</br>
+&lt;ImgNum:9:$$GAMEGOLD:-3:0:0|提示信息&lt;$GAMEGOLD&gt;+$$GAMEGOLD/@测试&gt; \\</br>
+&lt;ProgressBar:0:50:1:620:630:6:100:4:1:100:$$GAMEGOLD:190:0:249:0:0:%p／%m:NewopUI.pak中&lt;$GAMEGOLD&gt;+$$GAMEGOLD/@Label&gt;</br>
+&lt;ItemShow:21:$$GAMEGOLD:0:0:1:0:0/@Label&gt;\</br>
+</br>
+
+
+--------------------------------------------------------</br></br>
+
+
+
+
+
+
+
+
+
+
+
+</br></br></br></br></br></br></br>
+
+
+
+
+</br></br></br></br></br>
+
+
+</html>

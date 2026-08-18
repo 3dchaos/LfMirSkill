@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>播放人物效果</title>
+</head>
+
+<body>
+<B>设置人物特效播放</B><br />
+<p>格式:  PLAYEFFECT WIL文件序号 开始图片数 播放图片张数 播放次数（★ &lt;=0 为永久播放 ★） 播放速度(毫秒) 播放顺序(0或空：对象上层 1：对象底层 2：所有对象上层) X坐标 Y坐标 （不需坐标可留空） 普通播放或特效播放(0或空：特效播放；非0普通播放 </p>
+<p>WIL文件序号是在M2里编辑好的，详见M2-查看-列表信息二-WIL资源</p>
+<p>[@main]<br />
+  #ACT<br />
+  PLAYEFFECT 0 0 10 1 300 1<br />
+</p><br />
+
+图层播放顺序说明：<br />
+0或空  在当前坐标对象的底层播放  (类似火墙)<br />
+1  在当前坐标对象的前面    (类似playeffect 效果, 置于对象会在顶层播放,置于坐标Y+1的对象时,会被其遮挡)<br />
+2  在全部图层的上方    (不会被其他目标遮挡，类似雷电术)<br /><br />
+
+
+===================================================================================== <br />
+<B>停止人物特效播放（停止哪个特效通过参数来判断，参数一致的特效将被停止）</B><br />
+<p>格式: StopPlayEffect WIL文件序号 开始图片数 播放图片张数 播放次数 播放速度(毫秒) 播放顺序(0或空：在角色前面；非0：在角色后面)</p>
+<p>WIL文件序号是在M2里编辑好的，详见M2-查看-列表信息二-WIL资源</p>
+<p>[@main]<br />
+  #ACT<br />
+  StopPlayEffect 0 0 10 1 300 1<br />
+</p>
+===================================================================================== <br />
+<B>清空人物特效播放（停止所有PLAYEFFECT命令播放的特效）</B><br />
+<p>[@main]<br />
+  #ACT<br />
+  ClearPlayEffect <br />
+</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<br />
+注：本命令支持多级脚本 H.PLAYEFFECT  <br /><br />
+</body>
+</html>

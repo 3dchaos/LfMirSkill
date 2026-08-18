@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>检测人物是否佩带指定物品 </title>
+<style>
+<!--
+div{word-break:break-all;word-wrap:break-word}.t{border:1px solid #c7d6e1;margin:0px auto 8px;}.t2{border-top:#c7d6e1 1px solid;margin:0px auto 5px;}.t{padding:1px}.t {padding:0}th{word-break:break-all;word-wrap:break-word}.r_one{background:#f9f9f9;}.tr1 th{padding:5px 10px;text-align:left;vertical-align:top;font-weight:normal;}.tr1 th{border-right:1px solid #e6e6e6;}.tpc_content{font-size:14px;font-family:Arial;padding:0 2% 0 0.5%;margin:0 0 2%}-->
+</style>
+</head>
+
+<body>
+
+<p><font color="#0000ff" size="2"><strong>功能:<br>
+&nbsp; </strong></font><font size="2">检测当前人物是否佩带指定物品 </font><br>
+<br>
+<font color="#0000ff" size="2"><strong>格式:</strong></font> <br>
+&nbsp; <font size="2">CHECKITEMW&nbsp; 物品名 数量  是否装备名部分匹配（空或0，完全匹配。 不等于0部分匹配） </font>&nbsp;<br>
+<br>
+<font size="2"><strong>============================</strong></font></p>
+<p><font size="2">[@TEST] <br>
+#IF <br>
+CHECKITEMW&nbsp; 力量戒指 1 <br>
+#elsesay</font> <br>
+<font size="2">你身上没有力量戒指\ \</font> <br>
+<font size="2">#elseact <br>
+sendmsg 5 身上有力量戒指<br>
+break</font></p>
+
+
+[@TEST] <br>
+#IF <br>
+CHECKITEMW  力量 1 1<br>
+#elsesay <br>
+你身上没有穿戴包含力量的装备\ \ <br>
+#elseact <br>
+sendmsg 5 身上有包含力量的装备<br>
+break<br><br><br>
+
+
+
+<p><font size="2"><strong>============================</strong></font></p>
+<p>[@TEST1]<br>
+  #IF<br>
+  COMPARETEXT &lt;$DRESS&gt; 布衣(男)<br>
+  #elsesay <br>
+  你身上没有布衣(男)\ \ <br>
+  #elseact <br>
+  break<br>
+</p>
+
+
+注：检测当前英雄是否佩带指定物品命令：H.CHECKITEMW</p>
+</body>
+
+</html>

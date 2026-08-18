@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>CallEx支持多个同样的@地址</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<body><FONT face=Arial size=2>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT color=#0000ff>功能说明:</FONT> 
+原来多次Call@地址只能调用一个地址，新增CallEx支持多个同样的@地址<BR><BR></FONT></FONT></P>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT 
+color=#0000ff>CALLEX说明:</FONT>原来多次Call@地址只能调用一个地址，新增CallEx支持多个同样的@地址<BR></FONT></FONT></P>
+<P><FONT face=Fixedsys size=2></br></br>
+
+
+</br></br>
+--------------------------------------------------------</br></br>
+示例脚本：</br></br>
+</br>
+[@main]</br>
+&lt;充值1/@1&gt; &lt;充值2/@2&gt; &lt;充值3/@3&gt;  \</br></br></br>
+
+[@1]</br>
+#IF</br>
+#ACT</br>
+#CALLEX [\脚本1.txt] @充值链接</br>
+break</br></br>
+
+[@2]</br>
+#IF</br>
+#ACT</br>
+#CALLEX [\脚本2.txt] @充值链接</br>
+;前面有1个@充值链接，本次解析会将@充值链接自动换成[@充值链接~1]</br>
+break</br>
+</br></br>
+[@3]</br>
+#IF</br>
+#ACT</br>
+#CALLEX [\脚本3.txt] @充值链接</br>
+;前面有2个@充值链接，本次解析会将@充值链接自动换成[@充值链接~2]</br>
+break</br></br>
+
+说明：原CALL使用以上脚本全部读取一个脚本的@充值链接，CALLEX读取准确路径中的@充值链接</br></br>
+
+
+
+
+</br></br></br></br></br></br>
+
+
+
+</br></br></br></br></br>
+
+
+</html>

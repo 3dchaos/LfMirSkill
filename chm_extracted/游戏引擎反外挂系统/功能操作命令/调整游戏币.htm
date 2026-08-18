@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>游戏币(元宝)控制</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>&nbsp;&nbsp;&nbsp; 
+调整人物游戏币及根据时间自动增减游戏币（可用来做会员时间用）。</FONT></P>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>格式：</STRONG></FONT><BR>&nbsp;&nbsp;&nbsp; GAMEGOLD 
+控制符(=,+,-)&nbsp; （1-100）</P>
+<P><FONT 
+size=2>;==========================================<BR>;设置人物游戏币<BR>[@GAMEGOLD0]<BR>#IF<BR>#ACT<BR>&nbsp; 
+GAMEGOLD = 
+8<BR>#SAY<BR>你的游戏点已经为8了。<BR>;==========================================</FONT></P>
+<P><FONT 
+size=2>;==========================================<BR>;增加人物游戏币<BR>[@GAMEGOLD1]<BR>#IF<BR>#ACT<BR>&nbsp; 
+GAMEGOLD + 
+1<BR>#SAY<BR>你的游戏点已经加了1点。<BR>;==========================================</FONT></P>
+<P><FONT 
+size=2>;==========================================<BR>;降人物游戏币<BR>[@GAMEPOINT2]<BR>#IF<BR>#ACT<BR>&nbsp; 
+GAMEGOLD - 
+1<BR>#SAY<BR>你的游戏币已经降了1点。<BR>;==========================================</FONT></P><FONT 
+size=2>
+<P><STRONG><FONT color=#0000ff>功能：</FONT></STRONG><BR>&nbsp;&nbsp;&nbsp; 
+设置是否自动增加游戏币。</P>
+<P><STRONG><FONT color=#0000ff>格式：</FONT></STRONG><BR>&nbsp;&nbsp;&nbsp; 
+AUTOADDGAMEGOLD 控制符(START,STOP)</P>
+<P>;==========================================<BR>;设置自动增加游戏币<BR>[@AutoAddGAMEGOLD]<BR>#IF<BR>#ACT<BR>&nbsp; 
+PARAM1 1<BR>&nbsp; PARAM2 10 <BR>&nbsp; AUTOADDGAMEGOLD 
+START<BR>#SAY<BR>现进入自动增加游戏币模式，每10秒增加一个</P>
+<P>;==========================================</P>
+<P>;==========================================<BR>;停止自动增加游戏点<BR>[@AutoAddGAMEGOLD]<BR>#IF<BR>#ACT<BR>&nbsp; 
+AUTOADDGAMEGOLD STOP<BR>#SAY<BR>现退出自动增加游戏币模式</P>
+<P>;==========================================<BR>&nbsp;</P>
+<P><STRONG><FONT color=#0000ff>功能：</FONT></STRONG><BR>&nbsp;&nbsp;&nbsp; 
+设置是否自动减少游戏币。</P>
+<P><STRONG><FONT color=#0000ff>格式：</FONT><FONT 
+color=#000000></STRONG><BR></FONT>&nbsp;&nbsp;&nbsp; 
+AUTOADDGAMEGOLD 控制符(START,STOP)</P>
+<P>;==========================================<BR>;设置自动增加游戏币<BR>[@AutoAddGAMEGOLD]<BR>#IF<BR>#ACT<BR>&nbsp; 
+PARAM1 1<BR>&nbsp; PARAM2 10 <BR>&nbsp; AUTOSUBGAMEGOLD 
+START<BR>#SAY<BR>现进入自动增加游戏币模式，每10秒增加一个<BR>;==========================================</P>
+<P>;==========================================<BR>;停止自动增加游戏点<BR>[@AutoAddGAMEGOLD]<BR>#IF<BR>#ACT<BR>&nbsp; 
+AUTOSUBGAMEGOLD STOP<BR>#SAY<BR>现退出自动减少游戏币模式</P>
+<P>;==========================================<FONT 
+size=2></FONT></P></FONT><FONT size=2></FONT></FONT>
+</BODY>
+</HTML>
+

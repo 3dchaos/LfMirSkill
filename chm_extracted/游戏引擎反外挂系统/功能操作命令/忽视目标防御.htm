@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>忽视目标防御</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font size="5">忽视目标防御</font></strong> </p>
+<font size="3"><span class="STYLE2"><strong>功能：</strong>同时忽视目标防御和魔御</span><br />
+<strong>说明：</strong>本命令支持按照数值或百分比同时忽视目标防御和魔御，当和元素忽视目标防御冲突时，优先命令操作后的防御属性再进行元素忽视<br /><br /><br /><br />
+
+
+
+
+格式：SetIgnoreTargetDefense 值类型(0:百分比;1:固定值)  值  时间(单位秒,0为在线一直有效)</br></br>
+
+例子：</br>
+[@点数]</br>
+#act</br>
+SetIgnoreTargetDefense 1 80 20</br>
+SENDMSG 6 忽视目标防御80点，20秒有效</br></br>
+
+
+
+[@比例]</br>
+#act</br>
+SetIgnoreTargetDefense 0 50 10</br>
+SENDMSG 6 忽视目标防御50%，10秒有效</br></br>
+
+
+
+<br /><br /><br />
+
+
+
+
+</body>
+
+</html>

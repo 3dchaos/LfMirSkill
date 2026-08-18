@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>字符串分隔命令</title>
+</head>
+
+<body>
+
+
+</br></br>
+字符串分隔命令:</br></br>
+;======================================================</br>
+;下列为读取一套装备数据配合GetRandomText使用</br></br>
+
+#IF</br>
+gender man</br>
+checkjob warrior</br>
+#ACT</br>
+GetRandomText ..\QuestDiary\装备列表.txt S0 0</br>
+EXTRACTSTRING : &lt;$STR(S0)&gt; s1 s2 s3 s4 s5 s6 s7 s8</br>
+GIVE &lt;$STR(S1)&gt; 1</br>
+GIVE &lt;$STR(S2)&gt; 1</br>
+GIVE &lt;$STR(S3)&gt; 1</br>
+GIVE &lt;$STR(S4)&gt; 1</br>
+GIVE &lt;$STR(S5)&gt; 1</br>
+GIVE &lt;$STR(S6)&gt; 1</br>
+GIVE &lt;$STR(S7)&gt; 1</br>
+GIVE &lt;$STR(S8)&gt; 1</br>
+TakeOn &lt;$STR(S1)&gt; 0</br>
+TakeOn &lt;$STR(S2)&gt; 1</br>
+TakeOn &lt;$STR(S3)&gt; 3</br>
+TakeOn &lt;$STR(S4)&gt; 4</br>
+TakeOn &lt;$STR(S5)&gt; 5</br>
+TakeOn &lt;$STR(S6)&gt; 6</br>
+TakeOn &lt;$STR(S7)&gt; 7</br>
+TakeOn &lt;$STR(S8)&gt; 8</br>
+BREAK</br>
+;======================================================</br>
+;装备列表.txt   内容</br></br>
+
+;战神盔甲(男):裁决之杖:绿色项链:黑铁头盔:骑士手镯:骑士手镯:力量戒指:力量戒指</br>
+;战神盔甲(女):裁决之杖:绿色项链:黑铁头盔:骑士手镯:骑士手镯:力量戒指:力量戒指</br>
+;魔法长袍(男):血饮:恶魔铃铛:道士头盔:龙之手镯:龙之手镯:紫碧螺:紫碧螺</br>
+;魔法长袍(女):血饮:恶魔铃铛:道士头盔:龙之手镯:龙之手镯:紫碧螺:紫碧螺</br>
+;灵魂战衣(男):无极棍:灵魂项链:道士头盔:三眼手镯:三眼手镯:泰坦戒指:泰坦戒指</br>
+;灵魂战衣(女):无极棍:灵魂项链:道士头盔:三眼手镯:三眼手镯:泰坦戒指:泰坦戒指</br></br>
+
+;======================================================</br>
+;写变量可配合inc实现写入数据</br>
+#act</br>
+inc S0 &lt;$DRESS&gt;</br>
+inc S0 :</br>
+inc S0  &lt;$WEAPON&gt;</br>
+inc S0 :</br>
+inc S0  &lt;$HELMET&gt;</br>
+;.........后面的自己写</br>
+;======================================================</br></br></br>
+
+注：是字符串为空的时候才出现报错  引擎报错要延时两秒 应该是卡了一下，处理方式：就是字串空的时候 m2会报错 功能正常  字串空时中止执行就OK了</br></br></br>
+
+;======================================================</br></br></br>
+<B>扩展支持自定义变量并支持自动填写数字编号</B></br></br></br>
+[@aaa]</br>
+#IF</br>
+#ACT</br>
+; 分隔字符串后，按顺序往S11及以后放</br>
+ExtractStringEx | aaa|bbb|ccc|ddd|000 S11</br>
+SendMsg 6 &lt;$STR(S11)&gt;,&lt;$STR(S12)&gt;,&lt;$STR(S13)&gt;,&lt;$STR(S14)&gt;,&lt;$STR(S15)&gt;</br></br></br></br>
+
+; 分隔字符串后，依次放自定义变量1，2，3，4及以后放</br>
+ExtractStringEx | aaa|bbb|ccc|ddd|000 S$拆分</br>
+SendMsg 4 &lt;$STR(S$拆分1)&gt;,&lt;$STR(S$拆分2)&gt;,&lt;$STR(S$拆分3)&gt;,&lt;$STR(S$拆分4)&gt;,&lt;$STR(S$拆分5)&gt;</br></br></br></br></br>
+
+
+
+
+
+
+
+
+
+</br></br>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

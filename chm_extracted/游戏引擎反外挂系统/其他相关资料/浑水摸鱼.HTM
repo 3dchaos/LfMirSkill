@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=gb2312">
+<META name="GENERATOR" content="QuickCHM">
+<TITLE>神秘人地图设置</TITLE>
+<style type="text/css">
+<!--
+Body {
+		font-size: 12px
+}
+.STYLE37 {font-size: 16px}
+.STYLE38 {color: #0000FF; }
+.STYLE39 {
+	color: #0000FF;
+	font-size: 52px;
+	font-weight: bold;
+}
+.STYLE40 {
+	font-size: 16px;
+	font-weight: bold;
+	color: #FF0000;
+}
+.STYLE41 {font-size: 16px; color: #FF0000; }
+.STYLE42 {color: #FF0000; font-weight: bold; }
+.style43 {
+	font-size: 24px;
+	font-weight: bold;
+	color: #0000FF;
+}
+.style44 {font-size: 24px; font-weight: bold; color: #FF0000; }
+-->
+</style>
+</HEAD>
+<BODY>
+<p class="STYLE37">[+] 增加地图参数：SECRET(31|固定名字|2|21) //浑水摸鱼模式<br>
+<br>
+  01 禁止说话<br>
+  02 禁止名字变色<br>
+  04 禁止看对方装备<br>
+  08 统一名字 //第2参数就是指定显示的名字<br>
+  16 统一装备外观 //第3参数指衣服外观，第4参数指武器外观<br>
+  32 是否百分比显血 //是否人物、影响HP以百分比显示<br>
+  64 隐藏称号显示<br>
+128 隐藏顶戴花翎<br>
+注意：隐藏顶戴和称号自己可见自己属正常！！！！<br>
+  <B>如果要多个功能起作用，相加对应的数字即可，  </B><br>
+例如：禁止名字变色(02) + 禁止看对方装备(04) + 统一装备外观(16)，等于：22，既是第1参数=22</p>
+<p class="STYLE37">&nbsp;</p>
+<p class="STYLE37">&nbsp;</p>
+<p class="style43">SECRET(31|固定名字|2|21)</p>
+<p class="style43">特别解说: 第一参数 31 为控制总参数</p>
+<p class="style43">总参数分为</p>
+<p class="style43"><span class="STYLE37">01 禁止说话<br>
+02 禁止名字变色<br>
+04 禁止看对方装备<br>
+08 统一名字 //第2参数就是指定显示的名字<br>
+16 统一装备外观 //第3参数指衣服外观，第4参数指武器外观<br>
+32 是否百分比显血 //是否人物、英雄、人形怪HP以百分比显示<br>
+64 隐藏称号显示 <br>
+128 隐藏顶戴花翎</span></p>
+
+<p class="style43">假如第一参数为01时 SECRET(1|固定名字|2|21) 那么后面的 |固定名字|2|21 的几个参数也必须写上但是不生效</p>
+<p class="style43">举列: 我要设置盟重身 所有玩家名字为 神秘人 禁止说话 禁止查看对方装备</p>
+<p class="style43">那么第一参数就是 01+08+04=13 第2参数写 神秘人 第3参数和第4参数由于未用到可以随便写不起效</p>
+<p class="style43">[盟重省 3] SECRET(13|神秘人|2|21)</p>
+<p class="style44">举列2: 我要设置盟重身 所有玩家名字为 神秘人 禁止说话 禁止名字变色  禁止查看对方装备 统一装备外观为倚天衣=物品库的倚天衣SHAPE=35 统一武器外观为倚天武器=物品库的SHAPE=68</p>
+<p class="style44">那么第一参数就是 1+2+4+8+16=31 第2参数写 神秘人 第3参数写35 第4参数写68</p>
+<p class="style44">[盟重省 3] SECRET(31|神秘人|35|68)</p>
+<p class="style43">&nbsp;</p>
+<p class="style44">举列2: 我要设置盟重身 所有玩家名字为 神秘人 禁止说话 禁止名字变色  禁止查看对方装备 统一装备外观为倚天衣=物品库的倚天衣SHAPE=35 统一武器外观为倚天武器=物品库的SHAPE=68 .比例显血</p>
+<p class="style44">那么第一参数就是 1+2+4+8+16+32=63 第2参数写 神秘人 第3参数写35 第4参数写68</p>
+<p class="style44">[盟重省 3] SECRET(63|神秘人|35|68)</p>
+<p class="style43">&nbsp; </p><br><br><br><br>
+  <B>**************************************************以下为脚本命令使用**************************************************  </B>
+<p class="style43">如觉得地图参数设置不够灵活，可使用脚本命令实现：<br><br>
+<p class="style43">设置摸鱼模式：<br>
+<p class="style44">SetSecretMode 地图名(所有地图*)   控制参数  统一显示名字  统一显示衣服   统一显示武器<br><br>
+
+<p class="style43">控制参数：可随意组合（各值相加即可）；0为取消摸鱼模式<br>
+<p class="style43">01 禁止说话<br>
+<p class="style43">02 禁止名字变色<br>
+<p class="style43">04 禁止看对方装备<br>
+<p class="style43">08 统一名字 //第2参数就是指定显示的名字<br>
+<p class="style43">16 统一装备外观 //第3参数指衣服外观，第4参数指武器外观<br>
+<p class="style43">32 是否百分比显血 //是否人物、影响HP以百分比显示<br>
+<p class="style43">64 隐藏称号显示<br>
+<p class="style43">128 隐藏顶戴花翎<br><br>
+
+<p class="style44">脚本示范：<br>
+<p class="style44">[@MY]<br>
+<p class="style44">#IF<br>
+<p class="style44">#ACT<br>
+<p class="style44">SetSecretMode 3 31 摸鱼 9 34<br>
+break<br><br><br><br>
+
+</BODY>
+</HTML>
+<br><hr><br>
+

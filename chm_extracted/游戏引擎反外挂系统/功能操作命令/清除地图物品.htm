@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>清除地图物品</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG><BR></FONT>&nbsp;&nbsp;&nbsp; 
+清理地图上指定名字的物品.</FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT><BR>
+</STRONG>&nbsp;&nbsp;&nbsp; CLEARITEMMAP 地图 X Y 范围 物品名称 (清除地图物品，不带物品名称则清除所有) </FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>说明：</FONT><BR>
+</STRONG>&nbsp;&nbsp;&nbsp;物品名字等于*时表示指定范围内的所有物品. </FONT></P>
+<P><FONT size=2>  ;清除盟重安全区内的回城卷<BR>
+  [@main]<BR>
+  #IF<BR>
+  #ACT<BR>
+&nbsp;CLEARITEMMAP 3 330 330 10 回城卷 <BR>
+  #SAY<BR>
+  盟重安全区内的回城卷都被清除了。<BR>
+  <BR>
+  清除盟重安全区内所有物品<br>
+  [@main]<BR>
+  #IF<BR>
+  #ACT<BR>
+&nbsp;CLEARITEMMAP 3 330 330 10<BR>
+  #SAY<BR>
+  盟重安全区内的所有物品都被清除了。
+  <BR>
+  </FONT><FONT 
+size=3><BR>
+<BR><BR><BR><BR><BR>
+
+
+ClearItemMap支持清理地图所有物品(参数2(X)=0或空；参数3(Y)=0或空；参数4(范围) = 0或空)<BR><BR>
+;清掉盟重所有物品<BR>
+ClearItemMap 3<BR>
+
+
+</FONT></P>
+</BODY>
+</HTML>

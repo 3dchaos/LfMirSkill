@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>穿戴和脱装备统一触发</title>
+</head>
+
+<body>
+<p>功能说明：穿戴和脱装备统一触发</p>
+
+</br></br>
+
+人物通用穿戴装备触发@TakeOnEx，卸下装备触发：@TakeOffEx</br>
+英雄通用穿戴装备触发@HeroTakeOnEx，卸下装备触发：@HeroTakeOffEx</br></br>
+
+增加变量（人物）：</br>
+当前操作装备位置: &lt;$CurItemPos&gt;</br>
+当前操作装备数据库名: &lt;$CurItemName&gt;</br>
+当前操作装备改名后名称: &lt;$G_CurItemName&gt;</br>
+当前操作装备唯一ID: &lt;$CurItemMakeIndex&gt;</br></br>
+
+增加变量（英雄）：</br>
+当前操作装备位置: &lt;$H.CurItemPos&gt;</br>
+当前操作装备数据库名: &lt;$H.CurItemName&gt;</br>
+当前操作装备改名后名称: &lt;$H.G_CurItemName&gt;</br>
+当前操作装备唯一ID: &lt;$H.CurItemMakeIndex&gt;</br></br>
+
+[@TakeOnEx]</br>
+#ACT</br>
+SENDMSG 6 人物穿装备，位置&lt;$CurItemPos&gt;，物品&lt;$CurItemName&gt;(&lt;$G_CurItemName&gt;)，ID&lt;$CurItemMakeIndex&gt;</br></br>
+
+[@TakeOffEx]</br>
+#ACT</br>
+SENDMSG 6 人物脱装备，位置&lt;$CurItemPos&gt;，物品&lt;$CurItemName&gt;(&lt;$G_CurItemName&gt;)，ID&lt;$CurItemMakeIndex&gt;</br></br>
+
+[@HeroTakeOnEx]</br>
+#ACT</br>
+SENDMSG 6 英雄穿装备，位置&lt;$H.CurItemPos&gt;，物品&lt;$H.CurItemName&gt;(&lt;$H.G_CurItemName&gt;)，ID&lt;$H.CurItemMakeIndex&gt;</br></br>
+
+[@HeroTakeOffEx]</br>
+#ACT</br>
+SENDMSG 6 英雄脱装备，位置&lt;$H.CurItemPos&gt;，物品&lt;$H.CurItemName&gt;(&lt;$H.G_CurItemName&gt;)，ID&lt;$H.CurItemMakeIndex&gt;</br>
+
+
+
+
+</br></br></br>
+
+------------------------------------------</br>
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

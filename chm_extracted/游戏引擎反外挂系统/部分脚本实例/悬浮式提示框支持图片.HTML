@@ -1,0 +1,59 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>悬浮式装备信息窗口支持图片显示</title>
+</head>
+
+<body>
+<br><br><br><br>
+
+<font color="#0000FF"><b>物品备注悬浮式装备信息窗口支持图片显示</b></font>(可使用到物品备注、套装备注)：<br><br><br>
+
+<b>物品备注示例：</b><br>
+
+    宝藏钥匙=250/&lt;looks:1184&gt;可用来开启卧龙山庄中的“神秘宝藏”\253/直接获得其中的宝物<br>
+    火龙神甲=250/&lt;StateItem:595&gt;可用来开启卧龙山庄中的“神秘宝藏”\253/直接获得其中的宝物<br>
+
+文字均支持单行文字颜色自定义 插入：{文字内容|文字颜色0-255} 如：宝藏钥匙=250/&lt;looks:1184&lt;可用来开启{卧龙山庄|251}中的“神秘宝藏”\253/直接获得其中的宝物<br><br><br><br>
+
+<P><FONT face=Arial size=2><img src="BZ.jpg" width="450" height="255">. </FONT></P><br><br>
+<b>支持以下方式展示：</b><br><br>
+
+    1、Looks支持：读取Items或Items1.....<br>
+    格式：&lt;looks:N:X:Y:Z&gt;<br>
+    说明：N=图片位置；X=X偏移；Y=Y偏移 Z=是否显示物品背景框(0,1)<br>
+    &lt;looks:1184:0:0:1><br><br>
+
+
+    2、NewopUI支持；读取NewopUI.pak<br>
+    格式：&lt;NewopUI:N:X:Y&gt;<br>
+    说明：N=图片位置；X=X偏移；Y=Y偏移<br>
+    &lt;NewopUI:1184:0:0&gt;<br><br>
+
+    3、Img支持<br>
+    格式：&lt;Img:N:F:X:Y&gt;<br>
+N表示显示文件中的第几个图片,F表示WIL文件序号,X是横向坐标,Y是纵向坐标.<br>
+F=WIL文件序号(详见引擎：查看-列表信息(二)-WIL资源)<br>
+X和Y这两个坐标可以使图片显示的坐标更加精准. <br>
+    &lt;Img:1:1:0:0&gt;<br><br><br><br><br>
+
+
+
+4、PlayImg支持<br>
+格式: &lt;PlayImg:F:N:C:T:X:Y:M&gt;<br>
+
+F表示WIL文件序号,N表示播放开始图片,C表示播放张数,T表示播放速度(毫秒),X是横向坐标,Y是纵向坐标.<br>
+F=WIL文件序号(详见引擎：查看-列表信息(二)-WIL资源)<br>
+X和Y这两个坐标可以使图片显示的坐标更加精准.<br>
+M：绘制模式（0:原始绘制; 1:透明绘制; 2:底层原始绘制;3:底层透明绘制) <br><br> <br><br><br><br>
+
+
+
+5、悬浮框物品备注属性栏将数字转换为图片<br><br>
+
+装备栏提示  ( 没有  提示信息/@脚本触发)<br>
+ &lt;ImgNum: 数字类型(0-9): 数字值: 字符间隔: X: Y&gt;<br>
+
+图片位置：NewopUI.pak 1230开始---1329结束  （10组数字）<br><br><br><br><br>

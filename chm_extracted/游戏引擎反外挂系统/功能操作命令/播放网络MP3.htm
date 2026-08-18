@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>播放网络MP3</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<BODY>
+<P><FONT face=Arial size=2><FONT face=Fixedsys>说明: 播放网络上的MP3文件,或者本地MP3文件.<BR>格式: 
+PlayMP3 <A href="http://www.lfm2.com/123.mp3">http://www.lfm2.com/123.mp3</A>&nbsp; 
+<BR>注意: 如果是本地文件会自动搜索客户端Music目录中同名文件.</FONT></FONT></P>
+<P><FONT face=Fixedsys size=2></FONT><FONT 
+face=Fixedsys><BR>[@main]<BR>#IF<BR>#ACT<BR>PlayMusic 
+100.MP3<BR>
+
+<BR><BR>
+
+新增：<BR><BR>
+PlayMusicEx命令不受声音关闭影响（只能关闭电脑喇叭方式关闭）<BR><BR><BR>
+
+
+
+
+PlayMusicEx格式：<BR>
+
+PlayMusicEx 文件  循环次数  模式(0:自己;1:所有人;2:当前地图人;3:队友;4:自己周边的人)  参数4 <BR>
+
+- 参数4:	0或空   多个文件同时播放时,所有声音叠加到一起(目前方式)<BR>
+- 参数4:	1       上一段播放没结束时,中止声音,开始播放当前内容<BR><BR>
+
+
+
+[@main]<BR>
+&lt;播放/@播放&gt;<BR><BR>
+
+[@播放]<BR>
+#act<BR>
+PlayMusicEX 歌1.MP3 1 0 1<BR><BR><BR>
+
+
+
+
+</P></FONT></BODY>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>时间戳</title>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<body><FONT face=Arial size=2>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT color=#0000ff>功能说明:</FONT> 
+时间戳、获取时间、世界UTC时间到北京时间<BR><BR></FONT></FONT></P>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT 
+color=#0000ff>格式：</FONT>世界UTC时间到北京时间 格式：UnixToStr UTC时间 保存变量 格式(0:日期用-分隔; 1:日期用/分隔)<BR></FONT></FONT></P>
+<P><FONT face=Fixedsys size=2></br></br>
+
+
+</br></br>
+--------------------------------------------------------</br></br>
+
+世界时间变量：&lt;$UTCNow&gt;</br></br>
+
+
+时间戳转换月日年时分秒</br>
+世界UTC时间到北京时间（北京时间需在世界时间上减去8小时）</br>
+格式： UnixToStr UTC时间 保存变量 格式(0:日期用-分隔; 1:日期用/分隔)</br></br>
+
+例子
+[@main]</br>
+#IF</br>
+#ACT</br>
+Mov N1 &lt;$UTCNow&gt;</br>
+Mov N2 &lt;$STR(N1)&gt;</br>
+inc N2 28800\</br>
+UnixToStr &lt;$STR(N1)&gt; S1 0</br>
+#SAY</br>
+UTC(&lt;$STR(N1)&gt;)转为北京时间是:&lt;$STR(S1)&gt;\</br>
+UTC8为&lt;$STR(N2)&gt;\</br>
+
+
+
+
+
+--------------------------------------------------------</br></br>
+
+
+
+
+
+</br></br></br></br></br>
+
+
+</html>

@@ -1,0 +1,167 @@
+<title>程序变量说明[!]</title>
+<style type="text/css">
+<!--
+.STYLE1 {	color: #0000FF;
+	font-weight: bold;
+}
+.STYLE2 {font-size: 14px}
+.STYLE5 {color: #FF0000; font-weight: bold; }
+-->
+</style>
+<p>P0-P999 (私人变量，数字型) 关闭对话框重置为0。<br />
+  D0-D999 (私人变量，数字型) 下线不保存.摇筛子变量.<br />
+  M0-M999 (私人变量，数字型) 下线不保存.切换地图清空.<br />
+  N0-N999 (私人变量，数字型) 下线不保存.小退归0.<br />
+  S0-S999 (私人变量，字符型) 下线不保存.小退归0.<br />
+  I0-I999 (全局变量，数字型) 不可保存，服务器重启自动重置为0。<br />
+  G0-G999 (全局变量，数字型) 可保存。（存放在Mir200/GlobalVal.ini文件里面）<br />
+ A0-A999 (全局变量，字符型) 可保存。（存放在Mir200/GlobalVal.ini文件里面）<br />
+ U0-U499 (私人变量，数字型) 可保存。（存放在人物数据库Mir.db里面、值最大范围正负21亿）<br />
+ T0-T499 (私人变量，字符型) 可保存。（存放在人物数据库Mir.db里面、字符长度256<1个字母为1字符、1汉字为2字符>）<br />
+J0-J499 (私人变量，数字型) 可保存,每晚自动12点重置,合区或关停服务器请错开00:00点即可。（存放在人物数据库Mir.db里面、值最大范围正负21亿）<br />
+Z0-J499 (私人变量，字符型) 可保存,每晚自动12点重置,合区或关停服务器请错开00:00点即可。（存放在人物数据库Mir.db里面、自定义清理时间位于参数设置 - 时间控制,和J变量共清理时间）</p>
+提示：仅G、N$、U、N变量数字支持9223372036854775807，其他数字变量支持21亿<br /><br />
+提示：2023-07-22扩展U500-U599 T500-T599变量，如果你用不上跨服，或者说跨服用不上参数1为2的话，那么U500-U599 T500-T599可以在你服务端正常脚本中随意使用，如果用上了跨服的参数1为2的话变量将会从母区传回子区保存，所以写版本时需注意...<br /><br />
+注意：N998和N999变量为鼠标的在游戏中地图上的 坐标数字，请不要再服务端中使用这两个变量（因为这2个变量值一直的变动）<br /><br />
+<p>注意： 自定义变量不要以P、D、M、N、S、I、G、A开头<p class="STYLE5">(扩展说明见本页下方)</p>
+<p>【变量属性】 </p>
+<p>P(0-999) </p>
+<p>『属性说明』：该变量只对当前对话NPC内有效果。如果中途点其他NPC或者对话产生close、关闭时所有P变量均归0。该变量取值范围：（0-？）根据M2最大值不同 <br />
+  『用法』：该变量没有NPC间传递性作为临时变量多重复使用效果十分好。而且因为脚本命令有对该变量进行加/减/赋值/随机取值等运算，他和goto的配合可以使脚本中出现仿for循环的效果。并且因为他不传递的性质其 <br />
+  随机取值也能与RANDOM媲美。</p>
+<p>D(0-999) </p>
+<p>『属性说明』：该变量在人物不下线时对全局NPC通用传递。该变量取值范围：同P变量 <br />
+  『用法』：既有像[0-？]变量一样的人物属性私有变量的效果又有像P变量一样的运算功能！唯一不足就是下线 后该变量会被清空。可是如果配合上[000]变量或者namelist变量的记录性。实在是功能强大的个人隐私属性！ </p>
+<p>G(0-999) </p>
+<p>『属性说明』：该变量不属于人物属性范围，对于全服务器内该变量唯一并且全局NPC通用传递。该变量取值范围：同P变量 <br />
+  『用法』：这个变量是唯一的一个不属于任何人物而属于服务器的变量，该变量通过任何人的运算均产生效果。而且不保存在任何人的属性中。（存放在Mir200/GlobalVal.ini文件里面）</p>
+<p>A(0-999) </p>
+<p>『属性说明』：该变量不属于人物属性范围，对于全服务器内该变量唯一并且全局NPC通用传递。该变量取值范围：同D变量 <br />
+  『用法』：这个变量是唯一的一个不属于任何人物而属于服务器的变量，该变量通过任何人的运算均产生效果。而且不保存在任何人的属性中。（存放在Mir200/GlobalVal.ini文件里面）</p>
+<p><span class="STYLE5">@@InPutString</span> 用法 <span class="STYLE5">@InPutInteger</span> 类似,</p>
+如果需要在一个脚本中使用该命令，则需要在脚本的第一行输入(@@InPutInteger @@InPutString)这段内容。以下脚本用于测试输入功能，大家可从脚本中仔细研究一下脚本的实现原理。</p>
+<p>举例说明：</p>
+<p>22要和后面的变量一样&lt;$STR(S22)&gt;</p>
+<p>[@InPutString22]<br />
+  #IF<br />
+  CHECKTEXTLIST  ..\QuestDiary\元宝充值\50000.txt  &lt;$STR(S22)&gt;<br />
+  ;这个命令是检测你输入的卡号和50000.txt这里面的某行卡号是否相同<br />
+  #ACT<br />
+  DELTEXTLIST  ..\QuestDiary\元宝充值\50000.txt  &lt;$STR(S22)&gt;<br />
+  ;这个命令是将你输入的那行卡号在50000.txt这个文档里删除掉<br />
+  GAMEGOLD + 50000<br />
+  SENDMSG 7 充值成功：增加[50000元宝]，你当前帐户里元宝数为：&lt;$GAMEGOLD&gt;<br />
+  SENDMOVEMSG 0 251 249 350 1 [『&lt;$USERNAME&gt;』使用在线充值卡--充值成功：增加[50000元宝]，感谢您的支持希望您玩的开心:-)]<br />
+  GOTO @充值元宝<br />
+  #ELSEACT<br />
+  SENDMSG 7 您输入的卡号不正确或已被他人使用，请重新输入！<br />
+GOTO @充值元宝</p>
+<p class="STYLE5">@InPutInteger </p>
+
+
+★★★★★★★有禁止符号时执行当前npc的脚本@InputStringFilter, @InputIntegerFilter</br>
+
+禁止符号在M2-列表信息一设置</br>
+---------------------------------------------------------------------------------------------------------------------------------------------</p>
+<p class="STYLE5">扩展字符变量S和数字变量N</p>
+
+功能：扩展字符变量S和数字变量N<br />
+格式：无<br />
+说明：扩展字符变量S和数字变量N，除了支持0~499以外，可以在S$变量或N$变量后面增加任意字符<br />
+例： <br />
+[@test]<br />
+#ACT<br />
+MOV S$我的人物名称 &lt;$USERNAME&gt;<br />
+SENDMSG 0 &lt;$STR(S$我的人物名称)&gt; 255 253<br />
+
+[@test1]<br />
+#ACT<br />
+MOV N$我的杀怪总数 100<br />
+INC &lt;$STR(N$我的当前杀怪数)&gt; 1<br />
+SENDMSG 6 【杀怪总数=&lt;$STR(N$我的杀怪总数)&gt;】【当前杀怪数=&lt;$STR(N$我的当前杀怪数)&gt;】 255 253<br />
+<br /><br /><br />
+
+---------------------------------------@@InPutString 与  @InPutInteger区别------------------------------------------------------------------------------------------------------</p>
+
+;区别就是@@InPutString为字符，@InPutInteger为数字，数字对应私人变量为N，字符则为S</br>
+;示范：</br></br>
+
+[@Main]<br />
+请输入数字1 &lt;输入/@@InPutInteger1&gt;\</br>
+请输入数字2 &lt;输入/@@InPutInteger2&gt;\</br>
+请输入数字3 &lt;输入/@333&gt;\</br>
+...............................\</br>
+
+请输入字符1 &lt;输入/@@InPutString1&gt;\</br>
+请输入字符2 &lt;输入/@@InPutString2&gt;\</br>
+
+...............................\</br></br>
+
+[@InPutInteger1]</br>
+#SAY</br>
+你输入的数字1是 &lt;$STR(N1)&gt;\</br></br>
+
+[@InPutInteger2]</br>
+#if</br>
+LARGE N2 0</br>
+SMALL N2 1000001</br>
+#ACT</br>
+MessageBox 你输入的数字2是 &lt;$STR(N2)&gt;\</br>
+#ELSEACT</br>
+MessageBox 请正确输入数量（1-100W）。</br>
+break</br></br>
+
+
+[@333]</br>
+#ACT</br>
+MessageBox 请输入数量（1-100W）。 @@InPutInteger3(请输入元宝数量（1-1000000）。)</br></br>
+
+[@InPutInteger3]</br>
+#IF</br>
+LARGE N3 0</br>
+SMALL N3 1000001</br>
+#ELSEACT</br>
+MessageBox 请正确输入元宝数量（1-100W）。</br>
+break</br></br>
+
+#IF</br>
+CHECKGAMEGOLD &lt;  &lt;$STR(N3)&gt;</br>
+#ACT</br>
+MessageBox 你身上没有足够的元宝。</br>
+#ELSEACT</br>
+GAMEGOLD -  &lt;$STR(N3)&gt;</br>
+MessageBox 成功将 &lt;$STR(N3)&gt;元宝扣除。</br>
+break</br></br>
+
+;===============================</br></br>
+
+[@InPutString1]</br>
+#SAY</br>
+你输入的字符1是&lt;$STR(S1)&gt;\</br></br>
+
+[@InPutString2]</br>
+#IF</br>
+EQUAL S2 aaa</br>
+#ACT</br>
+MessageBox 正确</br>
+#ELSEACT</br>
+MessageBox 错误</br>
+break</br></br></br>
+
+
+
+
+
+有禁止符号时执行当前npc的脚本@InputStringFilter, @InputIntegerFilter</br>
+禁止符号在M2-列表信息一设置</br></br>
+
+[@InputStringFilter] </br>
+; 如果用户输入的字符在消息过滤列表中就会调转到这个字段</br>
+#SAY</br>
+输入的字符非法</br></br>
+
+[@InputIntegerFilter] </br>
+; 如果用户输入的数字在消息过滤列表中就会调转到这个字段</br>
+#SAY</br>
+输入的字符非法
+</br></br></br></br></br>

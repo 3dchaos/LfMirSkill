@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>设置技能伤害防御[!]</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>设置技能伤害防御.</FONT></FONT></P>
+<BR><BR><BR><BR><BR><BR><BR>
+设置技能伤害/防御<BR><BR>
+格式: SetSkillPower 技能ID   +/-/=   人物伤害增加%（-32768 .. 32767）   人物伤害增加值（-32768 .. 32767）  怪物伤害增加%（-32768 .. 32767）     怪物伤害增加值（-32768 .. 32767）   防御增加%（-32768 .. 32767）     防御增加值（-32768 .. 32767）   时间(秒; 0-65535;0一直有效)  是否保存数据库(0:不存；1：存）
+</P>
+
+
+
+示范脚本：<BR><BR>
+#act<BR>
+SetSkillPower 66 = 100 0 100 0 0 0 0<BR>
+SENDMSG 6 你的开天斩技能对人物伤害增加为原来的2倍(增加100%)，对怪物伤害为原来的2倍(增加100%)<BR>
+<BR><BR><BR><BR><BR><BR><BR><BR><BR>
+
+
+
+
+
+获取技能伤害/防御<BR><BR>
+GetSkillPower 技能ID   人物伤害增加%(变量)   人物伤害增加值(变量)  怪物伤害增加%(变量)     怪物伤害增加值(变量)   防御增加%(变量)     防御增加值(变量)   时间(变量)  是否保存数据库(变量)
+<BR><BR><BR><BR><BR><BR>
+
+
+
+
+计算方式为：M2-列表信息2-技能威力设置中 全局设置+命令私人设置 =效果(不想用M2全局的话可以将全局全部设置为0)<BR><BR><BR><BR><BR><BR><BR><BR><BR>
+</P>
+</BODY>
+</HTML>

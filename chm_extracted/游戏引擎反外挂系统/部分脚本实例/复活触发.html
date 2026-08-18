@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>复活触发[!]</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>复活时触发.</FONT></FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>说明：</FONT>QFunction-0.txt脚本触发</STRONG></FONT></P>
+<P>示列：<br>
+
+
+复活剩余时间变量：&lt;$RevivalTime&gt;
+
+<P>[@Revival]<br>
+#IF<br>
+#ACT<br>
+Sendmsg 6 剩余复活时间 &lt;$RevivalTime&gt;<br>
+SendMsg 5 你复活了！<br><br><br><br><br>
+
+
+
+
+<P>[@H.Revival]<br>
+#IF<br>
+#ACT<br>
+SendMsg 5 你的英雄复活了！<br>
+</P>
+</BODY>
+</HTML>

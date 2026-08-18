@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>键值对字典</title>
+</head>
+
+<body>
+
+
+</br></br>
+功能说明: 字典</br>
+格式：{key1:value1,key2:value2}</br></br>
+
+; 取字典中的元素数量</br>
+GetDictKeyCount 字典名 变量</br></br>
+
+; 取字典中的Keys或Values</br>
+GetDictItems 字典名 字段类型(0:Keys;1:Values) 保存变量</br></br>
+
+;取字典中值最大的元素</br>
+GetDictMaxValue 字典名 Key变量  Value变量</br></br>
+
+;取字典中值最小的元素</br>
+GetDictMinValue 字典名 Key变量  Value变量</br></br>
+
+;检查字典中的所有值是否均为数字</br>
+CheckDictAllDigit 字典名</br></br>
+
+;检查字典是否存在key或value</br>
+;格式：CheckInDict 字典变量 待检查的值 参数3</br>
+;参数3：   0或空  检查key是否存在</br>
+;参数3：   1      检查value是否存在</br></br>
+
+
+
+
+
+脚本示例：</br>
+[@字典测试]</br>
+#ACT</br>
+;字典初始化</br>
+MOV D$测试 {张三:100,李四:200,王五:300}</br></br>
+
+;添加/修改字典元素</br>
+Mov D$测试[周八] 600</br></br>
+
+;添加/修改字典元素</br>
+Inc D$测试 赵六:400</br></br>
+
+;添加/修改字典元素</br>
+Inc D$测试 孙七:500</br></br>
+
+;删除字典元素</br>
+Dec D$测试 赵六</br>
+sendmsg 7 &lt;$STR(D$测试)&gt;</br></br>
+
+; 取字典中的元素数量</br>
+GetDictKeyCount D$测试 N1</br>
+sendmsg 7 字典中Key有&lt;$STR(N1)&gt;个</br></br>
+
+; 将字典中的Key放到 L$Keys中</br>
+GetDictItems D$测试 0 L$Keys</br></br>
+
+;将字典中的Value放到 L$Values中</br>
+GetDictItems D$测试 1 L$Values</br></br>
+
+sendmsg 7 Keys:&lt;$Str(L$Keys)&gt;</br>
+sendmsg 7 Values:&lt;$Str(L$Values)&gt;</br></br>
+
+#IF</br>
+;检查Key是否存在</br>
+CheckInDict D$测试 张三 0</br>
+#ACT</br>
+SendMsg 7 Key:张三在字典中</br></br>
+
+#IF</br>
+;检查Value是否存在</br>
+CheckInDict D$测试 200 1</br>
+#ACT</br>
+SendMsg 7 Value:200在字典中</br></br>
+
+#IF </br>
+CheckDictAllDigit D$测试</br>
+#ACT</br>
+;取字典中值最大的元素</br>
+GetDictMaxValue D$测试 S1 N1</br>
+sendmsg 7 &lt;$STR(D$测试)&gt;中，数值最大元素Key=&lt;$STR(S1)&gt;，Value=&lt;$STR(N1)&gt;</br></br>
+
+;取字典中值最小的元素</br>
+GetDictMinValue D$测试 S1 N1</br>
+sendmsg 7 &lt;$STR(D$测试)&gt;中，数值最小元素Key=&lt;$STR(S1)&gt;，Value=&lt;$STR(N1)&gt;</br>
+#ELSEACT</br>
+sendmsg 7 &lt;$str(D$测试)&gt;内有非法数值，取值失败</br></br>
+
+#ACT</br>
+MOV D$测试 {}</br>
+sendmsg 7 字典内容为:&lt;$STR(D$测试)&gt;</br></br>
+
+
+
+
+;示范脚本为简易脚本，具体自由发挥.......</br></br></br></br>
+
+
+
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

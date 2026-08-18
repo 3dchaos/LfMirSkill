@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>聚灵珠使用前触发</title>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<body><FONT face=Arial size=2>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT color=#0000ff>功能说明:</FONT> 
+聚灵珠使用前触发、聚灵珠使用前中断命令<BR><BR></FONT></FONT></P>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT 
+color=#0000ff>说明：</FONT>聚灵珠使用前触发、聚灵珠使用前中断命令<BR></FONT></FONT></P>
+<P><FONT face=Fixedsys size=2></br></br>
+
+
+</br></br>
+--------------------------------------------------------</br></br>
+
+聚灵珠使用前触发QF命令</br></br>
+
+人物：@BeginUseExpSpiritBeads</br>
+宠物：@PetBeginUseExpSpiritBeads</br>
+英雄：@HeroBeginUseExpSpiritBeads</br></br>
+
+
+聚灵珠使用前中断命令**************************不管是人物还是英雄宠物，都用下面的中断，不用H. 或 Pet.</br>
+
+StopUseExpSpiritBeads</br></br></br></br>
+--------------------------------------------------------</br></br>
+
+示例：</br></br>
+[@BeginUseExpSpiritBeads]</br>
+#if</br>
+CHECKLEVELEX > 50</br>
+#act</br>
+StopUseExpSpiritBeads</br>
+SENDMSG 6 等级大于50级无法使用聚灵珠</br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</br></br></br></br></br></br></br>
+
+
+
+
+</br></br></br></br></br>
+
+
+</html>

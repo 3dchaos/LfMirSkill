@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>人物死亡时触发</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<body>
+<P><FONT face=Fixedsys size=2>人物死亡时触发. </FONT></P>
+<P><FONT face=Fixedsys size=2>#IF<BR>KillByHum<BR>#ACT<BR>SendMsg 5&nbsp;玩家 
+&lt;$HumKiller&gt; 在%m 把你干死了!<BR>#ELSEACT<BR>SendMsg 5 怪物 &lt;$MONKILLER&gt; 在%m 
+把你干死了!</P>
+====================================================================================================</P>
+变量：&lt;$KILLER&gt;  可显示人物、怪物、等其他一切杀死自己的对象名称，使用此变量为综合变量！！！可用于人物名字变量和怪物名字变量、如：</P>
+
+
+<P><FONT face=Fixedsys size=2>检查是被怪物还是人物杀死的. </FONT></P>
+<P><FONT face=Fixedsys size=2>#IF<BR>KillByHum<BR>#ACT<BR>SendMsg 5&nbsp;玩家 
+&lt;$KILLER&gt; 在%m 把你干死了!<BR>#ELSEACT<BR>SendMsg 5 怪物 &lt;$KILLER&gt; 在%m 
+把你干死了!</P>
+
+
+====================================================================================================</P>
+
+另外检测是否被人物杀死命令除KillByHum  也可使用 ：CheckKillByHum</BR></BR></BR></BR>
+
+
+
+特别说明：</BR>
+KillByHum 检测人物杀死为显示人物，宝宝杀死则为怪物（非人物）</BR>
+CheckKillByHum 检测为凶手为人物包含人物的任意下属 （含宝宝，英雄和英雄宝宝均检测为人物）</BR>
+$KILLER 变量显示配合CheckKillByHum 检测，凶手名字全部为人物名字（无论是宝宝，英雄和英雄宝宝均显示人物名字）</BR></BR></BR>
+
+[@PlayDie]</BR>
+#IF</BR>
+CheckKillByHum </BR>
+#ACT</BR>
+SendMsg 5 玩家 &lt;$KILLER&gt; 在%m 把你干死了!</BR>
+#ELSEACT</BR>
+SendMsg 5 怪物 &lt;$KILLER&gt; 在%m 把你干死了!</BR></BR>
+
+
+
+</FONT></P></body>
+</html>

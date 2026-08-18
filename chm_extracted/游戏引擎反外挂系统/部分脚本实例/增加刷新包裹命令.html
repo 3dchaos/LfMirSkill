@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=gb2312">
+<META name="GENERATOR" content="QuickCHM">
+<TITLE>刷新包裹的命令</TITLE>
+<style type="text/css">
+<!--
+Body {
+		font-size: 12px
+}
+
+.style2 {
+		color: #0000FF;
+		font-weight: bold;
+}
+.style5 {color: #FF0000}
+.style6 {font-size: 14px}
+.style7 {font-size: 12px}
+.style8 {color: #0000FF}
+-->
+</style>
+</HEAD>
+<BODY>
+<P class="style1"><span class="style2">功能：</span><BR> 
+增加刷新包裹物品命令：RefreshBag  刷新包裹时间间隔以引擎（功能设置-其他控制）设置为准，可以做个空技能触发</P>
+<P class="style1"><span class="style2">示例：</span></P>
+<P class="style8 style6 style1">[@GroupAttrib]<br>
+  我要刷新包裹：\<br>
+  &lt;刷新/@GroupAttrib5&gt;\ \<br>
+&lt;退出/@exit&gt;</P>
+<P class="style8 style6 style1">&nbsp;</P>
+<P class="style8 style6 style1">&nbsp;</P>
+<P class="style8 style6 style1">[@GroupAttrib5]</P>
+<P class="style8 style6 style1">#IF<br>
+  #ACT<br>
+<span class="style1">RefreshBag</span></P>
+<P class="style8 style6 style1">MESSAGEBOX 刷新包裹成功！<br>
+  CLOSE<br>
+#ELSEACT</P>
+
+<P class="style8 style6 style1">&nbsp;</P>
+<P class="style8 style6 style1">&nbsp;</P>
+<P class="style8 style6 style1">[@GroupAttrib6]</P>
+<P class="style8 style6 style1">#IF<br>
+  #ACT<br>
+<span class="style1">H.RefreshBag</span></P>
+<P class="style8 style6 style1">MESSAGEBOX 英雄刷新包裹成功！<br>
+  CLOSE<br>
+#ELSEACT</P>
+<P class="style1 style5 style7">&nbsp;</P>
+</BODY>
+</HTML>

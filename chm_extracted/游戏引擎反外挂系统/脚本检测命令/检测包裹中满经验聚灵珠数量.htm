@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>检测包裹中满经验聚灵珠数量</title>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<body><FONT face=Arial size=2>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT color=#0000ff>功能说明:</FONT> 
+给予一个满经验聚灵珠、检测包裹中满经验聚灵珠数量<BR><BR></FONT></FONT></P>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT 
+color=#0000ff>说明：</FONT>给予一个满经验聚灵珠、检测包裹中满经验聚灵珠数量<BR></FONT></FONT></P>
+<P><FONT face=Fixedsys size=2></br></br>
+
+
+</br></br>
+--------------------------------------------------------</br></br>
+<b>给予一个满经验聚灵珠命令</b></br>
+命令格式：GIVE  物品名  数量  参数3  参数4  参数5  参数6  参数7  参数8  参数9</br></br>
+
+参数3-8对应物品位置的0-5极品属性（其他位置无效）。参考下面的极品属性</br></br>
+
+参数9: 物品持久值(0或空保持当前，视物品而定; -1:给满持久)；*******注意：参数9仅对非叠加物品有效</br></br>
+
+例如</br>
+#ACT</br>
+give 聚灵珠 1 0 0 0 0 0 0 -1</br>
+sendmg 6 给了你一个满经验的聚灵珠</br></br>
+
+give 祝福罐 1 0 0 0 0 0 0 -1</br>
+sendmg 6 给了你一个满的祝福罐</br></br>
+
+-------------------------------------------------------</br></br>
+<B>检测包裹中满经验聚灵珠数量命令</b></br>
+
+获取背包中某物品的数量命令：GetBagItemCount 物品名称 保存变量 排除OK框中的物品(0或空:计算OK框的物品，1：不算OK框中的物品)   是否判断满持久</br></br>
+
+
+参数3： 是否判断满持久(0:不判断； 1：判断）*******注意：参数3仅对非叠加物品有效</br></br>
+
+格式: GetBagItemCount 物品名称  保存变量   排除OK框中的物品(0或空:计算OK框的物品，1：不算OK框中的物品)   是否判断满持久(0:或空不判断； 1：判断）</br></br></br></br>
+
+示列：</br></br>
+
+[@main]</br>
+#ACT</br>
+GetBagItemCount 聚灵珠 N1 0 1</br>
+SENDMSG 6 你的背包中共有&lt;$STR(N1)&gt;个满经验的聚灵珠</br>
+
+-------------------------------------------------------</br></br></br>
+<B>使用TAKE命令收回满经验的聚灵珠</b></br>
+格式：take 物品 数量 是否检测装备改名（0或空：不检测，1：检测） 物品名匹配方式(0或空：完整匹配，1：部分匹配） 是否回收自定义OK框物品(0或空:回收; 1:不回收)  检测持久（0或空：不检测 ，-1检测为满持久，-2未满持久）</br></br>
+
+[@main]</br>
+#ACT</br>
+GetBagItemCount 聚灵珠 N1 0 1</br>
+SENDMSG 6 你的背包中共有&lt;$STR(N1)&gt;个满经验的聚灵珠</br></br>
+
+#If</br>
+Large N1 0</br>
+#Act</br>
+take 聚灵珠 1 0 0 0 -1</br>
+ChangeExp + 100000</br>
+SendMsg 7 你的经验点数已经增加100000点。</br></br></br></br></br></br>
+
+
+
+
+
+
+
+
+
+
+
+</br></br></br></br></br></br></br>
+
+
+
+
+</br></br></br></br></br>
+
+
+</html>

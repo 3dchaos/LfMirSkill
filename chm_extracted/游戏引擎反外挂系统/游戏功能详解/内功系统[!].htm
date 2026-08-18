@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>内功系统[!]</TITLE>
+</HEAD>
+<BODY>
+<p> MonGen.txt 格式：地图 坐标X 坐标Y 怪物名字 范围 数量 间隔 集中刷新坐标机率 名字颜色(0~255)  内功怪物(0,1)  国家名字 同国家名玩家是否可攻击(0,1)<br>
+说明：最后一个参数为0时表示同国家玩家不能攻击该怪物，为1时在非国家攻击模式下可以攻击该怪物</p>
+<p>物品DB：<br>
+  (金牛装备：需等级 同时可内力恢复速度)<br>
+  DB设置： <br>
+  Need=18(表示穿戴需等级，装备可提高内力恢复速度) NeedLevel=50(等级条件) Stock=3(提高内力恢复速度)<br>
+  Need=19(表示穿戴需攻击力，装备可提高内力恢复速度%) NeedLevel=50(攻击力条件) Stock=3(提高内力恢复速度%)<br>
+  Need=20(表示穿戴需魔法，装备可提高内力恢复速度%) NeedLevel=50(魔法条件) Stock=3(提高内力恢复速度%)<br>
+  Need=21(表示穿戴需道术，装备可提高内力恢复速度%) NeedLevel=50(道术条件) Stock=3(提高内力恢复速度%)<br>
+  Need=22(表示穿戴需等级，装备可提高内力恢复速度+点) NeedLevel=50(等级条件) Stock=3(每次可提高内力值) <br>
+  Need=23(表示穿戴需攻击力，装备可提高内力恢复速度+点) NeedLevel=50(攻击力条件) Stock=3(每次可提高内力值) <br>
+  Need=24(表示穿戴需魔法，装备可提高内力恢复速度+点) NeedLevel=50(魔法条件) Stock=3(每次可提高内力值) <br>
+  Need=25(表示穿戴需道术，装备可提高内力恢复速度+点) NeedLevel=50(道术条件) Stock=3(每次可提高内力值) <br>
+</p>
+<p>脚本命令：<br>
+  功能:学习内功<br>
+  格式:READSKILLNG</p>
+<p>说明:<br>
+  1.判断玩家是学过内功,学过则进入@ReadNGFail,英雄则进入@ReadNGHeroFail<br>
+  2.学习成功进入@ReadNGOK,英雄则进入@ReadNGHeroOK<br>
+  3.主号学习过后,英雄才能学习<br>
+</p>
+<p>功能:调整内力经验点数。<br>
+  格式:CHANGENGEXP 控制符(=,+,-) 经验点数</p>
+<p>功能:检查是否学过内功<br>
+  格式:CHECKREADSKILLNG<br>
+</p>
+<p>功能:检查内功等级<br>
+  格式:CHECKNGLEVEL 操作符 (&lt;,&gt;,=) 等级数(1-255)</p>
+<p>功能:调整内功等级<br>
+  格式:CHANGENGLEVEL 控制符(=,+,-) 等级数(1-255)</p>
+</BODY>
+</HTML>
+
+ 

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>改变人物的模式</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<BODY><FONT face=Arial size=2>
+<P><FONT face=Fixedsys size=2>改变人物当前模式(无敌,隐身,生命,魔法,攻击力,道术力,魔法力,攻击速度,禁止攻击) 
+</FONT></P>
+<P><FONT color=#ff0000 size=2><FONT face=Fixedsys>格式: </FONT><FONT 
+face=Fixedsys><FONT color=#000000>ChangeModeEx 模式(1-10)&nbsp; 时间(1-65535)&nbsp; 
+附加值(1-21E)<BR></FONT><FONT color=#0000ff>说明: </FONT></FONT><FONT face=Fixedsys 
+color=#000000>1=无敌 2=隐身 3=HP&nbsp; 4=MP&nbsp; 5=攻击力 6=魔法力 7=道术力 8=攻击速度 9=禁止攻击 
+10=锁定 11=护身 12=防麻痹 13=破复活 14=传送 15=防止冰封<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+第三个参数无敌,隐身,禁止攻击时没有使用.</FONT></FONT></P>
+模式为11时，第三个参数为护身掉蓝比例(参数3设置100 表示遭遇攻击护身吸收所有伤害，设置50则只吸收一半)</BR>
+模式为12时，第三个参数为防御麻痹几率(参数3设置100 表示100%防御麻痹，设置50则为50%防御麻痹)<br>
+模式为13时，第三个参数为破复活几率(参数3设置100 表示100%破复活，设置50则为50%几率破复活)</p></p>
+<P><FONT color=#ff0000 size=2><FONT face=Fixedsys 
+color=#000000>#IF<BR>#ACT<BR>ChangeModeEx 1 
+60<BR>#SAY<BR>给你1分钟的无敌时间,好好利用哦!<BR><BR></FONT></FONT><FONT face=Arial 
+color=#ff0000 size=2><FONT color=#000000><FONT 
+face=Fixedsys>#IF<BR>#ACT<BR>ChangeModeEx 5 60 
+20<BR>#SAY<BR>60秒之内攻击力增加20点.</FONT></P>
+
+提示：改变英雄当前模式命令为：H.ChangeModeEx</P>
+
+注：ChangeModeEx支持多级脚本</P>
+</FONT></FONT></FONT></BODY>
+</html>

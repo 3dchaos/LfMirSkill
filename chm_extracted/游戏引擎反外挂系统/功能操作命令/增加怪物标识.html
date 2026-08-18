@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="GB2312">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>怪物标识系统详解</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #ffffff;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 25px;
+        }
+        h3 {
+            color: #16a085;
+        }
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: Consolas, monospace;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .note {
+            background-color: #e7f5fe;
+            border-left: 4px solid #3498db;
+            padding: 10px;
+            margin: 15px 0;
+        }
+        .warning {
+            background-color: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 10px;
+            margin: 15px 0;
+        }
+        .example {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 10px;
+            margin: 15px 0;
+        }
+        .command {
+            font-weight: bold;
+            color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <h1>怪物标识系统详解与高级应用</h1>
+    
+    <p>这个系统允许你为怪物设置<strong>临时标识</strong>（0-9共10个），每个标识可以存储一个<strong>0-255</strong>的数值。这些标识不会永久存储（服务器重启后消失），但可以用于实现各种动态效果，如：</p>
+    <ul>
+        <li><strong>标记特殊怪物</strong>（精英怪、BOSS、任务怪）</li>
+        <li><strong>触发特殊攻击效果</strong>（额外伤害、冰冻、中毒、减速）</li>
+        <li><strong>控制怪物行为</strong>（是否触发特殊技能、是否掉落额外物品）</li>
+        <li><strong>记录怪物状态</strong>（被攻击次数、是否被特定技能命中）</li>
+    </ul>
+
+    <h2>?? 核心命令详解</h2>
+    
+    <h3>1. 范围设置怪物标识（批量操作）</h3>
+    <pre><code>SetRangeMonAddByte 地图 X坐标 Y坐标 范围 怪物名称(*代表所有) 标识号(0-9) 值(0-255) 有效时间(秒;0或空为一直有效)</code></pre>
+    
+    <div class="example">
+        <h4>示例：</h4>
+        <pre><code>#ACT
+; 给人物周围10格内所有怪物设置标识0=100
+SetRangeMonAddByte self &lt;$X&gt; &lt;$Y&gt; 10 * 0 100
+
+; 只给周围5格内的"野猪"设置标识1=50
+SetRangeMonAddByte self &lt;$X&gt; &lt;$Y&gt; 5 野猪 1 50</code></pre>
+    </div>
+
+    <h3>2. 单个怪物设置标识（针对当前攻击目标）</h3>
+    <pre><code>M.SetMonAddByte 标识号(0-9) 值(0-255) 有效时间(秒;0或空为一直有效)</code></pre>
+    
+    <div class="example">
+        <h4>示例：</h4>
+        <pre><code>#ACT
+; 给当前攻击的怪物设置标识2=200
+M.SetMonAddByte 2 200</code></pre>
+    </div>
+
+    <h3>3. 检测怪物标识（需攻击后触发）</h3>
+    <pre><code>M.CheckMonAddByte 标识号(0-9) 比较符号(&lt;,&gt;,=) 检测数值(0-255)</code></pre>
+    
+    <div class="example">
+        <h4>示例：</h4>
+        <pre><code>#ACT
+; 如果当前攻击的怪物标识3 > 50，则触发效果
+M.CheckMonAddByte 3 > 50
+#SAY
+你的攻击触发了怪物的特殊状态！</code></pre>
+    </div>
+    
+    <div class="note">
+        <strong>注意：</strong>必须攻击怪物后才能检测，不能直接读取。
+    </div>
+
+    <h3>4. 获取怪物标识值（需攻击后触发）</h3>
+    <pre><code>M.GetMonAddByte 标识号(0-9) 保存变量</code></pre>
+    
+    <div class="example">
+        <h4>示例：</h4>
+        <pre><code>#ACT
+; 获取当前攻击目标的标识0值，存入N1变量
+M.GetMonAddByte 0 N1
+SendMsg 5 这个怪物的标识0值是：&lt;$STR(N1)&gt;</code></pre>
+    </div>
+
+    <h2>?? 高级应用场景</h2>
+    
+    <h3>1. 标记精英怪，触发额外掉落</h3>
+    <div class="example">
+        <pre><code>#ACT
+; 给当前怪物设置标识1=1（代表精英怪）
+M.SetMonAddByte 1 1
+
+[@OnKillMob]
+#IF
+M.CheckMonAddByte 1 = 1
+#ACT
+; 如果是精英怪，额外掉落物品
+Give 金条 1
+SendMsg 5 你击杀了精英怪，获得了额外奖励！</code></pre>
+    </div>
+
+
+
+
+    <h2>?? 注意事项</h2>
+    <div class="warning">
+        <ol>
+            <li><strong>标识是临时的</strong>，服务器重启后所有怪物标识会重置。</li>
+            <li><strong>检测和获取标识必须攻击怪物</strong>，不能直接读取未攻击的目标。</li>
+            <li><strong>标识号0-9</strong>，每个标识存储<strong>0-255</strong>的数值。</li>
+            <li>可以结合<code>#CALL</code>、<code>#IF</code>等脚本命令实现更复杂的逻辑。</li>
+        </ol>
+    </div>
+
+    <h2>?? 完整示例脚本</h2>
+    <div class="example">
+        <pre><code>[@标记精英怪]
+#ACT
+; 给周围8格内的"白野猪"设置标识1=1（精英标记）
+SetRangeMonAddByte self &lt;$X&gt; &lt;$Y&gt; 8 白野猪 1 1
+SendMsg 5 已标记附近的精英白野猪！
+
+[@攻击检测]
+#IF
+M.CheckMonAddByte 1 = 1
+#ACT
+SendMsg 5 你正在攻击一只精英怪！
+; 精英怪受到伤害+20%
+M.HumanHP - 20 0 0 0 0 1
+
+[@击杀精英怪]
+#IF
+M.CheckMonAddByte 1 = 1
+#ACT
+Give 屠龙 1
+SendMsg 5 恭喜！你击杀了精英怪，获得了屠龙！</code></pre>
+    </div>
+
+    <h2>总结</h2>
+    <ul>
+        <li><span class="command">SetRangeMonAddByte</span>：批量标记范围内的怪物。</li>
+        <li><span class="command">M.SetMonAddByte</span>：标记当前攻击的怪物。</li>
+        <li><span class="command">M.CheckMonAddByte</span>：检测怪物是否有特定标识（需攻击触发）。</li>
+        <li><span class="command">M.GetMonAddByte</span>：获取怪物标识值（需攻击触发）。</li>
+    </ul>
+
+    <p>这套系统非常适合做<strong>动态怪物行为控制</strong>，比如：</p>
+    <ul>
+        <li><strong>任务怪标记</strong>（只有带特定标识的怪才算任务目标）</li>
+        <li><strong>特殊技能触发</strong>（比如怪物血量低于30%时狂暴）</li>
+        <li><strong>副本机制</strong>（比如Boss进入二阶段）</li>
+    </ul>
+
+    <p>如果你有更复杂的需求，可以结合变量、计时器、技能触发等实现更强大的功能！ ??</p>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>替换字符命令[!]</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>替换字符命令.</FONT></FONT></P>
+
+
+<P>示列：<br>
+格式：<br>
+TextReplace 字符串内容  待替换的内容  新的内容  保存变量  分大小写(0或空：不分； 1：分)  只替换一次(0或空：全部替换；1：只替换一次）<br>
+
+
+
+<br>
+#ACT<br>
+TextReplace AAABBBAAA  AAA  字母 S1 0 0<br>
+SendMsg 6 &lt;$STR(S1)&gt;<br><br>
+
+</P>
+</BODY>
+</HTML>

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>宝宝立即叛变</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<BODY>
+<P><FONT size=2><FONT face=Fixedsys><FONT color=#0000ff>功能:</FONT> 
+指定宝宝立即叛变的脚本命令<BR><FONT color=#0000ff>格式:</FONT>&nbsp;GetCallMob 
+宝宝名字&nbsp;<BR><BR></FONT></FONT></P>
+<P><FONT face=Arial size=2><FONT face=Fixedsys>#act<BR>GETCALLMOB 
+神兽<BR>#say<BR>你的神兽已经叛变<BR><BR><BR><BR>
+
+;==================2020-09-28更新扩展如下===============================<BR><BR><BR>
+GetCallMob命令扩展(默认命令只叛变一个宝宝)<BR>
+功能: 指定宝宝立即叛变的脚本命令<BR>
+格式: GetCallMob 宝宝名字<BR><BR>
+
+扩展为<BR>
+GetCallMob 宝宝名字 数量 (0为所有相同名字宝宝都叛变 1为只叛变一个.2为叛变2个 其它类堆)   分身是否保留(0:不保留收回分身/1:保留分身叛变)<BR>
+GetCallMob 无参数形式 所有的宝宝立即叛变(分身收回)<BR><BR><BR><BR>
+
+
+
+
+
+#IF<BR>
+CheckSlaveCount  > 0 &lt;$UserName&gt; 1<BR>
+#ACT<BR>
+GetCallMob &lt;$USERNAME&gt; 1 1<BR>
+sendmsg 6 分身叛变啦 </br>
+#elseact</br>
+SENDMSG 5  你没有分身</br>
+
+<BR>
+<BR><BR><BR>
+
+
+宝宝叛变默认情况下会收回分身，如果需要叛变分身需要用人物名字 &lt;$USERNAME&gt; <BR>
+</FONT></P></FONT></BODY>
+</html>

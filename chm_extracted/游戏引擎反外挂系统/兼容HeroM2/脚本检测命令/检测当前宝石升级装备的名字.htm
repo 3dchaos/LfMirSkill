@@ -1,0 +1,17 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>检测当前宝石升级装备的名字</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<BODY>
+<P><FONT face=Fixedsys size=2>功能: 检测当前通过宝石升级装备的名字<BR>格式: CheckUpgradeItemName 
+位置(0-1) 名字<BR>说明: 位置0=升级装备的名字 1=左边一格宝石的名字<BR>注意: 
+此命令只能在QFunction中的@ItemUpgarde下执行.</FONT></P>
+<P><FONT face=Fixedsys size=2>[@ItemUpgrade]<BR>#IF<BR>CheckGold 
+5000<BR>CheckUpgradeItemName 0 裁决之杖<BR>#ACT<BR>Take 金币 
+5000<BR>#ELSESAY&nbsp;<BR>只能升级裁决之杖,或者你没有5000金币.<BR>#ELSEACT<BR>SetUpgradeFail<BR>Break<BR></FONT></P></BODY>
+</html>

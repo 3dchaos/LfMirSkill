@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>从文件中随机取文本</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp;</FONT><font size="2" face="宋体">从文件中随机取文本</font><FONT size=2>。</FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT><BR>
+</STRONG>&nbsp;&nbsp;&nbsp; GETRANDOMLINETEXT 文件 字符串变量 指定行(0或空：随机一行；大于0：取指定行；小于0：取倒数第几行) 是否绝对路径(0:不是；1：是) <BR>
+  <BR>
+  ;==========================================<BR>
+  ;示例脚本<br><br>
+
+
+[@Main]<br>
+#ACT<br>
+GetRandomLineText d:\aaa.txt S1 -1 1<br>
+SendMsg 4 d:\aaa.txt中倒数第1行内容为：&lt;$STR(S1)&gt;<br><br><br><br>
+
+[@Main]<br>
+#ACT<br>
+GetRandomLineText d:\aaa.txt S1 -3 1<br>
+SendMsg 4 d:\aaa.txt中倒数第3行内容为：&lt;$STR(S1)&gt;<br><br><br>
+
+
+  [@Main]<br>
+  #If
+  <br>
+  #Act<br>
+  GETRANDOMLINETEXT ..\QuestDiary\装备列表.txt &lt;$STR(S0)&gt;<br>
+  #Say<br> 
+  取回的文本是：
+&lt;$STR(S0)&gt;</FONT><font size="2"><BR>
+  ;==========================================<BR>
+  <BR>
+  </font><FONT 
+size=3><BR>
+  </FONT></P>
+</BODY>
+</HTML>
+
+ 

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>将背包物品放入仓库</title>
+</head>
+
+<body>
+<p>功能: 将背包物品放入仓库</br>
+<p>格式:</p></br>
+BagItemToStorage  物品名称  仓库类型(0或空:普通仓；1:无限仓)  变量(保存实际存放数量)</br>
+BagItemToStorageIdx  数据库物品Idx  仓库类型(0或空:普通仓；1:无限仓)  变量(保存实际存放数量)</br>
+BagItemToStoragemakeIndex  数据库物品唯一序列号     仓库类型(0或空:普通仓；1:无限仓) 变量(保存实际存放数量)</br>
+
+</br></br>
+
+
+
+示范：</br></br>
+
+
+[@仓库]</br>
+#ACT</br>
+BagItemToStorage 屠龙 1 N1</br>
+SendMsg 6 背包的屠龙有&lt;$STR(N1)&gt;保存到普通仓库中</br></br></br>
+
+
+</br></br>
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

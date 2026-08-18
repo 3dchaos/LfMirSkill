@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>在地图上放物品[!]</title>
+</head>
+
+<body>
+<p>格式: THROWITEM 地图名称 X坐标 Y坐标 范围 物品名称 数量|时间(此时间不受M2上的爆物品可捡时间控制)  捡取条件（0、1、2、3）   叠加物品是否叠加（0或空：叠加；1非叠加）</p>
+<p>[@main]<br />
+  #IF<br>
+  Random 100<br>
+  #ACT<br>
+  ThrowItem 3 330 330 10 回城卷 5|60</p>
+<p>&nbsp;</p>
+
+<br>
+捡取条件说明：<br><br>
+0 或者空  任何人都不可以捡，必须等到时间才可以<br>
+1 所有人都可以立即拾取。<br>
+2 自己与队伍可立即拾取，其他人不可拾取，需等到时间<br>
+3 自己可以立即拾取。其他人需要等到时间才可以<br>
+<p>&nbsp;</p>
+</body>
+</html>

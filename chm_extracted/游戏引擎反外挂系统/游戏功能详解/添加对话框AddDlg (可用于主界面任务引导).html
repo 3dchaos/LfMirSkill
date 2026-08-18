@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>添加对话框(可用于主界面任务引导)</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>添加对话框(可用于主界面任务引导).</FONT></FONT></P>
+
+
+格式: AddDlg 编号(1-50) 图片文件序号 图片编号 是否可移动(0:不能; 1:可以) 界面X:界面Y 文字偏移X:文字偏移Y 位置 内容</P>
+
+参数7 位置：为按钮是否可以移动0=不能移动1=可以移动2=人物装备栏3=人物背包栏4=英雄装备栏5=英雄背包栏6=聊天框左侧龙界面7=聊天框右侧等级界面8=商铺界面9=时装界面,10=英雄时装，11=技能栏，12=英雄技能栏，13=称号栏，14=英雄称号栏，15=状态栏，16=英雄状态栏，17=属性栏，18=英雄属性栏，19=人物出战栏，20=行会界面，21=详细属性位置, 22=宠物界面, 23=宠物背包，24=人物首饰，25=英雄首饰，26=人物神佑，27=英雄神佑 28=查看他人装备，29=查看他人时装，30=查看他人称号，31=查看他人首饰盒，32=查看他人神佑袋，33=M大地图，42=可视化默认仓库，43=可视化无限仓库 </BR>
+
+
+<P>示列：<br>
+
+
+<P>[@mail]<br>
+#ACT<br>
+AddDlg 1 1 440 1 10:20 30:40 0 &gt;翎风引擎官方网站|253#翎风引擎官方网站：^254#www.lfm2.com&gt;\&lt;当前时间：/SCOLOR=251&gt;&lt;$DATETIME&gt;\&lt;按钮点击/@1&gt;\&lt;关闭/@exit&gt;<br><br><br><br>
+
+;-------------------------------------------------------------------------------------------<br><br>
+
+
+格式:AddDlgEx 编号 图片文件序号 图片编号 是否可移动(0:不能; 1:可以) 界面X:界面Y 文字偏移X:文字偏移Y 位置 文件名  是否绝对路径(0:否;1:是)<br>
+
+示例：<br>
+AddDlgEx 1 1 440 1 10:20 30:40 0 d:\d.txt 1<br><br>
+
+
+;-------------------------------------------------------------------------------------------<br><br>
+删除对话框：DelDlg<br><br>
+
+示例：<br>
+#IF<br>
+#ACT<br>
+DelDlg 1 1<br>
+说明：参数1为对话框编号(1-50) 参数2(0或空的时删除自己的，1时删除全服用户的)<br><br>
+
+
+;-------------------------------------------------------------------------------------------<br>
+注意：AddDlg不支持 ITEMBOX:  INPUTNUM:  INPUTTEXT:<br>
+      并且点击触发只能是数字<br><br>
+
+
+;-------------------------------------------------------------------------------------------<br><br>
+
+触发：<br>
+   QFunction-0.txt中的 [@DlgButtonClickN]   (N代表数字) <br><br>
+
+
+;-------------------------------------------------------------------------------------------<br><br>
+d:\d.txt内容如下:<br>
+&lt;翎风引擎官方网站|253#翎风引擎官方网站：^254#www.lfm2.com&gt;\<br>
+&lt;当前时间：/SCOLOR=251&gt;&lt;$DATETIME&gt;\<br>
+&lt;按钮点击/@1&gt;\<br>
+&lt;关闭/@exit&gt;<br><br>
+
+;-------------------------------------------------------------------------------------------<br><br>
+AddDlg AddDlgex对话框支持图片<br>
+
+&lt;翎风引擎官方网站|253#翎风引擎官方网站：^254#www.lfm2.com&gt;\<br>
+★&lt;当前时间：/SCOLOR=251&gt;&lt;$DATETIME&gt;\<br>
+&lt;按钮点击/@1&gt;\\\\<br>
+&lt;关闭/@exit&gt;\<br>
+\<br>
+\<br>
+\<br>
+&lt;Looks:1:0:0:1|提示/@2&gt;<br>
+&lt;dnitems:1:0:0:1|提示/@3&gt;<br>
+&lt;stateitem:30:0:0:0|提示/@4&gt;<br>
+&lt;newopui:520:0:0|提示/@4&gt;<br>
+newopui: 图片序号:X:Y<br>
+&lt;ItemShow:1:1:10:0:1/@2&gt;\<br>
+&lt;ItemShow:2:1:10:20:1/@2&gt;<br><br><br>
+
+looks / dnitems / stateitem <br>
+参数1：物品的looks<br>
+参数2：X<br>
+参数3：Y<br>
+参数4：边框(0:无边框; &gt;0: newopui.pak - 250; &lt;0: newopui.pak - 251)<br><br><br><br><br>
+
+;-------------------------------------------------------------------------------------------<br><br>
+
+
+AddDlg中“&lt;按钮点击/@1(22,33,44)&gt;”支持带参数<br><br>
+
+
+<P>[@mail]<br>
+#ACT<br>
+AddDlg 1 1 440 1 10:20 30:40 0 &gt;翎风引擎官方网站|253#翎风引擎官方网站：^254#www.lfm2.com&gt;\&lt;当前时间：/SCOLOR=251&gt;&lt;$DATETIME&gt;\&lt;按钮点击/@1(22,33,44)&gt;\&lt;关闭/@exit&gt;<br><br><br><br>
+
+
+QFunction-0.txt:<br>
+[@DlgButtonClick1]<br>
+#if<br>
+#ACT<br>
+SENDMSG 6   &lt;$scriptparam1&gt;<br>
+SENDMSG 6   &lt;$scriptparam2&gt; <br>
+SENDMSG 6   &lt;$scriptparam3&gt; <br>
+
+
+<br><br><br><br>
+
+</P>
+</BODY>
+</HTML>

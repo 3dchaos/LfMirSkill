@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>设置攻击力倍数[!]</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<BODY>
+<P><STRONG>功能：</STRONG><BR>
+设置攻击力倍数</P>
+<p><STRONG>格式：<BR>
+  </STRONG>POWERRATE 攻击倍率 有效时间(0为永久) 是否保存(1为保存/0或留空不保存) 是否提示(0或者留空提示/1为不提示) 类型(0所有对象/1攻击人物(人物/英雄/宝宝)倍率/2攻击怪物倍率)<BR>
+倍率 为杀攻击力倍数，倍数除以100为真正的倍率(200 为 2 倍经验，150 为1.5倍)   <STRONG>支持变量操作</STRONG><BR>
+  <BR>
+  ;==========================================<BR>
+  [@POWERRATE]<BR>
+  #IF<BR>
+  #ACT<BR>
+ POWERRATE 1000   600  <BR>
+  #SAY<BR>
+您当前攻击力倍数为 10倍，有效时间   600秒。  <BR> <BR>
+
+
+  [@POWERRATE]<BR>
+  #IF<BR>
+  #ACT<BR>
+ POWERRATE 1000   0 1 <BR>
+  #SAY<BR>
+您当前攻击力倍数为 10倍，有效时间  永久。下线保存。  <BR> <BR> 
+
+
+  [@POWERRATE]<BR>
+  #IF<BR>
+  #ACT<BR>
+ POWERRATE 1000   600  1 <BR>
+  #SAY<BR>
+您当前攻击力倍数为 10倍，有效时间   600秒，下线保存剩余时间。  <BR><BR><BR>
+
+已有变量修改<BR>
+&lt;$PowerRate&gt;人物攻击人物伤害力倍数<BR>
+&lt;$PowerRateTime&gt;人物攻击人物伤害力时长<BR><BR>
+
+新增加变量<BR>
+&lt;$AttackMonPowerRate&gt;攻击怪物伤害力倍数<BR>
+&lt;$AttackMonPowerRateTime&gt;攻击怪物伤害力时长<BR><BR>
+
+&lt;$H.PowerRate&gt;英雄攻击人物伤害力倍数<BR>
+&lt;$H.PowerRateTime&gt;英雄攻击人物伤害力时长<BR><BR>
+
+&lt;$H.AttackMonPowerRate&gt;英雄攻击怪物伤害力倍数<BR>
+&lt;$H.AttackMonPowerRateTime&gt;英雄攻击怪物伤害力时长<BR><BR><BR><BR>
+
+  ;==========================================<BR>
+</p>
+</BODY>
+</html>

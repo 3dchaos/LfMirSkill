@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>检测伴侣是否在线和同一地图</title>
+</head>
+
+<body>
+<p>格式: </p>
+CheckDearOnline 人物名称 (不填表示检查自己的配偶在不在线，填则表示检查指定人的配偶在不在线）   <br />
+CheckDearOnMap 地图号(self或不填，自己所在的地图，否则为指定地图）  人物名称(不填表示检查自己的配偶在某个地图，否则检查指定人的配偶是否在某个地图）</p>
+<p>[@main]<br />
+  #ACT<br />
+CheckDearOnline </br>
+#SAY<br />
+你的配偶当前在线 </p>
+
+<p>[@main]<br />
+  #ACT<br />
+CheckDearOnline 翎风世界 </br>
+#SAY<br />
+翎风世界的配偶当前在线 </p>
+
+
+<p>[@main]<br />
+  #ACT<br />
+CheckDearOnMap  </br>
+#SAY<br />
+你的配偶和你在同一地图 </p>
+
+<p>[@main]<br />
+  #ACT<br />
+CheckDearOnMap 3 翎风世界 </br>
+#SAY<br />
+翎风世界的配偶当前在土城 </p>
+
+<p>[@main]<br />
+  #ACT<br />
+CheckDearOnMap 0  </br>
+#SAY<br />
+你的配偶在比奇 </p>
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<title>扩展NPC脚本点击触发带参数,NPC标签带参数</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+<p><strong><font size="5">扩展NPC脚本点击触发带参数</font></strong></p>
+<p>-----------------------------------扩展NPC脚本点击触发带参数------------------------------<br /><br /><br />
+ /////////////////////////////////////////////////////////// &lt;$SCRIPTPARAM&gt;新增触发带参数<br /><br /><br /><br />
+&lt;@测试1/@测试(1,2,3)&gt;  &lt;@测试2/@测试(2,3,4)&gt;<br /><br />
+
+[@测试]<br />
+#OR<br />
+;检查参数是否是这几组，防止有可能被人刷数据<br />
+CHECKSCRIPTPARAM 1,2,3<br />
+CHECKSCRIPTPARAM 2,3,4<br />
+#ACT<br />
+SENDMSG 6 &lt;$SCRIPTPARAM1&gt;,&lt;$SCRIPTPARAM2&gt;,&lt;$SCRIPTPARAM3&gt;<br />
+break<br />
+#ELSEACT<br />
+SENDMSG 6 非法的参数<br />
+break<br /><br /><br /><br /><br />
+
+
+
+
+
+[@main]<br />
+你想买点什么呢?\\<br />
+&lt;麻痹戒指/@购物(20,麻痹戒指)&gt;      &lt;重生戒指/@购物(20,重生戒指)&gt;\<br />
+&lt;护体戒指/@购物(20,护体戒指)&gt;      &lt;魔道麻痹/@购物(20,魔道麻痹戒)&gt;\<br />
+
+[@购物]<br />
+#OR<br />
+;检查参数是否是这几组，防止有可能被人刷数据<br />
+CHECKSCRIPTPARAM 20,麻痹戒指<br />
+CHECKSCRIPTPARAM 20,护体戒指<br />
+CHECKSCRIPTPARAM 20,重生戒指<br />
+CHECKSCRIPTPARAM 20,魔道麻痹戒<br />
+#ELSEACT<br />
+;-----------------------------------------------防止用抓包工具刷数据并且跳过了检测<br />
+SENDMSG 6 非法的参数<br />
+break<br />
+<br />
+#IF<br />
+CHECKGAMEGOLD &lt;$SCRIPTPARAM1&gt;<br />
+#ACT<br />
+GAMEGOLD - &lt;$SCRIPTPARAM1&gt;<br />
+GIVE &lt;$SCRIPTPARAM2&gt; 1<br />
+#ELSESAY<br />
+对不起!你的元宝不够!<br /><br /><br /><br />
+
+
+####################################################2019-08-28进行补充说明，防止个别人运用错误！！！！！下面为解说！！！！#########################################<br /><br /><br />
+
+[@main]<br />
+亲爱的&lt;$USERNAME&gt;\<br />
+你想买点什么呢?\\<br />
+&lt;麻痹戒指/@购物(20,麻痹戒指)&gt;      &lt;重生戒指/@购物(20,重生戒指)&gt;\<br />
+&lt;护体戒指/@购物(20,护体戒指)&gt;      &lt;魔道麻痹/@购物(20,魔道麻痹戒)&gt;\<br /><br />
+
+
+[@购物]<br />
+#OR<br />
+;检查参数是否是这几组，防止有可能被人刷数据<br />
+CHECKSCRIPTPARAM 20,麻痹戒指<br />
+CHECKSCRIPTPARAM 20,护体戒指<br />
+CHECKSCRIPTPARAM 20,重生戒指<br />
+CHECKSCRIPTPARAM 20,魔道麻痹戒<br />
+#ELSEACT<br />
+;-----------------------------------------------防止用抓包工具刷数据并且跳过了检测<br />
+SENDMSG 6 非法的参数<br />
+break<br /><br />
+
+#IF<br />
+CHECKGAMEGOLD &lt;$SCRIPTPARAM1&gt;<br />
+#ACT<br />
+GAMEGOLD - &lt;$SCRIPTPARAM1&gt;<br />
+GIVE &lt;$SCRIPTPARAM2&gt; 1<br />
+#ELSESAY<br />
+对不起!你的元宝不够!<br /><br /><br />
+
+
+------------------------------------**************************************但是一些GM会写成这样，然后来提交BUG*******************************-------------------------<br />
+
+**************************************************************************** 下面的写法会出问题:<br /><br />
+
+&lt;@测试1/@测试(封号1,100,封号1+)&gt;<br /><br />
+
+[@测试]<br />
+#ACT<br />
+;下面的脚本可能会触发跳转 @UnactiveTitle_XX  @ActiveTitle_XX，而为了保证安全发生跳转到新的标签时会清掉参数值<br />
+;建议可能触发跳转之前，用变量先存起来<br />
+GameGold - &lt;$SCRIPTPARAM2&gt;<br />
+RecycFenghao &lt;$SCRIPTPARAM1&gt;<br />
+GiveFenghao &lt;$SCRIPTPARAM3&gt; 1<br />
+MessageBox &lt;$SCRIPTPARAM1&gt;,&lt;$SCRIPTPARAM2&gt;,&lt;$SCRIPTPARAM3&gt;<br /><br /><br /><br />
+
+总结：<br />
+参数仅在一个对话框标签生效，更换或跳转到其它标签后参数清空<br />
+比如:[@测试]标签的参数仅限在该条脚本内生效，脚本运行中途出现任何跳转其他标签均清空，GOTO @xxxx   脚本执行中途出现其他任何标签参数均清空<br />
+
+<br /><br /><br /><br /><br /><br /><br /><br />

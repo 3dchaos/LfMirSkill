@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>天生元素字段说明</TITLE>
+</HEAD>
+<BODY>
+<P><STRONG><FONT 
+size=5>数据库设置天生元素方式</FONT></STRONG></P>
+<P><font color="#FF0000">装备 时装 称号 都支持天生元素 显示元素须在M2开启新属性才显示</font></P>
+element:    暴击几率(暴击几率增加 1~1000%)</br>
+element1:   攻击伤害(增加攻击伤害 1~1000%)</br>
+element2:   伤害吸收(物理伤害减少 1~100%)</br>
+element3:   魔法防御(魔法伤害减少 1~100%)</br>
+element4:   忽视防御(忽视目标防御 1~100%)</br>
+element5:   伤害反弹(所有伤害反弹 1~100%)</br>
+element6:   人物暴率(增加目标暴率 1~100%)</br>
+element7:   体力增加(人物体力增加 1~100%)</br>
+element8:   魔力增加(人物魔力增加 1~100%)</br>
+element9:   怒气恢复(怒气恢复增加 1~100%)</br>
+element10:  合击伤害(合击攻击增加 1~100%)</br>
+element11:  怪物暴率</br>
+element12:  防暴几率</br>
+element13:  防止麻痹</br>
+element14:  防止护身</br>
+element15:  防止复活</br>
+element16:  防止全毒</br>
+element17:  防止诱惑</br>
+element18:  防止火墙</br>
+element19:  防止冰冻</br>
+element20:  防止蛛网</br>
+element21:  致命一击几率</br>
+element22:  致命一击伤害增加</br>
+element23:  致命一击防御</br>
+element24:  暴击抗性(对方暴击几率 - 暴击抗性 = 对方暴击打出几率)1~1000%</br>
+element25:  攻击伤害抗性(对方攻击伤害倍数 - 攻击伤害抗性 = 对方攻击伤害增加的倍数) 1~1000% ..........本抗性对应元素属性1 增加攻击伤害</br>
+几率大于100%则按照100%计算，如暴击几率300%，目标暴击抗性270%，那么攻击这个目标的暴击几率只有30% ，，目标抗性为10% ，就是300-10=290 ，也为100%</br>
+element26: 杀怪经验倍率 1~100000%  [算法相加：自身倍数(自身倍率含特殊物品倍数*经验倍数命令 ） + 元素倍率]</br>
+<br><br><br><br>
+变量：
+&lt;$ELEMENT&gt;，&lt;$ELEMENT1&gt;   -  &lt;$ELEMENT26&gt;<br><br>
+
+
+英雄变量：
+&lt;$H.ELEMENT&gt;，&lt;$H.ELEMENT1&gt;   -  &lt;$H.ELEMENT26&gt;<br><br>
+<br>
+<P><FONT size=2>
+</BODY>
+</HTML>
+

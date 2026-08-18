@@ -1,0 +1,48 @@
+<title>英雄相关命令支持与示范，英雄捡起触发</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+<p><strong><font size="5">英雄相关命令支持与示范，英雄捡起触发</font></strong></p>
+<p>-----------------------------------英雄捡起触发---------------------------<br /><br /><br /><br /><br />
+1.增加英雄相关操作命令 支持-1位置<br />
+H.LINKPICKUPITEM<br />
+H.ChangeItemName<br />
+H.UpdateItem<br />
+H.ClearLinkItem<br />
+H.LINKGIVEITEM<br />
+H.ChangeItemNameColor<br />
+H.ChangeItemName<br /><br /><br />
+
+示范：<br /><br />
+
+[@H.PickUpItemEx]<br />
+#if<br />
+#act<br />
+H.LINKPICKUPITEM  <br />
+H.ChangeItemName -1 捡到的&lt;$PICKDROPITEMNAME&gt;<br />
+H.UpdateItem -1<br />
+H.ClearLinkItem<br />
+SENDMSG 0 玩家&lt;$USERNAME&gt;的英雄在&lt;$MapTitle&gt;坐标&lt;$X&gt;：&lt;$Y&gt;捡到&lt;$PICKDROPITEMNAME&gt;<br />
+break<br /><br />
+
+
+#IF<br />
+#ACT<br />
+H.give 屠龙 1<br />
+;给屠龙1把<br />
+H.LINKGIVEITEM<br />
+;绑定屠龙下面的操作只对绑定的装备生效<br />
+H.ChangeItemNameColor -1 253<br />
+H.ChangeItemName -1 屠龙改名<br />
+;调整武器颜色<br />
+H.updateitem -1<br />
+;刷新到客户端<br />
+H.clearLinkItem<br />
+<br /><br />
+
+注：如果命令不知道干啥的，可以去掉命令前的H. 然后搜索人物命令查看介绍即可！！！！<br /><br />
+
+特别注意：如果不解绑的情况下，会出现修改过属性的物品丢失，本命令绑定和解绑必须配套使用，只要绑定了，脚本执行不管成功还是失败，只要执行了绑定都必须执行解绑，切记！！！</BR>
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

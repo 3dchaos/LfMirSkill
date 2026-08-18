@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>沙城主公告</TITLE>
+</HEAD>
+<BODY>
+<P><FONT 
+size=2>将下面的放到沙皇宫的NPC脚本里就行了<BR><BR>(@@sendmsg)<BR>[@main]<BR>沙巴克当前归&lt;$OWNERGUILD&gt;所有，由&lt;$LORD&gt;统治管理。\<BR>现在金库中所存的金币数量为:&lt;$CASTLEGOLD&gt;，今天的收入为: 
+&lt;$TODAYINCOME&gt;\ \</FONT></P>
+<P><FONT size=2>&nbsp;『&lt;修改城名</FONT><A><FONT 
+size=2>/@@castlename</FONT></A><FONT size=2>&gt;』&nbsp;&nbsp;&nbsp; 
+『&lt;城主公告</FONT><A><FONT size=2>/@@sendMsg</FONT></A><FONT 
+size=2>&gt;』\\<BR>&nbsp;『&lt;取回资金</FONT><A><FONT 
+size=2>/@@withdrawal</FONT></A><FONT size=2>&gt;』&nbsp;&nbsp;&nbsp; 
+『&lt;存入资金</FONT><A><FONT size=2>/@@receipts</FONT></A><FONT 
+size=2>&gt;』\<BR>&nbsp;『&lt;控制城门</FONT><A><FONT 
+size=2>/@treatdoor</FONT></A><FONT size=2>&gt;』&nbsp;&nbsp;&nbsp; 
+『&lt;修理城门和城墙</FONT><A><FONT size=2>/@repaircastle</FONT></A><FONT 
+size=2>&gt;』\<BR>&nbsp;『&lt;雇用弓箭手</FONT><A><FONT 
+size=2>/@hirearchers</FONT></A><FONT size=2>&gt;』\ 
+\<BR>&nbsp;〖&lt;取消</FONT><A><FONT size=2>/@exit</FONT></A><FONT 
+size=2>&gt;〗\<BR>[@@sendMsg]<BR>#if<BR>checkcastlegold ? 
+100000<BR>#act<BR>takecastlegold 
+100000<BR>SETSENDMSGFLAG<BR>#elsesay<BR>城内资金不足，不要乱用钱。\ 
+\<BR>『&lt;返回</FONT><A><FONT size=2>/@main</FONT></A><FONT 
+size=2>&gt;』</FONT></P>
+<P><FONT size=2>[@treatdoor]<BR>城门当前状态为:『&lt;$CASTLEDOORSTATE&gt;』\ 
+\<BR>&nbsp;『&lt;关城门</FONT><A><FONT size=2>/@closemaindoor</FONT></A><FONT 
+size=2>&gt;』\<BR>&nbsp;『&lt;开城门</FONT><A><FONT 
+size=2>/@openmaindoor</FONT></A><FONT size=2>&gt;』\ 
+\<BR>&nbsp;〖&lt;返回</FONT><A><FONT size=2>/@main</FONT></A><FONT 
+size=2>&gt;〗\</FONT></P>
+<P><FONT size=2>[@openmaindoor]<BR>城门已经打开。\ \<BR>&nbsp;〖&lt;返回</FONT><A><FONT 
+size=2>/@treatdoor</FONT></A><FONT size=2>&gt;〗\</FONT></P>
+<P><FONT size=2>[@closemaindoor]<BR>城门已经关闭。\ \<BR>&nbsp;〖&lt;返回</FONT><A><FONT 
+size=2>/@treatdoor</FONT></A><FONT size=2>&gt;〗\</FONT></P>
+<P><BR><FONT size=2>;--------------------------------------------------<BR>;荐府 
+包访</FONT></P>
+<P><FONT size=2>[@repaircastle]<BR>请选择要修理的位置？\ 
+\<BR>&nbsp;『&lt;修理城门</FONT><A><FONT size=2>/@repairdoor</FONT></A><FONT 
+size=2>&gt;』\<BR>&nbsp;『&lt;修理城墙</FONT><A><FONT 
+size=2>/@repairwalls</FONT></A><FONT size=2>&gt;』\ 
+\<BR>&nbsp;〖&lt;返回</FONT><A><FONT size=2>/@main</FONT></A><FONT 
+size=2>&gt;』\</FONT></P>
+<P><FONT size=2>[@repairdoor]<BR>修理城门所需费用为:『&lt;$REPAIRDOORGOLD&gt;』金币。\ 
+\<BR>&nbsp;『&lt;修理城门</FONT><A><FONT size=2>/@repairdoornow</FONT></A><FONT 
+size=2>&gt;』\<BR>&nbsp;『&lt;返回</FONT><A><FONT 
+size=2>/@repaircastle</FONT></A><FONT size=2>&gt;』\</FONT></P>
+<P><FONT size=2>[@repairwalls]<BR>修理城墙所需费用为:『&lt;$REPAIRWALLGOLD&gt;』金币。\ 
+\<BR>&nbsp;『&lt;修理城墙</FONT><A><FONT size=2>/@repairwallnow1</FONT></A><FONT 
+size=2>&gt;』\<BR>&nbsp;『&lt;修理城墙</FONT><A><FONT 
+size=2>/@repairwallnow2</FONT></A><FONT 
+size=2>&gt;』\<BR>&nbsp;『&lt;修理城墙</FONT><A><FONT 
+size=2>/@repairwallnow3</FONT></A><FONT size=2>&gt;』\ 
+\<BR>&nbsp;〖&lt;返回</FONT><A><FONT size=2>/@repaircastle</FONT></A><FONT 
+size=2>&gt;』\</FONT></P>
+<P><BR><FONT 
+size=2>[@hirearchers]<BR>雇用弓箭手可保护城堡的安全，并维护城堡的治安。\<BR>每个弓箭手的雇用费用为『&lt;$ARCHERFEE&gt;』金币。\<BR>请选择要雇用弓箭手放置位置: 
+\ \<BR>&nbsp;『&lt;城墙左弓箭手三</FONT><A><FONT size=2>/@hirearchernow1</FONT></A><FONT 
+size=2>&gt;』, 『&lt;城墙左弓箭手二</FONT><A><FONT 
+size=2>/@hirearchernow2</FONT></A><FONT size=2>&gt;』, 
+『&lt;城墙左弓箭手一</FONT><A><FONT size=2>/@hirearchernow3</FONT></A><FONT 
+size=2>&gt;』\<BR>&nbsp;『&lt;城墙右弓箭手一</FONT><A><FONT 
+size=2>/@hirearchernow4</FONT></A><FONT size=2>&gt;』, 
+『&lt;城墙右弓箭手二</FONT><A><FONT size=2>/@hirearchernow5</FONT></A><FONT 
+size=2>&gt;』, 『&lt;城墙右弓箭手三</FONT><A><FONT 
+size=2>/@hirearchernow6</FONT></A><FONT 
+size=2>&gt;』\<BR>&nbsp;『&lt;城门左弓箭手</FONT><A><FONT 
+size=2>/@hirearchernow9</FONT></A><FONT size=2>&gt;』, 『&lt;城门左弓箭手</FONT><A><FONT 
+size=2>/@hirearchernow10</FONT></A><FONT size=2>&gt;』, 
+『&lt;城门右弓箭手</FONT><A><FONT size=2>/@hirearchernow11</FONT></A><FONT 
+size=2>&gt;』, 『&lt;城门右弓箭手</FONT><A><FONT 
+size=2>/@hirearchernow12</FONT></A><FONT 
+size=2>&gt;』\<BR>&nbsp;『&lt;皇宫左弓箭手</FONT><A><FONT 
+size=2>/@hirearchernow7</FONT></A><FONT size=2>&gt;』, 『&lt;皇宫右弓箭手</FONT><A><FONT 
+size=2>/@hirearchernow8</FONT></A><FONT 
+size=2>&gt;』\<BR>&nbsp;『&lt;返回</FONT><A><FONT size=2>/@main</FONT></A><FONT 
+size=2>&gt;』\</FONT></P>
+<P><FONT size=2></FONT>&nbsp;</P>
+</BODY>
+</HTML>
+ 

@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>增加会员时间[!]</title>
+<style>
+<!--
+div{word-break:break-all;word-wrap:break-word}.t{border:1px solid #c7d6e1;margin:0px auto 8px;}.t2{border-top:#c7d6e1 1px solid;margin:0px auto 5px;}.t{padding:1px}.t {padding:0}th{word-break:break-all;word-wrap:break-word}.r_one{background:#f9f9f9;}.tr1 th{padding:5px 10px;text-align:left;vertical-align:top;font-weight:normal;}.tr1 th{border-right:1px solid #e6e6e6;}.tpc_content{font-size:14px;font-family:Arial;padding:0 2% 0 0.5%;margin:0 0 2%}-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font color="#0000ff" size="2">功</font></strong><font color="#0000ff" size="2"><strong>能：<br>
+&nbsp;&nbsp; </strong></font>增加会员时间 文件名称 天 时 分<BR>
+<br>
+<font color="#0000ff" size="2"><strong><br>
+例子：<br>
+</strong></font><br>
+[@Test]<br>
+#IF<br>
+CHECKNAMEDATETIMELIST ..\QuestDiary\会员名单.txt 1 &lt;$STR(S1)&gt; &lt;$STR(N1)&gt; &lt;$STR(N2)&gt; &lt;$STR(N3)&gt;<br>
+#ACT<br>
+ADDNAMEDATETIMELIST ..\QuestDiary\会员名单.txt 30 0 0<br>
+SENDMSG 5 &lt;$USERNAME&gt;会员充值成功，增加30天0小时0分会员时间！<br>
+SENDMSG 6 你的会员到期时间是&lt;$STR(S1)&gt;【剩余天数=&lt;$STR(N1)&gt;】【剩余小时=&lt;$STR(N2)&gt;】【剩余分钟=&lt;$STR(N3)&gt;】 255 253<br>
+#ELSEACT<br>
+SENDMSG 6 你不是会员或已过期，请及时充值！ 255 253</p>
+</body>
+
+</html>

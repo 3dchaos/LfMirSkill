@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>脚本调整人物PK点</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>&nbsp;&nbsp;&nbsp; 
+调整人物PK点数。</FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT><BR></STRONG>&nbsp;&nbsp;&nbsp; CHANGEPKPOINT 
+控制符(=,+,-)&nbsp; 
+PK点数<BR><BR>;==========================================<BR>;将人物的PK点数设置为指定点数，不能为负数<BR>[@changepkpoint0]<BR>#IF<BR>#ACT<BR>&nbsp; 
+CHANGEPKPOINT = 
+0<BR>#SAY<BR>你的PK点数已经清除。<BR>;==========================================<BR><BR>;==========================================<BR>;将人物的PK点数加100点数，不能为负数<BR>[@changepkpoint1]<BR>#IF<BR>#ACT<BR>&nbsp; 
+CHANGEPKPOINT + 
+100<BR>#SAY<BR>你的PK点数已经增加100点。<BR><BR>;==========================================<BR><BR>;==========================================<BR>;将人物的PK点数减100点数，不能为负数，如果人物点数小于100则指定为0<BR>[@changepkpoint2]<BR>#IF<BR>#ACT<BR>&nbsp; 
+CHANGEPKPOINT - 
+100<BR>#SAY<BR>你的PK点数已经减少100点。<BR>;==========================================</FONT><FONT 
+size=3><BR><BR></FONT></P>
+</BODY>
+</HTML>
+

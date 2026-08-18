@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>改变人物状态脚本</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>改变人物状态.</FONT></FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>说明：</FONT>TestStatus 此命令可在M2自定义修改为你需要的命令</STRONG></FONT></P>
+<P>示列：<br>
+
+TestStatus 0 0  (参数0为状态类型、参加2为时间 0为清空所有颜色)<BR>
+状态类型颜色： 1 红色 2 蓝色 3 黄色 4 紫色 5 麻痹 8 隐身 11 盾<BR>
+
+<P>[@main]<br>
+#IF<br>
+#ACT<br>
+Gmexecute TestStatus 5 1<br>
+</P>
+</BODY>
+</HTML>

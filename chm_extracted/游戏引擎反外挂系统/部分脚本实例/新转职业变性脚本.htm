@@ -1,0 +1,442 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>新转职业变性脚本</TITLE>
+</HEAD>
+<BODY>
+<P>最新转职业脚本变性(含英雄转职和清理合击技能)<BR><BR></P>
+<p>[@变性转职]<br>
+{<br>
+欢迎你光临：&lt;$SERVERNAME&gt;\ \<br>
+你是否对自己的英雄职业不满意？是的，我想&lt;变更英雄职业/@变更英雄职业&gt;\ \<br>
+你是否对现在的职业已经厌烦？ 是的，我想&lt;变更职业/@职业变更&gt;\ \<br>
+你是否想尝试做异性的滋味？ 是的，我想&lt;变更性别/@性别变更&gt;\ \ <br>
+　　　　　　　　　　　　　　　　　　　　　 &lt;版权所有/@1&gt;:翎风引擎\<br>
+<br>
+[@性别变更]<br>
+#IF<br>
+gender man<br>
+#SAY<br>
+是不是做猛男没什么意思呀，想不想尝尝做淑女的滋味呀！！！\ \<br>
+『&lt;尝尝/@towoman&gt;』\ \<br>
+〖&lt;返回/@main&gt;〗 〖&lt;关闭/@exit&gt;〗<br>
+#ELSESAY<br>
+是不是做淑女挺累的，想不想尝尝做猛男的滋味呀！！！\ \<br>
+『&lt;尝尝/@toman&gt;』\ \<br>
+〖&lt;返回/@main&gt;〗 〖&lt;关闭/@exit&gt;〗<br>
+<br>
+[@toman]<br>
+#IF<br>
+CHECKGAMEGOLD &gt; 19<br>
+#ACT<br>
+GAMEGOLD - 20<br>
+CHANGEGENDER 0<br>
+#SAY<br>
+呵呵，你已经变成一位猛男了。\ \<br>
+&lt;返回/@main&gt;<br>
+#ELSEACT<br>
+MESSAGEBOX 对不起，您的元宝已经不足20颗。<br>
+<br>
+[@towoman]<br>
+#IF<br>
+CHECKGAMEGOLD &gt; 19<br>
+#ACT<br>
+GAMEGOLD - 20<br>
+CHANGEGENDER 1<br>
+#SAY<br>
+呵呵，你已经变成一位淑女了。\ \<br>
+〖&lt;返回/@main&gt;〗 〖&lt;关闭/@exit&gt;〗<br>
+#ELSEACT<br>
+MESSAGEBOX 对不起，您的元宝已经不足20颗。<br>
+<br>
+<br>
+[@职业变更]<br>
+#IF<br>
+CHECKJOB warrior<br>
+#SAY<br>
+是不是战士不好玩呀，换换别的职业试试吧！\ \<br>
+『&lt;玩玩法师/@法师&gt;』\<br>
+『&lt;玩玩道士/@道士&gt;』\ \<br>
+〖&lt;返回/@changjob&gt;〗〖&lt;关闭/@exit&gt;〗<br>
+#ACT<br>
+break<br>
+#IF<br>
+CHECKJOB wizard<br>
+#SAY<br>
+是不是法师不好玩呀，换换别的职业试试吧！\ \<br>
+『&lt;玩玩战士/@战士&gt;』\<br>
+『&lt;玩玩道士/@道士&gt;』\ \<br>
+〖&lt;返回/@changjob&gt;〗〖&lt;关闭/@exit&gt;〗<br>
+#ACT<br>
+break<br>
+#IF<br>
+CHECKJOB taoist<br>
+#SAY<br>
+是不是道士不好玩呀，换换别的职业试试吧！\ \<br>
+『&lt;玩玩战士/@战士&gt;』\<br>
+『&lt;玩玩法师/@法师&gt;』\ \<br>
+〖&lt;返回/@changjob&gt;〗〖&lt;关闭/@exit&gt;〗<br>
+#ACT<br>
+break<br>
+<br>
+[@战士]<br>
+#IF<br>
+CHECKGAMEGOLD &gt; 49<br>
+#ACT<br>
+GAMEGOLD - 50<br>
+CLEARSKILL<br>
+CHANGEJOB warrior
+<br>
+ADDSKILL 基本剑术<br>
+ADDSKILL 攻杀剑术<br>
+ADDSKILL 刺杀剑术<br>
+ADDSKILL 半月弯刀<br>
+ADDSKILL 野蛮冲撞<br>
+ADDSKILL 烈火剑法<br>
+ADDSKILL 狮子吼<br>
+SKILLLEVEL 基本剑术 + 3<br>
+SKILLLEVEL 攻杀剑术 + 3<br>
+SKILLLEVEL 刺杀剑术 + 3<br>
+SKILLLEVEL 半月弯刀 + 3<br>
+SKILLLEVEL 野蛮冲撞 + 3<br>
+SKILLLEVEL 烈火剑法 + 3<br>
+SKILLLEVEL 狮子吼 + 3
+<br>
+SENDMSG 0 恭喜:玩家「&lt;$USERNAME&gt;」成功转职。<br>
+#ELSEACT<br>
+MESSAGEBOX 对不起，您的元宝已经不足50颗。<br>
+BREAK<br>
+<br>
+[@法师]<br>
+#IF<br>
+CHECKGAMEGOLD &gt; 49<br>
+#ACT<br>
+GAMEGOLD - 50<br>
+CLEARSKILL<br>
+CHANGEJOB WIZARD
+<br>
+ADDSKILL 火球术<br>
+ADDSKILL 大火球<br>
+ADDSKILL 抗拒火环<br>
+ADDSKILL 地狱火<br>
+ADDSKILL 雷电术<br>
+ADDSKILL 疾光电影<br>
+ADDSKILL 诱惑之光<br>
+ADDSKILL 瞬息移动<br>
+ADDSKILL 火墙<br>
+ADDSKILL 爆裂火焰<br>
+ADDSKILL 地狱雷光<br>
+ADDSKILL 魔法盾<br>
+ADDSKILL 圣言术<br>
+ADDSKILL 冰咆哮<br>
+ADDSKILL 寒冰掌<br>
+ADDSKILL 灭天火<br>
+SKILLLEVEL 火球术 + 3<br>
+SKILLLEVEL 大火球 + 3<br>
+SKILLLEVEL 抗拒火环 + 3<br>
+SKILLLEVEL 地狱火 + 3<br>
+SKILLLEVEL 雷电术 + 3<br>
+SKILLLEVEL 疾光电影 + 3<br>
+SKILLLEVEL 诱惑之光 + 3<br>
+SKILLLEVEL 瞬息移动 + 3<br>
+SKILLLEVEL 火墙 + 3<br>
+SKILLLEVEL 爆裂火焰 + 3<br>
+SKILLLEVEL 地狱雷光 + 3<br>
+SKILLLEVEL 魔法盾 + 3<br>
+SKILLLEVEL 圣言术 + 3<br>
+SKILLLEVEL 冰咆哮 + 3<br>
+SKILLLEVEL 寒冰掌 + 3<br>
+SKILLLEVEL 灭天火 + 3
+<br>
+SENDMSG 0 恭喜:玩家「&lt;$USERNAME&gt;」成功转职。<br>
+#ELSEACT<br>
+MESSAGEBOX 对不起，您的元宝已经不足50颗。<br>
+BREAK<br>
+<br>
+[@道士]<br>
+#IF<br>
+CHECKGAMEGOLD &gt; 49<br>
+#ACT<br>
+GAMEGOLD - 50<br>
+CLEARSKILL<br>
+CHANGEJOB taoist
+<br>
+ADDSKILL 治愈术<br>
+ADDSKILL 精神力战法<br>
+ADDSKILL 施毒术<br>
+ADDSKILL 灵魂火符<br>
+ADDSKILL 幽灵盾<br>
+ADDSKILL 神圣战甲术<br>
+ADDSKILL 困魔咒<br>
+ADDSKILL 召唤骷髅<br>
+ADDSKILL 隐身术<br>
+ADDSKILL 集体隐身术<br>
+ADDSKILL 心灵启示<br>
+ADDSKILL 群体治疗术<br>
+ADDSKILL 召唤神兽<br>
+ADDSKILL 气功波<br>
+ADDSKILL 无极真气<br>
+SKILLLEVEL 治愈术 + 3<br>
+SKILLLEVEL 精神力战法 + 3<br>
+SKILLLEVEL 施毒术 + 3<br>
+SKILLLEVEL 灵魂火符 + 3<br>
+SKILLLEVEL 幽灵盾 + 3<br>
+SKILLLEVEL 神圣战甲术 + 3<br>
+SKILLLEVEL 困魔咒 + 3<br>
+SKILLLEVEL 召唤骷髅 + 3<br>
+SKILLLEVEL 隐身术 + 3<br>
+SKILLLEVEL 集体隐身术 + 3<br>
+SKILLLEVEL 心灵启示 + 3<br>
+SKILLLEVEL 群体治疗术 + 3<br>
+SKILLLEVEL 召唤神兽 + 3<br>
+SKILLLEVEL 气功波 + 3<br>
+SKILLLEVEL 无极真气 + 3
+<br>
+SENDMSG 0 恭喜:玩家「&lt;$USERNAME&gt;」成功转职。<br>
+#ELSEACT<br>
+MESSAGEBOX 对不起，您的元宝已经不足50颗。<br>
+BREAK<br>
+<br>
+[@变更英雄职业]<br>
+想把你的英雄变更为其它职业的英雄？\<br>
+只要你交纳50颗元宝，我即可将你的英雄成功转职。\<br>
+但是合击技能将会被删除，只给予新职业的部分技能、\<br>
+是否同意将英雄转职呢？\<br>
+<br>
+&lt;我同意将英雄转职业/@同意英雄转职&gt;\<br>
+<br>
+[@同意英雄转职]<br>
+#IF<br>
+CheckHaveHero<br>
+#ELSEACT<br>
+MESSAGEBOX 对不起，您没有英雄！<br>
+BREAK<br>
+<br>
+#IF<br>
+H.CHECKONLINE<br>
+#ELSEACT<br>
+MESSAGEBOX 对不起，您的英雄不在线！<br>
+BREAK<br>
+<br>
+#IF<br>
+CHECKGAMEGOLD &gt; 49<br>
+#ELSEACT<br>
+MESSAGEBOX 对不起，您的元宝已经不足50颗。<br>
+BREAK<br>
+<br>
+#IF<br>
+H.CHECKJOB warrior<br>
+#SAY<br>
+是不是战士英雄不好玩呀，换换别的英雄试试吧！\ \<br>
+『&lt;玩玩法师英雄/@法师英雄&gt;』\<br>
+『&lt;玩玩道士英雄/@道士英雄&gt;』\ \<br>
+〖&lt;返回/@changjob&gt;〗〖&lt;关闭/@exit&gt;〗<br>
+#ACT<br>
+break<br>
+#IF<br>
+H.CHECKJOB wizard<br>
+#SAY<br>
+是不是法师英雄不好玩呀，换换别的英雄试试吧！\ \<br>
+『&lt;玩玩战士英雄/@战士英雄&gt;』\<br>
+『&lt;玩玩道士英雄/@道士英雄&gt;』\ \<br>
+〖&lt;返回/@changjob&gt;〗〖&lt;关闭/@exit&gt;〗<br>
+#ACT<br>
+break<br>
+#IF<br>
+H.CHECKJOB taoist<br>
+#SAY<br>
+是不是道士英雄不好玩呀，换换别的英雄试试吧！\ \<br>
+『&lt;玩玩战士英雄/@战士英雄&gt;』\<br>
+『&lt;玩玩法师英雄/@法师英雄&gt;』\ \<br>
+〖&lt;返回/@changjob&gt;〗〖&lt;关闭/@exit&gt;〗<br>
+#ACT<br>
+break<br>
+<br>
+[@战士英雄]<br>
+#IF<br>
+CHECKGAMEGOLD &gt; 49<br>
+#ACT<br>
+GAMEGOLD - 50<br>
+H.CLEARSKILL<br>
+H.CHANGEJOB warrior<br>
+H.ADDSKILL 英雄基本剑术 1<br>
+H.ADDSKILL 英雄攻杀剑术 1<br>
+H.ADDSKILL 英雄刺杀剑术 1<br>
+H.ADDSKILL 英雄半月弯刀 1<br>
+H.ADDSKILL 英雄野蛮冲撞 1<br>
+H.ADDSKILL 英雄烈火剑法 1<br>
+H.ADDSKILL 英雄狮子吼 1<br>
+SENDMSG 0 恭喜:玩家「&lt;$USERNAME&gt;」成功将英雄转职。<br>
+#ELSEACT<br>
+MESSAGEBOX 对不起，您的元宝已经不足50颗。<br>
+BREAK<br>
+<br>
+[@法师英雄]<br>
+#IF<br>
+CHECKGAMEGOLD &gt; 49<br>
+#ACT<br>
+GAMEGOLD - 50<br>
+H.CLEARSKILL<br>
+H.CHANGEJOB WIZARD<br>
+H.ADDSKILL 英雄火球术 1<br>
+H.ADDSKILL 英雄大火球 1<br>
+H.ADDSKILL 英雄抗拒火环 1<br>
+H.ADDSKILL 英雄地狱火 1<br>
+H.ADDSKILL 英雄疾光电影 1<br>
+H.ADDSKILL 英雄雷电术 1<br>
+H.ADDSKILL 英雄诱惑之光 1<br>
+H.ADDSKILL 英雄瞬息移动 1<br>
+H.ADDSKILL 英雄火墙 1<br>
+H.ADDSKILL 英雄爆裂火焰 1<br>
+H.ADDSKILL 英雄地狱雷光 1<br>
+H.ADDSKILL 英雄魔法盾 1<br>
+H.ADDSKILL 英雄圣言术 1<br>
+H.ADDSKILL 英雄冰咆哮 1<br>
+H.ADDSKILL 英雄灭天火 1<br>
+H.ADDSKILL 英雄寒冰掌 1<br>
+SENDMSG 0 恭喜:玩家「&lt;$USERNAME&gt;」成功将英雄转职。<br>
+#ELSEACT<br>
+MESSAGEBOX 对不起，您的元宝已经不足50颗。<br>
+BREAK<br>
+<br>
+[@道士英雄]<br>
+#IF<br>
+CHECKGAMEGOLD &gt; 49<br>
+#ACT<br>
+GAMEGOLD - 50<br>
+H.CLEARSKILL<br>
+H.CHANGEJOB taoist<br>
+H.ADDSKILL 英雄神圣战术 1<br>
+H.ADDSKILL 英雄群疗术 1<br>
+H.ADDSKILL 英雄集体隐身 1<br>
+H.ADDSKILL 英雄精神战法 1<br>
+H.ADDSKILL 英雄施毒术 1<br>
+H.ADDSKILL 英雄召唤骷髅 1<br>
+H.ADDSKILL 英雄召唤神兽 1<br>
+H.ADDSKILL 英雄灵魂火符 1<br>
+H.ADDSKILL 英雄隐身术 1<br>
+H.ADDSKILL 英雄幽灵盾 1<br>
+H.ADDSKILL 英雄治愈术 1<br>
+H.ADDSKILL 英雄困魔咒 1<br>
+H.ADDSKILL 英雄心灵启示 1<br>
+H.ADDSKILL 英雄气功波 1<br>
+H.ADDSKILL 英雄无极真气 1<br>
+SENDMSG 0 恭喜:玩家「&lt;$USERNAME&gt;」成功将英雄转职。<br>
+#ELSEACT<br>
+MESSAGEBOX 对不起，您的元宝已经不足50颗。<br>
+BREAK<br>
+}</p>
+</BODY>
+</HTML>
+<p><font color="#FF0000" size="6"><b>QManage.txt里的配置脚本<br>
+<br>
+</b></font>[@HeroLogin]<br>
+#if<br>
+H.CHECKNAMELIST ..\QuestDiary\数据文件\英雄名单.txt<br>
+#act<br>
+H.DELSKILL 破魂斩<br>
+H.DELSKILL 劈星斩<br>
+H.DELSKILL 雷霆一击<br>
+H.DELSKILL 噬魂沼泽<br>
+H.DELSKILL 末日审判<br>
+H.DELSKILL 火龙气焰<br>
+H.delnamelist ..\QuestDiary\数据文件\英雄名单.txt<br>
+#IF<br>
+H.ISNEWHUMAN<br>
+H.gender man<br>
+CHECKHEROJOB WIZARD<br>
+#ACT<br>
+CHANGEHEROLEVEL = 35<br>
+H.ADDSKILL 英雄先天元力<br>
+H.ADDSKILL 英雄酒气护体<br>
+H.give 恶魔长袍(男) 1<br>
+H.give 骨玉权杖 1<br>
+H.TakeOnitem 骨玉权杖 1<br>
+H.TakeOnitem 恶魔长袍(男) 0<br>
+H.give 超级金创药 4<br>
+H.give 超级魔法药 3<br>
+SENDMSG 4 恭喜&lt;$USERNAME&gt;您的英雄领取了装备<br>
+break<br>
+#IF<br>
+H.ISNEWHUMAN<br>
+H.gender WOMAN<br>
+CHECKHEROJOB WIZARD<br>
+#ACT<br>
+CHANGEHEROLEVEL = 35<br>
+H.ADDSKILL 英雄先天元力<br>
+H.ADDSKILL 英雄酒气护体<br>
+H.give 恶魔长袍(女) 1<br>
+H.give 骨玉权杖 1<br>
+H.TakeOnitem 骨玉权杖 1<br>
+H.TakeOnitem 恶魔长袍(女) 0<br>
+H.give 超级金创药 4<br>
+H.give 超级魔法药 3<br>
+SENDMSG 4 恭喜&lt;$USERNAME&gt;您的英雄领取了装备<br>
+break<br>
+#IF<br>
+H.ISNEWHUMAN<br>
+H.gender man<br>
+CHECKHEROJOB WARRIOR<br>
+#ACT<br>
+CHANGEHEROLEVEL = 35<br>
+H.ADDSKILL 英雄先天元力<br>
+H.ADDSKILL 英雄酒气护体<br>
+H.give 战神盔甲(男) 1<br>
+H.give 裁决之杖 1<br>
+H.TakeOnitem 战神盔甲(男) 0<br>
+H.TakeOnitem 裁决之杖 1<br>
+H.give 超级金创药 4<br>
+H.give 超级魔法药 3<br>
+SENDMSG 4 恭喜&lt;$USERNAME&gt;您的英雄领取了装备<br>
+break<br>
+#IF<br>
+H.ISNEWHUMAN<br>
+H.gender WOMAN<br>
+CHECKHEROJOB WARRIOR<br>
+#ACT<br>
+CHANGEHEROLEVEL = 35<br>
+H.ADDSKILL 英雄先天元力<br>
+H.ADDSKILL 英雄酒气护体<br>
+H.give 战神盔甲(女) 1<br>
+H.give 裁决之杖 1<br>
+H.TakeOnitem 战神盔甲(女) 0<br>
+H.TakeOnitem 裁决之杖 1<br>
+H.give 超级金创药 4<br>
+H.give 超级魔法药 3<br>
+SENDMSG 4 恭喜&lt;$USERNAME&gt;您的英雄领取了装备<br>
+break<br>
+#IF<br>
+H.ISNEWHUMAN<br>
+H.gender man<br>
+CHECKHEROJOB TAOIST<br>
+#ACT<br>
+CHANGEHEROLEVEL = 35<br>
+H.ADDSKILL 英雄先天元力<br>
+H.ADDSKILL 英雄酒气护体<br>
+H.give 幽灵战衣(男) 1<br>
+H.give 龙纹剑 1<br>
+H.TakeOnitem 幽灵战衣(男) 0<br>
+H.TakeOnitem 龙纹剑 1<br>
+H.give 超级金创药 4<br>
+H.give 超级魔法药 3<br>
+SENDMSG 4 恭喜&lt;$USERNAME&gt;您的英雄领取了装备<br>
+break<br>
+#IF<br>
+H.ISNEWHUMAN<br>
+H.gender WOMAN<br>
+CHECKHEROJOB TAOIST<br>
+#ACT<br>
+CHANGEHEROLEVEL = 35<br>
+H.ADDSKILL 英雄先天元力<br>
+H.ADDSKILL 英雄酒气护体<br>
+H.give 幽灵战衣(女) 1<br>
+H.give 龙纹剑 1<br>
+H.TakeOnitem 幽灵战衣(女) 0<br>
+H.TakeOnitem 龙纹剑 1<br>
+H.give 超级金创药 4<br>
+H.give 超级魔法药 3<br>
+SENDMSG 4 恭喜&lt;$USERNAME&gt;您的英雄领取了装备<br>
+break<br>
+　</p>

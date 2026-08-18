@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>元宝转账</TITLE>
+</HEAD>
+<BODY>
+<p>(@@dealgold)<br>
+  [@main]<br>
+  &lt;进行元宝转账/@dealgamegold&gt;\<br>
+  &lt;关闭/@exit&gt;</p>
+<p>[@dealgamegold]<br>
+  #IF<br>
+  #ACT<br>
+  STARTTAKEGOLD</p>
+<p>[@startdealgold]<br>
+  #IF<br>
+  #SAY<br>
+  &lt;$DEALGOLDPLAY&gt;与你交易，请&lt;输入转账/@@dealgold&gt;数量\<br>
+  &lt;返回/@main&gt;</p>
+<p>[@dealgoldpost]<br>
+  对不起,需要交易的人没站好位置！\<br>
+  &lt;返回/@main&gt;</p>
+<p>[@dealgoldFail]<br>
+  对不起，你的元宝数量没有这么多！\<br>
+  &lt;返回/@exit&gt;</p>
+<p>[@dealgoldInputFail]<br>
+  非法操作，交易失败！</p>
+<p>[@dealgoldPlayError]<br>
+  转账失败！</p>
+<p></p>
+</BODY>
+</HTML>
+
+ 

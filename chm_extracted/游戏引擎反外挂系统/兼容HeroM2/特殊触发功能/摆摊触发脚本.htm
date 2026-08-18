@@ -1,0 +1,15 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>摆摊触发脚本</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<BODY>
+<P><FONT face=Arial size=2><FONT 
+face=Fixedsys>说明:允许摆摊的地图需要在MapInfo.txt中增加地图参数MyShop<BR><BR>打开摆摊窗口之前首先执行Q-Function中的@StartMyShop脚本段.<BR>脚本命令ForbidMyShop用于中断摆摊.<BR><BR><BR>例子:以下脚本放在Q-Function中.<BR>[@StartMyShop]<BR>#IF<BR>CheckLevelEx 
+&lt; 40<BR>IsOnMap 
+3<BR>#SAY<BR>40级之后才可以在盟重使用摆摊功能.<BR>#ACT<BR>ForbidMyShop<BR><BR></FONT></FONT></P></BODY>
+</html>

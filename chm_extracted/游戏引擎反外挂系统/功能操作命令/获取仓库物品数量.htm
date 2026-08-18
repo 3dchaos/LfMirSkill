@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>获取仓库物品数量</title>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<body><FONT face=Arial size=2>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT color=#0000ff>功能说明:</FONT> 
+获取仓库物品数量（不计算叠加，叠加再多也只算一个）<BR><BR></FONT></FONT></P>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT 
+color=#0000ff>格式：</FONT>GetStorageItemCount 仓库类型(0:普通仓; 1:无限仓)  依据值的类型(0:物品唯一ID; 1:物品数据Idx; 2:物品名称)  值  变量<BR></FONT></FONT></P>
+<P><FONT face=Fixedsys size=2></br></br>
+
+
+</br></br>
+--------------------------------------------------------</br></br>
+格式：GetStorageItemCount 仓库类型(0:普通仓; 1:无限仓)  依据值的类型(0:物品唯一ID; 1:物品数据Idx; 2:物品名称)  值  变量</br>
+
+
+示例：</br></br>
+[@test]</br>
+#act</br>
+GetStorageItemCount 0 1 0 N1</br>
+sendmsg 6 普通仓库中，物品idx=0的物品数量为&lt;$STR(N1)&gt;</br></br>
+
+[@test1]</br>
+#act</br>
+GetStorageItemCount 1 2 屠龙 N1</br>
+sendmsg 6 无限仓库中的屠龙数量为&lt;$STR(N1)&gt;</br></br>
+
+[@test2]</br>
+#act</br>
+GetStorageItemCount 0 2 * N1</br>
+sendmsg 6 普通仓库中的物品数量为&lt;$STR(N1)&gt;</br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</br></br></br></br></br></br></br>
+
+
+
+
+</br></br></br></br></br>
+
+
+</html>

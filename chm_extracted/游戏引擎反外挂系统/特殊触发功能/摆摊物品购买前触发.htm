@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>摆摊物品购买前触发</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font size="5">摆摊物品购买前触发</font></strong> </p>
+<font size="2"><span class="STYLE2"><strong>功能：</strong>摆摊物品购买前触发 和 中止购买</span><br />
+
+
+-----------------------------------------------------------------</br></br>
+
+购买前触发 QF 字段： @BeginHeroM2BuyUserItem</br>
+中止购买命令：StopBuyUserItem</br></br></br>
+
+<p><font face="楷体" color="#ff0000" size="5"><strong>*简易示范脚本，具体自己发挥</strong></font></p>
+
+
+
+[@BeginHeroM2BuyUserItem]</br>
+#IF</br>
+CHECKLEVELEX &lt; 50</br>
+#ACT</br>
+StopBuyUserItem</br>
+sendmsg 5 你的等级小于50级，脚本中止你的购买</br>
+BREAK</br>
+#elseact</br>
+sendmsg 5 你购买&lt;$CurUserName&gt; 出售的摆摊物品&lt;$CURITEMNAME&gt; (&lt;$G_CURITEMNAME&gt; ),ID:&lt;$CurItemMakeIndex&gt; ，花费&lt;$CurItemPrices&gt; &lt;$CurItemMoneyType&gt; (货币类型值：&lt;$CurItemMoneyTypeValue&gt; )，叠加数量&lt;$CurItemOverlapCount&gt;</br>
+BREAK</br>
+
+
+
+
+
+
+
+</body>
+
+</html>

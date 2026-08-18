@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>踢人物下线</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>功能：</FONT></STRONG><BR><STRONG><FONT 
+color=#0000ff>&nbsp;&nbsp;&nbsp; </FONT></STRONG> 
+踢人物下线.小退</FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT><BR></STRONG>&nbsp;&nbsp;&nbsp; 
+KICK<BR><BR>;==========================================<BR>[@KICK]<BR>#IF<BR>#ACT<BR><FONT 
+size=2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SENDMSG 5 
+%s，非法登录游戏<BR></FONT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;KICK 
+<BR>;==========================================<BR></P>
+
+[@KICK]</br>
+#IF</br>
+#ACT</br>
+DelayCall 5000 @Kicks</br>
+SENDMSG 5 %s，非法登录游戏，5秒会将被小退游戏！</p>
+
+[@KICKS]</br>
+#IF</br>
+#ACT</br>
+KICK 1</p>
+
+
+;注：命令：KICK  后面参数为0或空时为踢下线，为1时候将人物小退！ </br>
+</FONT>
+</BODY>
+</HTML>
+ 

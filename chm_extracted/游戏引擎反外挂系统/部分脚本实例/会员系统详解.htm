@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>会员系统详解</TITLE>
+</HEAD>
+<BODY>
+<P><FONT 
+size=5><STRONG>会员系统详解<BR><BR></STRONG></FONT><FONT 
+size=3><FONT 
+size=2>会员系统主要用来对一些加盟玩家的特殊控制。可以用IP地址，登录帐号，角色名，之类的为标志控制。</FONT><BR><BR></FONT><FONT 
+size=4><STRONG>相关脚本命令</STRONG></FONT></P>
+<P><FONT size=2>设置会员类型：<A 
+href="../功能操作命令/调整人物会员类型.htm">SETMEMBERTYPE</A><BR>
+设置会员等级：</FONT><A href="../功能操作命令/调整人物会员等级.htm"><FONT 
+size=2>SETMEMBERLEVEL</FONT></A><BR>
+<BR><FONT 
+size=2>检查会员类型：<A 
+href="../脚本检测命令/检查人物的会员类型.htm">CHECKMEMBERTYPE</A></FONT><BR>
+<FONT 
+size=2>检查会员等级：<A href="../脚本检测命令/检查人物的会员等级.htm">CHECKMEMBERLEVEL</A> <BR>
+<BR><STRONG><FONT 
+size=4>相关脚本会员物品</FONT></STRONG> </FONT></P>
+<P><FONT size=2><BR>物品使用条件：<A 
+href="../DB数据库资料/物品所需条件设置.htm">8、81、82</A></FONT></P>
+<P>&nbsp;</P>
+<P>增加会员时间 文件名称 天 时 分<br>
+  [@main]<br>
+  #ACT<br>
+  ADDNAMEDATETIMELIST ..\QuestDiary\会员名单.txt 30 2 3<br>
+  #ACT<br>
+SENDMSG 6 增加30天2小时3分 255 253</P>
+<p>检测会员剩余时间 文件名称 过期是否删除(0不删除 1删除) 变量1(到期时间 字符变量) 变量2(剩余天数 数字变量) 变量3(剩余小时 数字变量) 变量4(剩余分钟 数字变量)<br>
+  [@main]<br>
+  #IF<br>
+  CHECKNAMEDATETIMELIST ..\QuestDiary\会员名单.txt 1 S1 N1 N2 N3<br>
+  #ACT<br>
+  SENDMSG 6 你的会员到期时间是&lt;$STR(S1)&gt;【剩余天数=&lt;$STR(N1)&gt;】【剩余小时=&lt;$STR(N2)&gt;】【剩余分钟=&lt;$STR(N3)&gt;】 255 253<br>
+  #ELSEACT<br>
+  SENDMSG 6 你不是会员或已过期，请及时充值！ 255 253</p>
+<p>删除会员还是使用原来的老命令DELNAMEDATELIST</p>
+<p>[@main]<br>
+  &lt;输入需要充值的人物名称/@@InputString1&gt;\ \ \<br>
+  &lt;关闭/@EXIT&gt;\</p>
+<p>[@InputString1]<br>
+  #IF<br>
+  ;S1.CHECKONLINE<br>
+CheckOnline &lt;$STR(S1)&gt;<br>
+  #ACT<br>
+  ADDNAMEDATETIMELIST ..\QuestDiary\会员名单.txt 30 2 3<br>
+  SENDMSG 6 &lt;$STR(S1)&gt;充值成功，增加30天2小时3分！ 255 253<br>
+  #ELSEACT<br>
+  SENDMSG 6 &lt;$STR(S1)&gt;不在线！ 255 253</p><br><br><br>
+
+;----------------------------------------------------------------<br><br>
+以下命令支持绝对路径<br><br>
+
+ClearNameList 文件名 是否绝对路径（0或空：相对路径；1：绝对路径）<br>
+AddNameDateList  文件名 是否绝对路径（0或空：相对路径；1：绝对路径）<br>
+DelNameDateList  文件名 是否绝对路径（0或空：相对路径；1：绝对路径）<br><br><br><br><br>
+</BODY>
+</HTML>
+ 

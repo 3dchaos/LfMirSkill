@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>获取地图人数命令</title>
+</head>
+
+<body>
+
+功能说明：获取地图人数</br></br>
+
+格式：GetMapHumCount  地图编号  是否包含假人(0不包含假人/1包含假人)   返回变量</br></br></br></br>
+
+
+
+;例子</br>
+[@main]</br>
+#ACT</br>
+GetMapHumCount  3 1 N1</br>
+Sendmsg 7 当前土城有&lt;$STR(N1)&gt;人</br></br></br></br></br></br>
+
+
+如：&lt;$STR(N1)&gt;无法获取地图号N开头的地图，那么可以将常量更换为：&lt;$const(n1)&gt;
+
+
+
+</br></br></br></br>
+
+
+
+
+
+</p>
+</body>
+</html>

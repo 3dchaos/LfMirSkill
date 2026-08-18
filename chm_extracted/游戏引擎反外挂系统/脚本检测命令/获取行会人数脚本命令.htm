@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>获取行会人数脚本命令</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<body><FONT face=Arial size=2>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT color=#0000ff>功能:</FONT> 
+获取行会人数脚本命令<BR><BR></FONT></FONT></P>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT 
+color=#0000ff>格式:<BR></FONT>GETGUILDMEMBERCOUNT &nbsp;参数1&nbsp; 参数2 &nbsp;参数3<BR></FONT></FONT></P>
+参数1:行会名称<BR>
+参数2:保存变量 行会不存在返回0<BR>
+参数3:0或空为行会总人数，1为行会当前在线成员人数<BR><BR><BR><BR>
+
+
+例:<BR>
+[@main]<BR>
+#act<BR>
+GETGUILDMEMBERCOUNT &lt;$guildname&gt; N$人数<BR>
+sendmsg 6 你的行会人数:&lt;$str(N$人数)&gt; <BR><BR><BR><BR><BR>
+
+
+</html>

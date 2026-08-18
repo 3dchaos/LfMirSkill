@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>个人定时器</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>个人定时器</FONT>。</FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT><BR>
+</STRONG>&nbsp;&nbsp;&nbsp; SETONTIMER 定时器索引(0-255) 定时间隔（单位为秒）执行次数（留空为无限制执行，需使用停止定时器方可关闭，填写3为执行3次后自动关闭定时器）<br>
+&nbsp;&nbsp;&nbsp; SETOFFTIMER 定时器索引(0-255) //停止定时器 <BR>
+&nbsp;&nbsp;&nbsp;<BR>
+;==========================================<br>
+设置定时器<br>
+[@Test]<BR>
+#IF<br>
+#ACT<br>
+SetOnTimer 0 20</FONT></P>
+<p><font size="2"> QManage.txt:<br>
+  [@OnTimer0]<br>
+  #ACT<br>
+  SendMsg 5 你目前位于%m的(%x：%y)</font><font size="2"><BR>
+  ;==========================================</font></p>
+<p><FONT size=2>;==========================================<br>
+  停止定时器<br>
+[@Test]<BR>
+#IF<br>
+#ACT<br>
+SetOffTimer 0</FONT><font size="2"><BR>
+;==========================================</font></p>
+</BODY>
+</HTML>
+
+ 

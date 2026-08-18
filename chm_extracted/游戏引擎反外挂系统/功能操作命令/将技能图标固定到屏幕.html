@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="GB2312">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技能图标固定到屏幕设置命令说明</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #2a3a7c, #3a4a8c);
+            color: #e0e0ff;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(20, 25, 50, 0.85);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border: 1px solid #4a5fcf;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #4a5fcf;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: #6cb4ee;
+            text-shadow: 0 0 10px rgba(108, 180, 238, 0.5);
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: #8ab4f8;
+            margin: 30px 0 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #4a5fcf;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: #a6c1ff;
+            margin: 20px 0 10px;
+        }
+        
+        .section {
+            background: rgba(30, 35, 60, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-left: 4px solid #4a5fcf;
+        }
+        
+        .command {
+            background: #1e2230;
+            border: 1px solid #3a4466;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Consolas', 'Courier New', monospace;
+            color: #8ab4f8;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .example {
+            background: #1a1f2e;
+            border-left: 4px solid #6cb4ee;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .param-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: #1a1f2e;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .param-table th, .param-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #3a4466;
+        }
+        
+        .param-table th {
+            background: #2a3a7c;
+            color: #c7d3ff;
+        }
+        
+        .param-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .note {
+            background: rgba(200, 150, 50, 0.1);
+            border-left: 4px solid #e6b450;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .tip {
+            background: rgba(50, 150, 100, 0.1);
+            border-left: 4px solid #4caf50;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .code {
+            color: #8ab4f8;
+            font-family: 'Consolas', 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .function-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .function-card {
+            background: rgba(40, 45, 70, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid #4a5fcf;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .function-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #4a5fcf;
+            color: #8ab4f8;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>技能图标设置命令说明</h1>
+            <p>游戏界面自定义功能 - 技能图标与提示栏设置</p>
+        </header>
+        
+        <div class="section">
+            <h2>功能概述</h2>
+            <p>本文档详细说明了如何将技能图标设置到游戏屏幕上以及技能提示栏的方法。这些命令可以自定义将常用技能图标固定在屏幕指定位置或添加到技能提示栏中，方便快速使用。</p>
+            
+            <div class="function-grid">
+                <div class="function-card">
+                    <h3>屏幕固定技能图标</h3>
+                    <p>将技能图标固定显示在屏幕指定位置，玩家无法移动这些图标。</p>
+                    <p><strong>适用条件：</strong>仅限已设置快捷键的技能</p>
+                </div>
+                
+                <div class="function-card">
+                    <h3>技能提示栏图标</h3>
+                    <p>将技能添加到技能提示栏，方便玩家快速查看和使用。</p>
+                    <p><strong>适用条件：</strong>仅限已设置快捷键的技能</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>屏幕固定技能图标</h2>
+            
+            <h3>添加技能图标到屏幕</h3>
+            <div class="command">AddScreenMagicButton 技能ID/技能名称 坐标X 坐标Y</div>
+            
+            <table class="param-table">
+                <thead>
+                    <tr>
+                        <th>参数</th>
+                        <th>说明</th>
+                        <th>示例</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>技能ID/技能名称</td>
+                        <td>可以使用数字ID或技能名称</td>
+                        <td>26 或 "烈火剑法"</td>
+                    </tr>
+                    <tr>
+                        <td>坐标X</td>
+                        <td>图标在屏幕上的X坐标</td>
+                        <td>30</td>
+                    </tr>
+                    <tr>
+                        <td>坐标Y</td>
+                        <td>图标在屏幕上的Y坐标</td>
+                        <td>400</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>从屏幕删除技能图标</h3>
+            <div class="command">DelScreenMagicButton 技能ID/技能名称</div>
+            
+            <h3>使用示例</h3>
+            <div class="example">
+                <p><strong>显示图标在屏幕上：</strong></p>
+                <div class="command">
+                    [@显示图标在屏幕上]<br>
+                    #IF<br>
+                    #ACT<br>
+                    AddScreenMagicButton 26 30 400<br>
+                    ; 可使用技能ID或技能名称
+                </div>
+                
+                <p><strong>屏幕上删除技能图标：</strong></p>
+                <div class="command">
+                    [@屏幕上删除技能图标]<br>
+                    #IF<br>
+                    #ACT<br>
+                    DelScreenMagicButton 26<br>
+                    ; 可使用技能ID或技能名称
+                </div>
+                
+                <p><strong>实际应用示例：</strong></p>
+                <div class="command">
+                    ; 使用技能名称添加<br>
+                    AddScreenMagicButton 烈火剑法 30 400<br><br>
+                   或使用技能ID添加<br>
+                    ;AddScreenMagicButton 26 100 300<br><br>
+                    
+                    ; 添加多个技能图标<br>
+                    AddScreenMagicButton 野蛮冲撞 50 350<br>
+                    AddScreenMagicButton 半月弯刀 80 320
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>技能提示栏图标</h2>
+            
+            <h3>添加技能到提示栏</h3>
+            <div class="command">AddToMagicBar 技能ID/技能名称</div>
+            
+            <h3>从提示栏删除技能</h3>
+            <div class="command">DelFromMagicBar 技能ID/技能名称</div>
+            
+            <h3>使用示例</h3>
+            <div class="example">
+                <p><strong>显示图标在提示栏：</strong></p>
+                <div class="command">
+                    [@显示图标在提示栏]<br>
+                    #IF<br>
+                    #ACT<br>
+                    AddToMagicBar 26<br>
+                    ; 可使用技能ID或技能名称
+                </div>
+                
+                <p><strong>提示栏删除图标：</strong></p>
+                <div class="command">
+                    [@提示栏删除图标]<br>
+                    #IF<br>
+                    #ACT<br>
+                    DelFromMagicBar 26<br>
+                    ; 可使用技能ID或技能名称
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>完整应用示例</h2>
+            
+            <div class="example">
+                <div class="command">
+                    [@主菜单]<br>
+                    #ACT<br>
+                    ; 在屏幕上显示常用技能图标<br>
+                    AddScreenMagicButton 烈火剑法 30 400<br>
+                    AddScreenMagicButton 野蛮冲撞 60 400<br>
+                    AddScreenMagicButton 半月弯刀 90 400<br><br>
+                    
+                    ; 在技能提示栏添加技能<br>
+                    AddToMagicBar 烈火剑法<br>
+                    AddToMagicBar 野蛮冲撞<br><br>
+                    
+                    &lt;清理技能/@清理技能&gt;<br><br>
+                    
+  
+                    
+                    [@清理技能]<br>
+                    #ACT<br>
+                    ; 清理所有技能图标<br>
+                    DelScreenMagicButton 烈火剑法<br>
+                    DelScreenMagicButton 攻杀剑术<br>
+                    DelFromMagicBar 烈火剑法<br>
+                    DelFromMagicBar 攻杀剑术<br>
+                    SendMsg 5 "已清理所有技能图标"
+                </div>
+            </div>
+            
+            <h3>实用例子</h3>
+            <div class="example">
+                <div class="command">
+                    ; 批量设置常用技能<br>
+                    [@设置战士技能]<br>
+                    #ACT<br>
+                    AddScreenMagicButton 烈火剑法 30 400<br>
+                    AddScreenMagicButton 逐日剑法 60 400<br>
+                    AddScreenMagicButton 半月弯刀 90 400<br>
+                    AddScreenMagicButton 野蛮冲撞 120 400<br>
+                    AddToMagicBar 开天斩<br>
+                    AddToMagicBar 十步一杀<br>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>注意事项</h2>
+            
+            <div class="note">
+                <p><strong>重要提示：</strong></p>
+                <ul>
+                    <li><span class="code">仅限有快捷键的技能</span>：这些命令只能用于已设置快捷键的技能</li>
+                    <li><span class="code">固定位置</span>：屏幕图标位置固定，玩家无法移动</li>
+                    <li><span class="code">坐标参考</span>：坐标值需要根据实际屏幕分辨率进行调整</li>
+                    <li><span class="code">技能可用性</span>：确保添加的技能玩家已学习且可用</li>
+                    <li><span class="code">注意：</span>：命令拖出取消显示技能备注  和双击清除图标</li>
+                </ul>
+            </div>
+            
+            <div class="tip">
+                <p><strong>使用建议：</strong></p>
+                <ul>
+                    <li>在设置技能图标前，先确认玩家已学习相应技能</li>
+                    <li>合理规划图标位置，避免遮挡重要界面元素</li>
+                    <li>提供清理功能，方便玩家重置界面设置</li>
+                    <li>可根据职业特点预设不同的技能组合</li>
+                </ul>
+            </div>
+        </div>
+        
+        <footer>
+            <p>技能图标设置命令说明文档 | 最后更新: 2025年10月31</p>
+        </footer>
+    </div>
+</body>
+</html>

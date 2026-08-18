@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>设置假人捡物品列表</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font size="5">设置假人捡物品列表</font></strong> </p>
+<font size="2"><span class="STYLE2"><strong>功能：</strong>设置假人捡物品列表</span><br />
+<strong>默认假人捡物品列表为：列表信息1中的允许捡取物品和优先捡取物品<br />
+<strong>本命令可对指定假人设置自定义指定列表进行捡物品，未定义的假人全部默认列表信息1<br /><br />
+
+------------------------------------------------<br /><br />
+<p><font face="楷体" color="#ff0000" size="4"><strong>*设置假人捡物品列表</strong></font></p>
+格式：自定义设置假人捡物品列表<br />
+SetDummyPickItemFile  捡取列表文件名(一行一个物品名) 是否优先捡取(0或空：优先捡取列表;1:允许捡取列表）<br /><br /><br /><br />
+
+
+[@设置捡物品列表]<br />
+#IF<br />
+#ACT<br />
+;优先捡物品列表<br />
+;弑神飞影.SetDummyPickItemFile D:\假人捡垃圾1.txt<br />
+SetDummyPickItemFile D:\假人捡垃圾1.txt<br />
+sendmsg 8 设置假人优先捡取列表为D:\假人捡垃圾1.txt<br /><br />
+;允许捡物品列表<br />
+;弑神飞影.SetDummyPickItemFile D:\假人捡垃圾2.txt 1<br />
+SetDummyPickItemFile D:\假人捡垃圾2.txt 1<br />
+sendmsg 8 设置假人允许捡取列表为D:\假人捡垃圾2.txt<br /><br /><br />
+
+<p><font face="楷体" color="#0000FF" size="4"><strong>*PS：如果命令只设置了优先捡，那么假人就捡命令设置优先捡列表+列表信息1的允许捡列表</strong></font></p>
+<p><font face="楷体" color="#0000FF" size="4"><strong>*PS：如果命令只设置了允许捡，那么假人就捡命令设置的允许捡+列表1的优先捡</strong></font></p>
+<p><font face="楷体" color="#0000FF" size="4"><strong>*PS：如果全设置命令捡(不捡列表1)就和上述脚本一样同时使用命令设置优先和允许</strong></font></p>
+
+
+
+
+
+
+
+
+</br></br></br></br>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>武器被诅咒前触发</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font size="5">武器被诅咒前触发和终止诅咒命令</font></strong> </p>
+<font size="2"><span class="STYLE2"><strong>功能：</strong>武器被诅咒前触发使用命令中止诅咒</span><br />
+<strong>格式：</strong>人物触发：@BeginWeaponCurse ，英雄触发@HeroBeginWeaponCurse<br />
+<strong>说明：</strong>中止命令StopWeaponCurse<br /><br />
+
+
+
+<p><font face="楷体" color="#ff0000" size="5"><strong>*例子</strong></font></p>
+
+
+;人物武器被诅咒前QF触发脚本<br />
+[@BeginWeaponCurse]<br />
+#ACT<br />
+sendmsg 6 人物武器被诅咒，在此中止诅咒<br />
+StopWeaponCurse<br /><br />
+
+
+;英雄武器被诅咒前QF触发脚本<br />
+[@HeroBeginWeaponCurse]<br />
+#ACT<br />
+sendmsg 6 英雄武器被诅咒，在此中止诅咒<br />
+StopWeaponCurse<br />
+<br /><br /><br /><br />
+</tbody>
+</table>
+</div>
+
+
+</body>
+
+</html>

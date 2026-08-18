@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>发送屏幕滚动信息</title>
+</head>
+
+<body>
+<pre><font color="#0000ff" size="2"><strong>功能:</strong></font><font color="#0000ff" size="2"><strong><br /> 
+</strong></font>发送屏幕滚动信息<br />
+<font color="#0000ff" size="2"><strong>格式:</strong></font><font face="宋体"><br /> 
+SENDMOVEMSG </font><font face="宋体">信息类型代码(0-7)0全局发送1发送给个人 字体颜色(0-255) 背景颜色(0-255) Y坐标 滚动次数 信息内容 字体大小 滚动速度 范围 </font></pre>
+<p><font face="宋体">[@测试]<br />
+#if<br />
+#act<br />
+SENDMOVEMSG 1 253 255 350 1 这个是屏幕滚动信息坐标在350 10 200  0</font><br /><br />
+
+
+SENDMOVEMSG 0 253 0 130 5 {[双倍护送]/SCOLOR=251}振威镖局接镖已经开启{[双倍护送]/SCOLOR=251}，请各位玩家前往镇魔大陆请各位玩家前往镇魔大陆{[双倍护送]/SCOLOR=251}XXXXX..... 0 2 30 0<br />
+<br /><br />
+
+插入颜色：{内容/SCOLOR=颜色}<br />
+<br /><br /></p></p></p></p>
+
+
+信息类型介绍：<br /><br />
+
+0: 所有在线人物<br />
+
+1：自己<br />
+
+2：对友(包含自己)； 范围=0；所有对友； 范围>0；在自己范围之内的队友<br />
+
+3: 行会所有成员(包含自己)； 范围=0；行会所有成员； 范围>0；在自己范围之内的行会成员<br />
+
+4: 同一地图所有人物(包含自己)； 范围=0；同一地图所有人物； 范围>0；在自己范围之内的人物<br />
+
+5: 对友(不包含自己)； 范围=0；所有对友； 范围>0；在自己范围之内的队友<br />
+
+6: 行会所有成员(不包含自己)； 范围=0；行会所有成员； 范围>0；在自己范围之内的行会成员<br />
+
+7: 同一地图所有人物(不包含自己)； 范围=0；同一地图所有人物； 范围>0；在自己范围之内的人物<br />
+
+
+
+
+</body>
+</html>

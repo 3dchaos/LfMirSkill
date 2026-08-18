@@ -1,0 +1,278 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>押镖车</title>
+</head>
+
+<body>
+
+
+</br></br>
+押镖 镖车:</br></br>
+
+;数据库：</br>
+普通镖车;128;19;290;60;1;10;3000;3000;0;15;15;20;50;0;0;30;50;300;1;0;1200;;</br>
+高级镖车;128;19;291;60;1;10;3000;3000;0;15;15;20;50;0;0;30;50;300;1;0;1200;;</br>
+豪华镖车;128;19;292;60;1;10;3000;3000;0;15;15;20;50;0;0;30;50;300;1;0;1200;;</br>
+奢华镖车;128;19;293;60;1;10;3000;3000;0;15;15;20;50;0;0;30;50;300;1;0;1200;;</br>
+
+;======================================================</br></br></br>
+
+
+------------------------------------------------------------</br>
+
+检测是否有押镖任务：ISESCORTING</br>
+
+------------------------------------------------------------</br>
+
+开始押镖:	StartEscort 镖车数据库名称(镖车Race=128)</br>
+	
+	开始押镖相关触发（当前NPC)：</br>
+		1、@isEscorting；正在押镖中      </br>
+		2、@EscortFail；接押镖任务失败，一般是数据库无对应的镖车或Race不对</br>
+		3、@EscortOK，接押镖任务成功</br>
+
+------------------------------------------------------------</br>
+
+送至镖车处：MoveToEscort</br>
+	送至刹车处相关触发（当前NPC)：</br>
+		1、@MoveToEscort_Fail_1，无押镖镖车</br>
+		2、@MoveToEscort_Fail_2，镖车地图为空</br>
+------------------------------------------------------------</br>
+镖车移到人物身边：MoveEscortToSelf</br>
+	镖车移到人物身边相关触发（当前NPC)：</br>
+		1、[@MoveToEscort_Fail_1]，无押镖镖车</br>
+		2、[@MoveToEscort_Fail_2]，镖车地图为空</br>
+
+------------------------------------------------------------</br>
+	
+放弃押镖/释放镖车：GiveUpEscort</br>
+	触发（当前NPC)：</br>
+		1、@GiveUpEscort_Fail，无押镖镖车</br>
+		2、@GiveUpEscort_OK， 成功</br>
+
+------------------------------------------------------------</br>
+
+完成押镖：EscortFinish</br>
+	触发（当前NPC)：	</br>
+		1、@FinishEscort_Fail_1，无押镖镖车</br>
+		2、@FinishEscort_Fail_2，镖车还未到达目的地</br>
+		3、@FinishEscort_镖车名称，交镖；交镖后释放镖车GiveUpEscort ,用于奖励</br></br>
+
+
+-------------------------------------------------------------</br></br>
+
+;自己镖车被杀死，自己触发（QF）</br>
+[@EscortDie_镖车]</br>
+#ACT</br>
+SENDMSG 0 你的镖车车被【&lt;$CURRRTARGETNAME&gt;】破坏了</br></br>
+
+
+
+;镖车被杀死触发,击杀者触发（QF）</br>
+[@Plunder_镖车]</br>
+#ACT</br>
+SENDMSG 0 凶狠的[&lt;$USERNAME&gt;]将[&lt;$CurTargetMasterName&gt;]的【&lt;$CURRRTARGETNAME&gt;】破坏了</br></br>
+
+
+
+;镖车受到攻击触发（QF，当人物和自己的镖车不在同一地图，或相距20格以上时）</br>
+[@EscortUnderFire]</br>
+#ACT</br>
+SENDMSG 0 你的镖车被攻击了</br></br>
+----------------------------------------------------------------------------------------------------------------</br></br>
+
+
+
+ 简易例子：</br></br>
+
+[@MAIN]</br>
+&lt;开始押镖/@JSRW&gt;   &lt;完成押镖/@完成押镖&gt;</br></br>
+
+[@JSRW]</br>
+#IF</br>
+ISESCORTING</br>
+#SAY</br>
+您还没有完成上一次押镖任务.如果你要重新开始,请先放弃上一\</br>
+次未完成的护送任务。\ \</br>
+注意：放弃任务为任务失败！\ \</br>
+&lt;放弃任务/@放弃任务&gt;    &lt;送我至镖车丢失的地点/@flyto&gt;\ \</br>
+&lt;返回/@main&gt;\</br>
+#ACT</br>
+break</br>
+#IF</br>
+#ACT</br>
+StartEscort 高级镖车</br>
+;StartEscort 豪华镖车 15</br>
+;命令 镖车名称 时间 ，时间(单位分钟)留空默认为45分钟</br>
+break</br></br>
+
+
+[@isEscorting]</br>
+#SAY</br>
+你的托运任务正在执行中，不能再接此任务\</br>
+&lt;寻找镖车/@flyto&gt;      &lt;放弃任务/@放弃任务&gt;      &lt;关闭/@exit&gt;\</br></br>
+
+
+
+
+
+[@完成押镖]</br>
+#IF</br>
+#ACT</br>
+EscortFinish</br></br>
+
+
+[@放弃任务]</br>
+#IF</br>
+#SAY</br>
+任务注销成功.可以再次接任务拉车！</br>
+#ACT</br>
+GiveUpEscort</br>
+break</br></br>
+
+
+
+[@flyto]</br>
+#IF</br>
+#ACT</br>
+MoveToEscort</br>
+break</br></br>
+
+
+
+[@EscortOK]</br>
+#IF</br>
+#ACT</br>
+MESSAGEBOX 恭喜你接到了【镖车】\一直往前走,直到看见镖务总管为止!</br>
+break</br></br>
+
+
+[@EscortFail]</br>
+#SAY</br>
+接镖车任务失败，数据中不存在镖车！\</br>
+&lt;关闭/@exit&gt;</br></br>
+
+;-------------传送至镖车位置失败触发--------------------------------------------</br>
+
+[@MoveToEscort_Fail_1]
+#SAY
+你目前没有正在托运的镖车！\
+&lt;关闭/@exit&gt;</br></br>
+
+[@MoveToEscort_Fail_2]
+#SAY
+镖车地图错误！\
+&lt;关闭/@exit&gt;</br></br>
+
+
+
+;-------------寻找镖车--------------------------------------------</br>
+;QF中有移动寻找镖车就需要在QF脚本中增加相关触发</br>
+[@MoveToEscort_Fail_1]</br>
+#SAY</br>
+你目前没有正在托运的镖车！\</br>
+&lt;关闭/@exit&gt;</br></br>
+
+[@MoveToEscort_Fail_2]</br>
+#SAY</br>
+镖车还未到达目的地！\</br>
+&lt;关闭/@exit&gt;</br></br>
+
+;---------------------------------------------------------</br>
+[@FinishEscort_Fail_1]</br>
+你没有镖车啊，提交什么任务！？\</br>
+&lt;关闭/@exit&gt;</br></br>
+
+[@FinishEscort_Fail_2]</br>
+镖车距离我太远了，叫我如何核查货物呢？\</br>
+&lt;关闭/@exit&gt;</br></br>
+
+
+[@GiveUpEscort_OK]</br>
+;这个会被封包利用，不要用于奖励之类.可用于提示，或者不用这个触发</br>
+#IF</br>
+#ACT</br>
+MESSAGEBOX  完成押镖</br>
+break</br></br>
+
+[@FinishEscort_高级镖车]</br>
+#SAY</br>
+押镖完成！\</br>
+#ACT</br>
+GIVEUPESCORT</br>
+GAMEGOLD + 200</br>
+SENDMSG 0 恭喜玩家%s成功将【高级镖车】押到.完成任务获得【200元宝】奖励！ 253 215</br>
+SENDMSG 0 恭喜玩家%s成功将【高级镖车】押到.完成任务获得【200元宝】奖励！ 253 215 30</br></br></br>
+
+
+;===============================================</br></br>
+
+
+QF：</br>
+[@Plunder_高级镖车]</br>
+#ACT</br>
+GAMEGOLD + 1</br>
+SENDMSG 6 您成功的将[&lt;$CurTargetMasterName&gt;]的【&lt;$CURRRTARGETNAME&gt;】破坏了，奖励1元宝</br>
+SENDMSG 0 凶狠的[&lt;$USERNAME&gt;]在%m(%x:%y)将[&lt;$CurTargetMasterName&gt;]的【&lt;$CURRRTARGETNAME&gt;】破坏了，获得1元宝奖励</br>
+break</br></br>
+
+[@EscortDie_高级镖车]</br>
+#ACT</br>
+SENDMSG 5 押镖失败，你的镖车被【&lt;$CURRRTARGETNAME&gt;】打劫了！！！</br>
+break</br></br>
+
+
+[@EscortUnderFire]</br>
+你押运的镖车正受攻击！！！\</br>
+&lt;前往救急-花费10元宝/@rescue&gt;   &lt;关闭/@exit&gt;</br></br>
+
+[@rescue]</br>
+#IF</br>
+CHECKGAMEGOLD &gt; 10</br>
+#ACT</br>
+GAMEGOLD - 10</br>
+MoveToEscort</br>
+break</br>
+#elseact</br>
+messagebox 你没有【10】个元宝，我没办法帮您传送过去?</br>
+break</br></br>
+
+
+
+;镖车到时死亡触发（主人在线时提示）</br>
+[@EscortDie]</br>
+#IF</br>
+#ACT</br>
+messagebox 押镖因超时失败，已被系统摧毁....</br>
+break</br></br>
+
+
+
+
+
+;QF中有移动寻找镖车就需要在QF脚本中增加相关触发</br>
+[@MoveToEscort_Fail_1]</br>
+#SAY</br>
+你目前没有正在托运的镖车！\</br>
+&lt;关闭/@exit&gt;</br></br>
+
+[@MoveToEscort_Fail_2]</br>
+#SAY</br>
+镖车还未到达目的地！\</br>
+&lt;关闭/@exit&gt;</br></br></br></br>
+
+
+示范脚本为简易脚本，个别触发可以不要，具体自由发挥.......</br></br></br></br>
+
+
+
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

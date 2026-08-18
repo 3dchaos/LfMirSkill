@@ -1,0 +1,449 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>天下第一雕像相关说明</title>
+</head>
+
+<body>
+<br><br>
+<font color="#0000FF"><b>天下第一雕像相关变量</b></font><br>
+雕像更新人：&lt;$NPCSETUSER&gt; \<br>
+雕像更新人等级：&lt;$NPCSETLEVEL&gt; \<br><br><br><br><br>
+
+
+
+
+<font color="#0000FF"><b>天下第一雕像命令</b></font><br>
+功能：塑造人物当前形象为雕像<br>
+命令：  SetNpcImage 编号(编号-1：雕像破碎) 是否彩色（0或空为黑白，其他值为彩色)  是否原始大小（0为放大,1为原始大小）<br>
+
+SetNpcImage 40 1 1<br<br>
+
+示例：<br><br>
+[@造形]<br>
+#IF<br>
+#ACT<br>
+SetNpcImage 40<br>
+MESSAGEBOX 恭喜，雕像打造成功！<br><br><br>
+
+
+[@造形1]<br>
+#IF<br>
+#ACT<br>
+SetNpcImage 40 1<br>
+MESSAGEBOX 恭喜，雕像打造成功！<br><br><br>
+
+[@破碎]<br>
+#IF<br>
+#ACT<br>
+SetNpcImage -1<br>
+MESSAGEBOX 您的雕像已经破碎！<br><br><br>
+
+
+
+----------------------------------------设置雕像有效时间---------------------------------------------------------------------------------------<br>
+SetNpcImageTime 操作符（=，+，-）   时间（为空，小于或等于0为永久有效，大于0为指定分钟） ，附：塑造雕像时候不用此命令为无时间限制，因为符合了小于0或等于0或为空<br><br>
+
+注意此命令只可以在ARP为273的NPC使用！！！！<br><br>
+<P>示列：<br>
+
+<P>[@SetNpc]<br>
+#IF<br>
+#ACT<br>
+SetNpcImageTime + 600<br>
+SendMsg 5 雕像维护成功，时间增加10小时！<br>
+
+
+
+======================================<b><font color="#FF0000">天下第一男战士简单示例</b></font>===========================================================================<br><br>
+MerChant.txt 添加：<br>
+天下第一/天下第一男战士 3 366 338 天下第一男战士 0 273 0 0 0 0 0  天下第一男战士.txt<br><br>
+
+注：最后的天下第一男战士.txt表示当前天下第一信息保存文本名称，前方的<B>5个0</B>(第6个参数为保存名，可任意数,请勿重名冲突)表示NPC原始就拥有的参数配置，将天下第一男战士.txt放在最后就行了，保存路径为：Envir\Npc_Data<br><br><br><br>
+
+
+
+[@天下第一男战士]<br>
+#IF<br>
+EQUAL A2 &lt;$USERNAME&gt;<br>
+#SAY<br>
+　请问你需要进行什么操作？\ \<br>
+你申请时的信息\<br>
+　申请人物名称：&lt;$STR(A2)&gt;\<br>
+　申请人物等级：&lt;$STR(G7)&gt;\<br>
+　申请人物攻击：&lt;$STR(G8)&gt;\<br>
+　保持纪录时间：&lt;$STR(G11)&gt;\<br>
+　上次维护时间：&lt;$STR(G9)&gt;\ \<br>
+&lt;更换形像/@天下第一更换形像&gt;\<br>
+&lt;关闭/@exit&gt;\<br>
+#ELSESAY<br>
+　想为自己树立一尊雕像吗？从此扬名天\<br>
+下！现在机会来了，赶快申请吧！\<br>
+　申请成功后，可以自由设定雕像的样子\<br>
+　--------------------------------\<br>
+　申请人物名称：&lt;$STR(A2)&gt;\<br>
+　申请人物等级：&lt;$STR(G7)&gt;\<br>
+　申请人物攻击：&lt;$STR(G8)&gt;\<br>
+　--------------------------------\ \<br>
+&lt;我要申请天下第一战圣（男）/@天下第一我要申请&gt;\
+&lt;关闭/@exit&gt;\<br><br><br><br>
+
+
+
+
+[@天下第一我要申请]<br>
+#IF<br>
+equal A3 &lt;$USERNAME&gt;<br>
+#act<br>
+MESSAGEBOX 你已经是天下第一法神(男)了，不能再申请！！<br>
+Break<br><br>
+
+#IF<br>
+equal A4 &lt;$USERNAME&gt;<br>
+#act<br>
+MESSAGEBOX 你已经是天下第一道尊(男)了，不能再申请！！<br>
+Break<br><br>
+
+#IF<br>
+equal A14 &lt;$USERNAME&gt;<br>
+#act<br>
+MESSAGEBOX 你已经是天下第一战圣(女)了，不能再申请！！<br>
+Break<br><br>
+
+#IF<br>
+equal A15 &lt;$USERNAME&gt;<br>
+#act<br>
+MESSAGEBOX 你已经是天下第一法神(女)了，不能再申请！！<br>
+Break<br><br>
+
+#IF<br>
+equal A16 &lt;$USERNAME&gt;<br>
+#act<br>
+MESSAGEBOX 你已经是天下第一道尊(女)了，不能再申请！！<br>
+Break<br><br>
+
+#IF<br>
+CHECKJOB Warrior<br>
+GENDER MAN<br>
+#ACT<br>
+Goto @申请检测<br>
+#ELSEACT<br>
+MESSAGEBOX 失败，只有男战士才能申请！<br>
+Break<br><br>
+
+
+[@申请检测]<br>
+#IF<br>
+NOT LARGE G8 &lt;$MAXDC> <br>
+#ACT<br>
+Goto @天下第一申请成功<br>
+Break<br><br>
+
+#IF<br>
+NOT LARGE G8 &lt;$MAXDC> <br>
+CHECKLEVELEX > &lt;$STR(G7)&gt;<br>
+#ACT<br>
+Goto @天下第一申请成功<br>
+#ELSEACT<br>
+MESSAGEBOX 申请失败，你的攻击力还没有超过他！<br>
+Break<br><br><br>
+
+[@天下第一申请成功]<br>
+#IF<br>
+#SAY<br>
+　恭喜你，申请成功！你现在可以对雕像\<br>
+进行维护、管理，以及设定造形。\ \<br>
+需要重新申请。\ \<br>
+&lt;关闭/@exit&gt;\<br>
+#ACT<br>
+MOV A2 &lt;$USERNAME&gt;<br>
+MOV G7 &lt;$LEVEL><br>
+MOV G8 &lt;$MAXDC><br>
+SetNpcImage 40 <br>
+SENDMSG 0 【公告】：[&lt;$USERNAME&gt;]成功申请了天下第一战圣(男)，申请时等级(&lt;$STR(G7)&gt;)，攻击力(&lt;$STR(G8)&gt;)。天下第一拥有上线1.2倍攻击特权！<br>
+POWERRATE 120 9999<br>
+Break<br><br><br><br>
+
+
+
+[@天下第一更换形像]<br>
+　雕像的形象是根据人物当前的信息实时\<br>
+显示的。雕像的衣服、武器和发型是根据\<br>
+你当前的装备情况来显示。\ \<br>
+　此外，你还可以自由把雕像设定为三种\<br>
+攻击姿势。请打造雕像吧：\ \<br>
+&lt;攻击造形一/@攻击造形一&gt;\<br>
+&lt;攻击造形二/@攻击造形二&gt;\<br>
+&lt;攻击造形三/@攻击造形三&gt;\<br>
+&lt;站立造形/@站立造形&gt;\<br>
+&lt;走路造形/@走路造形&gt;\<br>
+&lt;跑步造形/@跑步造形&gt;\<br>
+&lt;关闭/@exit&gt;\<br><br><br><br>
+
+[@攻击造形一]<br>
+#IF<br>
+EQUAL A2 &lt;$USERNAME&gt;<br>
+#ACT<br>
+SetNpcImage 240<br>
+MESSAGEBOX 恭喜，雕像打造成功！<br>
+#elsesay<br>
+[失败]\ \<br>
+这座雕像不是您的哦！\<br>
+Break<br><br><br>
+
+
+[@攻击造形二]<br>
+#IF<br>
+EQUAL A2 &lt;$USERNAME&gt;<br>
+#ACT<br>
+SetNpcImage 436<br>
+MESSAGEBOX 恭喜，雕像打造成功！<br>
+#elsesay<br>
+[失败]\ \<br>
+这座雕像不是您的哦！\<br>
+Break<br><br><br>
+
+
+[@攻击造形三]<br>
+#IF<br>
+EQUAL A2 &lt;$USERNAME&gt;<br>
+#ACT<br>
+SetNpcImage 514<br>
+MESSAGEBOX 恭喜，雕像打造成功！<br>
+#elsesay<br>
+[失败]\ \<br>
+这座雕像不是您的哦！\<br>
+Break<br><br><br>
+
+[@站立造形]<br>
+#IF<br>
+EQUAL A2 &lt;$USERNAME&gt;<br>
+#ACT<br>
+SetNpcImage 40 1 1<br>
+MESSAGEBOX 恭喜，雕像打造成功！<br>
+#elsesay<br>
+[失败]\ \<br>
+这座雕像不是您的哦！\<br>
+Break<br><br><br>
+
+[@走路造形]<br>
+#IF<br>
+EQUAL A2 &lt;$USERNAME&gt;<br>
+#ACT<br>
+SetNpcImage 107 1 0<br>
+MESSAGEBOX 恭喜，雕像打造成功！<br>
+#elsesay<br>
+[失败]\ \<br>
+这座雕像不是您的哦！\<br>
+Break<br><br><br>
+
+[@跑步造形]<br>
+#IF<br>
+EQUAL A2 &lt;$USERNAME&gt;<br>
+#ACT<br>
+SetNpcImage 173<br>
+MESSAGEBOX 恭喜，雕像打造成功！<br>
+#elsesay<br>
+[失败]\ \<br>
+这座雕像不是您的哦！\<br>
+Break<br><br><br>
+}
+<br><br><br><br><br>
+
+
+======================================<b><font color="#FF0000">英雄天下第一男战士简单示例</b></font>===========================================================================<br><br>
+<font color="#0000FF"><b>命令如果说明书没有独立的，那么一般均是人物命令加H. ，脚本变量没独立的话，一般也是人物变量加H.</b></font><br><br><br><br>
+
+[@main]<br>
+#IF<br>
+EQUAL A2 &lt;$HERONAME&gt; <br>
+#SAY<br>
+　请问你需要进行什么操作？\ \<br>
+你申请时的信息\<br>
+　申请人物名称：&lt;$STR(A2)&gt;\<br>
+　申请人物等级：&lt;$STR(G7)&gt;\<br>
+　申请人物攻击：&lt;$STR(G8)&gt;\<br>
+　保持纪录时间：&lt;$STR(G11)&gt;\<br>
+　上次维护时间：&lt;$STR(G9)&gt;\ \<br>
+&lt;更换形像/@天下第一更换形像&gt;\<br>
+&lt;关闭/@exit&gt;\<br>
+#ELSESAY<br>
+　想为自己树立一尊雕像吗？从此扬名天\<br>
+下！现在机会来了，赶快申请吧！\<br>
+　申请成功后，可以自由设定雕像的样子\<br>
+　--------------------------------\<br>
+　申请人物名称：&lt;$STR(A2)&gt;\<br>
+　申请人物等级：&lt;$STR(G7)&gt;\<br>
+　申请人物攻击：&lt;$STR(G8)&gt;\<br>
+　--------------------------------\ \<br>
+&lt;我要申请天下第一战圣（男）/@天下第一我要申请&gt;\ &lt;关闭/@exit&gt;\<br><br><br>
+
+
+
+[@天下第一我要申请]<br>
+#IF<br>
+equal A3 &lt;$HERONAME&gt; <br>
+#act<br>
+MESSAGEBOX 你已经是天下第一法神(男)了，不能再申请！！<br>
+Break<br><br>
+
+#IF<br>
+equal A4 &lt;$HERONAME&gt; <br>
+#act<br>
+MESSAGEBOX 你已经是天下第一道尊(男)了，不能再申请！！<br>
+Break<br><br>
+
+#IF<br>
+equal A14 &lt;$HERONAME&gt; <br>
+#act<br>
+MESSAGEBOX 你已经是天下第一战圣(女)了，不能再申请！！<br>
+Break<br><br>
+
+#IF<br>
+equal A15 &lt;$HERONAME&gt; <br>
+#act<br>
+MESSAGEBOX 你已经是天下第一法神(女)了，不能再申请！！<br>
+Break<br><br>
+
+#IF<br>
+equal A16 &lt;$HERONAME&gt; <br>
+#act<br>
+MESSAGEBOX 你已经是天下第一道尊(女)了，不能再申请！！<br>
+Break<br><br>
+
+#IF<br>
+CheckHeroOnline<br>
+CheckHeroJob  Warrior<br>
+H.GENDER MAN<br>
+#ACT<br>
+Goto @申请检测<br>
+#ELSEACT<br>
+MESSAGEBOX 失败，只有男战士才能申请！<br>
+Break<br><br>
+
+[@申请检测]<br>
+#IF<br>
+NOT LARGE G8 &lt;$H.MAXDC&gt; <br>
+#ACT<br>
+Goto @天下第一申请成功<br>
+Break<br><br>
+
+#IF<br>
+NOT LARGE G8 &lt;$H.MAXDC&gt; <br>
+H.CHECKLEVELEX &gt; &lt;$STR(G7)&gt;<br>
+#ACT<br>
+Goto @天下第一申请成功<br>
+#ELSEACT<br>
+MESSAGEBOX 申请失败，你的攻击力还没有超过他！<br>
+Break<br><br>
+
+
+[@天下第一申请成功]<br>
+#IF<br>
+#SAY<br>
+　恭喜你，申请成功！你现在可以对雕像\<br>
+进行维护、管理，以及设定造形。\ \<br>
+需要重新申请。\ \<br>
+&lt;关闭/@exit&gt;\<br>
+#ACT<br>
+MOV A2 &lt;$HERONAME&gt; <br>
+MOV G7 &lt;$H.LEVEL&gt;<br>
+MOV G8 &lt;$H.MAXDC&gt;<br>
+H.SetNpcImage 40 <br>
+SENDMSG 0 【公告】：[&lt;$HERONAME&gt; ]成功申请了天下第一战圣(男)，申请时等级(&lt;$STR(G7)&gt;)，攻击力(&lt;$STR(G8)&gt;)。天下第一拥有上线1.2倍攻击特权！<br>
+H.POWERRATE 120 9999<br>
+Break<br><br>
+
+
+
+[@天下第一更换形像]<br>
+　雕像的形象是根据人物当前的信息实时\<br>
+显示的。雕像的衣服、武器和发型是根据\<br>
+你当前的装备情况来显示。\ \<br>
+　此外，你还可以自由把雕像设定为三种\<br>
+攻击姿势。请打造雕像吧：\ \<br>
+&lt;攻击造形一/@攻击造形一&gt;\<br>
+&lt;攻击造形二/@攻击造形二&gt;\<br>
+&lt;攻击造形三/@攻击造形三&gt;\<br>
+&lt;站立造形/@站立造形&gt;\<br>
+&lt;走路造形/@走路造形&gt;\<br>
+&lt;跑步造形/@跑步造形&gt;\<br>
+&lt;关闭/@exit&gt;\<br><br>
+
+
+
+[@攻击造形一]<br>
+#IF<br>
+EQUAL A2 &lt;$HERONAME&gt;<br>
+#ACT<br>
+H.SetNpcImage 240<br>
+MESSAGEBOX 恭喜，雕像打造成功！<br>
+#elsesay<br>
+[失败]\ \<br>
+这座雕像不是您的哦！\<br>
+Break<br><br>
+
+
+[@攻击造形二]<br>
+#IF<br>
+EQUAL A2 &lt;$HERONAME&gt; <br>
+#ACT<br>
+H.SetNpcImage 436<br>
+MESSAGEBOX 恭喜，雕像打造成功！<br>
+#elsesay<br>
+[失败]\ \<br>
+这座雕像不是您的哦！\<br>
+Break<br><br>
+
+
+[@攻击造形三]<br>
+#IF<br>
+EQUAL A2 &lt;$HERONAME&gt; <br>
+#ACT<br>
+H.SetNpcImage 514<br>
+MESSAGEBOX 恭喜，雕像打造成功！<br>
+#elsesay<br>
+[失败]\ \<br>
+这座雕像不是您的哦！\<br>
+Break<br><br>
+
+
+[@站立造形]<br>
+#IF<br>
+EQUAL A2 &lt;$HERONAME&gt; <br>
+#ACT<br>
+H.SetNpcImage 40 1 1<br>
+MESSAGEBOX 恭喜，雕像打造成功！<br>
+#elsesay<br>
+[失败]\ \<br>
+这座雕像不是您的哦！\<br>
+Break<br><br>
+
+
+[@走路造形]<br>
+#IF<br>
+EQUAL A2 &lt;$HERONAME&gt; <br>
+#ACT<br>
+H.SetNpcImage 107 1 0<br>
+MESSAGEBOX 恭喜，雕像打造成功！<br>
+#elsesay<br>
+[失败]\ \<br>
+这座雕像不是您的哦！\<br>
+Break<br><br>
+
+
+[@跑步造形]<br>
+#IF<br>
+EQUAL A2 &lt;$HERONAME&gt; <br>
+#ACT<br>
+H.SetNpcImage 173<br>
+MESSAGEBOX 恭喜，雕像打造成功！<br>
+#elsesay<br>
+[失败]\ \<br>
+这座雕像不是您的哦！\<br>
+Break<br><br><br><br><br>
+
+
+}

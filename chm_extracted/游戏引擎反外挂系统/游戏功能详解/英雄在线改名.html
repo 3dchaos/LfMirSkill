@@ -1,0 +1,58 @@
+<title>英雄在线改名系统</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+<p><strong><font size="5">英雄在线改名系统</font></strong></p>
+<p>-----------------------------------英雄在线改名------------------------------<br />
+ [@Main]<br />
+&lt;我要改英雄名字/@@InputString2(请输入新的名称：)&gt;\<br /><br />
+
+
+[@InputString2]<br />
+#IF<br />
+Equal S2<br />
+#ACT<br />
+SENDMSG 6 请输入一个正确的名称<br />
+Break<br /><br />
+
+#OR<br />
+CheckStringlength S2 > 14<br />
+CheckStringlength S2 < 4<br />
+#ACT<br />
+SENDMSG 6 输入名称长度不正确<br />
+Break<br /><br />
+
+#IF<br />
+#ACT<br />
+CHANGEHERONAME S2<br /><br />
+
+
+-----------------------------------------------------------------------------<br /><br /><br />
+
+QFunction-0.txt脚本相关触发<br /><br />
+
+[@NameLengthFail]<br />
+名字长度必须在4-14个字符之间！\ \<br />
+&lt;关闭/@exit&gt;\<br /><br />
+
+[@ChangeingHeroName]<br />
+正在修改英雄名，请稍后。。。\ \<br />
+&lt;关闭/@exit&gt;\<br /><br />
+
+[@ChangeHeroNameOK]<br />
+你的名字修改成功，旧名称：&lt;$HERONAME&gt; 新名称：&lt;$USERNEWNAME&gt;\ \<br />
+&lt;关闭/@exit&gt;\<br /><br />
+
+[@HeroNameFilter]<br />
+该名字存在非法字符！\ \<br />
+&lt;关闭/@exit&gt;\<br /><br />
+  
+[@HeroNameExists]<br />
+该名字已经被其他玩家占用，请选择其他名字\ \<br />
+&lt;关闭/@exit&gt;\<br /><br />
+
+[@ChangeHeroNameFail]<br />
+改名失败！\ \<br />
+&lt;关闭/@exit&gt;\<br /><br /><br /><br /><br /><br />

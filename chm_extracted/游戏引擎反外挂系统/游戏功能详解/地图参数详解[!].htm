@@ -1,0 +1,299 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<HTML><HEAD><TITLE>地图参数详解[!]</TITLE>
+<META http-equiv=Content-Language content=zh-cn>
+<META http-equiv=Content-Type content="text/html; charset=gb2312">
+<META content="MSHTML 6.00.2900.6148" name=GENERATOR>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</HEAD>
+<BODY>
+<P><strong><font size="5">地图参数详解</font></strong>
+<P> 
+  <font size="2"><span class="STYLE2"><strong>功能：</strong>地图参数详解</span><br>
+  <strong>格式：</strong>无<br>
+  <strong>说明：</strong>无<br>
+  <strong>例：</strong></font>
+<P>
+
+<TABLE width="800" border=1 borderColor=#99ccff>
+<!--DWLayoutTable-->
+<TBODY>
+  <TR>
+    <TD>
+      <P><FONT size=2>地图参数标志</FONT></P></TD>
+    <TD>
+      <P><FONT size=2>说明</FONT></P></TD></TR>
+  <TR>
+    <TD><FONT size=2>CHECKQUEST&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </FONT></TD>
+    <TD><FONT size=2>进入本地图执行任务脚本 格式：CHECKQUEST(Q001) 说明： Q001 
+  代表脚本名。</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NEEDSET_ON&nbsp;</FONT></TD>
+    <TD><FONT size=2>进入本地图需要人物指定标志为打开状态格式：NEEDSET_ON(001) 说明：001 
+    代表人物标志</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NEEDSET_OFF&nbsp;</FONT></TD>
+    <TD><FONT size=2>进入本地图需要人物指定标志为关闭状态格式：NEEDSET_OFF(001) 说明：001 
+    代表人物标志</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>MUSIC&nbsp;</FONT></TD>
+    <TD><FONT size=2>进入入本地图播放音乐 格式：MUSIC(..\Wav\bg.mp3) 或者 
+      MUSIC(.\Wav\sellect-loop2.wav)代表客户端Wav文件下的sellect-loop2.wav文件</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>EXPRATE&nbsp;</FONT></TD>
+    <TD><FONT size=2>进入本地图后杀怪经验倍数 格式：EXPRATE(100) 
+      说明：100代表经验倍数，除以100后为实际倍数。</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>PKWINLEVEL&nbsp;</FONT></TD>
+    <TD><FONT size=2>进入本地图后可以PK升级 格式：PKWINLEVEL(1) 说明：1代表升多少级；</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>PKWINEXP&nbsp;</FONT></TD>
+    <TD><FONT size=2>进入本地图后可以PK得经验 格式：PKWINEXP(1000) 
+  说明：1000代表得多少经验；</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>PKLOSTLEVEL&nbsp;</FONT></TD>
+    <TD><FONT size=2>进入本地图后可以PK死亡掉等级 格式：PKLOSTLEVEL(1) 
+  说明：1代表掉多少等级；</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>PKLOSTEXP&nbsp;</FONT></TD>
+    <TD><FONT size=2>进入本地图后可以PK死亡掉经验 格式：PKLOSTEXPP(1000) 
+    说明：1000代表掉多少经验；</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>DECHP</FONT></TD>
+    <TD><FONT size=2>进入本地图后自动减HP 格式：DECHP(1/10) 说明 1/10 
+      1代表减的间隔(秒)，10代表一次减多少点；</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>INCHP&nbsp;</FONT></TD>
+    <TD><FONT size=2>进入本地图后自动加HP 格式：INCHP(1/10) 说明 1/10 
+      1代表减的间隔(秒)，10代表一次加多少点；</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>DECGAMEGOLD</FONT></TD>
+    <TD><FONT size=2>进入本地图后自动减游戏币 格式：DECGAMEGOLD(1/10) 说明 1/10 
+      1代表减的间隔(秒)，10代表一次减多少点； </FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>INCGAMEGOLD</FONT></TD>
+    <TD><FONT size=2>进入本地图后自动加游戏币 格式：INCGAMEGOLD(1/10) 说明 1/10 
+      1代表加的间隔(秒)，10代表一次加多少点； </FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>INCGAMEPOINT</FONT></TD>
+    <TD><FONT size=2>进入本地图后自动加游戏点 格式：INCGAMEPOINT(1/10) 说明 1/10 
+      1代表加的间隔(秒)，10代表一次加多少点；(用于游戏泡点功能)</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>DECGAMEPOINT</FONT></TD>
+    <TD><FONT size=2>进入本地图后自动减游戏点 格式：DECGAMEPOINT(1/10) 说明 1/10 
+      1代表减的间隔(秒)，10代表一次减多少点；(用于游戏泡点功能)</FONT></TD></TR>
+
+
+  <TR>
+    <TD><FONT size=2>BattlingDisExit</FONT></TD>
+    <TD><FONT size=2>战斗状态禁止退出</FONT></TD></TR>
+  <TR>
+
+  <TR>
+    <TD><FONT size=2>RUNMON</FONT></TD>
+    <TD><FONT size=2>允许穿怪</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>RUNHUMAN</FONT></TD>
+    <TD><FONT size=2>允许穿人</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NORUNMON</FONT></TD>
+    <TD><FONT size=2>禁止穿怪</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NORUNHUMAN</FONT></TD>
+    <TD><FONT size=2>禁止穿人</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NEEDHOLE&nbsp;</FONT></TD>
+    <TD><FONT size=2>进入需要洞</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NORECALL&nbsp;</FONT></TD>
+    <TD><FONT size=2>禁止记忆召唤</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NOGUILDRECALL</FONT></TD>
+    <TD><FONT size=2>禁止行会召唤</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NODEARRECALL&nbsp;</FONT></TD>
+    <TD><FONT size=2>禁止夫妻召唤</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NOMasterRECALL&nbsp;</FONT></TD>
+    <TD><FONT size=2>禁止师徒传送</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NORANDOMMOVE</FONT></TD>
+    <TD><FONT size=2>禁止随机传送;瞬息移动</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NODRUG&nbsp;</FONT></TD>
+    <TD><FONT size=2>禁止使用任何药品</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>MINE&nbsp;</FONT></TD>
+    <TD><FONT size=2>可以挖矿</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NoAutoDropItemToBag</FONT></TD>
+    <TD><FONT size=2>禁止OpenAutoDropItemToBag命令物品自动入包</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NoAutoRangePickItem</FONT></TD>
+    <TD><FONT size=2>禁止OpenAutoPickItem命令范围拾取</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NOPOSITIONMOVE&nbsp;</FONT></TD>
+    <TD><FONT size=2>禁止定座标移动、传送戒指、坐标传送</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NORECONNECT&nbsp;</FONT></TD>
+    <TD><FONT size=2>进游戏时退出本地图&nbsp; 格式:NORECONNECT(3)&nbsp; 说明：3 
+      代表地图号盟重</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>QUIZ</FONT></TD>
+    <TD><FONT size=2>禁止喊话</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>ALLOWUSEMYSHOP</FONT></TD>
+    <TD><FONT size=2>允许摆摊(个人商店允许购买物品的地图加此参数,使用仿herom2指定地图摆摊也需此参数)</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>FIGHT2</FONT></TD>
+    <TD><FONT size=2>杀人不犯法.但是会爆装备.适合用来做一些战争PK的地图</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>FIGHT3(是否掉装备)</FONT></TD>
+    <TD><FONT size=2>行会战地图进入该地图名字颜色会变色，杀人不加PK。格式:FIGHT3(0) 死亡不掉装备 格式:FIGHT3(1) 死亡掉装备 </FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NOTALLOWUSEITEMS</FONT></TD>
+    <TD><FONT size=2>禁止使用物品 说明：NOALLOWUSEITEMS(回城卷|强效金创药)&nbsp; </FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NOTALLOWUSEMAGIC</FONT></TD>
+    <TD><FONT size=2>禁止使用技能 说明：NOTALLOWUSEMAGIC(火墙|彻地钉)</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NODROPITEM</FONT></TD>
+    <TD><FONT size=2>禁止死亡爆装备、物品(怪除外)</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NOHEROPROTECT</FONT></TD>
+    <TD><FONT size=2>禁止英雄守护</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>THUNDER</FONT></TD>
+    <TD><FONT size=2>例:THUNDER(10)&nbsp;&nbsp; 此地图有闪电效果,击中减hp为10</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>LAVA</FONT></TD>
+    <TD><FONT size=2>例:LAVA(10)&nbsp;&nbsp; 此地图地上冒岩浆,击中减HP为10 </FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>CustomEffect</FONT></TD>
+    <TD><FONT size=2>例:<a href="/游戏引擎反外挂系统/游戏功能详解/掉血的地图参数.htm">CustomEffect(参数)设置地图伤害和特效</a>等</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>FIGHT4</FONT></TD>
+    <TD><FONT size=2>挑战地图</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>Safe</FONT></TD>
+    <TD><FONT size=2>此地图为安全地图，不可PK类似安全区</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>FIGHT</FONT></TD>
+    <TD><FONT size=2>此参数地图不犯法，不爆装备</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>FLAME</FONT></TD>
+    <TD><FONT size=2>FLAME(45:82:50|43:84:50)参数说明:x坐标：y坐标：伤害 可以为多坐标以|分隔 </FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NOHORSE</FONT></TD>
+    <TD><FONT size=2>当前地图禁止骑马</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NoAutoOnline</FONT></TD>
+    <TD><FONT size=2>当前地图禁止挂机</FONT></TD></TR>
+  <TR>
+    <TD><FONT face=宋体 size=2>NoCallPet</FONT></TD>
+    <TD><FONT face=新宋体 size=2>禁止召唤宠物，已召唤宠物将自动收回</FONT></TD></TR>
+  <TR>
+    <TD><FONT face=宋体 size=2>MISSION</FONT></TD>
+    <TD><FONT face=新宋体 size=2>不允许使用任何物品和技能，并且宝宝在该地图会自动消失，不能攻击</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NOMANNOMON</FONT></TD>
+    <TD><FONT size=2>智能刷怪，当地图无人时清理怪物，有人时重新刷怪，此功能需在M2怪物设置开启</FONT></TD></TR>
+  <TR>
+    <TD><FONT face=宋体 size=2>NOCALLHERO</FONT></TD>
+    <TD><FONT face=新宋体 size=2>禁止召唤英雄，已召唤英雄将自动消失</FONT></TD></TR>
+  <TR>
+    <TD><FONT face=宋体 size=2>DisableCallHero</FONT></TD>
+    <TD><FONT face=新宋体 size=2>禁止召唤英雄，已召唤英雄不受影响</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NIGHT</FONT></TD>
+    <TD><FONT size=2>该参数与M2禁止免蜡无关联，凡是地图参数包含NIGHT那么该地图就开启天气效果（不受禁止免蜡控制）</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>NEEDLEVELTIME</FONT></TD>
+    <TD><FONT size=2>没到指定等级时不让进入，发送string.ini里的NeedLevelToXYErrorMsg提示可以自行修改</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>DECEXPRATETIME(值)</FONT></TD>
+    <TD><FONT size=2>每秒减双倍经验时间,如值小于1时，则默认为1</FONT></TD></TR>
+  <TR>
+    <TD height=2><FONT size=2>NGEXPRATE(数值)</FONT></TD>
+    <TD><FONT size=2>内功经验倍数(100代表经验倍数，除以100后为实际倍数)</FONT></TD></TR>
+  <TR>
+    <TD height=2><FONT size=2>PULSEXPRATE(数值)</FONT></TD>
+    <TD><FONT size=2>经络经验倍数(100代表经验倍数，除以100后为实际倍数)</FONT></TD>
+  <TR>
+    <TD height=2><FONT size=2>DARK</FONT></TD>
+    <TD><FONT size=2>黑暗效果 如果同时存在 DAY以DAY参数效果为准</FONT></TD></TR>
+  <TR>
+    <TD height=2><FONT size=2>DAY</FONT></TD>
+    <TD><FONT size=2>白天效果 如果同时存在DARK以DAY参数效果为准</FONT></TD></TR>
+    <TD height=2>
+      <DIV><FONT size=2>SAYLEVEL(等级)</FONT></DIV></TD><TD>
+      <DIV><FONT size=2>可限制当前地图人物说话等级.</FONT></TD></TR>  
+  <TR>
+    <TD height=2><FONT size=2>DELDROPITEM</FONT></TD>
+    <TD><FONT size=2>人物(英雄)死亡后掉落的身上物品立即消失(不掉落在地图中).</FONT></TD></TR>  
+  <TR>
+    <TD height=2><FONT size=2>REVIVAL(X/N)</FONT></TD>
+    <TD><FONT size=2>当前地图人物可复活的次数,X表示复活次数(X设置0为禁止复活),N表示人物在当前地图已经复活次数的自动清零间隔(最小30秒).具体表示:设定多少秒内允许复活次数,达到指定时间后重新计数.</FONT></TD></TR>
+  <TR>
+    <TD height=2><FONT size=2>NODROPUSEITEMS</FONT></TD>
+    <TD><FONT size=2>当前地图人物死亡不掉落身上的物品</FONT></TD></TR>
+  <TR>
+    <TD height=2><FONT size=2>NOSAFEPOSITIONMOVE</FONT></TD>
+    <TD><FONT size=2>禁止在当前地图安全区中使用传送戒指</FONT></TD></TR>
+	<TR>
+    <TD height=2><FONT size=2>NOALLOWUSEITEMS</FONT></TD>
+    <TD><FONT size=2>不允许使用物品NOALLOWUSEITEMS(回城卷,随机传送卷)</FONT></TD></TR>
+
+	<TR>
+    <TD height=2><FONT size=2>NOSWITCHATTACKMODE</FONT></TD>
+    <TD><FONT size=2>地图中禁止切换攻击模式</FONT></TD></TR>
+	<TR>
+	<TR>
+    <TD height=2><FONT size=2>NOHEROPROTECT</FONT></TD>
+    <TD><FONT size=2>禁止英雄守护</FONT></TD></TR>
+	<TR>
+	<TR>
+    <TD height=2><FONT size=2>KILLMON</FONT></TD>
+    <TD><FONT size=2>杀死怪物时触发,对应地图参数中需要加入ONKILLMON才可生效!</FONT></TD></TR>
+	<TR>
+    <TD height=2><FONT size=2>NOTSTONE</FONT></TD>
+    <TD><FONT size=2>当前地图魔血石、气血石、幻魔石无效!</FONT></TD></TR>
+	<TR>
+    <TD height=2><FONT size=2>DIETIME(10)</FONT></TD>
+    <TD><FONT size=2>当前地图人物死亡多长时间后自动掉线,DIETIME(时间秒),加入此项后,M2上的时间设置对当前地图无效!</FONT></TD></TR>
+  <TR></TR>
+    <TD height=2><FONT size=2>NOCHALLENGE</FONT></TD>
+    <TD><FONT size=2>当前地图禁止挑战</FONT></TD></TR>
+  <TR></TR>
+    <TD height=2><FONT size=2>NOTHROWITEM</FONT></TD>
+    <TD><FONT size=2>禁止丢物品(连金币都不可以)!</FONT></TD></TR>
+  <TR></TR>
+    <TD height=2><FONT size=2>SLAVENOTATTACKHUMAN</FONT></TD>
+    <TD><FONT size=2>宝宝不攻击人物</FONT></TD></TR>
+  <TR></TR>
+    <TD height=2><FONT size=2>SLAVENOTATTACKHERO</FONT></TD>
+    <TD><FONT size=2>宝宝不攻击英雄</FONT></TD></TR>
+  <TR></TR>
+  <TR>
+    <TD><FONT size=2>FB(40,祖玛副本,0,1)</FONT></TD>
+    <TD><FONT size=2>FB(40,祖玛副本,0,1)创建40个祖玛副本地图 第3个参数：0:限制队友必须有三职业; 1:不限制职业，队友都可进; 2:只允许自己进入; 3:允许行会进入 第4个参数：副本创建1分钟后(未收回时)，允许延时进入副本时间(分)系统默认时间为1分钟.此参数为在1分钟时间基础上延长多少分,第5个参数默认留空，表示当角色退出副本地图后删除副本时间，留空默认10秒</FONT></TD></TR>
+  <TR></TR>
+    <TD height=2><FONT size=2>NoDeal</FONT></TD>
+    <TD><FONT size=2>禁止交易</FONT></TD></TR>
+  <TR></TR>
+    <TD height=2><FONT size=2>NoShop</FONT></TD>
+    <TD><FONT size=2>禁止使用商铺</FONT></TD></TR>
+  <TR></TR>
+    <TD height=2><FONT size=2>DROPITEMADDUSERBAG(破魂|降魔)</FONT></TD>
+    <TD><FONT size=2>怪物死亡掉落物品直接进入玩家背包,多件物品使用 | 隔开</FONT></TD></TR>
+  <TR></TR>
+  <TD height=2><FONT size=2>NOSWITCHATTACKMODE(1)</FONT></TD>
+    <TD><FONT size=2>锁定攻击模式1-8（0或无括号表示不锁定）</FONT></TD></TR>
+  <TR></TR>
+  <TD height=2><FONT size=2>SHOWNATIONCOLOR(1)</FONT></TD>
+    <TD><FONT size=2>强制显示国家颜色（游戏参数——》状态控制 中设置名字颜色）SHOWNATIONCOLOR(1)不含怪物,去掉(1)则包含怪物</FONT></TD></TR>
+  <TR></TR>
+</BODY></HTML>

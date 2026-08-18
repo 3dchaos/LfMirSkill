@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>查看人物/英雄装备</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font size="5">查看在线人物/英雄装备</font></strong> </p>
+<font size="3"><span class="STYLE2"><strong>功能：</strong>查看人物/英雄装备</span><br />
+<strong>说明：</strong>一共两条命令,其中无论目标人物是否在线均可查看,按需使用<br /><br /><br /><br />
+
+
+
+功能：查看在线人物/英雄装备</br>
+格式：QueryUserState  用户名/英雄名</br>
+说明：当用户/英雄不在线时，会触发 当前Npc 中的@QueryUserStateFail</br></br>
+
+
+[@查看他人装备]</br>
+#ACT</br>
+QueryUserState dddd</br></br>
+
+;QF触发</br>
+[@QueryUserStateFail]</br>
+#ACT</br>
+sendmsg 6  用户不存在或不在线</br></br>
+
+================================================================</br></br>
+
+
+功能：查看人物/英雄装备（无论是否在线均可查看）</br>
+格式：QueryUserStateEx  用户名/英雄名</br>
+说明：当用户不存在时，会触发 当前Npc 中的@QueryUserStateExFail</br></br>
+
+
+[@查看他人装备]</br>
+#ACT</br>
+QueryUserStateEx dddd</br></br>
+
+;QF触发</br>
+[@QueryUserStateExFail]</br>
+#ACT</br>
+sendmsg 6  用户不存在</br>
+
+
+
+
+
+
+
+
+
+<br /><br /><br />
+
+
+
+
+</body>
+
+</html>

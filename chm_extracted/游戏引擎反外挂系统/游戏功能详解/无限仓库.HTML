@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=gb2312">
+<META name="GENERATOR" content="QuickCHM">
+<TITLE>无限仓库</TITLE>
+</HEAD>
+<BODY><FONT size=2>
+(@bigstorage @biggetback @getnextpage @getPreviouspage)<br>
+%100<br>
+[@main]<br>
+您好。我是仓库保管员。这里存放的物品不受限制。\<br>
+无论你有多少物品，我这里都可以存放进去。\<br>&lt;存放物品</FONT><A><FONT 
+size=2>/@bigstorage&gt;\</FONT></A>
+<br><FONT 
+size=2>
+&lt;取回物品/@biggetback&gt;\<br>&lt;离开/@exit&gt; 
+</FONT>
+
+<p><FONT size=2>[@bigstorage]<br>
+  需要保管什么东西?\ \<br>&lt;返回/@main&gt;</FONT>
+</p>
+<p><FONT size=2>[@biggetback]<br>
+  请看目录决定找什么东西.\ \<br>
+无限仓库每页刷新50件物品出来，查看所有物品点击下一页\ \<br>
+&lt;上一页/@getPreviouspage&gt; &lt;下一页/@getnextpage&gt; \<br>&lt;返回/@main&gt;</FONT>
+</p>
+<p><FONT size=2>[@getPreviouspage]<br>
+  #ACT<br>
+  goto @biggetback</FONT>
+   </p>
+<p><FONT size=2>[@getnextpage]<br>
+  #ACT<br>
+  goto @biggetback</FONT>
+   </p>
+<P><FONT size=2><BR></FONT></P>
+
+<B>注：无限仓库可存数量位于M2-功能设置- 个人商店 中设置无限仓库可存放数量！</B></P></P>
+无限仓库保存在Mir200\M2Data\M2Data.DB内<br><br>
+
+说明：无限仓库默认可存放数量在M2-功能设置- 个人商店 中设置，如果需要进行额外扩展可以使用以下命令进行增加无限仓库可存放数量<br><br>
+
+增加无限仓库扩展命令<br>
+说明: 调整人物无限制仓库存放物品的数量.<br>
+格式: SetBigStorageCount 操作符(+ - =) 数量(0-65535)<br><br><br>
+
+检测无限仓库可存放数量脚本：<br>
+将无限仓库可存放数量写入变量然后进行检测！<br>
+#ACT<br>
+GetBigStorageCount N1<br>
+SendMsg 5  扩展无限仓库数据为&lt;$STR(N1)&gt;<br><br><br>
+
+
+</BODY>
+</HTML>

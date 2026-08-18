@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>调整宝宝等级</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<BODY>
+<P><FONT face=Arial size=2><FONT face=Fixedsys>功能: 直接调整人物宝宝的等级<BR>格式: 
+ChangeSlaveLevel 名字(*为所有宝宝)  操作符(+ = -) 等级(1-7) 参数4（0：调整单个宝宝；1：调整所有宝宝）<BR><BR><BR>例子: 
+把虎卫的等级调整到7级.<BR>#IF<BR>#ACT<BR>ChangeSlaveLevel 虎卫 = 
+7<BR><BR>
+====================以下是调整人物在线所有宝宝，比如有5个虎卫全部调整到指定等级====================<BR>
+#IF<BR>#ACT<BR>ChangeSlaveLevel 虎卫 = 
+7 1<BR><BR><BR><BR>
+
+
+
+#IF<BR>
+#ACT<BR>
+ChangeSlaveLevel * = 7 <BR>
+sendmsg 6 所有宝宝调整到7级 <BR>
+<BR><BR><BR><BR>
+
+</FONT></FONT></P></BODY>
+</html>

@@ -1,0 +1,31 @@
+
+<br><b>功能：</b></br>
+    检查人物是否移动.可以制作任务或者封闭网站挂机人物 </p>
+
+<br><b>格式：</b></br>
+    CHECKSTATIONTIME  控制符(&lt;、&gt;、 =)  分钟 </br>
+
+;==========================================</br>
+<br><b>示例一：</b></br>
+#IF</br>
+CHECKSTATIONTIME &gt; 50</br>
+#SAY</br>
+你已经有50分钟没有移动了，系统将你踢下线！</br>
+#ACT</br>
+KICK</p>
+
+
+<br><b>示例二</b></br>
+#IF</br>
+CHECKSTATIONTIME &gt; 50</br>
+#SAY</br>
+你已经有50分钟没有移动了，系统将在5秒后将你小退游戏！</br>
+#ACT</br>
+DelayCall 5000 @Kick</p>
+
+
+
+[@Kick]</br>
+#IF</br>
+#ACT</br>
+Kick 1</br>

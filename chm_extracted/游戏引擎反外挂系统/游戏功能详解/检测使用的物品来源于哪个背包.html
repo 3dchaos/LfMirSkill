@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>检测使用的物品来源于哪个背包</title>
+</head>
+
+<body>
+
+功能说明：检测使用的物品来源于哪个背包（仅限双击使用能触发QF的物品，比如31类）</br></br>
+
+变量：&lt;$UseItemFrom&gt;，值为0对应人物背包，1:英雄背包; 2：宠物背包</br></br>
+
+
+</br></br>
+-----------------------------------------------------------------------------</br></br>
+[@StdModeFunc10]</br>
+#if</br>
+equal &lt;$UseItemFrom&gt; 0</br>
+#act</br>
+humanhp + 100</br>
+sendmsg 6 你使用【&lt;$UseItemFrom&gt;】增加了100血</br>
+break</br>
+#if</br>
+equal &lt;$UseItemFrom&gt; 1</br>
+#act</br>
+H.humanhp + 100</br>
+sendmsg 6 你使用【&lt;$UseItemFrom&gt;】英雄增加了100血</br>
+break </br>
+#if</br>
+equal &lt;$UseItemFrom&gt; 2</br>
+#act</br>
+PET.humanhp + 100</br>
+sendmsg 6 你使用【&lt;$UseItemFrom&gt;】宠物增加了100血</br>
+break</br></br></br></br></br>
+
+
+
+</p>
+</body>
+</html>

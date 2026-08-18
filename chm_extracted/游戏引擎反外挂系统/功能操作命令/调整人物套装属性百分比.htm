@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>调整人物属性百分比</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font size="5">调整人物套装百分比属性</font></strong> </p>
+<font size="3"><span class="STYLE2"><strong>功能：</strong>调整人物套装属性百分比</span><br />
+<strong>脚本命令：</strong>ChangeHumGroupItemRate 调整人物套装百分比属性，与套装百分比同时叠加计算 <br />
+<span class="STYLE1">格式:</span> ChangeHumGroupItemRate 属性索引(0-25) 操作符(+ = -) 值<br><br>
+
+说明：属性索引0-25分别对应： <br>
+0：调整属性有效时间（请务必在最后调整，##如果要设置0，也必须调用，调用设置时间后，才会重新计算##； 0:表示在线一直有效）<br>
+1：MaxHP百分比<br>
+2：MaxMP百分比<br>
+3：防御下限百分比<br>
+4：防御上限百分比<br>
+5：魔防下限百分比<br>
+6：魔防上限百分比<br>
+7：攻击下限百分比<br>
+8：攻击上限百分比<br>
+9：魔法下限百分比<br>
+10：魔法上限百分比<br>
+11：道术下限百分比<br>
+12：道术上限百分比<br>
+13：准确百分比<br>
+14：敏捷百分比<br>
+15：魔法躲避百分比<br>
+16：毒躲避百分比<br>
+17：毒恢复百分比<br>
+17：HP恢复百分比<br>
+19：MP恢复百分比 <br>
+20：刺术下限百分比<br>
+21：刺术上限百分比<br>
+22：箭术下限百分比<br>
+23：箭术上限百分比<br>
+24：武力下限百分比<br>
+25：武力上限百分比<br><br><br><br>
+
+
+<p><font face="楷体" color="#ff0000" size="4"><strong>*脚本命令</strong></font></p>
+脚本命令：ClearHumGroupItemRates 清除调整人物的套装百分比（调用后，不会重新计算套装属性，除非后面有 ChangeHumGroupItemRate调整有效时间)<br>
+格式：ClearHumGroupItemRates<br><br>
+
+----------------------------------------------<br><br>
+脚本命令：GetHumGroupItemRate 获取人物套装百分比和ChangeHumGroupItemRate增加的百分比<br>
+格式: GetHumGroupItemRate 模式(0=命令加的 1= 套装加的) 属性索引(0-25) 返回值到变量<br><br>
+
+----------------------------------------------<br><br>
+[@清套装百分比属性]<br>
+#ACT<br>
+ClearHumGroupItemRates<br>
+;清完属性后，记得指定时间来重算属性<br>
+ChangeHumGroupItemRate 0 = 0<br><br>
+
+[@增加套装百分比属性]<br>
+#ACT<br>
+;可以先清一次<br>
+;ClearHumGroupItemRates<br>
+
+ChangeHumGroupItemRate 7 + 10<br>
+ChangeHumGroupItemRate 8 + 20<br>
+
+;调整完后，记得指定时间来重算属性<br>
+ChangeHumGroupItemRate 0 = 5<br>
+
+GetHumGroupItemRate 0 7 N7<br>
+GetHumGroupItemRate 0 8 N8<br>
+
+sendmsg 6 套装的攻击下限增加10%，达到&lt;$STR(N7)&gt;%<br>
+sendmsg 6 套装的攻击上限增加20%，达到&lt;$STR(N8)&gt;%<br>
+
+GetHumGroupItemRate 0 0 N0<br>
+sendmsg 6 属性有效时间为&lt;$STR(N0)&gt;秒<br>
+
+
+
+
+<br /><br /><br /><br />
+
+
+</body>
+
+</html>

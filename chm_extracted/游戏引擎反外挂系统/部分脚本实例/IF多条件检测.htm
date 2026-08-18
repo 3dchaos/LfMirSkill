@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>IF多条件检测[!]</TITLE>
+</HEAD>
+<BODY>
+</br></br>
+<P><FONT face=Arial size=3><FONT face=Fixedsys>功能: #IF 多条件检测，#if(3)  // 如果众多条件中只需要满足3个条件，即可执行#act , #say.....等</FONT> 
+</FONT></P>
+
+</br></br></br>
+
+
+简易示例：</br>
+;在其中一个地图均可通过检测</br>
+#if(1)</br>
+ISONMAP 0</br>
+ISONMAP 3</br>
+ISONMAP 5</br>
+#say</br>
+你再规定的地图内</br></br></br></br>
+
+
+;满足其中2个条件即可通过检测</br>
+#if(2)</br>
+check [100] 1</br>
+CheckLevel 51</br>
+CHECKGAMEGOLD &gt; 19</br>
+#act</br>
+SENDMSG 满足条件</br></br></br></br></br></br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+</P>
+</BODY>
+</HTML>

@@ -1,0 +1,74 @@
+<title>人物身上物品掉落触发</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+<p><strong><font size="5">人物身上物品掉落前触发</font></strong></p>
+<p>-----------------------------------人物身上物品(不包含背包)掉落前触发---------------------------<br /><br /><br /><br /><br />
+
+QF触发字段：[@HumDropItem]<br />
+功能说明：人物身上掉落触发（人物）-------列表信息二 物品规则 仅对勾选启用的物品生效<br /><br />
+
+NPC命令，中止物品丢弃/掉落 StopItemDrop<br /><br /><br />
+
+
+
+以下为QF触发示范：<br />
+
+[@HumDropItem]<br />
+#act<br />
+
+; 扩展参数3，是否只取DB中的名称(0:若改名以改名为准； 1：只取DB中的名称）<br />
+; 将名字放到S1中<br />
+GetUserItemName -1 1 1<br />
+
+;也可以用 Mov S1 &lt;$PickDropItemName&gt;<br />
+
+#if<br />
+CompareText S1 偃月<br />
+#act<br />
+ChangeItemNameColor -1 253<br /><br /><br />
+
+
+
+;---------------------------------------例子二<br />
+
+[@HumDropItem]<br />
+#ACT
+<br />
+SENDMSG 5 【&lt;$CurUserName&gt;】掉落物品【&lt;$CurItemName&gt;】，位置：&lt;$maptitle&gt; &lt;$ScatterItemX&gt;:&lt;$ScatterItemY&gt;<br /><br /><br /><br />
+
+;---------------------------------------例子三<br />
+
+;//********************************
+;//	物品掉落触发（人物）
+;//********************************
+[@HumDropItem]
+#IF<br />
+#ACT <br />
+SENDMSG 0 【&lt;$CurUserName&gt;】掉落物品【&lt;$CurItemName&gt;】，位置：&lt;$maptitle&gt; &lt;$ScatterItemX&gt;:&lt;$ScatterItemY&gt;<br />
+ChangeItemNameColor -1 253<br />
+<br /><br />
+
+
+<font face="楷体" color="#0000ff" size="4"><strong>;英雄身上掉落物品触发[@HeroDropItem]  </strong></font> -------列表信息二 物品规则 仅对勾选启用的物品生效<br /><br />
+[@HeroDropItem]<br />
+#ACT <br />
+SENDMSG 0 【&lt;$CurUserName&gt;】掉落物品【&lt;$CurItemName&gt;】物品位置&lt;$H.CurItemPos&gt;物品序列号:&lt;$CurItemMakeIndex&gt;，位置：&lt;$H.maptitle&gt; &lt;$H.ScatterItemX&gt;:&lt;$H.ScatterItemY&gt;<br />
+<br /><br />
+;---------------------------------------例子<br />
+[@HumDropItem]<br />
+#ACT<br />
+StopItemDrop<br />
+SENDMSG 5 中止掉落身上物品【&lt;$CurItemName&gt;】物品序列号:&lt;$CurItemMakeIndex&gt;<br /><br />
+
+
+[@HeroDropItem]<br />
+#ACT<br />
+H.StopItemDrop<br />
+SENDMSG 5 中止掉落英雄身上物品【&lt;$H.CurItemName&gt;】物品序列号:&lt;$H.CurItemMakeIndex&gt;<br />
+
+
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

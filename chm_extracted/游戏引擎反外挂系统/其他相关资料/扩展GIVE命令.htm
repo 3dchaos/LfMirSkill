@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>扩展GIVE命令</TITLE>
+</HEAD>
+<BODY>
+<P><FONT 
+size=5><STRONG>扩展GIVE命令</STRONG></FONT></P>
+<P>此功能可以实现脚本给物品时候增加特定属性。</P>
+<p><STRONG>命令格式：<BR>
+</STRONG>GIVE&nbsp;&nbsp;物品名&nbsp;&nbsp;数量&nbsp;&nbsp;参数0&nbsp;&nbsp;参数1&nbsp;&nbsp;参数2&nbsp;&nbsp;参数3&nbsp;&nbsp;参数4&nbsp;&nbsp;参数5  参数6 参数7 参数8 参数9 参数10 参数11 参数12 </p>
+<p>参数3-8对应物品位置的0-5极品属性（其他位置无效）。<font color="#00FF00">参考下面的极品属性</font></p>
+
+参数9: 物品持久值(0或空保持当前，视物品而定; -1:给满持久)；*******注意：参数9仅对非叠加物品有效</br>
+参数10：刺术</br>
+参数11：箭术</br>
+参数12：武力</br></br>
+
+
+例如</br>
+#ACT</br>
+give 聚灵珠 1 0 0 0 0 0 0 -1</br>
+sendmsg 6 给了你一个满经验的聚灵珠</br></br>
+
+give 祝福罐 1 0 0 0 0 0 0 -1</br>
+sendmsg 6 给了你一个满的祝福罐</br></br></br></br>
+
+;-------------------------------------------------------------------------------------</br></br></br>
+
+
+
+
+
+
+<P><FONT color="#FF0000" 
+size=5><STRONG>扩展新GiveOnItem命令</STRONG></FONT></P>
+<p><STRONG>命令格式：给予玩家一个新的物品直接到指定位置</STRONG>不经过背包</p>
+<p><STRONG><FONT color="#FF0000" 
+size=5><STRONG>GiveOnItem</STRONG></FONT> <font color="#0000FF">装备位置</font> 物品名称 数量默认写1(数量大于1时只对OK框叠加物品有效) 参数4 参数5 参数6 参数7 参数8 参数9 参数10 参数11 参数12 <br>
+</STRONG></p>
+<p><STRONG><font color="#0000FF">装备位置：<br>
+  -1升级框<br>
+  0--29：装备栏和时装栏<br>
+  30-35：首饰盒<br>
+  40-51：神佑袋<br>
+  boxitem0-boxitem7：OK框</font></STRONG></p>
+<p><STRONG><br>
+  参数4-参数9 参考 <font color="#00FF00">下面的极品属性</font></STRONG></p>
+参数10：刺术</br>
+参数11：箭术</br>
+参数12：武力</br></br>
+
+[@测试]</br>
+#act</br>
+GIVE 屠龙 1 0 0 0 0 0 0 0 10 11 12</br>
+GIVE 重盔甲(女) 1 0 0 0 0 0 0 0 10 11 12</br>
+GIVE 金项链 1 0 0 0 0 0 0 0 10 11 12</br>
+Sendmsg 6 上面的几个物品，极品属性为：刺术:10；箭术:11；武力:12</br></br>
+
+
+
+
+
+<p>&nbsp;</p>
+<p>位置及值参考物品的<font color="#00FF00"><strong>极品属性</strong></font><strong></br>
+</strong></p>
+<p>盔甲</br>
+  0 防御</br>
+  1 魔御</br>
+  2 攻击</br>
+  3 魔法</br>
+  4 道术</br>
+  5-13 无效果</br>
+  14 持久</br>
+  </br>
+  </br>
+</p>
+<p>武器</br>
+  0 DC2</br>
+  1 MC2</br>
+  2 SC2</br>
+  3 幸运</br>
+  4 诅咒</br>
+  5 准确</br>
+  6 攻击速度</br>
+  7 强度</br>
+  8-9 暂不知道</br>
+  10 需开封</br>
+  11-13 暂不知道</br>
+  14 持久</br>
+  </br>
+  </br>
+</p>
+<p>头盔</br>
+  0 防御</br>
+  1 魔御</br>
+  2 攻击</br>
+  3 魔法</br>
+  4 道术</br>
+  5 佩带需求</br>
+  6 佩带级别</br>
+  7-13 无效果</br>
+  14 持久</br>
+  </br>
+  </br>
+</p>
+<p>项链</br>
+  0 AC2</br>
+  1 MAC2</br>
+  2 DC2</br>
+  3 MC2</br>
+  4 SC2</br>
+  6 佩带需求</br>
+  7 佩带级别</br>
+  8 reserved</br>
+  9-13 暂不知道</br>
+  14 持久</br>
+  </br>
+  </br>
+  </br>
+</p>
+<p>手镯</br>
+  0 AC2</br>
+  1 MAC2</br>
+  2 DC2</br>
+  3 MC2</br>
+  4 SC2</br>
+  6 佩带需求</br>
+  7 佩带级别</br>
+  8-13 无效果</br>
+  14 持久</br>
+  </br>
+  </br>
+</p>
+<p>戒指</br>
+  0 AC2</br>
+  1 MAC2</br>
+  2 DC2</br>
+  3 MC2</br>
+  4 SC2</br>
+  6 佩带需求</br>
+  7 佩带级别</br>
+  8-13 无效果</br>
+  14 持久</br>
+  </br>
+  </br>
+  </br>
+  </br>
+</p>
+<p>&nbsp;</p>
+</BODY>
+</HTML>
+
+ 

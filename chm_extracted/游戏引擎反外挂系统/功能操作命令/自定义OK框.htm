@@ -1,0 +1,152 @@
+<title>自定义OK框[!]</title>
+<p>自定义OK框</p>
+*******注意：如果您的QF内也使用了自定义OK框，那么NPC和QF内的OK框编号不要出现相同编号***************<br /><br /><br />
+<p>&lt;ITEMBOX:N:F:M:X:Y:W:H:S:T&gt;\<br />
+  N=编号(0~31)<br />
+  F=OK框的背景的WIL序号，-1时不绘制背景<br />
+  M=OK框的背景的图片序号<br />
+  X Y = 微调坐标<br />
+  W=宽度<br />
+  H=高度<br />
+  S=允许放入的物品类型。DB库的StdMode值，如果有多个使用“,”隔开，如果为“*”时，允许所有物品<br />
+T=未放入装备时，鼠标移动显示信息</p>
+<p>&lt;$BOXITEM[X].NAME&gt; 当前自定义OK框中的物品名称<br />
+  &lt;$BOXITEM[X].NAME_G&gt; 当前自定义OK框中的物品改名名称<br />
+  &lt;$BOXITEM[X].DURA&gt; 当前自定义OK框中的物品持久<br />
+  &lt;$BOXITEM[X].DURAMAX&gt; 当前自定义OK框中的物品最大持久<br />
+  &lt;$BOXITEM[X].MAKEINDEX&gt; 当前自定义OK框中的物品序列号<br />
+  &lt;$BOXITEM[X].STDMODE&gt; 当前自定义OK框中的物品StdMode字段值<br />
+  &lt;$BOXITEM[X].SHAPE&gt; 当前自定义OK框中的物品Shape字段值<br />
+  &lt;$BOXITEM[X].LOOKS&gt; 当前自定义OK框中的物品Looks字段值<br />
+  &lt;$BOXITEM[X].COLOR&gt; 当前自定义OK框中的物品Color字段值<br />
+  &lt;$BOXITEM[X].UPGRADECOUNT&gt; 当前自定义OK框中的物品星星数<br />
+  &lt;$BOXITEM[X].HP&gt; 当前自定义OK框中的物品HP字段值<br />
+  &lt;$BOXITEM[X].MP&gt; 当前自定义OK框中的物品MP字段值<br />
+  &lt;$BOXITEM[X].LAC&gt; 当前自定义OK框中的物品的防御下限<br />
+  &lt;$BOXITEM[X].HAC&gt; 当前自定义OK框中的物品的防御上限<br />
+  &lt;$BOXITEM[X].LMAC&gt; 当前自定义OK框中的物品的魔防下限<br />
+  &lt;$BOXITEM[X].HMAC&gt; 当前自定义OK框中的物品的魔防上限<br />
+  &lt;$BOXITEM[X].LDC&gt; 当前自定义OK框中的物品的攻击下限<br />
+  &lt;$BOXITEM[X].HDC&gt; 当前自定义OK框中的物品的攻击上限<br />
+  &lt;$BOXITEM[X].LMC&gt; 当前自定义OK框中的物品的魔法下限<br />
+  &lt;$BOXITEM[X].HMC&gt; 当前自定义OK框中的物品的魔法上限<br />
+  &lt;$BOXITEM[X].LSC&gt; 当前自定义OK框中的物品的道术下限<br />
+&lt;$BOXITEM[X].HSC&gt; 当前自定义OK框中的物品的道术上限</p>
+..............
+&lt;$BOXITEM[X].Expand20&gt; 支持数据库所有字段.............</p>
+
+<br />
+PS:当基础属性字段为上述字段时为当前属性，数据库字段为数据库属性<br />
+&lt;$BOXITEM[0].hdc&gt; ;当前属性最高攻击<br />
+&lt;$BOXITEM[0].dc2&gt; ;数据库属性最高攻击<br />
+&lt;$BOXITEM[0].XXX&gt; ;数据库自定义字段XXX的数值(仅支持数字)<br /><br /><br />
+
+
+
+<p>OK框触发编号X范围=0~31<br />
+
+
+;-------------------------------------------------------------------------------<br />
+</p>
+<p>[@main]<br />
+请放入需要升级的装备\<br />
+&lt;ITEMBOX:0:2:117:20:10:76:76:10,11:254#只允许放入衣服^251#www.lfm2.com&gt;\ \ \<br />
+&lt;ITEMBOX:1:2:117:96:10:76:76:*:254#所有物品都允许放入^251#www.lfm2.com&gt;\<br />
+</p>
+<p>UNALLOWITEMINTOBOX <br />
+  禁止放入命令，在OK框里放入物品时触发使用</p>
+<p>ReturnBoxItem (0~31)<br />
+  OK框物品返回到包裹</p>
+<p>CheckBoxItemCount OK框编号(0~31) 物品数量(该参数只有是叠加物品时才会有效)<br />
+  检测OK框中是否有物品</p>
+<p>DelBoxItem(0~31) 数量(数量只对叠加物品有效)<br />
+  删除操作框物品</p>
+<p>自定义OK框放入物品后在当前NPC脚本中触发，X值为0~31<br />
+  [@ItemIntoBoxX]<br />
+  #ACT<br />
+  ;禁止放入命令，可以检测是否可以升级的物品，可以使用此命令禁止放入<br />
+  UNALLOWITEMINTOBOX</p>
+<p>例:<br />
+  [@main]<br />
+  请放入需要升级的装备\<br />
+  &lt;ITEMBOX:0:2:117:20:10:76:76&gt;\ \ \ \ \ \</p>
+<p>&lt;开始升级/@开始升级&gt;\</p>
+<p>[@开始升级]<br />
+  #IF<br />
+  ;检测名称不等于空时OK框中有物品,也可以检测其他参数<br />
+  NOT Equal &lt;$BOXITEM[0].NAME&gt;<br />
+  #ACT<br />
+  ;关联到OK框物品 才可以使用脚本命令修改自定义OK框中的物品<br />
+  SetUpgradeItem 0</p>
+<p>;修改该OK框物品的名称颜色 boxitem0表示是OK框<br />
+  CHANGEITEMNAMECOLOR boxitem0 253</p>
+<p>;修改OK框物品星星数量 boxitem0表示是OK框<br />
+  CHANGEITEMUPGRADECOUNT boxitem0 + 1</p>
+<p>;修改OK框装备名称 boxitem0表示是自定义OK框第一个位置<br />
+  ChangeItemName boxitem0  &lt;$BOXITEM[0].NAME&gt;+1 </p>
+<p>;修改OK框装备暴击+1 boxitem0表示是OK框第一个框<br />
+  SetNewItemValue boxitem0 0 + 1 </p>
+<p>;刷新到客户端 (注意：刷新必须写对位置)<br />
+  UpdateItem  boxitem0</p>
+<p>;物品返回到包裹<br />
+  ReturnBoxItem 0<br />
+  SENDMSG 6 装备升级成功<br />
+  #ELSEACT<br />
+  SENDMSG 6 请放入需要升级的装备</p></p></p>
+<P><B>;自定义OK框新增命令:GiveBoxItem 0~31  数量(数量只对叠加物品有效) 将背包中指定物品放入指定OK框</B></P>
+#IF<BR>
+checkitem 怒斩 1<BR>
+#ACT<BR>
+GiveBoxItem 0 怒斩<BR>
+SendMsg 5 恭喜：OK框0成功放入怒斩！<BR>
+----------------------------------------------------------------------------------------------<BR><BR>
+功能：通过唯一ID将物品放入OK框<BR>
+
+命令：GIVEBOXITEMEX OK框编号 唯一ID<BR><BR>
+
+
+============================================================================================<BR>
+
+GiveOnItem   装备位置  物品名称  数量默认写1(数量大于1时只对OK框叠加物品有效) 参数4 参数5 参数6 参数7 参数8 参数9<BR><BR>
+
+物品位置：<BR>
+-1升级框<BR>
+0--29：装备栏和时装栏<BR>
+30-35：首饰盒<BR>
+40-51：神佑袋<BR>
+boxitem0-boxitem7：OK框<BR><BR>
+参数4-参数9 参考 GIVE的扩展<BR><BR>
+
+----------------------------------------------------------------------------------------------<BR><BR>
+
+
+检测包裹中物品的数量(排除已经放入自定义OK框的物品)<BR>
+CHECKBAGITEMCOUNTEX 物品名称 数量<BR><BR>
+
+
+增加触发：<BR>
+将OK框的物品放回到包裹后，触发[@ItemOutBoxX],X值为0~31<BR><BR><BR><BR><BR>
+
+
+
+
+
+
+
+*******注意：如果您的QF内也使用了自定义OK框，那么NPC和QF内的OK框编号不要出现相同编号***************<br /><br /><br /><BR><BR><BR><BR><BR><BR>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

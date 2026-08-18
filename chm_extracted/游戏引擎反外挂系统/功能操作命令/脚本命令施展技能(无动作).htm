@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>脚本命令释放技能(无动作施展)</TITLE>
+</HEAD>
+<BODY>
+<P><STRONG><FONT 
+size=5>脚本命令释放技能(无动作施展)</FONT></STRONG></P>
+
+脚本命令释放技能(无动作施展) </P>  
+
+
+releasemagicEX    参数1   参数2  参数3  参数4   参数5 参数6</br></br>
+
+
+参数1    释放技能id      (能支持自定义技能)</br></br>
+
+参数2    技能是否是强化技能 0=普通技能   1=强化技能</br></br>
+
+参数3    技能等级</br></br>
+
+参数4    技能目标   1=攻击目标             2=自身</br></br>
+
+参数5    是否计算冷却时间    0或空为计算。1为不计算</br></br>
+
+参数6   值=0或空不会支持伤害触发  值=1支持伤害触发</br></br>
+
+在攻击/伤害相关触发中使用 RelaseseMagic/ReleaseMagicEx，参数6最好置0（即不触发脚本），以避免可能产生的脚本死循环,且不要写在@AttackDamage/@StruckDamage等中.......</br>
+在不触发的前提下，持续伤害技能如火墙不推荐使用，因即使设置不触发在火墙内移动也会触发</br>
+
+参数6为以下触发：</br>
+[@MagicStruck]</br>
+[@MagicAttack]</br>
+[@Struck]</br>
+[@Attack]</br></br></br></br></br>
+
+
+
+
+[@attack]</br>
+#if</br>
+#act</br>
+releasemagicEx 33 1 9 1</br>
+SENDMSG 6 你的物理攻击触发了一次3级烈火剑法</br></br></br>
+
+
+[@magicattack]</br>
+#if</br>
+equal &lt;$CURRRUSEMAGICID&gt; 11</br>
+#act</br>
+releasemagicEx 33 1 9 1</br>
+SENDMSG 6 你的雷电术触发特效攻击，对怪物释放了一次强化九重冰咆哮</br></br></br>
+
+
+#if</br>
+equal &lt;$CURRRUSEMAGICID&gt; 11</br>
+#act</br>
+releasemagicEx 2 0 3 2</br>
+SENDMSG 6 你的雷电术攻击为自己释放了一次3级治疗术</br></br></br>
+
+
+[@attack]</br>
+#if</br>
+#act</br>
+releasemagicEx 206 0 3 1 1</br>
+;参数5为1时候触发技能无视该技能CD</br>
+SENDMSG 6 你的雷电术触发特效攻击，对怪物释放了一次强化九重冰咆哮</br></br></br></br></br>
+
+
+
+英雄命令：H.releasemagicEX</br></br>
+分身命令：FS.releasemagicEx</br></br>
+注：本命令不支持战士技能，如需要绑定自身动作的技能请使用releasemagic</br></br></br></br></br>
+
+<P><FONT size=2>
+</BODY>
+</HTML>
+

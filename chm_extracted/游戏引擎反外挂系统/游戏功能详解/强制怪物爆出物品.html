@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>强制怪物爆出物品、怪物掉落/爆出物品</title>
+</head>
+
+<body>
+
+功能说明：强制怪物爆出物品、怪物掉落/爆出物品</br></br>
+
+格式：MonDropItems 怪物名称 物品名称 物品数量 是否掉落物品以最近攻击目标为中心(为0或空时物品以人物为中心,1时掉落物品以最近攻击目标为中心) </br></br>
+
+格式：MonDropItemsEx 怪物名称 物品名称 物品数量  是否掉落物品以最近攻击目标为中心(为0或空时物品以人物为中心,1时掉落物品以最近攻击目标为中心)</br></br>
+
+</br></br>
+-----------------------------------------------------------------------------</br>
+增加怪物掉落/爆出物品：</br></br>
+
+MonDropItems 怪物名 物品名 物品数量 是否掉落物品以最近攻击目标为中心(为0或空时物品以人物为中心,1时掉落物品以最近攻击目标为中心) </br></br></br></br>
+
+
+
+杀死怪物触发：</br></br>
+[@KillMon]</br>
+#ACT</br>
+SENDMSG 6 &lt;$USERNAME&gt;杀了怪物&lt;$ATTACKMONSTER_NAME&gt;</br>
+MonDropItems &lt;$KillMonName&gt; 屠龙 2</br>
+SENDMSG 6  &lt;$KILLMONNAME&gt;再次爆出5个裁决</br></br></br>
+
+
+NPC命令执行：</br></br>
+ 
+[@测试]</br>
+#ACT</br>
+MonDropItems 随便搞个怪 屠龙 2 1</br>
+SENDMSG 6 没怪也掉物品</br>
+
+
+</br></br></br>
+
+
+-----------------------------------------------------------------------------</br></br>
+
+MonDropItemsEx 掉落物品支持掉落提示和怪物掉落触发</br></br>
+-----------------------------------------------------------------------------</br></br></br>
+
+爆出来的物品来源根据怪物来写,该命令不受怪物爆出物品控制限制,但会记录到爆出数量!</br></br>
+
+
+注：本命令爆出的物品支持怪物掉落触发[@M2DropItem] , 物品必须在列表信息2的物品规则启用掉落触发才可以触发哦</br></br></br></br></br></br>
+
+</br></br></br></br>
+
+
+
+
+
+</p>
+</body>
+</html>

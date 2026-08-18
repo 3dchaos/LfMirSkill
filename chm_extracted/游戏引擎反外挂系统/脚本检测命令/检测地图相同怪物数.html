@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>检测地图相同怪物数</title>
+</head>
+
+<body>
+<p>格式:       CheckMapSameMonCount 地图名称 怪物名称 控制符(&lt;,&gt;,=) 数量 是否忽略怪物名称后面的数字(留空或0=检测数字,1=不检测数字) </p>
+<p><br />
+  [@Main] <br />
+  #IF<br />
+CheckMapSameMonCount 3 稻草人 &gt; 10 <br />
+  #SAY<br />
+  土城的稻草人大于10个</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+[@Main] <br />
+#IF<br />
+CheckMapSameMonCount 3 圣兽A > 2 <br />
+#SAY<br />
+土城的圣兽A大于2个<br />
+
+比如圣兽a 圣兽A1 圣兽A2各刷一只，后面不检测数字 那么土城圣兽大于2 ，检测的话就只有一个真正的圣兽了,留空和0 全是检测数字 ，1才是不检测<br />
+</body>
+</html>

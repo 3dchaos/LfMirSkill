@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>召唤指定怪物为宝宝,脚本召唤宝宝</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><STRONG><FONT color=#0000ff>功能：</FONT></STRONG><BR>&nbsp;&nbsp;&nbsp; 
+脚本召唤宝宝。</FONT></P>
+<P><FONT size=2><STRONG><FONT color=#0000ff>格式：</FONT><BR></STRONG>RecallMobEx 怪物名称 X坐标  Y坐标  等级 数量 叛变时间 颜色类型(0:固定颜色,1:自动变色)  颜色值(0-255;0不改变颜色) <BR>
+攻击力受自动变色颜色不同而不同<BR>固定颜色攻击力受指定颜色不同而不同</FONT></P>
+<P><FONT size=2> 
+   注：如设固定颜色，自动变色参数必须设置为0<BR><BR></FONT><FONT 
+size=2>;==========================================<BR>;召唤最多5个七宝宝，30分钟后叛变,七彩变色<BR>
+
+
+[@recallmobEX]<BR>
+#IF<BR>
+CHECKSLAVECOUNT < 5<BR>
+#ACT<BR>
+RECALLMOBEX 神兽  &lt;$X&gt; &lt;$Y&gt; 7 5 30  1<BR>
+#SAY<BR>
+好好看着自己的宝宝，不要乱咬人。<BR>
+#ELSESAY<BR>
+你已经有5个或以上的宝宝，现在不可以再召宝宝。<BR>
+</BODY>
+</HTML>
+
+ 

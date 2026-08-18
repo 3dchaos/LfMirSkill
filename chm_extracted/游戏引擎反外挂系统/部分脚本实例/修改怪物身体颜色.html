@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="GB2312">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>怪物颜色修改功能</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+        h1 {
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 10px;
+        }
+        code {
+            background-color: #f5f5f5;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: Consolas, monospace;
+            color: #d63384;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 12px;
+            border-radius: 5px;
+            overflow-x: auto;
+            line-height: 1.45;
+        }
+        .note {
+            background-color: #e7f4ff;
+            border-left: 4px solid #3498db;
+            padding: 12px;
+            margin: 16px 0;
+        }
+        .warning {
+            background-color: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 12px;
+            margin: 16px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 16px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .example {
+            background-color: #f8f9fa;
+            border-left: 4px solid #6c757d;
+            padding: 12px;
+            margin: 16px 0;
+        }
+        .section {
+            margin-bottom: 32px;
+        }
+    </style>
+</head>
+<body>
+    <h1>怪物颜色修改功能</h1>
+    
+    <div class="section">
+        <h2>1. SetMonColor 命令</h2>
+        
+        <h3>基本格式</h3>
+        <pre><code>SetMonColor 地图名 怪物名 颜色(1~255) 时间(秒) 类型(0/1)</code></pre>
+        
+        <h3>参数说明</h3>
+        <table>
+            <tr>
+                <th>参数</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>地图名</td>
+                <td>要修改怪物的地图名称</td>
+            </tr>
+            <tr>
+                <td>怪物名</td>
+                <td>要修改颜色的怪物名称</td>
+            </tr>
+            <tr>
+                <td>颜色</td>
+                <td>1-255之间的颜色值</td>
+            </tr>
+            <tr>
+                <td>时间</td>
+                <td>颜色持续时间(秒)，0表示永久有效</td>
+            </tr>
+            <tr>
+                <td>类型</td>
+                <td>0=固定颜色，1=七彩变色</td>
+            </tr>
+        </table>
+        
+        <h3>示例</h3>
+        <div class="example">
+            <pre><code>[@SetMonColor]
+#IF
+CheckMapSameMonCount D2083 火龙教主 > 0
+#ACT
+SetMonColor D2083 火龙教主 151 0 1
+SendMsg 5 D2083地图的火龙教主已经修改为七彩变色！
+
+[@SetMonColor1]
+#IF
+CheckMapSameMonCount D2083 火龙教主 > 0
+#ACT
+SetMonColor D2083 火龙教主 151 0 0
+SendMsg 5 D2083地图的火龙教主已经修改为黄色！</code></pre>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>2. SetMonColorEx 命令</h2>
+        
+        <h3>基本格式</h3>
+        <pre><code>SetMonColorEx 地图名 X Y 范围 怪物名 颜色(1~255) 时间(秒) 类型(0/1)</code></pre>
+        
+        <h3>参数说明</h3>
+        <table>
+            <tr>
+                <th>参数</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>地图名</td>
+                <td>要修改怪物的地图名称</td>
+            </tr>
+            <tr>
+                <td>X</td>
+                <td>中心点X坐标</td>
+            </tr>
+            <tr>
+                <td>Y</td>
+                <td>中心点Y坐标</td>
+            </tr>
+            <tr>
+                <td>范围</td>
+                <td>修改范围(以X,Y为中心的半径)</td>
+            </tr>
+            <tr>
+                <td>怪物名</td>
+                <td>要修改颜色的怪物名称</td>
+            </tr>
+            <tr>
+                <td>颜色</td>
+                <td>1-255之间的颜色值</td>
+            </tr>
+            <tr>
+                <td>时间</td>
+                <td>颜色持续时间(秒)，0表示永久有效</td>
+            </tr>
+            <tr>
+                <td>类型</td>
+                <td>0=固定颜色，1=七彩变色</td>
+            </tr>
+        </table>
+        
+        <h3>示例</h3>
+        <div class="example">
+            <pre><code>[@SetMonColor5]
+#IF
+CHECKRANGEMONCOUNTEX D2083 火龙教主 50 50 10 > 0
+#ACT
+SetMonColorEx D2083 50 50 10 火龙教主 151 0 0
+SendMsg 5 D2083地图坐标50:50坐标范围10以内的火龙教主已经修改为黄色！</code></pre>
+        </div>
+    </div>
+    
+    <div class="warning">
+        <h3>注意事项</h3>
+        <ul>
+            <li>请尽量不要在刷怪触发中使用怪物身体改色，特别是刷怪数量很多时触发</li>
+            <li>SetMonColor命令会对地图中很大一块区域进行怪物操作，每刷一个怪就遍历地图很大一块区域，效率低</li>
+            <li>如果需要可以考虑使用M.SetBodyColor</li>
+            <li>如内挂设置BOSS身体变色则以内挂设置为准</li>
+        </ul>
+    </div>
+    
+    <div class="note">
+        <h3>性能优化建议</h3>
+        <p>对于大量怪物的颜色修改，建议使用以下方式优化性能：</p>
+        <pre><code>[@OnMobGen]
+#ACT
+M.SetBodyColor 151 0 1</code></pre>
+        <p>这种方式只影响当前生成的怪物，不会遍历整个地图区域。</p>
+    </div>
+</body>
+</html>

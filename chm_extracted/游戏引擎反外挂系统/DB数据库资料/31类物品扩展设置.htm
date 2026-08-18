@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>31类物品扩展设置</TITLE>
+</HEAD>
+<BODY>
+<P><STRONG><FONT 
+size=5>31类物品扩展设置，支持放入物品框和死亡使用</FONT></STRONG></P>
+
+StdMode为31类物品数据库reserved字段设置为：不等于0（即大于或小于0）   则限制死亡后才可以使用</P>
+
+StdMode为31类物品数据库source字段为：-2 可以放入物品栏</P></br></br></br></br></br>
+
+<B>************************************以下为2020-06月份扩展********************************************</B></br></br>
+
+-----------------------------------------------------------</br>
+1406	31类一次性物品1	31	50	1	1	100	0	1230	1	0	0	0	0	0	0	0	0	0	0	0	0	1	5	255	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	</br>			
+1407	31类多次物品	31	51	1	2	0	0	1230	1	0	0	0	0	0	0	0	0	0	0	0	0	1	5	255	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	</br>			
+-----------------------------------------------------------</br></br>
+
+StdMode=31扩展物品</br>
+Shape=50，物品使用一次后消失</br>
+Shape=51，物品可以一直使用，直到手动删除</br></br>
+
+触发：</br>
+以上扩展2种类型的物品</br>
+人物触发 QF中的 [@StdModeFuncExX] X=物品的Anicount</br>
+英雄触发 QF中的 [@HeroStdModeFuncExX] X=物品的Anicount</br></br>
+
+-----------------------------------------------------------</br></br>
+
+增加NPC变量:</br>
+当前使用物品名：&lt;$UseItemName&gt;, &lt;$H.UseItemName&gt;</br>
+当前使用物品唯一ID：&lt;$UseItemMakeIndex&gt;  &lt;$H.UseItemMakeIndex&gt;</br>
+以上2个变量仅限用于触发 [@StdModeFuncX]，[@StdModeFuncExX]，[@HeroStdModeFuncExX]</br></br>
+
+-----------------------------------------------------------</br></br>
+
+增加NPC命令：</br>
+关联背包物品 LinkBagItem 物品MakeIndex(唯一ID)</br>
+将关联物品从背包删除  DelLinkItem 物品数量(用于叠加物品，0整个物品删除，大于0从叠加中删除指定数量)-----20200927支持叠加</br></br>
+
+-----------------------------------------------------------</br></br>
+
+
+[@StdModeFuncEx1]</br>
+#act</br>
+SendMsg 6 当前使用的物品名:&lt;$UseItemName&gt;，唯一ID:&lt;$UseItemMakeIndex&gt;；本物品使用完后会直接消失</br></br>
+
+[@StdModeFuncEx2]</br>
+#if</br>
+Random 3</br>
+#act</br>
+SendMsg 6 人物当前使用的物品名:&lt;$UseItemName&gt;，唯一ID:&lt;$UseItemMakeIndex&gt;；本次删除</br>
+LinkBagItem &lt;$UseItemMakeIndex></br>
+DelLinkItem</br>
+#elseact</br>
+SendMsg 6 人物当前使用的物品名:&lt;$UseItemName&gt;，唯一ID:&lt;$UseItemMakeIndex&gt;；本物品还可以使用</br>
+LinkBagItem &lt;$UseItemMakeIndex&gt;</br>
+ChangeItemName -1   新的名字3</br>
+UpdateItem -1</br>
+ClearLinkItem</br></br>
+
+[@HeroStdModeFuncEx2]</br>
+#act</br>
+#if</br>
+Random 10</br>
+#act</br>
+SendMsg 6 英雄当前使用的物品名:&lt;$H.UseItemName&gt;，唯一ID:&lt;$H.UseItemMakeIndex&gt;；本次删除</br>
+H.LinkBagItem &lt;$H.UseItemMakeIndex&gt;</br>
+H.DelLinkItem</br>
+#elseact</br>
+SendMsg 6 英雄当前使用的物品名:&lt;$H.UseItemName&gt;，唯一ID:&lt;$H.UseItemMakeIndex&gt;；本物品还可以使用</br>
+H.LinkBagItem &lt;$H.UseItemMakeIndex&gt;</br>
+H.ChangeItemName -1   新的名字3</br>
+H.UpdateItem -1</br>
+H.ClearLinkItem</br></br>
+
+注：shape=1可能不利于英雄使用，建议31-1类物品禁止放入英雄背包！</br></br></br>
+
+
+<P><FONT size=2>
+</BODY>
+</HTML>
+

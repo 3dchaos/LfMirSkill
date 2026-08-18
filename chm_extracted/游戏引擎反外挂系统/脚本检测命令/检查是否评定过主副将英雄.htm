@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>检查是否评定过主副将英雄</title>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<body><FONT face=Arial size=2>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT color=#0000ff>功能说明:</FONT> 
+检查是否评定过主副将英雄<BR><BR></FONT></FONT></P>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT 
+color=#0000ff>说明：</FONT>CheckAssessHero<BR></FONT></FONT></P>
+<P><FONT face=Fixedsys size=2></br></br>
+
+
+</br></br>
+--------------------------------------------------------</br></br>
+                                                
+检查是否评定过主副将英雄命令 CheckAssessHero</br> </br> </br> </br>
+
+
+
+
+
+
+
+[@删除英雄] </br>
+是否确认删除英雄\ </br>
+&lt;是，我确认删除英雄/@DelMyHero&gt; &lt;我考虑下/@exit&gt; </br> </br>
+
+[@DelMyHero] </br>
+#if </br>
+CheckAssessHero  </br>
+#ACT </br>
+MESSAGEBOX 评定过的英雄禁止删除 </br>
+BREAK </br>
+#ELSEACT </br>
+DELETEHERO </br>
+;//返回消息 </br> </br>
+
+[@NotHaveHero] </br>
+你没有英雄。\ </br>
+&lt;关闭/@exit&gt; </br> </br>
+
+[@LogOutHeroFirst] </br>
+请将英雄设置下线！ \</br>
+&lt;关闭/@exit&gt; </br> </br> </br> </br>
+
+
+
+
+
+
+</br></br></br></br></br>
+
+
+</html>

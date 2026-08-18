@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>NPC获取文件行数命令</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>读取文件行数命令</FONT></FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>功能：</FONT>NPC获取文件行数命令</STRONG></FONT></P>
+<P>示范：<br><br><br><br>
+
+
+命令：GetTextLineCount 路径 保存变量<br><br>
+[@main]<br>
+#if<br>
+#act<br>
+GetTextLineCount ..\QuestDiary\装备回收.txt N$行数<br>
+Sendmsg 5 提示:装备回收.txt文件共有&lt;$STR(N$行数)&gt;行内容<br><br><br>
+
+
+
+</BODY>
+</HTML>

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>聊天框自定义颜色</TITLE>
+<style type="text/css">
+<!--
+.STYLE1 {font-family: "宋体"}
+.STYLE2 {
+	font-family: "宋体";
+	color: #0000FF;
+	font-weight: bold;
+}
+-->
+</style>
+</HEAD>
+<BODY>
+<p class="STYLE2">聊天框信息颜色自定义格式：
+</p>
+<p class="STYLE1">&nbsp;</p>
+<p class="STYLE1">{信息|F:B:M}</p>
+<p class="STYLE1">F=字体颜色 B=背景颜色  M=模式(0绘制背景色,1字体描边)</p>
+<p class="STYLE1">例如：</p>
+<p>[@main]<br>
+#ACT<br>
+SENDMSG 5 {&lt;$USERNAME&gt;|254:253}翎风引擎官方网站：http://www.lfm2.com<br>
+SENDMSG 5 {&lt;$USERNAME&gt;|250:0:1}翎风引擎官方网站：http://www.lfm2.com<br>
+SENDTOPCHATBOARDMSG 0 149 235 30 {&lt;$USERNAME&gt;|250:0}翎风引擎官方网站：http://www.lfm2.com</p>
+
+<p>注意请在网关上设置过滤{信息|F:B}中任意字符，防止玩家发送彩色聊天信息</p>
+<p class="STYLE1">&nbsp;</p>
+</BODY>
+</HTML>
+
+ 

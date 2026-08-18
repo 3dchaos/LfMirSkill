@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>丢弃背包物品前触发</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>丢弃背包物品前触发</FONT></FONT></P><BR><BR><BR>
+
+<P><FONT size=2><FONT color=#0000ff><STRONG>命令：</STRONG></FONT><BR>
+人物中止丢弃背包物品：StopItemDrop <BR>
+英雄中止丢弃背包物品：H.StopItemDrop<BR><BR><BR>
+<P><FONT size=2><FONT color=#0000ff><STRONG>QF触发：</STRONG></FONT><BR>
+人物丢弃背包物品前触发：[@HumDropBagItem]<BR>
+英雄丢弃背包物品前触发：[@HeroDropBagItem]<BR><BR><BR><BR>
+
+
+
+
+[@HumDropBagItem]<BR>
+#act<BR>
+StopItemDrop<BR>
+SENDMSG 5 中止丢弃背包内物品【&lt;$CurItemName&gt;(&lt;$G_CurItemName&gt;)】物品序列号:&lt;$CurItemMakeIndex&gt;<BR>
+break<BR><BR>
+
+
+[@HeroDropBagItem]<BR>
+#act<BR>
+H.StopItemDrop<BR>
+SENDMSG 5 中止丢弃英雄背包内物品【&lt;$H.CurItemName&gt;(&lt;$H.G_CurItemName&gt;)】物品序列号:&lt;$H.CurItemMakeIndex&gt;<BR>
+break<BR><BR><BR><BR><BR>
+
+
+
+
+
+
+</BODY>
+</HTML>

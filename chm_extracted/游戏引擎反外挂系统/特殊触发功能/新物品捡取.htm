@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>物品捡取和丢弃触发</title>
+</head>
+
+<body>
+</BR></BR></BR></BR>
+@PickUpItemsX X是物品数据库中对应的IDX</BR>
+@DropItemsX   X是物品数据库中对应的IDX<br>
+@H.PickUpItemsX X是物品数据库中对应的IDX(英雄)</BR>
+@H.DropItemsX   X是物品数据库中对应的IDX(英雄)<br>
+<br><br><br>
+
+
+<p>QFunction-0.txt功能脚本增加以下内容</font></p>
+<p><font color="#FF0000">在列表信息二选择需要触发的物品后在功能脚本增加：</font></p>
+[@DropItems10]<br>
+#if<br>
+#act<br>
+SENDMSG 0 玩家&lt;$USERNAME&gt;在&lt;$MapTitle&gt;坐标&lt;$X&gt;：&lt;$Y&gt;扔掉了力量戒指<br>
+break</p>
+
+[@PickUpItems10]<br>
+#if<br>
+#act<br>
+SENDMSG 0 玩家&lt;$USERNAME&gt;在&lt;$MapTitle&gt;坐标&lt;$X&gt;：&lt;$Y&gt;捡到&lt;$PICKDROPITEMNAME&gt;<br>
+break</p>
+
+
+
+----------------------------------------------------------------------------<br><br>
+[@DropItems10] <br>
+#if<br>
+#act<br>
+;   //这里支持查看物品属性<br>
+SENDMSG 0 玩家&lt;$USERNAME&gt;在&lt;$MapTitle&gt;坐标&lt;$X&gt;：&lt;$Y&gt;扔掉&lt;$PICKDROPITEM&gt;<br>
+break<br><br><br><br>
+
+
+&lt;$PICKDROPITEMNAME&gt;//捡到或者丢弃的物品名字<br>
+&lt;$PICKDROPITEM&gt;//捡到或者丢弃的物品名字，支持查看物品属性<br><br><br>
+
+
+<font color="#0000FF"><b>注意：需要使用此触发需要在（选项——》列表信息2——》物品规则——》增加“触发ID”）选择触发物品！</b></font></p>
+
+
+<p>以上脚本为捡起物品和扔物品触发.触发条件需要在列表信息二增加物品规则..</p>
+
+
+
+
+</body>
+
+</html>

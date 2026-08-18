@@ -1,0 +1,46 @@
+<title>物品掉落触发</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+<p><strong><font size="5">物品掉落触发</font></strong></p>
+<p>-----------------------------------物品掉落触发---------------------------<br /><br /><br /><br /><br />
+
+
+功能说明：物品掉落触发（怪物）-------列表信息二 物品规则<br /><br /><br />
+
+
+特别注意：脚本不要太复杂，因掉落属频繁调用脚本，如服务器同时掉落几百件物品同时触发属于大负荷运用，脚本尽量简单，复杂脚本建议使用捡取触发<br /><br />
+
+
+QF触发（仅支持改色和改名，复杂的暂不考虑支持）<br /><br />
+
+
+以下为QF触发示范：<br />
+
+[@M2DropItem]<br />
+#act<br />
+
+; 扩展参数3，是否只取DB中的名称(0:若改名以改名为准； 1：只取DB中的名称）<br />
+; 将名字放到S1中<br />
+GetUserItemName -1 1 1<br />
+
+;也可以用 Mov S1 &lt;$PickDropItemName&gt;<br />
+
+#if<br />
+CompareText S1 偃月<br />
+#act<br />
+ChangeItemNameColor -1 253<br /><br /><br />
+
+
+
+;---------------------------------------例子二<br />
+
+[@M2DropItem]<br />
+#ACT
+<br />
+SENDMSG 5 【&lt;$CurUserName&gt;】掉落物品【&lt;$CurItemName&gt;】，位置：&lt;$maptitle&gt; &lt;$ScatterItemX&gt;:&lt;$ScatterItemY&gt;<br />
+
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

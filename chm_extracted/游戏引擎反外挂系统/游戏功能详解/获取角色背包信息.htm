@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>获取角色背包信息</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<body><FONT face=Arial size=2>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT color=#0000ff>功能:</FONT> 
+获取角色背包信息<BR><BR></FONT></FONT></P>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT 
+color=#0000ff>获取角色背包信息   格式:</FONT>GetBagInfo 参数1 参数2(保存变量) 参数3(stdmode值) <BR></FONT></FONT></P>
+<P><FONT face=Fixedsys size=2>
+        参数1：信息类型可取如下值：</br>
+           ItemCount: 物品数量(每个背包物品都算一个数量，不管是否为叠加物品)</br>
+           ItemMakeIndex:所有背包物品的MakeIndex；参数2即保存变量必须为元素类型</br>
+           ItemIdx:所有背包物品的数据库idx；参数2即保存变量必须为元素类型</br>
+           ItemName:所有背包物品的名称；参数2即保存变量必须为元素类型</br>
+        参数3(stdmode值)：留空为获取背包所有物品数量，填写5只获取stdmode值为5的武器数量，可以   5|6|10|11  只取背包武器衣服</br>
+</br></br>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT 
+color=#0000ff>获取背包物品的字段值   格式:</FONT>GetBagItemFieldValue  参数1   参数2  字段名称  保存变量<BR></FONT></FONT></P>
+<P><FONT face=Fixedsys size=2>
+    参数1: 可取如下值</br>
+           0: 根据背包物品序号取物品（即取背包第几个物品），参数2就是序号（从0开始）</br>
+           1: 根据背包物品的MakeIndex取物品，参数2就是MakeIndex</br>
+            将对应的物品字段保存到变量中</br>
+
+</br></br>
+--------------------------------------------------------</br></br>
+示例脚本：</br></br>
+
+;取背包物品数量保存到变量</br>
+#act</br>
+GetBagInfo ItemCount N100</br>
+SendMsg 6 背包物品数量为&lt;$STR(N100)&gt;</br></br>
+
+Mov N1 0</br>
+GetBagInfo ItemCount N100</br>
+WHILE N1 &lt; &lt;$STR(N100)&gt;</br>
+Mov S1</br>
+Mov S2</br>
+; 第一个参数: (0根据顺序号/1根据MakeIndex)；参数2：表示取第几个；参数3：字段名称；参数4：</br>
+GetBagItemFieldValue 0 &lt;$STR(N1)&gt; name S1 </br>
+GetBagItemFieldValue 0 &lt;$STR(N1)&gt; upgradecount S2</br>
+Sendmsg 6 提示：第&lt;$STR(N1)&gt;件,物品名称=&lt;$STR(S1)&gt;,星星数=&lt;$STR(S2)&gt;</br>
+INC N1 1</br>
+ENDWHILE</br></br></br>
+
+;取背包所有物品的MakeIndex保存到元素变量中</br>
+GetBagInfo ItemMakeIndex L$背包物品</br>
+SendMsg 6 背包物品MakeIndex:&lt;$STR(L$背包物品)&gt;</br></br>
+
+;根据MakeIndex取得对应背包物品的字段值并保存到变量中</br>
+GetBagItemFieldValue 1 &lt;$STR(L$背包物品[0])&gt; name S1 </br>
+Sendmsg 6 提示：第0件,物品名称=&lt;$STR(S1)&gt;;MakeIndex=&lt;$STR(L$背包物品[0])&gt;</br></br>
+
+;取背包所有物品的数据库Idx保存到元素变量中</br>
+GetBagInfo ItemIdx L$背包物品</br>
+SendMsg 6 背包物品数据库Idx:&lt;$STR(L$背包物品)&gt;</br></br>
+
+;取背包所有物品名称保存到元素变量中</br>
+GetBagInfo ItemName L$背包物品</br>
+SendMsg 6 背包物品名称:&lt;$STR(L$背包物品)&gt;</br></br></br></br></br>
+
+
+
+示例脚本2：</br></br>
+&lt;获取背包物品的字段值/@获取背包物品的字段值(0)&gt;   &lt;获取背包物品的字段值index获取/@获取背包物品的字段值(1)&gt; \</br></br></br>
+
+
+[@获取背包物品的字段值]</br>
+#IF</br>
+equal &lt;$scriptparam1&gt; 0</br>
+#act</br>
+GetBagItemFieldValue 0 9 NAME S$name</br></br>
+
+#IF</br>
+equal &lt;$scriptparam1&gt; 1</br>
+#act</br>
+GetBagItemFieldValue 1 227490 NAME S$name</br></br>
+
+#IF</br>
+#ACT</br>
+sendmsg 7 .方法&lt;$scriptparam1&gt;.&lt;$STR(S$name)&gt;</br></br></br>
+
+
+
+</br></br></br></br></br>
+
+
+</html>

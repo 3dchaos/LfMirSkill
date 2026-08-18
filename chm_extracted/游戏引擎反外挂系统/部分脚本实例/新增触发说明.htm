@@ -1,0 +1,96 @@
+<br><b>新增触发</b></br>
+<br><b>以下QFunction-0.txt触发为2013年10月28号后增加的，为方面大家查找触发命令特保存在本页！！！</b></br>
+
+</br></br></br></br></br>
+
+
+
+
+;沙巴克丢失仅掌门人（行会老大）触发：@LostCastle</br>
+;沙巴克占领仅掌门人（行会老大）触发：@GetCastle</br>
+
+;沙巴克被占领触发</br>
+[@GetCastle]</br>
+#IF</br>
+#Act</br>
+#SAY</br>
+break</br>
+沙巴克被占领!</br></br></br>
+
+;沙巴克被别人占领触发</br>
+[@LostCastle] </br>
+#IF</br>
+#Act</br>
+SENDMSG 0 提示：沙巴克老大&lt;$USERNAME&gt;要换人了</br></br></br></br>
+
+
+;以下为占领沙巴克和丢失沙巴克行会所有在线成员都触发（包括行会老大），和上面的仅掌门人触发按需使用</br></br>
+;---------------------------------------------------</br>
+;沙巴克丢失全员触发：@LostCastleEx</br>
+;沙巴克占领全员触发：@GetCastleEx</br>
+
+[@LostCastleEx]</br>
+#ACT</br>
+SENDMSG 5 你所在的行会丢失沙巴克</br></br>
+
+[@GetCastleEx]</br>
+#ACT</br>
+SENDMSG 5 你所在的行会已占领沙巴克</br></br>
+
+
+;---------------------------------------------------</br>
+;创建行会触发</br>
+[@CreateGuild]</br>
+#IF</br>
+#ACT</br>
+break</br>
+#SAY</br>
+行会已经创建!</br></br>
+
+;退出行会触发</br>
+[@exitGuild]</br>
+#IF</br>
+#SAY</br>
+你已经从行会中退出!</br>
+;---------------------------------------------------</p>
+
+
+出师触发 QFunction-0.txt<BR>
+[@UnMasterEnd]<BR>
+#IF<BR>
+#ACT<BR>
+SENDMSG 6 提示：师傅触发！</p>
+
+[@UnMasterEnd1]<BR>
+#IF<BR>
+#ACT<BR>
+SENDMSG 6 提示：徒弟触发！</p>
+<BR><BR><BR>
+
+QF触发强制(脱离师徒)出师：<BR>
+@ForceUnMasterEnd  师傅触发<BR>
+@ForceUnMasterEnd1 徒弟触发<BR><BR><BR><BR>
+---------------------------------------------------</p>
+
+
+
+挂机触发 QFunction-0.txt<BR>
+[@StartAutoOnline]<BR>
+#IF<BR>
+#ACT<BR>
+SENDMSG 6 提示：开始挂机！</p>
+
+[@StopAutoOnline]<BR>
+#IF<BR>
+#ACT<BR>
+SENDMSG 6 提示：停止挂机！</p>
+---------------------------------------------------</p>
+<B>20170407增加加入行会触发</B> </p>
+[@JoinGuild]<BR>
+#IF<BR>
+#Act<BR>
+SENDMSG 6  你已经加入了&lt;$GUILDNAME&gt;行会！<BR>
+SendCenterMsg 180 251你已经加入了&lt;$GUILDNAME&gt;行会 0 30<BR><BR><BR><BR><BR>
+
+<BR>
+陆续增加中...........</br><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR>

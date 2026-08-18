@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>变量传递说明</title>
+</head>
+
+<body>
+</br></br></br>
+变量传递命令：</br></br>
+
+设置指定人物的变量值：</br>
+SetHumVar 对方的名字 对方的变量 值 </br></br>
+
+获取指定人物的变量 到 自己的变量中：</br>
+GetHumVar 对方的名字 对方的变量 自己的变量</br></br>
+
+
+变量传递脚本示例：</br></br>
+
+[@main]</br>
+你要把你的防御力数值传给别人,让他知道你的防御力是多少吗\</br>
+请确保对方在线\</br>
+&lt;请输入对方名字/@@InPutString1&gt; \</br>
+对方名字：&lt;$STR(S1)&gt; \</br></br>
+
+
+你想知道对方防御力是多少吗,并且不让他知道\</br>
+请确保对方在线\</br>
+&lt;请输入对方名字/@@InPutString3&gt; \</br>
+对方名字：&lt;$STR(S3)&gt; </br>
+对方防御力：&lt;$STR(S4)&gt;\</br></br></br>
+
+
+
+;传递</br>
+[@InPutString1]</br>
+#IF</br>
+#ACT</br>
+SetHumVar S1 S2 &lt;$MAXAC&gt;</br>
+;S1为对方名字</br>
+SENDMSG 6 成功把你的防御力数值传递给对方的S2变量，对方已知道你的防御力多少</br></br></br>
+
+
+
+
+;获取</br>
+[@InPutString3]</br>
+#IF</br>
+#ACT</br>
+GetHumVar S3 &lt;$MAXAC&gt; S4</br>
+;S3 为对方名字 &lt;$MAXAC&gt;对方防御力</br>
+;S4 你的变量</br>
+SENDMSG 6 你已成功取得对方防御力为&lt;$STR(S4)&gt;</br></br></br></br>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>假人摆摊</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font size="5">假人摆摊</font></strong> </p>
+<font size="2"><span class="STYLE2"><strong>功能：</strong>假人摆摊</span><br />
+<strong>格式：</strong>假人摆摊<br />
+<strong>说明：</strong>假人摆摊*****<br />
+
+</br></br></br></br></br>
+
+
+;----------------------------------------------------------------</br></br>
+
+检测是否在摆摊</br>
+CheckShopStallStatus</br></br>
+
+;----------------------------------------------------------------</br></br>
+
+增加摆摊物品(从背包中找到物品并上架)：</br>
+HeroM2AddUserItem 物品名称 单个物品价格(如果是叠加物品，则计算总数量价格)  货币类型(0:元宝；1:游戏点；2:金币；3:金刚石；4:灵符)</br></br>
+
+#ACT</br>
+HeroM2AddUserItem 珊瑚戒指 10 2</br>
+
+;---------------------------------------------------
+
+删除摆摊物品</br>
+HeroM2DelUserItem 物品名称</br></br>
+
+#ACT</br>
+HeroM2DelUserItem 珊瑚戒指</br>
+
+;-------------------------------------------------------------</br></br>
+
+开始摆摊: HeroM2StartShopStall 显示文字</br>
+停止摆摊:HeroM2StopShopStall</br></br>
+
+
+[@摆摊]</br>
+#IF</br>
+CheckShopStallStatus</br>
+#ACT</br>
+HeroM2StopShopStall</br>
+#ELSEACT</br>
+HeroM2StartShopStall 这里有好东西，价格优惠，欲购从速</br></br></br></br>
+
+
+
+
+;================================================================</br></br>
+假人主体设置当前的锁定攻击目标</br>
+SetTarget   角色名   角色类型(0:人物;1:英雄;2:怪物)    名称是否过滤数字匹配(仅适用于怪物时；0:不过滤;1：过滤数字匹配)</br></br>
+英雄设置当前的锁定攻击目标</br>
+假人H.SetTarget 名称 人物或英雄或怪物(1:英雄，2:人物  3:怪物) 名称是否过滤数字匹配(仅适用于怪物时；0:不过滤;1：过滤数字匹配)</br>
+
+
+
+</br></br></br></br></br></br>
+</body>
+
+</html>

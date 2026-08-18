@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>千里传音[!]</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>使用传音命令无需佩戴传音道具.</FONT></FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT>在没有佩戴传音道具前提下，使用命令进行千里传音</STRONG></FONT></P>
+<P>示列：<br><br>
+;===================获取聊天框所有文字=========================<br>
+[@UserCmd22]<br>
+#IF<br>
+CHECKGAMEGOLD > 0<br>
+#ACT<br>
+MOV S1 &lt;$PARAMS&gt;<br>
+GAMEGOLD - 1<br>
+SENDMSG 0  &lt;$USERNAME&gt;:&lt;$STR(S1)&gt; 255 253 0<br>
+#ELSEACT <br>
+SENDMSG 7 使用千里传音需要支付1元宝<br><br><br>
+
+;=======================以下为原始，不能使用空格，如需空格支持请看最后面一条============================================<br>
+[@UserCmd2]<br>
+#IF<br>
+CHECKGAMEGOLD > 0<br>
+#ACT<br>
+MOV S1 &lt;$PARAM(1)&gt;<br>
+GAMEGOLD - 1<br>
+SENDMSG 0  &lt;$USERNAME&gt;:&lt;$STR(S1)&gt; 255 253 0<br>
+#ELSEACT <br>
+SENDMSG 7 使用千里传音需要支付1元宝<br><br><br>
+
+
+[@UserCmd3]<br>
+#IF<br>
+CHECKGAMEGOLD > 0<br>
+#ACT<br>
+MOV S1 &lt;$PARAM(1)&gt;<br>
+MOV S2 &lt;$PARAM(2)&gt;<br>
+MOV S3 &lt;$PARAM(3)&gt;<br>
+MOV S4 &lt;$PARAM(4)&gt;<br>
+MOV S5 &lt;$PARAM(5)&gt;<br>
+MOV S6 &lt;$PARAM(6)&gt;<br>
+GAMEGOLD - 2<br>
+SENDTOPCHATBOARDMSG 0 149 235 30 &lt;$STR(S1)&gt;&lt;$STR(S2)&gt;&lt;$STR(S3)&gt;&lt;$STR(S4)&gt;&lt;$STR(S5)&gt;&lt;$STR(S6)&gt;<br>
+#ELSEACT <br>
+SENDMSG 7 使用传音筒需要支付2元宝<br>
+</P>
+</BODY>
+</HTML>

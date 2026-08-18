@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>检测背包是否有指定物品[!]</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<BODY>
+<P><FONT face=Fixedsys size=2>功能: 检测背包是否有指定物品<BR><BR>
+格式:checkitem 名字   数量   参数3（空或0，名称完全匹配。 不等于0部分匹配）参数4(是否检测改名的装备0：否; 1: 是）   <BR><BR><BR>
+
+#IF<br>
+CheckItem 麻痹 1 1<br>
+#ACT<br>
+SendMsg 5 你背包有包含麻痹文字的装备<br><br><br><br>
+
+
+
+#IF<br>
+CheckItem 麻痹戒指 1<br>
+#ACT<br>
+SendMsg 5 你背包有麻痹戒指<br><br><br><br>
+
+==================================================<br><BR><BR><BR>
+
+
+
+
+
+格式:checkitems  参数1名字   参数2数量   参数3检测身上相同（包含检查装备，首饰，神佑）装备总量  
+<BR><BR><BR>
+#IF<BR>
+checkitems 传送戒指 2<BR>
+#ACT<BR>
+SENDMSG 5 你身上有2个传送戒指....<BR><BR><BR>
+
+</BODY>
+</html>

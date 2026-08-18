@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>取两个时间之间的相差</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font size="5">取两个时间之间的相差</font></strong> </p>
+<font size="3"><span class="STYLE2"><strong>功能：</strong>取两个时间之间的相差（时间2-时间1）</span><br />
+<strong>说明：</strong> GETINTERVAL 时间1 时间2 (0:年 1:月 2:星期 3:天 4:时 5:分 6:秒) 保存变量<br /><br /><br /><br />
+
+
+
+功能: 取两个时间之间的相差（时间2-时间1）<br />
+格式: GETINTERVAL 时间1 时间2 (0:年 1:月 2:星期 3:天 4:时 5:分 6:秒) 保存变量<br /><br />
+
+例子：<br />
+
+[@时间计算]<br />
+#IF<br />
+#ACT<br />
+GETINTERVAL &lt;$datetime&gt; &lt;$YEAR&gt;-&lt;$MONTH&gt;-&lt;$DAY&gt;,23:59:59 6 S$时间<br />
+SENDMSG 0  距离当天结束还剩余&lt;$STR(S$时间)&gt;秒<br /><br /><br /><br />
+注意：服务器的时间格式修改为:yyyy-M-d,否则会提示该命令的时间格式错误<br />
+
+
+
+
+
+
+
+
+<br /><br /><br />
+
+
+
+
+</body>
+
+</html>

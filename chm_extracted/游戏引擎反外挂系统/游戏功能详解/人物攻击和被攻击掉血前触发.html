@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>人物攻击和被攻击掉血前触发、修改当前伤害血量</title>
+</head>
+
+<body>
+
+功能说明：人物攻击和被攻击掉血前触发、修改当前伤害血量</br></br>
+
+格式：ChangeDamageValue 类型(0=值,1=百分比)  操作符(+,-,=)  值</br></br>
+
+注意：当前伤害血量仅用于以下触发</br></br>
+增加伤害前触发：</br>
+人物攻击目标掉血前：@AttackDamage</br>
+英雄攻击目标掉血前：@HeroAttackDamage</br>
+人物被攻击掉血前：@StruckDamage</br>
+英雄被攻击掉血前：@HeroStruckDamage</br></br></br>
+
+
+
+增加NPC变量，当前伤害掉血量（仅用于以下触发）：&lt;$DamageValue> &lt;$H.DamageValue&gt;</br></br>
+
+[@AttackDamage]</br>
+#ACT</br>
+SENDMSG 6 人物攻击目标，掉血量为&lt;$DamageValue&gt;，攻击加成10点血量</br>
+ChangeDamageValue 0 + 10</br></br>
+
+
+[@HeroAttackDamage]</br>
+#ACT</br>
+SENDMSG 6 英雄攻击目标，掉血量为&lt;$H.DamageValue&gt;，攻击加成10点血量</br>
+H.ChangeDamageValue 0 + 10</br></br>
+
+[@StruckDamage]</br>
+#ACT</br>
+SENDMSG 6 人物被攻击，掉血量为&lt;$DamageValue&gt;，抵御掉血量的50%</br>
+ChangeDamageValue 1 - 50</br></br>
+
+[@HeroStruckDamage]</br>
+#ACT</br>
+SENDMSG 6 英雄被攻击，掉血量为&lt;$H.DamageValue&gt;，抵御掉血量的50%</br>
+H.ChangeDamageValue 1 - 50</br></br></br></br>
+
+
+
+
+
+
+
+</br></br></br></br>
+
+
+
+
+
+</p>
+</body>
+</html>

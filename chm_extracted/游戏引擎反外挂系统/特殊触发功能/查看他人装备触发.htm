@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>查看他人装备触发、查看装备触发[!]</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<BODY>
+</br></br></br></br></br></br></br>
+<P><FONT face=Arial size=2><FONT face=Fixedsys>功能: 查看他人装备触发、查看装备属性触发</FONT> 
+</FONT></P>
+
+
+</br></br></br></br>
+查看他人装备触发：@QueryUserState</br>
+查看他人英雄装备触发：@QueryUserHeroState</br></br>
+
+他人查看自己的装备触发：@UserQueryState</br>
+他人查看自己英雄的装备触发：@UserQueryHeroState</br></br>
+
+[@QueryUserState]</br>
+#ACT</br>
+SENDMSG 5 你查看了他人&lt;$UserStateName&gt;的装备 </br></br>
+
+[@QueryUserHeroState]</br>
+#ACT</br>
+SENDMSG 5 你查看了英雄&lt;$UserStateName&gt;的装备 </br></br>
+
+[@UserQueryState]</br>
+#ACT</br>
+SENDMSG 5 他人&lt;$CurUserName&gt;查看了你的装备 </br></br>
+
+[@UserQueryHeroState]</br>
+#ACT</br>
+SENDMSG 5 他人&lt;$CurUserName&gt;查看了你的英雄装备 </br></br></br></br>
+
+;---------------------------------------------------------------------</br></br>
+
+
+<p><font face="楷体" color="#ff0000" size="6"><strong>*中止查看他人或英雄装备”</strong></font></p>
+
+命令：stopQueryUserState</br></br>
+
+
+[@QueryUserState]</br>
+#ACT</br>
+stopQueryUserState</br>
+SENDMSG 5 禁止查看他人&lt;$UserStateName&gt;的装备 </br></br>
+
+[@QueryUserHeroState]</br>
+#ACT</br>
+stopQueryUserState</br>
+SENDMSG 5 禁止查看英雄&lt;$UserStateName&gt;的装备 </br></br>
+
+[@QueryPlayMonsterState]</br>
+#ACT</br>
+stopQueryUserState</br>
+SENDMSG 5 禁止查看人形怪&lt;$UserStateName&gt;的装备 </br></br>
+;---------------------------------------------------------------------</br></br>
+[@QueryUserState]</br>
+#ACT</br>
+MOV S1 &lt;$UserStateName&gt;</br>
+;SetCurrTarget 名称 (名称空的情况下表示清空当前对象;设置指定人物为当前对象，要求和执行脚本的玩家在同一地图且坐标在20格以内)</br>
+;使用SetCurrTarget设置当前对象</br>
+SetCurrTarget S1</br></br>
+
+#IF</br>
+CompareText &lt;$C.USERNAME&gt; S1</br>
+;检测设置的对象是否成功</br>
+#say</br>
+当前对象名称：\</br>
+【&lt;$C.USERNAME&gt; 】等级=【&lt;$C.LEVEL&gt; 】攻击=【&lt;$C.DC&gt; - &lt;$C.MAXDC&gt; 】PK值=【&lt;$C.PKPOINT&gt; 】\</br>
+#ELSESAY</br>
+对象获取失败。</br>
+
+
+<P></P>
+</BODY>
+</html>

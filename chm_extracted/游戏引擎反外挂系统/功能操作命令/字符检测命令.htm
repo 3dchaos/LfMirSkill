@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>字符检测命令GetStringPosEX</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>字符检测命令GetStringPosEX</FONT>。</FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT><BR>
+GetStringPosEX A B C D E F<BR>
+参数A：文件路径<BR>
+参数B：检测字符(支持变量、支持大小写字母、支持数字)<BR>
+参数C：N1返回检测的字符所在的行数(N变量不是固定，可以更换其它数字型变量)<BR>
+参数D：S1返回检测的字符所在的行数(S变量不是固定，可以更换其它字符型变量)<BR>
+参数E：是否绝对路径(0:相对路径  1:绝对路径)两种模式<BR>
+参数F：匹配模式(0或空:包含匹配; 1:完全匹配)<BR>
+<BR>
+
+命令作用：检测参数B字符，是否在指定文本中包含。<BR>
+命令作用：如果包含则返回字符所在文本中的行数到参数C变量，本行所有内容返回到参数D变量。<BR><BR>
+
+例如：<BR>
+#IF<BR>
+GetStringPosEX ..\QuestDiary\测试.txt 管理员1号 N1 S1 0<BR>
+#ACT<BR>
+SendMsg 5 字符在文本中的行数:&lt;$STR(N0)&gt;，本行所有内容是:&lt;$STR(S1)&gt;。<BR>
+#ELSEACT<BR>
+SendMsg 5 字符不在测试.txt文本中。<BR><BR><BR>
+
+
+测试.txt<BR>
+---------------------------------------<BR>
+管理员1号|奖励100元宝|奖励1000金刚石<BR>
+管理员2号|奖励200元宝|奖励2000金刚石<BR>
+管理员3号|奖励300元宝|奖励3000金刚石<BR><BR>
+
+示范2：<BR>
+[@GetStringPosEx]<BR>
+;GetStringPosEX 文件路径  包含字符串  行数变量  文本变量  是否绝对路径<BR>
+#if  <BR>
+GetStringPosEX ..\QuestDiary\111.txt aabb N1 S1 0<BR>
+#act<BR>
+sendmsg 6 字符在文本中的行数:&lt;$STR(N1)&gt;，本行所有内容是:&lt;$STR(S1)&gt;。<BR><BR>
+
+;==========================================</font></p>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>带缓存的字符检测命令：</STRONG></FONT><BR>
+CacheGetStringPosEx；命令格式同上<BR><BR>
+
+
+
+
+
+</BODY>
+</HTML>
+
+ 

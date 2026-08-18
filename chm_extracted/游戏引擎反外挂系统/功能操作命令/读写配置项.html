@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>读写配置项,读写ini配置项</title>
+</head>
+
+<body>
+
+
+</br></br>
+</br></br>
+
+
+说明：读写ini配置项</br></br>
+
+---------------------------------------------------------------------------------------------</br></br></br>
+说明：</br></br>
+
+
+WriteConfigFileItem 写配置项 （最后加个参数 1为绝对路径，，0或者留空为默认的相对路径)</br>
+功能说明：可以把一些数据进行配置保存 你也可以把它当成一种变量保存方式</br></br>
+
+
+ReadConfigFileItem 读配置项  （最后加个参数 1为绝对路径，，0或者留空为默认的相对路径)</br>
+功能说明：获取出配置文件中的配置项内容 </br></br>
+
+此两个命令配合使用 就相当于变量保存操作 </br></br></br>
+
+
+
+
+示例：</br>
+[@main]</br>
+&lt;写配置项&gt; &lt;请输入你要写入配置项的内容/@@InPutString3&gt;\</br>
+&lt;读配置项内容/@读配置项&gt; &lt;$STR(S$配置项内容)&gt;\</br></br>
+
+[@InPutString3]</br>
+#IF</br>
+#ACT</br>
+;写配置项</br>
+WriteConfigFileItem ..\QuestDiary\KEY.txt &lt;$USERNAME&gt; 内容 &lt;$STR(S3)&gt;</br>
+SENDMSG 6 你已经把你输入的内容写到配置文件中KEY.txt</br></br>
+
+[@读配置项]</br>
+#IF</br>
+#ACT</br>
+;读配置项</br>
+ReadConfigFileItem ..\QuestDiary\KEY.txt &lt;$USERNAME&gt; 内容 &lt;$STR(S$配置项内容)&gt;</br>
+SENDMSG 6 你已经把配置文件KEY.txt中的内容获取出</br>
+GOTO @main</br></br>
+
+
+
+删除配置文件中的一行：</br>
+DelConfigFileItem 文件名 设置 用户  （删除 用户 = aaaa 这一行）</br></br>
+删除配置文件中的一个区：</br>
+DelConfigFileSection 文件名 设置 （删除 [设置] 及设置以下的项）</br></br></br></br>
+<B>WriteConfigFileItem  ReadConfigFileItem  增加支持绝对路径，注意使用绝对路径参数必须完整！</B></br></br></br></br>
+;================================================================以下命令属高效率=============================</br></br>
+ReadCacheConfigFileItem</br>
+WriteCacheConfigFileItem</br>
+DelCacheConfigFileItem</br>
+DelCacheConfigFileSection</br></br>
+
+注：这4个是 Cache(缓存)，操作速度会比不带cache的快很多，问题就是，在M2运行过程中，只能用脚本操作，手动操作的无效。如果ini文件不存在手动操作的情况下，就用Cache</br>
+Cache的特点是，对ini的操作只打开一次，然后一直在内存缓存，所以只命令操作才有效，手动操作无效。关闭引擎时候才会保存到INI文件内，引擎运行期间一直内存中运行，所以启动引擎后手动修改INI文件信息是无效的</br></br>
+
+在没有手动操作ini的情况下，推荐用带cache的。不带cache的比较耗时。</br></br>
+
+比如提现：操作会删除提现记录属于手动操作，所以不能使用cache，但计算战斗力属于内部引擎操作无手动干预，可以使用带cache的！</br></br></br></br>
+
+
+
+
+</br></br>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>设置装备发光特效</title>
+</head>
+
+<body>
+<p>格式: SETITEMEFFECT 位置(-1时是升级框中的装备, 0-51时是穿在身上的装备， boxitem0-boxitem7为自定义OK框) 特效编号(0-50000,0为清除特效)    特效位置</p>
+<p>特效编号需要在列表信息2-特效列表中编辑好的（支持特效编号中所有类型特效，不局限性于发光特效）</p>
+<p>特效位置0-2  ，可以同时给物品同时设置3个特效编号进行显示，参数3为空或0为默认</p>
+
+<p>[@main]<br />
+  #ACT<br />
+  SETITEMEFFECT  0 1</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+
+<B>注：设置英雄装备特效命令为：H.SETITEMEFFECT</b></br></br>
+
+
+;----------------------------------------------------------------------</br></br>
+
+例子脚本：</br></br>
+[@main]</br>
+#ACT</br>
+SETITEMEFFECT 6 1</br>
+SendMsg 6  左手镯附加了特效编号1，位置0</br></br>
+
+
+#ACT</br>
+SETITEMEFFECT 6 0 </br>
+SendMsg 6  左手镯关闭了位置0特效编号</br></br>
+
+;-----------------上面为默认。下面为扩展需求</br></br>
+
+#ACT</br>
+SETITEMEFFECT 6 1 1</br>
+SendMsg 6  左手镯附加了特效编号1，位置1</br></br>
+
+#ACT</br>
+SETITEMEFFECT 6 0 1</br>
+SendMsg 6  左手镯关闭了位置1的特效</br></br>
+
+
+;-----------------</br>
+#ACT</br>
+SETITEMEFFECT 6 5 2</br>
+SendMsg 6  左手镯附加了特效编号5，位置2</br></br>
+
+#ACT</br>
+SETITEMEFFECT 6 0 2</br>
+SendMsg 6  左手镯关闭了位置2的特效</br></br>
+
+
+
+
+
+
+
+==================================================</br></br></br></br>
+
+
+
+装备位置：</br>
+-1 升级框</br>
+0 盔甲</br>
+1 武器</br>
+2 照明物（蜡烛，此物品属性升级无效）</br>
+3 项链</br>
+4 头盔</br>
+5 右手镯</br>
+6 左手镯</br>
+7 右戒指</br>
+8 左戒指</br>
+9 无(放护身符位置)</br>
+10 腰带</br>
+11 鞋子</br>
+12 宝石</br>
+13 斗笠</br>
+14 军鼓</br>
+15 马牌</br>
+16 盾牌</br>
+17 灵玉</br>
+18 时装衣服</br>
+19 时装武器</br>
+20 时装项链</br>
+21 时装头盔</br>
+22 时装左手镯</br>
+23 时装右手镯</br>
+24 时装左戒指</br>
+25 时装右戒指</br>
+26 时装勋章</br>
+27 时装腰带</br>
+28 时装靴子</br>
+29 时装宝石</br>
+30-35 首饰盒</br>
+40-51 生肖盒</br>
+boxitem0-boxitem7  自定义OK框</br>
+</body>
+</html>

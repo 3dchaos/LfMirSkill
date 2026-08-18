@@ -1,0 +1,56 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>设置装备绑定状态[!]</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<BODY>
+<P><FONT face=Arial size=2><FONT face=Fixedsys> 功能：设置装备绑定状态。 <br>
+格式：SetItemState 装备位置(-1~13,-1时为OK框中物品) 项目(0-5) 属性(0为正常,1为绑定) <br>
+项目: 0 禁止扔 1 禁止交易 2 禁止存 3 禁止修 4 禁止出售 5 禁止爆出 6 丢弃消失 7 禁止取下<FONT 
+size=3><BR><BR></FONT></FONT></FONT>
+
+
+
+
+[@检测绑定]<br>
+#IF<br>
+CheckItemState 0 0<br>
+#ACT<br>
+SENDMSG 6 该装备已经设置过禁止扔<br>
+#ELSEACT<br>
+SENDMSG 6 没有绑定禁止扔掉<br>
+
+
+
+
+<p>[@设置禁止扔]<br>
+  #IF<br>
+  CheckItemState 0 0<br>
+  #ACT<br>
+  SENDMSG 6 该装备已经设置过禁止扔<br>
+  #ELSEACT<br>
+  SetItemState 0 0 1<br>
+  SENDMSG 6 该装备禁止扔</p>
+
+</p></p>
+<br><br>
+
+
+[@禁止取下]<br>
+#IF<br>
+CheckItemState 1 7<br>
+#ACT<br>
+SENDMSG 6 该装备已经设置过取下<br>
+#ELSEACT<br>
+SetItemState 1 7 1<br>
+SENDMSG 6 该装备禁止取下<br><br><br><br><br>
+
+<P><FONT 
+face=Fixedsys><BR><BR>
+</FONT></P>
+</BODY>
+</html>

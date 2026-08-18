@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>自定义进度条和自定义属性演示脚本</title>
+</head>
+
+<body>
+</BR></BR></BR></BR></BR>
+自定义进度条和自定义属性示例脚本</BR></BR>
+
+[@main]</BR>
+#SAY</BR>
+\\</BR>
+自定义装备进度条 &lt;开启/@开启装备进度条&gt;  &lt;值+20【带100%触发】/@装备进度条值+&gt;  &lt;检测/@检测装备进度条>  &lt;取值/@取装备进度条值&gt;\\</BR></BR>
+
+自定义装备属性   &lt;开启/@开启装备属性&gt;  &lt;值+20/@装备属性值+>  &lt;检测/@检测装备属性值&gt;  &lt;取值/@取装备属性值&gt;\\</BR></BR></BR>
+
+
+
+;==============================================================</BR>
+
+[@开启装备进度条]</BR>
+#ACT</BR>
+
+; 开启自定义装备进度条0</BR>
+SETCUSTOMITEMPROGRESSBAR 1 0 0 1</BR>
+
+; 设置自定义装备进度条0的名称</BR>
+SETCUSTOMITEMPROGRESSBAR 1 0 1 刀魂%p-%m： </BR>
+
+; 设置自定义装备进度条0的名称</BR>
+SETCUSTOMITEMPROGRESSBAR 1 0 1 刀魂%r%： </BR>
+
+; 设置自定义装备进度条0的颜色</BR>
+SETCUSTOMITEMPROGRESSBAR 1 0 2 255</BR>
+; 设置自定义装备进度条0的图片播放张数</BR>
+SETCUSTOMITEMPROGRESSBAR 1 0 3 15</BR>
+
+; 设置自定义装备进度条0上的值按数值方式显示</BR>
+SETCUSTOMITEMPROGRESSBAR 1 0 4 2</BR>
+
+; 设置自定义装备进度条0的最大值为 1000</BR>
+SETCUSTOMITEMPROGRESSBARVALUE 1 0 0 = 1000</BR>
+; 设置自定义装备进度条0的当前值为 60%</BR>
+SETCUSTOMITEMPROGRESSBARVALUE 1 0 2 = 60</BR></BR></BR>
+
+;==============================================================</BR>
+
+[@取装备进度条值]</BR>
+#ACT</BR>
+GetCustomItemProgressbarValue 1 0 0 &lt;$STR(N1)&gt;</BR>
+GetCustomItemProgressbarValue 1 0 1 &lt;$STR(N2)&gt;</BR>
+GetCustomItemProgressbarValue 1 0 2 &lt;$STR(N3)&gt;</BR>
+SENDMSG 6 最大值&lt;$STR(N1)&gt;</BR>
+SENDMSG 6 当前值&lt;$STR(N2)&gt;</BR>
+SENDMSG 6 百分比值&lt;$STR(N2)&gt;%</BR></BR></BR>
+
+;==============================================================</BR>
+
+[@武器进度条0满100%]</BR>
+#ACT</BR>
+SENDMSG 6 ★★★★★★★★进度条满了★★★★★★★★★★。。。。。</BR></BR>
+
+
+[@装备进度条值+]</BR>
+#IF</BR>
+CheckCustomItemProgressbarValue 1 0 2 < 100</BR>
+#ACT</BR>
+; 设置自定义装备进度条0的当前值+20</BR>
+SETCUSTOMITEMPROGRESSBARVALUE 1 0 1 + 20</BR>
+#ELSEACT</BR>
+BREAK</BR></BR>
+
+;判断进度条是否达到100%</BR>
+#IF</BR>
+CheckCustomItemProgressbarValue 1 0 2 = 100</BR>
+#ACT</BR>
+goto @武器进度条0满100%</BR></BR>
+
+;==============================================================</BR>
+
+[@检测装备进度条]</BR>
+#IF</BR>
+CheckCustomItemProgressbarValue 1 0 2 > 40</BR>
+#ACT</BR>
+SENDMSG 6 检测成功</BR></BR>
+
+;==============================================================</BR>
+
+[@开启装备属性]</BR>
+#IF</BR>
+#ACT</BR>
+SetCustomItemText 1 我的自定义属性显示</BR>
+SetCustomItemTextColor 1 249</BR>
+
+;设置自定义装备属性0的颜色 </BR>
+SetCustomItemAbil 1 0 0 250</BR>
+
+;设置自定义装备属性0绑定属性1</BR>
+SetCustomItemAbil 1 0 1 1</BR>
+
+;设置自定义装备属性0的显示位置为1</BR>
+SetCustomItemAbil 1 0 2 1</BR>
+
+;设置自定义装备属性0为百分比显示</BR>
+SetCustomItemAbil 1 0 3 1</BR>
+
+;设置自定义装备属性0的值</BR>
+SetCustomItemValue 1 0 = 20</BR></BR>
+
+;-------------------------------</BR></BR>
+
+;设置自定义装备属性1的颜色 </BR>
+SetCustomItemAbil 1 1 0 249</BR>
+
+;设置自定义装备属性1绑定属性2</BR>
+SetCustomItemAbil 1 1 1 2</BR>
+
+;设置自定义装备属性1的显示位置为2</BR>
+SetCustomItemAbil 1 1 2 2</BR>
+
+;设置自定义装备属性1为非百分比</BR>
+SetCustomItemAbil 1 1 3 0</BR>
+
+;设置自定义装备属性1的值</BR>
+SetCustomItemValue 1 1 = 40</BR></BR>
+
+;================================================================</BR>
+[@装备属性值+]</BR>
+#ACT</BR>
+SetCustomItemValue 1 0 + 20</BR></BR>
+
+;================================================================</BR>
+[@检测装备属性值]</BR>
+#IF</BR>
+CheckCustomItemValue 1 0 > 100</BR>
+#ACT</BR>
+SENDMSG 6 装备属性值0大于100</BR></BR>
+
+;================================================================</BR>
+[@取装备属性值]</BR>
+#ACT</BR>
+GetCustomItemValue 1 0 &lt;$STR(N1)&gt; &lt;$STR(N2)&gt;</BR></BR>
+
+; 第2个变量不为0时，表示百分比</BR>
+#IF</BR>
+Equal &lt;$STR(N2)&gt; 0</BR>
+#ACT</BR>
+SENDMSG 6 装备属性值0为&lt;$STR(N1)&gt;</BR>
+#ELSEACT</BR>
+SENDMSG 6 装备属性值0为&lt;$STR(N1)&gt;%</BR></BR></BR></BR></BR></BR>
+
+
+=====================================================================================================================</br></br></br>
+相关说明：</br>
+改物品的属性，需用LOCKUPDATEITEM锁定要修改的装备</br>
+---------</br>
+物品在人物身上。</br>
+
+
+LOCKUPDATEITEM  XX</br>
+
+UPDATEITEM</br>
+</br>
+
+--------------</br></br>
+物品不在人物身上</br>
+LOCKUPDATEITEM  XX</br>
+
+UPDATEITEM</br></br></br></br>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

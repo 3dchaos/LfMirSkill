@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>脚本发送屏幕震动[!]</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>脚本发送屏幕震动[脚本命令：SCENESHAKE  0-4[0自己，1所有地图，2屏幕范围内，3.当前地图 4.指定地图 地图ID] 次数（留空默认1次） 是否受内挂选项“屏幕震动”选项控制(1为受控，空为不受)</FONT></FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT></STRONG></FONT></P>
+<P>[@main]<br>
+&lt;自己震动0/@SceneShake&gt; \<br>
+&lt;所以地图震动1/@SceneShake1&gt; \<br>
+&lt;可视范围震动2/@SceneShake2&gt;  \<br>
+&lt;当前地图震动3/@SceneShake3&gt;  \<br>
+&lt;比奇省屏幕震动/@SceneShake4&gt;\</p>
+
+[@SceneShake]<br>
+#IF<br>
+#ACT<br>
+SceneShake 0  3<br>
+;自己震动3次，后面参数不要的话为自己震动一次
+break<br></p>
+
+[@SceneShake1]<br>
+#IF<br>
+#ACT<br>
+SceneShake 1<br>
+break</p>
+
+[@SceneShake2]<br>
+#IF<br>
+#ACT<br>
+SceneShake 2 1 1<br>
+;屏幕范围内震动1次，本次震动需勾选内挂"屏幕震动"选项，否则看不到震动效果<br>
+break</p>
+
+[@SceneShake3]<br>
+#IF<br>
+#ACT<br>
+SceneShake 3<br>
+break</p>
+
+[@SceneShake4]<br>
+#IF<br>
+#ACT<br>
+;命令     参数 地图<br>
+SceneShake 4 0<br>
+break</P>
+</BODY>
+</HTML>

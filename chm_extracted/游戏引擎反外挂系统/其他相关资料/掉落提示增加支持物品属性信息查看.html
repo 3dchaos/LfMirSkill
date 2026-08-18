@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>掉落提示增加支持物品属性信息查看</title>
+</head>
+
+<body>
+</br></br></br></br>
+默认：</br>
+DropItemHint=物品[%Item]从[%Name]身上掉落在地图%Map(%X,%Y)处</br></br></br></br>
+
+如果需要掉落显示物品属性请到String.ini文件内将DropItemHint项修改如下即可：</br></br>
+DropItemHint=物品[%ShowItem]从[%Name]身上掉落在地图%Map(%X,%Y)处</br></br></br></br></br>
+
+
+注：（20180512修改如下）</br>
+%ShowItem 显示当前掉落物品名字 </br></br>
+%ShowDBItem 显示数据库名字  就算改名了也显示数据库的</br></br></br></br>
+
+
+2020824修改:</br>
+人物掉落提示/怪物掉落提示：HumDropItemHint，DropItemHint，增加数据库名变量%DBItem  (原默认的%Item修改为支持掉落触发改名后的名字显示)</br></br>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

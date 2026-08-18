@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>Npc文字Text使用</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>Npc对话框文字Text运用</FONT></FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>功能：</FONT>设置文字在对话框中坐标、颜色、字体大小、字体、粗体显示.</STRONG></FONT></P>
+<P>说明：<br><br><br><br><br>
+
+格式：Text:文字:提示:X:Y{FCOLOR=250;FSIZE=14;FNAME=黑体;FBOLD=1}/@测试<br><br>
+
+示范： &lt;Text:文字内容|提示:0:0{FCOLOR=250;FSIZE=14;FNAME=黑体}/@测试&gt; \ \<br><br><br>
+
+<b>绝对坐标示范：</b> &lt;&Text:绝对坐标|提示:0:0{FCOLOR=250;FSIZE=14;FNAME=黑体}/@测试&gt; \ \<br><br><br><br><br><br>
+
+
+
+<b>字体25号，加粗，楷体，变色显示</b><br>
+&lt;Text:绝对坐标|提示:30:20{AUTOCOLOR=254,251,168,191,250,70,245,249,253;FSIZE=25;FNAME=楷体;FBOLD=1}/@测试&gt; \ \\ \\ \<br><br><br><br>
+
+
+
+
+<b>颜色253，字体25号，宋体</b><br>
+&lt;Text:测试下这段文字的显示|提示信息:10:20{FCOLOR=253;FSIZE=25;FNAME=宋体}/@测试&gt;<br><br><br><br><br><br>
+
+
+参数说明:<br>
+
+AUTOCOLOR  彩色字体设置<br>
+FSIZE  字体大小<br>
+FNAME 字体类型<br>
+FBOLD  字体加粗<br>
+FCOLOR 字体颜色<br>
+
+</BODY>
+</HTML>

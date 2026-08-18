@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>设置人物伤害吸收</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<body>
+<P><FONT face=Fixedsys size=2> 说明:设置人物可吸收收到的攻击伤害. </FONT></P>
+<P><FONT face=Fixedsys size=2>格式: SetSuckDamage 操作符(+ - =) 总吸收值(1-2000000000) 
+吸收比例(1-1000) 成功率(1-100)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;吸收比例 1=0.1% 
+500=50% 1000=100%</P>
+<P><FONT color=#ffffff><FONT color=#ff0000><FONT 
+color=#000000>例子: 
+设置总共吸收1000点伤害,每次吸收20%伤害,成功率95%<BR>#IF<BR>CheckGold 10000<BR>#ACT <BR>  SetSuckDamage 
++ 1000 200&nbsp;95<BR>    Take 
+金币 10000<BR></FONT></FONT></FONT></P>
+<P><FONT color=#ffffff><FONT color=#ff0000><FONT 
+color=#000000></FONT></FONT></FONT>&nbsp;</P>
+<P><FONT color=#ffffff><FONT color=#ff0000><FONT 
+color=#000000></FONT></FONT></FONT>&nbsp;</P>
+<P><FONT color=#ffffff><FONT color=#ff0000><FONT 
+color=#000000>特别说明:当人物设置伤害吸收后,收到攻击后会按照一定比例减少受到的伤害.<BR>例如:当前拥有5000点伤害吸收,每次吸收20%,成功率100%.当前攻击受到100点伤害,那么本次攻击实际受到的伤害是80点.当前伤害吸收剩余4980点,此状态直到伤害吸收等于0时恢复,下线不保存.</FONT></FONT></FONT><FONT 
+color=#ffffff><FONT color=#ff0000><FONT color=#000000></P><P><BR>
+
+
+<BR><BR><BR>
+总吸收值设置为 -1时 无限数值(必须用等于号，不可以加减) <BR><BR>
+
+[@77]<BR>
+#ACT<BR>
+SetSuckDamage = -1 800 100<BR><BR><BR><BR>
+
+
+
+
+伤害吸收值变量：&lt;$SUCKDAMAGE&gt;<P><BR>
+<P><BR></P></FONT></FONT></FONT></FONT></body>
+</html>

@@ -1,0 +1,73 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>扩展check支持批量检测个人标识</title>
+</head>
+
+<body>
+ </br> </br>
+<p><font color="#0000FF"><b>扩展check支持批量检测</b></font></p>
+<font face="Arial" size="2"> </br> </br> </br> </br> </br>
+
+
+check支持批量检测</br> </br>
+
+多个非连续的标识可以用逗号隔开，连续可用 - 串联</br>
+格式：check [1,2,4-6,8] 1</br></br>
+
+
+
+
+
+#if</br>
+check [1,2,4-6,8] 1</br>
+#act</br>
+SENDMSG 6  1,2,4,5,6,8全为1</br></br></br></br>
+
+
+
+
+<p><font face="楷体" color="#ff0000" size="5"><strong>SET支持批量设置个人标识</strong></font></p>
+
+格式：</br>
+SET [1,2,4-6,8] 1</br>
+SET [1,2,4-6,&lt;$STR(N$变量)&gt;] 1</br></br></br>
+
+<p><font face="楷体" color="#ff0000" size="5"><strong>个人标识取反  set [n] -1</strong></font></p>
+
+
+; 新增方式 set [n] -1</br></br>
+
+
+[@main1]</br>
+
+个人标识9的值为：&lt;$flag(9)&gt;  \</br>
+&lt;修改flag_9/@修改flag9&gt;\</br>
+&lt;flag取反_9/@取反flag9&gt;</br></br>
+
+
+[@取反flag9]</br>
+#act</br>
+set [9] -1</br>
+goto @main1</br></br>
+
+
+[@修改flag9]</br>
+#IF</br>
+check [9] 0</br>
+#act</br>
+set [9] 1</br>
+goto @main1</br>
+#elseact</br>
+set [9] 0</br>
+goto @main1</br></br></br>
+
+
+
+<p><font face="楷体" color="#0000FF" size="6"><strong>特别注意：个人标识从1开始，0是无效的！！！</strong></font></p>
+
+</body>
+
+</html>

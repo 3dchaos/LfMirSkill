@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=gb2312">
+<META name="GENERATOR" content="QuickCHM">
+<TITLE>人物登录脚本</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>&nbsp;&nbsp;&nbsp; 
+即在人物进入游戏时自动执行的脚本，通过此脚本可对人物进行大量的功能控制。</FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT><BR></STRONG>在目录&nbsp;Envir\MapQuest_def\&nbsp;中建立文件名为QManage.txt的脚本，按以下格式编写脚本：</P>
+<P><FONT 
+size=2>========================================================================<BR>;脚本例子 
+<BR></FONT><FONT color=#0000ff size=2><FONT color=#000000>[@Login]<BR>#IF&nbsp;<BR>&nbsp; IsAdmin<BR>#ACT<BR>&nbsp; 
+CHANGEMODE 2 1<BR>&nbsp; CHANGEMODE 3 1<BR>&nbsp; 
+SENDMSG 5 
+%s，欢迎进入游戏，当前模式为GM管理模式。========================================================================</FONT><BR><FONT 
+color=#ff0000>注：</FONT><FONT color=#000000>如该脚本更改后，不须重启M2使其生效，可用<FONT 
+color=#ff0000>@ReloadManage</FONT>命令重新加载该脚本。 
+<BR></P></FONT></FONT></FONT>
+</BODY>
+</HTML>
+
+ 

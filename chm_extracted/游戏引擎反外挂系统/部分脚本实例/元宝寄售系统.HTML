@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>开通元宝寄售服务</TITLE>
+</HEAD>
+<BODY>
+
+
+功能: 开通元宝寄售服务</br>
+格式: OPENYBDEAL 数字 //开通元宝交易，数字表示需要的元宝数量   永久使用,保存入人物数据里</br>
+
+
+@@dealybme 寄售物品</br></br>
+
+QUERYYBSELL //查询正在出售的物品</br>
+QUERYYBDEAL //查询可以的购买物品</br></br>
+
+&lt;$QUERYYBDEALLOG&gt; //显示交易记录</br></br></br>
+
+ 
+
+下面是完整脚本实例</br></br></br>
+
+
+
+(@ybdeal )</br>
+[@main]</br>
+您好，有什么可以效劳的？我可以为您提供关于元宝的各类服务 \</br>
+现在已经开通了金刚石的元宝交易功能，\</br>
+点击交易栏的第十格可以放置金刚石进行交易，\</br>
+如果不更新客户端，&lt;交易栏的第十格将不能使用&gt;。\</br>
+&lt;查询元宝交易协议/@rule1&gt;                  &lt;开通元宝交易/@rule&gt;\</br>
+&lt;查询元宝数/@askybnum&gt;                        &lt;出售物品/@@dealybme&gt;\</br>
+&lt;查询正在出售的物品/@askybsell&gt;                &lt;购买物品/@askybdeal&gt;\</br>
+&lt;查询交易信息/@askybdeallog&gt;\</br></br></br>
+
+
+[@askybsell]</br>
+#ACT</br>
+QUERYYBSELL</br></br>
+
+[@askybdeal]</br>
+#ACT</br>
+QUERYYBDEAL</br></br>
+
+[@askybdeallog]</br>
+&lt;$QUERYYBDEALLOG&gt;</br></br>
+
+[@askybnum]</br>
+你的帐号里元宝的总数是：&lt;$GAMEGOLD&gt;颗。\ \ \</br>
+&lt;返回/@main&gt;</br></br>
+
+[@rule]</br>
+人人都知道，我是玛法大陆最公正的人\</br>
+您要开通以元宝出售道具，必须向我支付1个元宝\</br>
+我将为您提供永久、公正的服务\ \</br>
+&lt;我已阅读并同意元宝交易协议，支付一个元宝开通元宝交易/@openybsell&gt;\</br>
+&lt;不同意/@exit&gt;</br></br>
+
+[@openybsell]</br>
+#ACT</br>
+//参数1 表示开通需要元宝</br>
+OPENYBDEAL 1</br></br>
+
+[@rule1]</br>
+您确定已仔细阅读了《元宝交易协议》并接受协议内的所有条款\</br>
+1、第一次使用元宝交易，必须开通元宝交易功能并向NPC支付1个元宝\</br>
+2、充值元宝是针对帐号进行的，\</br>
+该帐号下相同服务器的角色均可以使用这些元宝\</br>
+3、如果物品放在NPC处出售超过3天，交易将被终止，\</br>
+同时卖方取回物品时需额外再支付1个元宝。\</br>
+4、卖方在输入买方角色和元宝数量时，请注意输入正确的角色名\</br>
+因自己本身操作失误造成的损失系统将不进行补偿。\</br>
+&lt;下一页/@rule2&gt;</br></br>
+
+[@rule2]</br>
+5、在一笔交易未完成的情况下，交易双方均不可以再次进行元宝交易\</br>
+6、帐号在单组服务器携带元宝上限:9999个，\</br>
+元宝单次交易额最高不超过9999个，\</br>
+交易成功如果角色携带元宝数量超过上限，\</br>
+超过上限的元宝数量将被自动转换成游戏时间（天卡）\</br>
+7、交易成功，卖方将自动获得相应元宝\</br>
+8、玩家可在我这里查询最近一次的元宝交易记录\</br>
+在取消交易或接受交易物品时,若包裹栏无足够空间，则物品将不能取回\</br>
+&lt;返回/@main&gt;</br></br>
+
+[@AskYBSellFail]</br>
+没有查询到指定的记录\</br>
+&lt;返回/@main&gt;</br>
+[@AskYBDealFail]</br>
+没有查询到指定的记录\</br>
+&lt;返回/@main&gt; </br></br>
+
+

@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>获取对象的属性、获取属性</title>
+</head>
+
+<body>
+
+功能说明：获取对象的全体属性、获取怪物属性  （目标M.GetObjectAbilityEx）</br></br>
+
+格式：GetObjectAbilityEx 属性类型 变量</br></br></br></br>
+
+
+属性类型如下：</br>
+0: HP</br>
+1: MaxHP</br>
+2: MP</br>
+3: MaxMP</br>
+4: AC1</br>
+5: AC2</br>
+6: MAC1</br>
+7: MAC2</br>
+8: DC1</br>
+9: DC2</br>
+10: MC1</br>
+11: MC2</br>
+12: SC1</br>
+13: SC2</br>
+14: 攻击速度</br>
+15: 移动速度</br></br>
+
+#ACT</br>
+FS.GetObjectAbilityEx 0 N1</br>
+SendMsg 6 分身的血量为&lt;$STR(N1)&gt;</br></br>
+
+FS.M.GetObjectAbilityEx 0 N2</br>
+SendMsg 6 分身攻击目标的血量为&lt;$STR(N2)&gt;</br></br>
+
+
+M.GetObjectAbilityEx 0 N2</br>
+SendMsg 6 攻击目标的血量为&lt;$STR(N2)&gt;</br></br></br></br>
+
+
+
+
+对人物需变量传递：</br></br>
+
+#IF</br>
+CHECKCURRTARGETRACE = 0</br>
+#ACT </br>
+M.GetObjectAbilityEx 0 N1</br>
+GetHumVar &lt;$CURRRTARGETNAME&gt; &lt;$STR(N1)&gt; N1</br>
+SendMsg 6 目标人物的血量为&lt;$STR(N1)&gt;</br>
+SENDMSG 6 你攻击了人物【&lt;$CURRRTARGETNAME&gt;】。使用魔法ID=&lt;$CURRRUSEMAGICID&gt; 255 249</br>
+BREAK</br></br></br>
+
+
+
+</br></br></br></br>
+
+
+
+
+
+</p>
+</body>
+</html>

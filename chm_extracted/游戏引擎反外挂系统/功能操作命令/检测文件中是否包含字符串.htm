@@ -1,0 +1,24 @@
+<title>检测文件中是否包含字符串</title>
+<p>功能：<br />
+检测文件中是否包含字符串。</p>
+<p>格式：<br />
+  CheckContainsTextList  文件名  字符串<br />
+
+<p>;==========================================<br />
+  检查字符串是否包涵在另外一个字符串中<br />
+  [@Test]<br />
+#if<br />
+CheckContainsTextList  ..\QuestDiary\理想\理想爆率\10元地图.txt &lt;$MAP&gt; <br />
+#ACT<br />
+MESSAGEBOX  包含<br />
+  #elsesay <br />
+  不包含<br />
+<br /><br /><br /><br />
+
+注：
+新增的CheckCacheContainsTextList  同CheckContainsTextList用法一致，区别就是CheckCacheContainsTextList从缓存检测。会更快。<br />
+启动后不动态发生变化又要求速度的，可以用缓存检测（引擎启动后不会去手动修改）<br /><br /><br />
+
+CheckContainsTextList  支持绝对路径（地址直接写绝对路径即可）<br /><br />
+
+  ;==========================================</p>

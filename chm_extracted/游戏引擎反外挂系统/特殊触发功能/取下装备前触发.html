@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>人物取下装备前触发、英雄取下装备前触发</title>
+</head>
+
+<body>
+</br></br></br>
+功能说明：人物取下装备前触发、英雄取下装备前触发</br>
+</br>
+</br></br></br>
+QF触发：</br>
+人物取下装备前触发：@BeginTakeOff</br>
+英雄取下装备前触发：@HeroBeginTakeOff</br></br>
+
+请不要在@BeginTakeOff/@HeroBeginTakeOff做回收物品等操作</br></br>
+NPC命令：中止取下 StopTakeOff  仅用于上面2个触发</br></br>
+;例子</br></br>
+</br></br>
+[@BeginTakeOff]</br>
+#if</br>
+CHECKMAPNAME 3</br>
+#ACT</br>
+;中止装备取下操作</br>
+StopTakeOff</br>
+SENDMSG 6 你身上的物品位置&lt;$CurItemPos&gt;，名称：&lt;$CurItemName&gt;，改名名称：(&lt;$G_CurItemName&gt;)，ID&lt;$CurItemMakeIndex&gt; 在当前地图禁止更换！</br></br>
+
+
+
+</br></br>
+[@HeroBeginTakeOff]</br>
+#if</br>
+EQUAL &lt;$H.CurItemName&gt; 屠龙</br>
+#act</br>
+H.StopTakeOff</br>
+SENDMSG 7 禁止英雄脱装备：位置:&lt;$H.CurItemPos&gt;，物品:&lt;$H.CurItemName&gt;(&lt;$H.G_CurItemName&gt;)，ID:&lt;$H.CurItemMakeIndex&gt;</br></br></br></br>
+
+
+
+
+
+
+</br></br></br></br>
+
+
+
+
+
+</p>
+</body>
+</html>

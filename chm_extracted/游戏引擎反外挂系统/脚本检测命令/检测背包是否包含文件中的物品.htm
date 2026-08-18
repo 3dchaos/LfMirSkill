@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>检测背包是否包含文件中的物品</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>检测背包是否包含文件中的物品</FONT></FONT></P><BR><BR>
+
+<P><FONT size=2><FONT color=#0000ff><STRONG>命令：</STRONG></FONT><BR>
+CheckBagItems 文件名  物品名变量 数量变量<BR>
+CacheCheckBagItems 文件名  物品名变量 数量变量<BR><BR>
+<P><FONT size=2><FONT color=#0000ff><STRONG>说明：</STRONG></FONT><BR>
+检测背包是否包含文件中的物品,按文件中的物品顺序检测，检测到后返回<BR>
+高频率检测脚本请使用CacheCheckBagItems 缓存命令，效果更高<BR><BR><BR>
+
+
+
+[@测试]<BR>
+#IF<BR>
+CheckBagItems d:\a.txt S1 N1<BR>
+#ACT<BR>
+SendMsg 6 检测到背包中有d:\a.txt的物品，物品名为&lt;$STR(S1)&gt;，数量为&lt;$STR(N1)&gt;<BR>
+#ELSEACT<BR>
+SendMsg 6 未检测到背包中有d:\a.txt的物品<BR><BR><BR>
+
+[@测试1]<BR>
+#IF<BR>
+CheckBagItems ..\QuestDiary\回收系统\赤月装备.txt S1 N1<BR>
+#ACT<BR>
+SendMsg 6 检测到背包中有赤月装备物品，物品名为&lt;$STR(S1)&gt;，数量为&lt;$STR(N1)&gt;<BR>
+#ELSEACT<BR>
+SendMsg 6 未检测到背包中有赤月装备物品<BR><BR><BR>
+
+
+
+
+
+
+
+
+</BODY>
+</HTML>

@@ -1,0 +1,104 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>可视仓库</title>
+</head>
+
+<body>
+
+<p><font face="Fixedsys"><b><font color="#0000FF">可视仓库操作说明</font></b><br>
+<br>
+<br>
+<font color="#0000FF"><b>说明：</b></font><br>
+OpenStorageView  1  打开无限仓库（可视）<br>
+OpenStorageView  0 打开普通仓库（可视）<br>
+
+支持坐标调整打开窗口的位置，格式为：OpenStorageView   0/1  坐标x 坐标 y<br>
+
+<br><br><br>
+
+<br>
+<font color="#0000FF"><b>示例(打开默认仓库)：</b></font><br>
+  [@main]<br>
+#IF<br>
+#ACT<br>
+OpenStorageView  0</font></p>
+
+
+
+
+
+
+下面为扩展的默认仓库数量。默认仓库由之前的44个存储数量提升至49个，页数扩展增加3页，合计4页。<br><br>
+
+非可视仓库NPC脚本：<br>
+&lt;保管/@storage&gt; 物品\<br>
+&lt;保管2/@storage2&gt; 物品\<br>
+&lt;保管3/@storage3&gt; 物品\<br>
+&lt;保管4/@storage4&gt; 物品\<br><br>
+
+&lt;找回/@getback&gt; 物品\<br>
+&lt;找回2/@getback2&gt; 物品\<br>
+&lt;找回3/@getback3&gt; 物品\<br>
+&lt;找回4/@getback4&gt; 物品\<br><br><br>
+
+
+QF触发：<br>
+[@OpenStoratge2]<br>
+[@OpenStoratge3]<br>
+[@OpenStoratge4]<br><br><br>
+
+
+触发脚本示范：<br><br>
+
+[@OpenStoratge2]<br>
+#if <br>
+; 检查2号仓库是否开启<br>
+not CheckStorageOpen 2<br>
+#act<br>
+; 开启仓库  仓库号(2,3,4)  是否开启(0,1)<br>
+OpenStoratge 2 1<br>
+SendMsg 5  开启仓库2<br><br>
+
+
+
+
+<br><br><br><br><br><br><br>
+
+
+
+
+
+
+
+
+;========================================下方为无限仓库=========================<br><br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+注：无限仓库需要在M2-功能设置- 个人商店 内打开无限仓库功能和设置无限仓库存取数量<br>
+无限仓库保存在UserData\Storage目录内<br><br><br>
+
+
+<br>
+<font color="#0000FF"><b>示例(打开无限仓库)：</b></font><br>
+  [@main]<br>
+#IF<br>
+#ACT<br>
+OpenStorageView  1</font></p>
+
+</body>
+
+</html>

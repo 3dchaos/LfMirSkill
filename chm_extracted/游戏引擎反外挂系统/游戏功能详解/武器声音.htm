@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>武器声音、武器音效</TITLE>
+</HEAD>
+<BODY>
+<P><STRONG><FONT 
+size=5>自定义武器砍击的声音</FONT></STRONG></P>
+
+</br></br></br></br></br>
+数据库配置武器声音 物品数据库字段：Horse，当值为0时表示使用默认声音</br></br>
+
+武器Horse字段：砍出(空中)声音为低位，打在目标身上为高位 ,提供数据折分合并工具（引擎包/工具文件夹）</br></br>
+
+数据折分合并工具.exe 用法（专用工具计算数值 ，不自定义目标挨打声音 武器Horse延续以前直接填写,直接填写指定数字即可，需要定义挨打声音则需要工具计算）</br></br>
+
+
+当指定值时，读取指定序号的声音：</br></br>
+
+声音序号对应参考对照：Wav\sound.lst </br></br>
+
+（例： 乌木剑  Horse=54，则读取Wav\54.wav）  若要添加自己的声音，可以修改Wav\sound.lst空位置或往最后添加  --- 此条说明仅为低位声自定义，需高位声请使用工具计算Horse数值</br></br>
+
+1:	wav\1.wav</br>
+2:	wav\2.wav</br>
+3:	wav\3.wav</br>
+4:	wav\4.wav</br>
+5:	wav\5.wav</br>
+6:	wav\6.wav</br>
+7:	wav\7.wav</br>
+8:	wav\8.wav</br>
+9:	wav\9.wav</br>
+10:	wav\10.wav</br>
+11:	wav\11.wav</br>
+12:	wav\12.wav</br>
+13:	wav\13.wav</br>
+14:	wav\14.wav</br>
+15:	wav\15.wav</br>
+16:	wav\16.wav</br>
+17:	wav\17.wav</br>
+18:	wav\18.wav</br>
+19:	wav\19.wav</br>
+20:	wav\20.wav</br>
+21:	wav\21.wav</br>
+22:	wav\22.wav</br>
+23:	wav\23.wav</br>
+24:	wav\24.wav</br>
+25:	wav\25.wav</br>
+26:	wav\26.wav</br>
+27:	wav\27.wav</br>
+28:	wav\28.wav</br>
+29:	wav\29.wav</br>
+30:	wav\30.wav</br>
+31:	wav\31.wav</br>
+32:	wav\32.wav</br>
+48: 	wav\M42-2.wav</br>
+49: 	wav\game-over2.wav</br>
+50:	wav\50.wav</br>
+51:	wav\51.wav</br>
+52:	wav\52.wav</br>
+53:	wav\53.wav</br>
+54:	wav\54.wav</br>
+55:	wav\55.wav</br>
+56:	wav\56.wav</br></br></br></br></br>
+
+
+列表左侧为声音序号，如需设置 49: 	wav\game-over2.wav   那么Horse设置49(低位)即可 ！！！自己新增的声音文件需要将文件放入wav文件夹。然后 记事本打开sound.lst添加，然后将sound.lst集成到登录器即可，声音文件可集成登录器也就可微端更新 </br>
+</br></br></br></br></br></br></br></br><P><FONT size=2>
+</BODY>
+</HTML>
+

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>获取装备镶嵌宝石数量</title>
+</head>
+
+<body>
+</br></br></br></br>
+
+命令：</br>
+获取装备宝石数量</br>
+GetItemStoneCount 装备位置  宝石名称(不分名称可用 * 或 all） 变量</br></br>
+
+获取身上所有装备宝石数量</br>
+GetStoneCount 宝石名称(不分名称可用 * 或 all） 变量</br></br></br></br></br></br>
+
+
+示范：</br>
+GetItemStoneCount 1 * N10</br>
+SENDMSG 6 你的【&lt;$WEAPON&gt;】上面共有宝石：&lt;$STR(N10)&gt;</br></br>
+
+GetItemStoneCount 1 攻击青宝石(初级) N10</br>
+SENDMSG 6 你的【&lt;$WEAPON&gt;】上面共有【攻击青宝石(初级)】：&lt;$STR(N10)&gt;</br></br>
+
+
+GetStoneCount * N10</br>
+SENDMSG 6 你的身上所有宝石共有宝石：&lt;$STR(N10)&gt;</br></br>
+
+
+GetStoneCount 攻击青宝石(初级) N10</br>
+SENDMSG 6 你的身上【攻击青宝石(初级)】共有宝石：&lt;$STR(N10)&gt;</br></br></br></br></br>
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

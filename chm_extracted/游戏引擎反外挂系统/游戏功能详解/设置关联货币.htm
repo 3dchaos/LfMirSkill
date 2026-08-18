@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>设置货币关联</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font size="5">设置货币关联</font></strong> </p>
+<font size="3"><span class="STYLE2"><strong>功能：</strong>设置货币关联</span><br />
+<strong>说明：</strong>引擎选项---自定义货币。同一分组中的货币，扣除顺序从0开始，即0优先扣除<br />
+<strong>说明：</strong>注意：对绑定货币进行操作的指令，如果没有绑定（自定义货币中没有配置分组，同一分组的为绑定），则操作指定货币名称自身<br /><br /><br />
+
+
+<p><font face="楷体" color="#0000ff" size="4"><strong>命令:</strong></font></p>
+
+
+
+调整货币数量(含预留货币): ChangeMoney 货币名称 操作符(=/+/-)  值 <br /> <br />
+
+
+检测货币对应分组中的所有货币总额是否>=检测值：CheckBindMoney 货币名称 检测值 <br /> <br />
+
+
+获取绑定的货币总数量：<br />
+GetBindMoney 货币名称 变量 <br /> <br />
+
+减少绑定的货币数量：<br />
+DecBindMoney 货币名称 数量 <br /> <br />
+
+增加变量：<br />
+预留货币5数量：&lt;$Money5&gt;
+.......................................
+预留货币34数量：&lt;$Money34&gt; <br /> <br />
+
+
+
+================================================== <br /> <br />
+示例代码如下： <br /> <br />
+
+#ACT<br />
+ChangeMoney 预留货币34 = 150<br />
+ChangeMoney 游戏点 = 250<br />
+ChangeMoney 金币 = 350<br />
+ChangeMoney 金刚石 = 450<br />
+ChangeMoney 灵符 = 550<br />
+ChangeMoney 预留货币5 = 650<br />
+ChangeMoney 元宝 = 750<br />
+GetBindMoney 元宝 N1<br />
+sendmsg 5 元宝所对应的分组中，货币总额为&lt;$STR(N1)&gt;<br />
+DecBindMoney 元宝 300<br />
+GetBindMoney 元宝 N1<br />
+sendmsg 5 元宝所对应的分组中，货币总额为&lt;$STR(N1)&gt;<br />
+
+
+
+<br /><br /><br />
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>Mongen.txt 增加刷怪触发</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>&nbsp;&nbsp;&nbsp; 
+Mongen.txt 刷怪触发<BR><FONT 
+
+
+<FONT 
+color=#000000></FONT></P></FONT>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT><BR></STRONG>&nbsp;&nbsp;&nbsp; &nbsp; 
+Mongen.txt 增加刷怪触发<BR></FONT>
+
+</br></br></br>
+Mongen.txt 文件内容如下：</br>
+3	180	275	毒蜘蛛		2	4	1	100	249	0	0	0	0	0	 @刷毒蜘蛛  </br></br>
+------------------</br>
+;QF触发：</br></br>
+
+[@刷毒蜘蛛]</br>
+#if</br>
+#act</br>
+SENDMOVEMSG 0 251 0 50 1 {【世界BOSS全服提示】:/SCOLOR=70}{『&lt;$RegMonName&gt;』/SCOLOR=250}已出世，位于地图&lt;$RegMonMap&gt;(&lt;$RegMonMapDesc&gt;)，坐标&lt;$RegMonX&gt;:&lt;$RegMonY&gt;，赶紧抢！！！</br></br></br></br></br></br>
+
+################################################满足G变量刷怪##################################################</br></br>
+
+G变量 操作符(&gt;,&lt;,=,&gt;=,&lt;=) 数值 </br></br> 
+Mongen.txt 文件内容如下：</br>
+3	180	275	毒蜘蛛		2	4	1	100	249	0	0	0	0	0	 @刷毒蜘蛛  G9 > 9</br></br>
+;G9变量大于9刷怪</br>
+------------------</br>
+;QF触发：</br></br>
+
+[@刷毒蜘蛛]</br>
+#if</br>
+#act</br>
+SENDMOVEMSG 0 251 0 50 1 {【世界BOSS全服提示】:/SCOLOR=70}{『&lt;$RegMonName&gt;』/SCOLOR=250}已出世，位于地图&lt;$RegMonMap&gt;(&lt;$RegMonMapDesc&gt;)，坐标&lt;$RegMonX&gt;:&lt;$RegMonY&gt;，赶紧抢！！！</br></br></br></br></br></br>
+
+
+
+
+
+
+
+<B>变量说明</B></br></br>
+&lt;$RegMonName&gt;：当前怪物</br>
+&lt;$RegMonMap&gt;： 地图号</br>
+&lt;$RegMonMapDesc&gt;：地图名</br>
+&lt;$RegMonX&gt;：刷怪X</br>
+&lt;$RegMonY&gt;：刷怪Y</br>
+</br></br></br>
+
+<B>适用于单个刷怪，或极少数刷怪，也就是BOSS刷新触发，如果刷怪数量太大，超过死循环设置数量将被提示死循环</b></br></br></br></br></br>
+</FONT><FONT 
+size=2>。<BR>;==========================================</FONT></P>
+</BODY>
+</HTML>

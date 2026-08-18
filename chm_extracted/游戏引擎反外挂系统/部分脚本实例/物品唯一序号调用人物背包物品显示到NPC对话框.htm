@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>NPC对话框调用背包物品信息（支持物品图片以及展示属性）</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font size="5">NPC对话框调用背包物品信息</font></strong> </p>
+<font size="3"><span class="STYLE2"><strong>功能：</strong>NPC对话框调用背包物品信息</span><br />
+<strong>说明：</strong> NPC对话框按照物品唯一序列号调用背包物品信息<br /><br /><br />
+
+
+
+
+
+
+
+
+
+
+
+<b>脚本调用：</b><br><br><br><br>
+
+&lt;makeindexitem:D:F:X:Y:Z:W:G/@Label&gt;<br><br>
+参数说明：<br>
+d= 物品IDX唯一序号   <br>    
+F= 数量(数量设置小于1则不显示)        <br> 
+X Y = 微调坐标 排版的   <br>
+Z= 是否显示物品框，0为不显示，1为显示(当为1时，读取NewopUI.pak:250)，值>1 (NewopUI.pak中指定素材) <br>
+W= 首饰发光代码，代码与light一样（不需要则可忽略不填写这个参数 ，或填写0） <br>
+G=  灰化显示(0或空=正常，1=灰化) <br>
+U= 数量是否显示单位（0为不显示单位；1:超过10000时显示单位W) <br> 
+鼠标放上去显示物品属性。类似&lt;Img&gt;图标的用法  <br>
+@Label是点击图片时需要触发的脚本标签. (不需要跳转则可不需填写，如：&lt;ItemShow:D:F:X:Y:Z:W:G:U&gt;)<br>
+<br>
+
+ <br> <br> <br> <br> <br>
+
+效果展示：<br>
+
+<P><FONT face=Arial size=2><img src="ItemShow.png" width="473" height="365">. </FONT></P>
+<p></p>
+
+
+
+
+
+
+
+<br /><br /><br />
+
+
+
+
+</body>
+
+</html>

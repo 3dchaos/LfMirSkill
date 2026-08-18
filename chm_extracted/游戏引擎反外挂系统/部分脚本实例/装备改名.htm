@@ -1,0 +1,86 @@
+功能：
+    <TITLE>装备名称自定义系统</TITLE>
+
+格式：<br>
+    例脚本：<br>
+
+(@@useitemname)<br>
+[@main]<br>\
+请选择要改名的装备：(将要改名的装备戴身上)\<br>
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\<br>
+◇◇◇『&lt;盔　甲/@@useitemname0&gt;』◇◇◇『&lt;武　器/@@useitemname1&gt;』◇◇◇\<br>
+◇◇◇『&lt;项　链/@@useitemname3&gt;』◇◇◇『&lt;头　盔/@@useitemname4&gt;』◇◇◇\<br>
+◇◇◇『&lt;左手镯/@@useitemname5&gt;』◇◇◇『&lt;右手镯/@@useitemname6&gt;』◇◇◇\<br>
+◇◇◇『&lt;左戒指/@@useitemname8&gt;』◇◇◇『&lt;右戒指/@@useitemname7&gt;』◇◇◇\<br>
+◇◇◇『&lt;勋  章/@@useitemname2&gt;』\<br>
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈\<br>
+〖&lt;返回/@main&gt;〗 〖&lt;关闭/@exit&gt;〗\</P>
+[@@useitemname0]<br>
+#ACT
+ goto @ChangeName<br>
+[@@useitemname1]<br>
+#ACT<br>
+ goto @ChangeName<br>
+[@@useitemname2]<br>
+#ACT<br>
+ goto @ChangeName<br>
+[@@useitemname3]<br>
+#ACT<br>
+ goto @ChangeName<br>
+[@@useitemname4]<br>
+#ACT<br>
+ goto @ChangeName<br>
+[@@useitemname5]<br>
+#ACT<br>
+ goto @ChangeName<br>
+[@@useitemname6]<br>
+#ACT<br>
+ goto @ChangeName<br>
+[@@useitemname7]<br>
+#ACT<br>
+ goto @ChangeName<br>
+[@@useitemname8]<br>
+#ACT<br>
+ goto @ChangeName<br>
+[@@useitemname9]<br>
+#ACT<br>
+ goto @ChangeName<br>
+[@@useitemname10]<br>
+#ACT<br>
+ goto @ChangeName<br>
+[@@useitemname11]<br>
+#ACT<br>
+ goto @ChangeName<br>
+[@@useitemname12]<br>
+#ACT<br>
+ goto @ChangeName</P>
+
+[@ChangeName]<br>
+#if<br>
+  checkgamegold > 0<br>
+#act<br>
+  SETSCRIPTFLAG 1 1<br>
+  sendmsg 7 改名成功！！！<br>
+  Close<br>
+#elseact<br>
+  sendmsg 7 没钱跑来做什么？</P></P>
+
+;装备改名失败调用： @UseItemName_Fail，改名成功调用 @UseItemName_OK<br>
+[@UseItemName_Fail]<br>
+#if<br>
+#act<br>
+sendmsg 7 装备改名失败！名称中包含系统禁用字符！！<br>
+break</P></P>
+
+[@UseItemName_OK]<br>
+#if<br>
+#act<br>
+gamegold - 1<br>
+sendmsg 7 装备改名成功！！！<br>
+break</P></P>
+
+
+
+
+
+;如果使用了装备改名禁止字符功能请在脚本内增加成功和失败的脚本，方便退换失败后所扣除的物品..<br>

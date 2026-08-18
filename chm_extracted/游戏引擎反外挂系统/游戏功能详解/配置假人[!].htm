@@ -1,0 +1,227 @@
+<title>假人配置[!]</title>
+<style type="text/css">
+<!--
+.STYLE1 {
+	color: #FF0000;
+	font-weight: bold;
+}
+.STYLE2 {
+	color: #0000FF;
+	font-weight: bold;
+}
+.STYLE3 {color: #FF0000}
+-->
+</style>
+<p><strong><font size="5">假人配置</font></strong> </p>
+<p><font size="2"><span class="STYLE3"><strong>功能：</strong>假人配置</span><br />
+      <strong>格式：</strong>无<br />
+      <strong>说明：</strong><span class="STYLE1">假人是和人物一样的，所有人物的命令假人都可以使用，比如可以使用加入行会的命令，把假人加入某个行会</span><br />
+      <strong>例：</strong></font></p>
+<p>;====================================华丽的分割线====================================</p>
+<p class="STYLE1">增加假人登录脚本命令<span class="STYLE2">DUMMYLOGON</span>。会自动登录“D:\MirServer\Mir200\Envir\DummyNameList.txt”中的假人</p>
+<p>格式:DUMMYLOGON 地图 X Y 数量</p>
+<p>;====================================华丽的分割线====================================</p>
+
+假人主体设置当前的锁定攻击目标</br>
+SetTarget 名称 人物或英雄或怪物(1:英雄，2:人物  3:怪物)   名称是否过滤数字匹配(仅适用于怪物时；0:不过滤;1：过滤数字匹配)</br></br>
+英雄设置当前的锁定攻击目标</br>
+假人H.SetTarget 名称 人物或英雄或怪物(1:英雄，2:人物  3:怪物)  名称是否过滤数字匹配(仅适用于怪物时；0:不过滤;1：过滤数字匹配)</br>
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>;QManage.txt</p>
+<p>;====================================人物登录触发====================================<br />
+  [@Login]<br />
+  #IF<br />
+  ;检测是否是假人<br />
+  ISDUMMY<br />
+  #ACT<br />
+  ;设置假人配置文件。 如果不设置假人配置文件，默认读取 D:\MirServer\Mir200\Envir\DummyConfig\假人名称.txt<br />
+  ;格式 SETDUMMYCONFIGFILENAME 文件路径<br />
+  SETDUMMYCONFIGFILENAME ..\QuestDiary\智能陪练\一级女法陪练.txt</p>
+<p>;读取假人配置文件，将配置文件中的参数读取到假人，这句必须要的。<br />
+  LOADDUMMYCONFIGFILE<br />
+</p>
+<p>;更改攻击模式<br />
+  ;攻击模式(英雄无效)<br />
+  ;0-全体攻击(主动攻击) 1-和平攻击(不PK) 2-夫妻攻击 3-师徒攻击 4-编组攻击 5-行会攻击<br />
+  ;6-红名攻击(不主动攻击，受攻击后反击)<br />
+  ChangeAttatckMode 0<br />
+;--------------------------下面是英雄相关的，如果假人不召唤英雄，下面的脚本就不需要了--------------------------</p>
+<p>;从假人列表或假人英雄列表中获取一个没有登录过的名称<br />
+  ;人物的 D:\MirServer\Mir200\Envir\DummyNameList.txt<br />
+  ;英雄的 D:\MirServer\Mir200\Envir\DummyHeroNameList.txt<br />
+  ;格式 GETDUMMYNAME  保存变量  列表类型(0=人物列表 1=英雄列表)  获取类型(0=顺序获取 1=随机获取)<br />
+  GETDUMMYNAME &lt;$STR(S1)&gt; 1 1</p>
+<p>;把获取到的英雄名称给假人，假人就可以召唤英雄了，这句必须要的，否则召唤不了英雄<br />
+  ;格式 SETDUMMYHERONAME  英雄名称<br />
+  SETDUMMYHERONAME &lt;$STR(S1)&gt;</p>
+<p>;召唤英雄<br />
+  RECALLHERO<br />
+  ;-------------------------------------------------------------------------------------</p>
+<p>;假人开始自动打怪，这句必须的，否则假人就站着不会动。如果就在安全区挂着，可以不要。<br />
+  ;对应使用的命令 DUMMYSTOP 停止自动打怪<br />
+  DUMMYSTART<br />
+</p>
+<p>;====================================英雄登录触发====================================<br />
+  [@HeroLogin]<br />
+  #IF<br />
+  ;检测是否是假人英雄<br />
+  H.ISDUMMY<br />
+  #ACT<br />
+  ;设置假人配置文件。 如果不设置假人配置文件，默认读取 D:\MirServer\Mir200\Envir\DummyConfig\假人名称.txt<br />
+  ;格式 SETDUMMYCONFIGFILENAME 文件路径<br />
+  H.SETDUMMYCONFIGFILENAME ..\QuestDiary\智能陪练\一级女法陪练.txt</p>
+<p>;读取假人配置文件，将配置文件中的参数读取到假人英雄，这句必须要的。<br />
+  H.LOADDUMMYCONFIGFILE</p>
+<p>;====================================假人配置文件====================================<br />
+[Info]</p>
+;反击延时<br />
+CounterattackDelay = 1000<br /><br />
+<p> ;自动捡物，1=捡，0=不捡<br />
+AutoPickUpItem=1</p>
+<p> ;攻击模式(英雄无效)<br />
+  ;0-全体攻击(主动攻击) 1-和平攻击(不PK) 2-夫妻攻击 3-师徒攻击 4-编组攻击 5-行会攻击 <br />
+  ;6-红名攻击(不主动攻击，受攻击后反击)<br />
+  AttatckMode=0
+</p>
+</p>
+<p>;说话机率(英雄无效)<br />
+  SayRate=10;</p>
+<p>;装备极品机率<br />
+  ItemAddValueRate = 10; </p>
+<p>;装备元素机率<br />
+  ItemNewAddValueRate= 10;<br />
+</p>
+<p>;掉身上装备，1=掉，0=不掉<br />
+  DropUseItem=0</p>
+<p>;掉身上装备机率<br />
+  DropUseItemRate=15</p>
+<p>;掉包裹物品，1=掉，0=不掉<br />
+  DropBagItem=1</p>
+<p>;;假人走位几率（为0表示不走位攻击）<br />
+RunAttackRate = 6  </p>
+<p>;职业<br />
+  Job=2</p>
+<p>;性别<br />
+  Gender=1</p>
+<p>;头发<br />
+  Hair=1</p>
+<p>;等级<br />
+  Level=60</p>
+<p>;使用毒符物品(道士有效)<br />
+  ;1：身上或包裹中都不需要符或毒，就可以直接使用魔法<br />
+  ;2：需要身上佩戴符或毒，才可以使用魔法<br />
+  ;3：首先使用身上佩戴符或毒，如果身上没有佩戴，就使用包裹中的符或毒。<br />
+  NeedMagicItem=1</p>
+<p>;使用魔法<br />
+  UseSkill=灵魂火符,施毒术,召唤月灵,召唤神兽,治愈术,神圣战甲术,幽灵盾</p>
+<p>;包裹物品<br />
+  BagItems=护身符,黄色药粉(大量),灰色药粉(大量)<br />
+</p>
+<p>[灵魂火符]<br />
+  ;魔法等级<br />
+  Level=3<br />
+  ;强化魔法等级<br />
+  NewLevel=0</p>
+<p>[施毒术]<br />
+  ;魔法等级<br />
+  Level=3<br />
+  ;强化魔法等级<br />
+  NewLevel=0<br />
+</p>
+<p>[召唤月灵]<br />
+  ;魔法等级<br />
+  Level=3<br />
+  ;强化魔法等级<br />
+  NewLevel=0</p>
+<p>[召唤神兽]<br />
+  ;魔法等级<br />
+  Level=3<br />
+  ;强化魔法等级<br />
+  NewLevel=0</p>
+<p>[治愈术]<br />
+  ;魔法等级<br />
+  Level=3<br />
+  ;强化魔法等级<br />
+  NewLevel=0</p>
+<p>[神圣战甲术]<br />
+  ;魔法等级<br />
+  Level=3<br />
+  ;强化魔法等级<br />
+  NewLevel=0</p>
+<p>[幽灵盾]<br />
+  ;魔法等级<br />
+  Level=3<br />
+  ;强化魔法等级<br />
+  NewLevel=0<br />
+</p>
+<p>[UseItems]<br />
+  ;衣服<br />
+  UseItems0=天师长袍<br />
+  ;武器<br />
+  UseItems1=逍遥扇<br />
+  ;照明物<br />
+  UseItems2=<br />
+  ;项链<br />
+  UseItems3=天尊项链<br />
+  ;头盔<br />
+  UseItems4=天尊头盔<br />
+  ;左手镯<br />
+  UseItems5=天尊手镯<br />
+  ;右手镯<br />
+  UseItems6=天尊手镯<br />
+  ;左戒指<br />
+  UseItems7=天尊戒指<br />
+  ;右戒指<br />
+  UseItems8=天尊戒指<br />
+  ;物品<br />
+  UseItems9=护身符<br />
+  ;腰带<br />
+  UseItems10=<br />
+  ;鞋子<br />
+  UseItems11=<br />
+  ;宝石<br />
+  UseItems12=<br />
+
+</p>
+<p>;攻击时的说话信息(英雄无效)<br />
+  [Say]<br />
+  0=没钱买装备玩什么游戏<br />
+  1=装备差就不要出来混<br />
+  2=垃圾装备也出来丢人现眼<br />
+  3=刚花了500买的装备<br />
+</p>
+<p>;QFunction-0.txt<br />
+  ;使用假人开始挂机命令DummyStart触发[@DummyStart]<br />
+  [@DummyStart]</p>
+<p>;使用假人停止挂机命令DummyStop或者假人在挂机过程中移动失败，触发[@DummyStop]<br />
+  [@DummyStop]</p>
+<p>&nbsp;</p>
+<p>;人物的 D:\MirServer\Mir200\Envir\DummyNameList.txt<br />
+  ;英雄的 D:\MirServer\Mir200\Envir\DummyHeroNameList.txt<br />
+  需要把这2个文件里的名称，复制到D:\MirServer\DBServer\DenyChrName.txt这样玩家就不可以注册假人的角色名<br />
+</p>
+<p>;============================================================================<br />
+  功能：检查服务器假人数<br />
+  格式：CHECKDUMMYCOUNT 检测符(&gt;,&lt;,=) 人数</p>
+<p>&nbsp;</p><br /><br />
+<p>;============================================================================<br />
+检查地图假人数量：<br /><br />
+
+CheckMapDummyCount 地图  ('&gt;' '&lt;' '=') 数量<br /><br /><br />
+
+<p>;============================================================================<br />
+增加关键字&lt;$const();        地图名为n3，执行下面脚本跳转不正确：<br /><br />
+
+#act<br />
+VAR string global 假人_盟重省地图编号<br /><br />
+
+;★★★★★★★★★★★注意下面一行，n3是一个常量，而非变量，用 &lt;$const(n3)&gt; 来表示常量<br />
+calcvar global 假人_盟重省地图编号 = &lt;$const(n3)&gt;<br />
+
+SendMsg 0 &lt;$global(假人_盟重省地图编号)&gt; <br />
+map &lt;$global(假人_盟重省地图编号)&gt;<br /><br /><br /><br /><br />
+<p>;============================================================================<br />
+<br /><br /><br />

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>对捡取的物品进行关联</title>
+</head>
+
+<body>
+</BR></BR></BR>
+对捡取的物品进行关联  LINKPICKUPITEM  </BR></BR>
+
+刷新关联物品UpdateItem </BR></BR>
+
+[@PickUpItems10] </BR>
+#IF</BR>
+#ACT</BR>
+LINKPICKUPITEM  </BR>
+;关联后就可以使用其他脚本命令对刚刚捡取的物品进行检测，或操作</BR>
+;修改该物品的名称颜色</BR>
+CHANGEITEMNAMECOLOR -1 253</BR>
+;修改物品星星数量</BR>
+CHANGEITEMUPGRADECOUNT -1 + 1</BR>
+;修改后的参数，刷新到客户端</BR>
+UpdateItem -1</BR>
+break</BR></BR></BR>
+
+位置：</BR>
+-1升级框</BR>
+0--29：装备栏和时装栏</BR>
+30-35：首饰盒</BR>
+40-51：神佑袋</BR>
+boxitem0-boxitem7：OK框</BR></BR>
+
+说明：linkpickupitem和linkgiveitem都是绑定对象到升级框，调整属性后刷新-1位置即可！</BR></BR></BR></BR></BR></BR></BR></BR></BR></BR></BR></BR>
+
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

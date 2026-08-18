@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>检测字符串长度命令</TITLE>
+<style>
+<!--
+.STYLE1 {
+	color: #0000FF;
+	font-weight: bold;
+}
+-->
+</style>
+</HEAD>
+<BODY>
+<p><b><font color="#0000FF" size="2">功能：</font></b><font size="2"><br>
+<br>
+&nbsp;&nbsp; 检测字符串长度命令<br>
+<br>
+</font><b><font color="#0000FF" size="2">格式：</font></b><font size="2"><br>
+<br>
+&nbsp;&nbsp; CheckStringlength 字符串 操作符(&lt;,&gt;,=) 位数<br>
+<br>
+说明：一个汉字位数为2, &quot;》&quot;也为2个字符<br>
+<br>
+[@test]<br>
+#IF<br>
+CheckStringlength lfm2 &gt; 3<br>
+#SAY<br>
+lfm2大于3个字符<br>
+#ELSESAY<br>
+lfm2小于3个字符<br>
+<br>
+　</font></p>
+</BODY>
+</HTML>
+
+ 

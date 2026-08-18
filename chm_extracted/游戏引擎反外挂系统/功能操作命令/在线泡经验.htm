@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>在线泡经验</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>功能：</FONT></STRONG><BR>&nbsp;&nbsp;&nbsp; 
+在线泡经验（直接得到经验）</FONT> </P>
+<P><FONT size=2><STRONG>格式：例：（等级30级以上，地图3安全区内每1秒种得到10个经验点）<BR></STRONG></FONT><FONT 
+size=2><STRONG>==================================================</STRONG><BR>#IF<BR>&nbsp;CheckLevelex 
+&gt; 30<BR>#ACT<BR> 
+  
+&nbsp;&nbsp;&nbsp; setautogetexp&nbsp;1&nbsp;&nbsp;10&nbsp;1&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp; 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1000&nbsp;100  <BR> <BR> <BR> <BR> 
+命令 ：setautogetexp<BR> 
+参数一：间隔时间<BR> 
+参数二：获得经验值<BR> 
+参数三：是否安全区（0为任何地方）<BR> 
+参数四：地图号（*为任何地图）<BR> 
+参数五：是否允许英雄分配经验（0为禁止）<BR> 
+参数六：是否允许将经验存放聚灵珠（1为允许，留空或0为不允许）<BR> 
+参数七：泡点有效时间（秒；为0或空表示泡点一直有效）<BR> 
+参数八：100为限制泡点等级（参数8等级限制(0为不限制 填写100 则表示小于100级才会获得经验 到100级了就不加经验了 命令自动结束)<BR> 
+
+<BR><STRONG>==================================================</STRONG></FONT></P>
+</BODY>
+</HTML>
+
+ 

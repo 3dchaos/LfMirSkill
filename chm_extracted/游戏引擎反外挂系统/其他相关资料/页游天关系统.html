@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>页游天关系统</title>
+</head>
+
+<body>
+<p>说明: 仿页游天关系统</p>
+
+</BR></BR></BR></BR>
+
+
+天关相关触发：</BR></BR>
+
+领奖成功：</BR>
+@GuardinaLevelCanGetItemOK</BR></BR>
+
+攻击力：</BR>
+@GuardinaLevelClick1</BR></BR>
+
+召唤守卫:</BR>
+@GuardinaLevelClick2</BR></BR>
+
+
+NPC命令：</BR></BR>
+
+// 初始化守关信息  SetGuardianLevelInfo 关卡号 总波数 守护雕像名称 守护雕像坐标X 守护雕像坐标Y  刷怪坐标X  刷怪坐标Y  奖励物品1  奖励物品2  奖励物品3  奖励物品4</BR></BR>
+
+// 设置每波信息  SetGuardianLevelBatchInfo 第几波 怪物名:数量|怪物名:数量|怪物名:数量 本波奖励物品1数量  本波奖励物品2数量 本波奖励物品3数量 本波奖励物品4数量</BR></BR>
+
+// 开始闯关 StartGuardianLevel</BR></BR>
+
+; 在进入地图后执行以下触本</BR>
+[@MoveEctype_OK]</BR>
+#ACT</BR>
+SetGuardianLevelInfo 1 5 天关雕像 44 27 52 27 黑铁矿石 鸡肉 护身符 强效金创药</BR>
+SetGuardianLevelBatchInfo 1 白野猪:2|稻草人:4|僵尸1:5 0 0 1 1</BR>
+SetGuardianLevelBatchInfo 2 白野猪:4|稻草人:6|僵尸1:5 0 0 1 1</BR>
+SetGuardianLevelBatchInfo 3 白野猪:6|稻草人:8|僵尸1:8 1 1 0 0</BR>
+SetGuardianLevelBatchInfo 4 白野猪:8|稻草人:10|僵尸1:10 1 1 1 1</BR>
+SetGuardianLevelBatchInfo 5 白野猪:10|稻草人:10|尸王1:1 1 2 1 2</BR>
+DELAYGOTO 3000 @开始闯关</BR></BR>
+
+[@开始闯关]</BR>
+#IF</BR>
+#ACT</BR>
+StartGuardianLevel</BR></BR></BR></BR>
+
+
+
+
+示范：</BR>
+[@main]</BR>
+#IF</BR>
+CheckMirrorMap &lt;$USERID&gt;</BR>
+#ACT</BR>
+CLEARITEMMAP &lt;$USERID&gt; 30 35 10</BR>
+CLEARMAPMON &lt;$USERID&gt;</BR>
+SetMirrorMapTime &lt;$USERID&gt; 100 1</BR>
+#ELSEACT </BR>
+ADDMIRRORMAP 0139 &lt;$USERID&gt; 魔境 100 &lt;$const(3)&gt; 9999 &lt;$STR(N$镜像)&gt; 1 338,341</BR>
+#act</BR>
+mapmove &lt;$USERID&gt; 30 35</BR>
+SetGuardianLevelInfo 1 5 千年树妖 31 36 17 20 回城卷 随机传送卷 麻痹戒指 护身戒指</BR>
+SetGuardianLevelBatchInfo 1 黑野猪:1 0 0 1 1</BR>
+SetGuardianLevelBatchInfo 2 黑野猪:2 1 1 1 1</BR>
+SetGuardianLevelBatchInfo 3 黑野猪:5 1 1 1 1</BR>
+SetGuardianLevelBatchInfo 4 黑野猪:8 1 1 1 1</BR>
+SetGuardianLevelBatchInfo 5 黑野猪:15 1 1 1 1</BR></BR></BR></BR>
+StartGuardianLevel
+
+
+特别说明：宝宝请务必使用REAC= 155的自定义怪物</BR></BR></BR></BR>
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

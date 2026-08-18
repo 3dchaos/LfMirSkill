@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>调整技能等级(扩展)</TITLE>
+<style>
+<!--
+.STYLE1 {color: #FF0000}
+-->
+</style>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>&nbsp;&nbsp;&nbsp; 
+脚本调整技能等级。</FONT><span class="STYLE1"></span></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT><BR></STRONG>&nbsp;&nbsp;&nbsp;SKILLLEVEL 魔法名称 调整符(+,-,=) 等级 是否调整强化技能(0或为空时为技能等级,1为强化技能等级)<BR>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>英雄操作命令：</FONT><BR></STRONG>&nbsp;&nbsp;&nbsp;H.SKILLLEVEL 魔法名称 调整符(+,-,=) 等级 是否调整强化技能(0或为空时为技能等级,1为强化技能等级)<BR>
+  <BR><BR>;==========================================<BR>[@skilllevel0]<BR>#IF<BR>#ACT<BR>&nbsp; 
+SKILLLEVEL 雷电术 = 
+3<BR>#SAY<BR>你的雷电术等级已经为3级。<BR>;==========================================<BR><BR>;==========================================<BR>;<BR>[@skilllevel1]<BR>#IF<BR>#ACT<BR>&nbsp; 
+SKILLLEVEL 雷电术 + 
+1<BR>#SAY<BR>你的雷电术等级已经升了1级。<BR>;==========================================<BR><BR>;==========================================<BR>;<BR>[@skilllevel2]<BR>#IF<BR>#ACT<BR>&nbsp; 
+SKILLLEVEL 雷电术 - 
+1<BR>#SAY<BR>你的雷电术等级已经降了1级。<BR>;==========================================</FONT><FONT 
+size=3></P>
+<P><FONT size=2><BR>
+  </FONT>[@<FONT size=2>skilllevel3</FONT>]<BR>
+  #IF<BR>
+  CHECKSKILL 冰咆哮 = 0 1<BR>
+  #ACT<BR>
+  SKILLLEVEL 冰咆哮 = 1   1<BR>
+  SENDMSG 6 冰咆哮已修炼到强化一重</P>
+<P><B>强化技能升级，技能栏"升级"鼠标移上去提示的配置文件：客户端目录\data\SkillUpgradeDesc.Dat</B>(以下为示例：) </P>
+
+;技能类型(普通技能/内功技能),技能名,需要强化等级,强化描述(描述使用,换行 参考9重)<BR>
+普通技能,攻杀剑术,1,111111111111<BR>
+普通技能,攻杀剑术,2,222222222222<BR>
+普通技能,攻杀剑术,3,333333333333333<BR>
+普通技能,攻杀剑术,4,44444444444444444<BR>
+普通技能,攻杀剑术,5,5555555555555555555555<BR>
+普通技能,攻杀剑术,6,6666666666666666666666<BR>
+普通技能,攻杀剑术,7,77777777777777777<BR>
+普通技能,攻杀剑术,8,8888888888888888888<BR>
+普通技能,攻杀剑术,9,升到9级要好多毛线的,你确定要升级????????<BR>
+</FONT>
+</BODY>
+</HTML>

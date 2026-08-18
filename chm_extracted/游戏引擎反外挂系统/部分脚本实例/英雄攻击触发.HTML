@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>英雄攻击触发</title>
+</head>
+
+<body>
+
+
+
+英雄攻击触发：</br></br>
+</br>
+[@HeroMagicStruck]</br>
+[@HeroMagicAttack]</br>
+[@HeroStruck]</br>
+[@HeroAttack]</br></br></br>
+
+
+
+QFunction-0 </br></br>
+
+
+;所有触发只有攻击到怪物才会触发，有些魔法不会触发，如魔法盾</br></br>
+;======================被魔法攻击触发==========================</br>
+[@HeroMagicStruck]</br>
+#IF</br>
+H.CHECKCURRTARGETRACE = 0</br>
+#ACT </br>
+SENDMSG 6 你的英雄被人物【&lt;$H.CURRRTARGETNAME&gt;】攻击了。使用魔法ID=&lt;$H.CURRRUSEMAGICID&gt; 255 253</br>
+BREAK</br></br>
+
+#IF</br>
+H.CHECKCURRTARGETRACE = 1</br>
+#ACT </br>
+SENDMSG 6 你的英雄被英雄【&lt;$H.CURRRTARGETNAME&gt;】攻击了。使用魔法ID=&lt;$H.CURRRUSEMAGICID&gt; 255 253</br>
+BREAK
+</br></br>
+#IF</br>
+H.CHECKCURRTARGETRACE = 151</br>
+#ACT </br>
+SENDMSG 6 你的英雄被分身【&lt;$H.CURRRTARGETNAME&gt;】攻击了。使用魔法ID=&lt;$H.CURRRUSEMAGICID&gt; 255 253</br>
+BREAK
+</br></br>
+#IF</br>
+#ACT </br>
+SENDMSG 6 你的英雄被怪物【&lt;$H.CURRRTARGETNAME&gt;】攻击了。使用魔法ID=&lt;$H.CURRRUSEMAGICID&gt; 255 253</br>
+BREAK</br></br>
+
+;======================魔法攻击触发==========================</br>
+[@HeroMagicAttack]</br>
+#IF</br>
+H.CHECKCURRTARGETRACE = 0</br>
+#ACT </br>
+SENDMSG 6 你的英雄攻击了人物【&lt;$H.CURRRTARGETNAME&gt;】。使用魔法ID=&lt;$H.CURRRUSEMAGICID&gt; 255 249</br>
+BREAK</br></br>
+
+#IF</br>
+H.CHECKCURRTARGETRACE = 1</br>
+#ACT </br>
+SENDMSG 6 你的英雄攻击了英雄【&lt;$H.CURRRTARGETNAME&gt;】。使用魔法ID=&lt;$H.CURRRUSEMAGICID&gt; 255 249</br>
+BREAK</br></br>
+
+#IF</br>
+#ACT </br>
+SENDMSG 6 你的英雄攻击了怪物【&lt;$H.CURRRTARGETNAME&gt;】。使用魔法ID=&lt;$H.CURRRUSEMAGICID&gt; 255 249</br>
+BREAK</br></br>
+
+;======================被物理攻击触发==========================</br>
+
+[@HeroStruck]</br>
+#IF</br>
+H.CHECKCURRTARGETRACE = 0</br>
+#ACT </br>
+SENDMSG 6 你的英雄被人物【&lt;$H.CURRRTARGETNAME&gt;】攻击了。使用魔法ID=&lt;$H.CURRRUSEMAGICID&gt; 255 253</br>
+BREAK</br></br>
+
+#IF</br>
+H.CHECKCURRTARGETRACE = 1</br>
+#ACT </br>
+SENDMSG 6 你的英雄被英雄【&lt;$H.CURRRTARGETNAME&gt;】攻击了。使用魔法ID=&lt;$H.CURRRUSEMAGICID&gt; 255 253</br>
+BREAK</br></br>
+
+#IF</br>
+H.CHECKCURRTARGETRACE = 151</br>
+#ACT </br>
+SENDMSG 6 你的英雄被分身【&lt;$H.CURRRTARGETNAME&gt;】攻击了。使用魔法ID=&lt;$H.CURRRUSEMAGICID&gt; 255 253</br>
+BREAK
+</br></br>
+
+#IF</br>
+#ACT </br>
+SENDMSG 6 你的英雄被怪物【&lt;$H.CURRRTARGETNAME&gt;】攻击了。使用魔法ID=&lt;$H.CURRRUSEMAGICID&gt; 255 253</br>
+BREAK</br></br>
+
+
+;======================物理攻击触发==========================</br>
+
+[@HeroAttack]</br>
+#IF</br>
+H.CHECKCURRTARGETRACE = 0</br>
+#ACT </br>
+SENDMSG 6 你的英雄攻击了人物【&lt;$H.CURRRTARGETNAME&gt;】。使用魔法ID=&lt;$H.CURRRUSEMAGICID&gt; 255 249</br>
+BREAK</br></br>
+
+#IF</br>
+H.CHECKCURRTARGETRACE = 1</br>
+#ACT </br>
+SENDMSG 6 你的英雄攻击了英雄【&lt;$H.CURRRTARGETNAME&gt;】。使用魔法ID=&lt;$H.CURRRUSEMAGICID&gt; 255 249</br>
+BREAK</br></br>
+
+#IF</br>
+#ACT </br>
+SENDMSG 6 你的英雄攻击了怪物【&lt;$H.CURRRTARGETNAME&gt;】。使用魔法ID=&lt;$H.CURRRUSEMAGICID&gt; 255 249</br>
+BREAK</br></br></br></br>
+
+
+
+;======================下面变量获取怪物完整名字==========================</br></br>
+
+增加变量以显示完整名（不去数字）：$H.CURRRTARGETFULLNAME </br></br>
+
+
+上面演示脚本中变量不获取怪物名字后面的数字：$H.CURRRTARGETNAME</br></br>
+
+
+
+提供2种变量大家自己按需使用！</br></br>
+
+
+</p>
+</body>
+</html>

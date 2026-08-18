@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>禁止物品掉落、停止物品掉落、禁止爆出物品、爆出物品检测，脚本回收爆出物品</title>
+</head>
+
+<body>
+
+功能说明：禁止物品掉落、停止物品掉落、禁止爆出物品、爆出物品检测,爆物品检测</br></br>
+
+操作命令：StopDropItem</br></br>
+
+增加NPC变量：</br>
+当前物品名&lt;$CURITEMNAME&gt;</br></br></br>
+
+
+爆率文件触发：</br>
+#CHILD 1/1 RANDOM [N1<1000,1,@触发检测]</br>
+(</br>
+1/1 天尊头盔</br>
+1/1 火球术</br>
+1/1 治愈术</br>
+1/1 基本剑术</br>
+)</br></br></br></br>
+
+QF 以检测天尊头盔是否爆出为例：</br>
+
+[@触发检测]</br>
+#if</br>
+;检测掉落物品是否有天尊头盔</br>
+equal &lt;$CURITEMNAME&gt; 天尊头盔</br>
+;有天尊头盔则继续执行，没有就中断执行</br>
+#act</br>
+#elseact</br>
+break</br>
+#if</br>
+LARGE U99 1999</br>
+;续检测U99充值记录大于2000元，则允许此物品掉落</br>
+#act</br>
+;U99 大于2000则中断执行，物品正常掉落，否则进入下一步执行命令</br>
+break</br>
+#elseact</br>
+;U3小于2000，禁止掉落天尊头盔</br>
+StopDropItem</br>
+SENDMSG 6 禁止物品"&lt;$CURITEMNAME&gt;"掉落</br>
+break</br></br>
+
+
+</br></br></br></br>
+
+
+
+
+
+</p>
+</body>
+</html>

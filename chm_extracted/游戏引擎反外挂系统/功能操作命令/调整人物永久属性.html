@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>永久调整人物属性值</title>
+<style>
+<!--
+div{word-break:break-all;word-wrap:break-word}.t{border:1px solid #c7d6e1;margin:0px auto 8px;}.t2{border-top:#c7d6e1 1px solid;margin:0px auto 5px;}.t{padding:1px}.t {padding:0}th{word-break:break-all;word-wrap:break-word}.r_one{background:#f9f9f9;}.tr1 th{padding:5px 10px;text-align:left;vertical-align:top;font-weight:normal;}.tr1 th{border-right:1px solid #e6e6e6;}.tpc_content{font-size:14px;font-family:Arial;padding:0 2% 0 0.5%;margin:0 0 2%}.STYLE1 {
+	color: #0000FF;
+	font-weight: bold;
+}
+-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font color="#0000ff" size="2">功</font></strong><font color="#0000ff" size="2"><strong>能：</strong></font> 调整人物属性</p>
+<p><span class="STYLE1">格式:</span> ChangeHumAbilityEX 属性(1-29) 操作符(+ = -) 效果(1-65535) <br>
+ <span class="STYLE1">说明:</span> 属性1-29分别对应值<br>
+1、防御下限<br>
+2、防御上限<br>
+3、魔御下限<br>
+4、魔御上限<br>
+5、攻击下限<br>
+6、攻击上限<br>
+7、魔法下限<br>
+8、魔法上限<br>
+9、道术下限<br>
+10、道术上限<br>
+11、MaxHP<br>
+12、MaxMP<br>
+13、内功攻击伤害减<br>
+14、HP恢复<br>
+15、MP恢复<br>
+16、毒恢复<br>
+17、毒躲避<br>
+18、魔法躲避<br>
+19、准确<br>
+20、敏捷<br>
+21、幸运<br>
+22、内功伤害增加<br>
+23、内力值<br>
+24、刺术下限<br>
+25、刺术上限<br>
+26、箭术下限<br>
+27、箭术上限<br>
+28、武力下限<br>
+29、武力上限<br><br>
+<span class="STYLE1">注意:</span> 此命令是永久增加属性值 </p>
+<p><br>
+  <font color="#0000ff" size="2"><strong><br>
+例子：<br>
+</strong></font><br>
+[@Test]<font color="#0000ff" size="2"><strong><br>
+</strong></font>#IF<br>
+#ACT<br>
+ChangeHumAbilityEX 2 + 10<br>
+#SAY<br>
+你的防御上限增加10点</p>
+
+
+提示：调整英雄属性命令为： H.ChangeHumAbilityex</p>
+
+注：支持调整人物原始属性，减少属性为累计属性，如：人物100点攻击，命令减少200点，那么人物攻击变成0，更换装备提升攻击，必须让人物自身攻击大于200才可以突破0（因为已经存储人物攻击减少200点），恢复原始属性 ChangeHumAbilityEX = 0 即可</p>
+
+也就是当减少属性大于角色当前属性，角色需要将差值的坑填满才可以有属性 (慎重使用)</p>
+
+
+<font face="楷体" color="#0000ff" size="4"><strong>;涉及人物或英雄的属性修改建议使用LockUpdateAbil和UpdateAbil对执行脚本进行锁定操作并解锁刷新来显著提高脚本性能，详细请说明书搜索LockUpdateAbil和UpdateAbil查阅说明文档</strong></font><br>
+
+</body>
+
+</html>

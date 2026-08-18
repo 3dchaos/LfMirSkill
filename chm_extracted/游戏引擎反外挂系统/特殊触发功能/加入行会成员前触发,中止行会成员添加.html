@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>加入行会成员前触发,中止行会成员添加</title>
+</head>
+
+<body>
+<p>QFunction-0 </p>
+<p>;加入行会成员前触发,中止行会成员添加<br><br><br>
+
+
+
+
+增加加入行会成员前触发QF.[@BeforeJoinGuild]（老行会:行会老大添加成员时触发，新行会：行会老大接受申请前触发）<br><br>
+
+增加中止行会成员添加：StopHumanJoinGuild，仅限于@BeforeJoinGuild中使用<br><br>
+
+增加Npc变量，当前加入行会的成员名称：&lt;$JoinGuildHuman&gt;,仅限于@BeforeJoinGuild中使用<br><br><br><br>
+
+[@BeforeJoinGuild]<br>
+#ACT<br>
+SendMsg 5 当前要加入行会的人是：&lt;$JoinGuildHuman&gt;<br>
+StopHumanJoinGuild<br><br><br><br><br><br><br>
+
+
+
+
+
+</p>
+</body>
+</html>

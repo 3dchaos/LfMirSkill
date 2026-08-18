@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>调整人物会员等级</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>&nbsp;&nbsp;&nbsp; <FONT 
+size=2>调整人物会员等级</FONT>。</FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT><BR></STRONG>&nbsp;&nbsp;&nbsp; 
+SETMEMBERLEVEL 控制符(=,+,-)&nbsp; 
+等级数(1-65535)<BR><BR>;==========================================<BR>;设置人物会员等级<BR>[@changememberlevel0]<BR>#IF<BR>#ACT<BR>&nbsp; 
+SETMEMBERLEVEL = 
+5<BR>#SAY<BR>你的会员等级为5。<BR>;==========================================<BR><BR>;==========================================<BR>;增加人物会员等级<BR>[@changememberlevel1]<BR>#IF<BR>#ACT<BR>&nbsp; 
+SETMEMBERLEVEL + 
+1<BR>#SAY<BR>你的会员等级已经改变。<BR>;==========================================<BR><BR>;==========================================<BR>;减少人物会员等级<BR>[@changememberlevel2]<BR>#IF<BR>#ACT<BR>&nbsp; 
+SETMEMBERLEVEL - 
+1<BR>#SAY<BR>你的会员等级已经改变。<BR>;==========================================<BR></FONT></P>
+</BODY>
+</HTML>
+ 

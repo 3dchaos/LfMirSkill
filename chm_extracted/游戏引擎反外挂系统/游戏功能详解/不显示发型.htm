@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>DB控制不显示人物发型,悬浮框装备背景图片</TITLE>
+</HEAD>
+<BODY>
+<P><STRONG><FONT 
+size=5>DB控制不显示人物内观和外观发型 和 悬浮框装备背景图片</FONT></STRONG></P>
+
+DB数据库字段：expand5    </P>  
+
+
+expand5: 装备悬浮名字背景图片序号 * 10；如：要装备显示Newopui.pak中 100的图片，应该填 1000</br>
+衣服： expand5 = 0表示衣服内观和外观带头发。 =1则表示内外观不带发型</br></br>
+
+衣服的就是，图片编号 * 10 + （0/1)，图片编号1000，就要设置 1000 * 10 = 10000 + 0/1(是否衣服带头发）</br></br>
+
+图片0就是不显示图片，显示图片只能从>=1</br></br>
+
+如：设置图片编号Newopui.pak  1801 的图片则填写18010 ，如果是衣服不需要显示发型设置18011</br></br></br></br>
+
+
+悬浮框不显示物品名称选项（选项-客户端设置-装备信息，，选项expend5值 > 9 才生效 ）可用于指定图片替代装备名字</br></br></br>
+
+
+****************注：此背景图，不可同装备改名Changeitemname设置背景图一起使用 ，否则会叠加显示******************************</br></br>
+</P></P>
+
+
+<P><FONT size=2>
+</BODY>
+</HTML>
+

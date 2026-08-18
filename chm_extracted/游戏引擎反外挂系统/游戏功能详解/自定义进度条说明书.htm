@@ -1,0 +1,360 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>悬浮框自定义进度条使用说明</title>
+</head>
+
+<body>
+
+
+自定义装备进度条说明书</p>
+
+功能说明：可以给装备自定义进度条，支持2个进度条。</br>
+显示位置：显示在升级星星的下一行</br>
+资源位置：必备补丁NewopUI.PAK </br>
+进度条1：620 背景图片 621~629 为静态的进度条图 630~639 为动态的进度条图</br> 
+进度条2：640 背景图片 641~649 为静态的进度条图 650~659 为动态的进度条图 </br></br>
+
+
+自定义进度条的支持的装备位置如下：</br>
+
+-1 升级框</br>
+0--25：装备栏</br>
+30-35：首饰盒</br>
+40-51：神佑袋</br>
+boxitem0-boxitem7：OK框</br></br>
+
+M2 其他设置 可以设置关闭提示没有佩戴装备的提示</br> 
+
+@KillMonGetExp   人物杀怪获得经验触发 可以配合进度条使用</br>
+@HeroKillMonGetExp 英雄杀怪获得经验触发 可以配合进度条使用</br></br>
+
+检测进度条是否开启：CheckCustomItemProgressBar装备位置 进度条序号(0=进度条1；1=进度条2) </br>
+检测类型说明（参数3）：</br>
+0：进度条最大值</br>
+1：进度当前值</br>
+2：进度条当前百分比</br>
+3：进度条等级  </br></br>
+
+[@检测武器的第一个进度条是否开启]</br>
+#IF</br>
+CHECKCUSTOMITEMPROGRESSBAR 1 0</br>
+#ACT</br>
+SENDMSG 6 武器的第一个进度条已经开启</br>
+#ELSEACT</br>
+SENDMSG 6 武器的第一个进度条没有开启</br></br></br></br>
+
+
+
+
+检测进度条值：CheckCustomItemProgressbarValue 装备位置 进度条序号(0,1) 检测值类型(0,1,2,3) 检测符(&gt;,&lt;,=) 检测值</br>
+检测值类型说明（参数3）：</br>
+0：进度条最大值</br>
+1：进度当前值</br>
+2：进度条当前百分比</br>
+3：进度条等级  </br></br>
+
+[@检测武器的第一个进度条最大值]</br>
+#IF</br>
+CheckCustomItemProgressbarValue 1 0 0 > 99</br>
+#ACT</br>
+SENDMSG 6 武器的第一个进度条最大值大于99</br>
+#ELSEACT</br>
+SENDMSG 6 武器的第一个进度条最大值不大于99</br></br></br>
+
+
+[@检测武器的第一个进度条当前值]</br>
+#IF</br>
+CheckCustomItemProgressbarValue 1 0 1 > 99</br>
+#ACT</br>
+SENDMSG 6 武器的第一个进度条当前值大于99</br>
+#ELSEACT</br>
+SENDMSG 6 武器的第一个进度条当前值不大于99</br></br></br>
+
+
+[@检测武器的第一个进度条百分比]</br>
+#IF</br>
+CheckCustomItemProgressbarValue 1 0 2 > 99</br>
+#ACT</br>
+SENDMSG 6 武器的第一个进度条百分比为100%</br></br></br>
+
+
+[@检测武器的第一个进度条等级]</br>
+#IF</br>
+CheckCustomItemProgressbarValue 1 0 3 > 99</br>
+#ACT</br>
+SENDMSG 6 武器的第一个进度条等级大于99</br>
+#ELSEACT</br>
+SENDMSG 6 武器的第一个进度条等级不大于99</br></br></br>
+
+
+
+
+设置进度条值：SetCustomItemProgressbarValue 装备位置 进度条序号(0,1) 设置值类型(0,1,2,3) 设置符(+,-,=) 设置值</br>
+设置值类型说明（参数3）：</br>
+0：进度条最大值</br>
+1：进度当前值</br>
+2：进度条当前百分比</br>
+3：进度条等级  </br></br></br>
+
+
+[@修改武器的第一个进度条的最大值]</br>
+#ACT</br>
+SetCustomItemProgressbarValue 1 0 0 = 100</br>
+;当前进度值不能超过进度条最大值，一般先要修改进度条最大值，然后在修改当前进度值。这里最大值设置为100</br></br>
+
+[@修改武器的第一个进度条的当前进度值]</br>
+#ACT</br>
+SetCustomItemProgressbarValue 1 0 1 + 10 </br>
+;当前进度值不能超过进度条最大值，一般先要修改进度条最大值，然后在修改当前进度值。</br></br>
+
+[@修改武器的第一个进度条的百分比]</br>
+#ACT</br>
+SetCustomItemProgressbarValue 1 0 2 + 10 </br>
+;百分比最大建议 100% 。</br>
+
+[@修改武器的第一个进度条的等级]</br>
+#ACT</br>
+SetCustomItemProgressbarValue 1 0 3 + 10 </br>
+;进度条的等级可以用 %i 显示在进度条名称后面，用于进度条的值满后提升进度条的等级。</br></br></br></br>
+
+
+
+
+获取自定义装备进度条属性值</br>
+GetCustomItemProgressbarValue 装备位置 进度条序号(0,1) 获取值类型(0,1,2,3) 变量</br>
+获取值类型说明（参数3）：</br>
+0：进度条最大值</br>
+1：进度当前值</br>
+2：进度条当前百分比</br>
+3：进度条等级 </br></br></br>
+
+
+[@获取武器的第一个进度条的最大值]</br>
+#ACT</br>
+GetCustomItemProgressbarValue 1 0 0 &lt;$STR(N1)&gt;</br>
+SENDMSG 6 武器第一个进度条的最大值&lt;$STR(N1)&gt;</br></br></br>
+
+
+[@获取武器的第一个进度条的当前进度值]</br>
+#ACT</br>
+GetCustomItemProgressbarValue 1 0 1 &lt;$STR(N2)&gt;</br>
+SENDMSG 6 武器第一个进度条的当前值&lt;$STR(N2)&gt;</br></br>
+
+
+[@获取武器的第一个进度条的百分比]</br>
+#ACT</br>
+GetCustomItemProgressbarValue 1 0 2 &lt;$STR(N3)&gt;</br>
+SENDMSG 6 武器第一个进度条的当前百分比&lt;$STR(N2)&gt;</br></br>
+
+
+[@获取武器的第一个进度条的等级]</br>
+#ACT</br>
+GetCustomItemProgressbarValue 1 0 3 &lt;$STR(N4)&gt;</br>
+SENDMSG 6 武器第一个进度条的等级&lt;$STR(N4)&gt;</br></br></br></br>
+
+
+
+
+设置自定义装备进度条各种属性</br>
+SetCustomItemProgressbar装备位置 进度条序号(0,1) 属性类型(0~4) 参数4 </br>
+属性类型(0~4；参数3)：</br>
+0：参数4表示是否开启进度条：参数4=0时，关闭进度条； 参数4=1时，开启进度条</br></br>
+
+1：参数4表示设置进度条名称【进度条名称会显示在进度条的左边，长度30字符】，名称可以使用特殊字符</br>
+   	特殊字符：\=换行； %p=当前进度值； %m=最大值； %r=进度百分比； %i:当前等级</br></br>
+
+2：参数4表示进度条名称颜色(0~255)</br></br>
+
+3：参数4表示设置进度条图片播放数量(0：不显示进度条；1~9：单张绘制；10~19：循环绘制）</br>
+用进度条0来举例：</br>
+如果参数4=1就会绘制621，</br>
+如果参数4=2就会绘制622。</br></br>
+
+如果参数4=11 表示在630~631之间循环绘制</br>
+如果参数4=12 表示在630~632之间循环绘制</br></br></br>
+
+4：参数4表示进度条数值显示方式【0=不显示；1=百分比显示(10%)；2=数值显示(10/100)；3=等级显示】</br></br>
+
+
+[@显示武器的第一个进度条]</br>
+#ACT</br>
+SetCustomItemProgressbar 1 0 0 1</br></br>
+
+[@显示武器的第二个进度条]</br>
+#ACT</br>
+SetCustomItemProgressbar 1 1 0 1</br></br>
+
+[@关闭武器的第一个进度条]</br>
+#ACT</br>
+SetCustomItemProgressbar 1 0 0 0</br></br>
+
+[@关闭武器的第二个进度条]</br>
+#ACT</br>
+SetCustomItemProgressbar 1 1 0 0</br></br></br>
+
+
+
+
+[@设置武器的第一个进度条的名称]</br>
+#ACT</br>
+SetCustomItemProgressbar 1 0 1 刀魂</br>
+;支持显示进度值、百分比、进度条等级 %p表示当前进度值 %m表进度条最大值 %r表示进度条百分比 %i表示进度条等级 特殊字符：\=换行；</br> 
+;例如:</br>
+;SetCustomItemProgressbar 1 0 1 刀魂: %p-%m</br>
+;SetCustomItemProgressbar 1 0 1 刀魂: %m</br>
+;SetCustomItemProgressbar 1 0 1 刀魂: %r</br>
+;SetCustomItemProgressbar 1 0 1 老猫神剑\老猫剑魂: %i级</br></br>
+
+
+[@设置武器的第一个进度条的名称颜色]</br>
+#ACT</br>
+SetCustomItemProgressbar 1 0 2 254</br></br>
+
+[@设置武器的第一个进度条，不显示图片和背景，这样的情况下只显示进度条名称和数值]</br>
+#ACT</br>
+SetCustomItemProgressbar 1 0 3 0</br></br>
+
+[@设置武器的第一个进度条静态图片素材]</br>
+#ACT</br>
+SetCustomItemProgressbar 1 0 3 1</br>
+SENDMSG 6 武器的第一个进度条静态图片素材,使用NewopUI.PAK第621号</br></br>
+
+[@设置武器的第一个进度条动态图片素材]</br>
+#ACT</br>
+SetCustomItemProgressbar 1 0 3 19</br>
+SENDMSG 6 武器的第一个进度条动态图片素材,使用NewopUI.PAK第630~639号之间循环播放</br></br>
+
+[@设置武器的第二个进度条静态图片素材]</br>
+#ACT</br>
+SetCustomItemProgressbar 1 1 3 1</br>
+SENDMSG 6 武器的第二个进度条静态图片素材,使用NewopUI.PAK第641号</br></br>
+
+[@设置武器的第二个进度条动态图片素材]</br>
+#ACT</br>
+SetCustomItemProgressbar 1 1 3 19</br>
+SENDMSG 6 武器的第二个进度条动态图片素材,使用NewopUI.PAK第650~659号之间循环播放</br></br>
+
+
+[@设置武器的第一个进度条，不显示数值，这样的情况下只显示进度条名称和图片]</br>
+#ACT</br>
+SetCustomItemProgressbar 1 0 4 0</br></br>
+
+[@设置武器的第一个进度条百分比显示]</br>
+#ACT</br>
+SetCustomItemProgressbar 1 0 4 1</br></br>
+
+[@设置武器的第一个进度条数值显示]</br>
+#ACT</br>
+SetCustomItemProgressbar 1 0 4 2</br></br>
+
+[@设置武器的第一个进度条等级显示]</br>
+#ACT</br>
+SetCustomItemProgressbar 1 0 4 3</br></br></br></br></br>
+
+
+
+
+获取自定义进度条各种属性</br>
+GetCustomItemProgressbar装备位置 进度条序号(0,1) 属性类型(0~4) 变量 </br>
+属性类型(0~4；参数3)：</br>
+0：获取进度条是否开启进度条：0=关闭进度条； 1=开启进度条</br>
+1：获取进度条显示名称</br>
+2：获取进度条名称颜色(0~255)</br>
+3：获取进度条图片播放数量(0：不显示进度条；1~9：单张绘制；10~19：循环绘制）</br>
+4：获取进度条数值显示方式【0=不显示；1=百分比显示(10%)；2=数值显示(10/100)；3=等级显示】</br></br></br>
+
+
+[@获取武器第一个自定义进度条开启状态：0未开启 或 1开启]</br>
+#ACT</br>
+GetCustomItemProgressbar 1 0 0 &lt;$STR(N1)&gt;</br>
+
+SENDMSG 6 武器第一个进度条状态&lt;$STR(N1)&gt;</br></br>
+
+[@获取武器第一个自定义进度条名称]</br>
+#ACT</br>
+GetCustomItemProgressbar 1 0 1 &lt;$STR(S2)&gt;</br>
+
+SENDMSG 6 武器第一个进度条名称&lt;$STR(S2)&gt;</br></br>
+
+[@获取武器第一个自定义进度条名称的颜色值]</br>
+#ACT</br>
+GetCustomItemProgressbar 1 0 2 &lt;$STR(N1)&gt;</br>
+
+SENDMSG 6 武器第一个进度条名称的颜色值&lt;$STR(N1)&gt;</br></br>
+
+[@获取武器第一个自定义进度条图片的参数]</br>
+#ACT</br>
+GetCustomItemProgressbar 1 0 3 &lt;$STR(N1)&gt;</br>
+
+SENDMSG 6 武器第一个进度条图片的参数&lt;$STR(N1)&gt;</br></br>
+
+[@获取武器第一个自定义进度条数值的参数]</br>
+#ACT</br>
+GetCustomItemProgressbar 1 0 4 &lt;$STR(N1)&gt;</br>
+
+SENDMSG 6 武器第一个进度条数值的参数&lt;$STR(N1)&gt;</br></br></br>
+
+
+
+============================================================================================</br></br>
+
+
+
+
+锁定装备更新：LockUpdateItem 装备位置</br>
+更新装备到客端： UpdateItem 装备位置</br></br>
+
+【★★注意★★：有 LockUpdateItem 必须有 UpdateItem；反过来说UpdateItem可以单独使用】</br>
+【★★注意★★：当调用两次锁定武器更新  LockUpdateItem 1;  LockUpdateItem 1 时，必须调用两次 UpdateItem 1； UpdateItem 1 武器才会刷新到客户端】</br>
+
+
+【★★★★★★脚本实例：★★★★★★】</br></br>
+
+
+
+
+
+;★★★★ 锁定头盔更新  由于下面是对头盔的批量操作，锁定后，对头盔进行操作不会向客户端发包，直到 UpdateItem 4的出现，减少网络包的流量</br>
+LockUpdateItem 4</br></br>
+
+SetCustomItemText 4 [高级属性]</br>
+SetCustomItemTextColor 4 146</br></br>
+
+SetCustomItemAbil 4 2 1 3</br>
+SetCustomItemAbil 4 3 1 4</br>
+SetCustomItemAbil 4 4 1 5</br>
+SetCustomItemAbil 4 5 1 6</br>
+SetCustomItemAbil 4 6 1 7</br></br>
+
+SetCustomItemAbil 4 2 0 250</br>
+SetCustomItemAbil 4 3 0 250</br>
+SetCustomItemAbil 4 4 0 250</br>
+SetCustomItemAbil 4 5 0 250</br>
+SetCustomItemAbil 4 6 0 250</br></br>
+
+;★★★★解锁并更新头盔到客户端</br>
+UpdateItem 4</br></br>
+
+</br></br></br></br></br>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+=====================================================================================================================</br></br></br>
+相关说明：</br>
+改物品的属性，需用LOCKUPDATEITEM</br>
+---------</br>
+物品在人物身上。</br>
+
+LOCKUPDATEITEM  XX</br>
+
+UPDATEITEM</br>
+
+--------------</br></br>
+物品不在人物身上</br>
+LOCKUPDATEITEM  XX</br>
+
+UPDATEITEM</br></br></br></br>
+</body>
+</html>

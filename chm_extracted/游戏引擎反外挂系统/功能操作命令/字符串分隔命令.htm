@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>字符串分隔命令</title>
+</head>
+
+<body>
+
+
+</br></br>
+字符串切割命令:</br></br>
+
+;======================================================</br></br></br>
+<B>命令 分割符号 分割内容 保存变量 (自动填写数字编号)</B></br></br></br>
+[@aaa]</br>
+#IF</br>
+#ACT</br>
+; 分隔字符串后，按顺序往S11及以后放</br>
+ExtractStringEx | aaa|bbb|ccc|ddd|000 S11</br>
+SendMsg 6 &lt;$STR(S11)&gt;,&lt;$STR(S12)&gt;,&lt;$STR(S13)&gt;,&lt;$STR(S14)&gt;,&lt;$STR(S15)&gt;</br></br></br></br>
+
+; 分隔字符串后，依次放自定义变量1，2，3，4及以后放</br>
+ExtractStringEx | aaa|bbb|ccc|ddd|000 S$拆分</br>
+SendMsg 4 &lt;$STR(S$拆分1)&gt;,&lt;$STR(S$拆分2)&gt;,&lt;$STR(S$拆分3)&gt;,&lt;$STR(S$拆分4)&gt;,&lt;$STR(S$拆分5)&gt;</br></br></br></br></br>
+
+
+;======================================================</br></br></br>
+特别说明：当参数是变量的不支持嵌套 </br></br>
+这样不支持，如下：</br>
+GetDBItemFieldValue &lt;$STR(S$奖励内容&lt;$str(p1)&gt;)&gt; idx N$签到奖励&lt;$str(p1)&gt;   </br></br>
+正确应该这样：</br>
+mov s1 N$签到奖励&lt;$str(p1)&gt;</br>
+GetDBItemFieldValue &lt;$STR(S$奖励内容&lt;$str(p1)&gt;)&gt; idx s1</br>
+得到的idx还是存到s1中，而不是N$签到奖励1中</br></br></br></br></br>
+
+
+
+
+
+</br></br></br>
+
+正确可以参考以下示范：</br></br>
+#if</br>
+#act</br>
+MOV S$奖励内容 麻痹戒指,圣战戒指,裁决之杖,屠龙</br>
+ExtractStringEx , &lt;$STR(S$奖励内容)&gt; S$奖励内容</br>
+MOV P1 1</br>
+WHILE P1 &lt; 3</br>
+mov s1 N$签到奖励&lt;$str(p1)&gt;</br>
+GetDBItemFieldValue &lt;$STR(S$奖励内容&lt;$str(p1)&gt;)&gt; idx s1</br>
+sendmsg 6 嵌套的变量获取&lt;$STR(S$奖励内容&lt;$str(p1)&gt;)&gt;IDX&lt;$STR(s1)&gt;</br>
+INC P1 1</br>
+ENDWHILE</br></br></br>
+
+
+
+
+
+</br></br>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

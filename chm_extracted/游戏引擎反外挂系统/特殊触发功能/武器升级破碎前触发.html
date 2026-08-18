@@ -1,0 +1,33 @@
+<title>武器升级失败破碎前触发</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+<p><strong><font size="5">武器升级失败破碎前触发</font></strong></p>
+<p>-----------------------------------武器升级开刀破碎前(不包含成功)掉落触发---------------------------<br /><br /><br /><br /><br />
+
+QF触发字段：[@BeginWeaponBroken]<br /><br />
+功能说明：武器升级开刀破碎前触发QF字段<br /><br />
+中止武器破碎Npc命令: StopWeaponBroken<br /><br />
+<br />
+<br />
+<br />
+
+
+
+
+
+以下为QF触发示范：<br />
+
+[@BeginWeaponBroken]<br />
+#act<br />
+sendmsg 6 破碎前触发，不让破碎<br />
+StopWeaponBroken<br />
+
+
+
+
+
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

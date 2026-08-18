@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>按地图列表移动</title>
+<style>
+<!--
+div{word-break:break-all;word-wrap:break-word}.t{border:1px solid #c7d6e1;margin:0px auto 8px;}.t2{border-top:#c7d6e1 1px solid;margin:0px auto 5px;}.t{padding:1px}.t {padding:0}th{word-break:break-all;word-wrap:break-word}.r_one{background:#f9f9f9;}.tr1 th{padding:5px 10px;text-align:left;vertical-align:top;font-weight:normal;}.tr1 th{border-right:1px solid #e6e6e6;}.tpc_content{font-size:14px;font-family:Arial;padding:0 2% 0 0.5%;margin:0 0 2%}-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font color="#0000ff" size="2">功</font></strong><font color="#0000ff" size="2"><strong>能：<br>
+&nbsp;&nbsp; </strong></font>先设定每一张地图停留的地间，再把地图列表添加一下，人物会<br>
+&nbsp;&nbsp; 从第一张地图开始一张一张移动到最后一张<br>
+<font color="#0000ff" size="2"><strong><br>
+例子：<br>
+</strong></font><br>
+[@Test]<font color="#0000ff" size="2"><strong><br>
+</strong></font>#IF<br>
+#ACT<br>
+batchDelay 1&nbsp; ;(暂停时间)<br>
+addbatch B102 ;步进地图名1<br>
+addbatch B103 ;步进地图名2<br>
+addbatch B104 ;步进地图名3<br>
+addbatch B105 ;步进地图名4<br>
+addbatch B106 ;步进地图名5<br>
+addbatch B107 ;步进地图名6<br>
+batchmove ;开始从第一个步进地图移动到最后一个步进地图(这里是6)</p>
+
+</body>
+
+</html>

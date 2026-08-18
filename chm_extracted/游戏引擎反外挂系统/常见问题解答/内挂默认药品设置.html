@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>内挂默认药品设置</TITLE>
+</HEAD>
+<BODY>
+
+
+<P><B>内挂默认药品设置</B><br>
+
+数据库指定字段(Horse)设置如下为内挂默认药品：<br>
+1.普通HP药水 <br>
+2.特殊HP药水<br>
+3.普通+特殊HP药水<br>
+4.普通MP药水<br>
+5.特殊MP药水<br>
+6.普通+特殊MP药水<br>
+7.HP/MP特殊药水<br>
+8.普通HP药水+普通MP药水+特殊HP药水+HP/MP特殊药水<br>
+9.特殊HP药水+HP/MP特殊药水<br><br><br>
+
+及时雨内挂默认对应如下：<br><br>
+
+第一个HP  为普通HP药水    数据库字段：1、3、8<br>
+第二个HP  为特殊HP药水    数据库字段：1、3、8、9<br>
+MP        为普通MP药水    数据库字段：4、6、8<br>
+HP/MP     为HP/MP特殊药水 数据库字段：7、8、9<br><br><br><br>
+
+
+默认内挂对应：<br><br>
+1.普通体力药<br>
+4.普通魔法药<br>
+2.7.9特殊体力药 （触发内挂吃药后只要背包中有2和7和9的药品自动吃）<br>
+5.7.9特殊魔法药（触发内挂吃药后只要背包中有5和7和9的药品自动吃）<br><br><br><br><br>
+
+
+
+
+如果你使用仿及时雨内挂不想将药品区分太多：药品字段全部设置8，或者普通HP和MP设置8，特殊HP和特殊HP/HP设置9<br><br>
+
+
+如果你使用默认内挂普通药的字段设置1和4，特殊药不想区分太细就全部设置9<br><br><br><br>
+
+
+
+-------------------------------------------------------------------------------------------------------<br><br>
+
+<P>客户端自动解包配置，药品数据库的Anicount=打包物品的Shape，这样才可以自动解包<br>
+  例如：<br>
+  强效金创药 Anicount=100 超级金创药 Shape=100<br>
+  疗伤药 Anicount=115 疗伤药包 Shape=115<br>
+回城卷 Anicount=108 回城卷包 Shape=108</P>
+<p>支持2次打包<br>
+  例如：<br>
+  可以把“疗伤药包”再次打包<br>
+  疗伤药包 Anicount=120 超级疗伤药包 Shape=120</p>
+
+<br><br><br><br>
+
+默认药品支持同时支持物品分类号：2类、31类
+
+</BODY>
+</HTML>
+ 

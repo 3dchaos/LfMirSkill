@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>调整分身攻击人物的威力倍率</title>
+</head>
+
+<body>
+<p>功能说明：调整分身攻击人物的威力倍率</p>
+<p>格式：SetSlaveAttackHumPowerRate 分身名称 攻击人物威力倍率(0不攻击人物,当前值除以100为实际倍数)</p>
+</br></br></br>
+
+
+
+
+示范：</br></br>
+#if</br>
+CheckSlaveCount  > 0 &lt;$UserName&gt; 1<BR>
+#act</br>
+SetSlaveAttackHumPowerRate &lt;$USERNAME&gt; 0</br>
+sendmsg 6 分身不攻击人物</br>
+#elseact</br>
+SENDMSG 5  你没有分身</br>
+
+</br></br></br>
+
+-----------------------------上面为百分比、以下为数值-------------</br></br></br>
+
+调整宝宝、分身攻击人物威力值命令 及获取  （点数值 非百分比）</br></br>
+
+调整宝宝攻击人物威力（具体数值 比如加50点攻击    + 50）</br>
+SetSlaveAttackHumPowerRateEx 宝宝名 操作符(+/-/=)  值</br></br>
+
+#if</br>
+CheckSlaveCount  > 0 &lt;$UserName&gt; 1<BR>
+#act</br>
+SetSlaveAttackHumPowerRate &lt;$USERNAME&gt; + 50</br>
+sendmsg 6 分身增加50点攻击人物威力</br>
+#elseact</br>
+SENDMSG 5  你没有分身</br></br>
+</br></br>
+
+获取宝宝攻击人物威力</br>
+GetSlaveAttackHumPowerRate 宝宝名 变量</br></br>
+#if</br>
+CheckSlaveCount  > 0 &lt;$UserName&gt; 1<BR>
+#act</br>
+GetSlaveAttackHumPowerRate  &lt;$USERNAME&gt; N1</br>
+sendmsg 6 分身增加&lt;$STR(N1)&gt;点攻击人物威力</br>
+#elseact</br>
+SENDMSG 5  你没有分身</br></br></br></br>
+
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

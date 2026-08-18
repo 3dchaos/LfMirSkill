@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>魔王岭脚本</TITLE>
+<style type="text/css">
+<!--
+.STYLE1 {font-family: "宋体"}
+.STYLE2 {
+	font-family: "宋体";
+	color: #0000FF;
+	font-weight: bold;
+}
+-->
+</style>
+</HEAD>
+<BODY>
+<p class="STYLE2">天下第一脚本</p>
+<p class="STYLE1">&nbsp;</p>
+<p class="STYLE1">修改MerChant.txt 配置文件</p>
+<p class="STYLE1">NPC名称支持变量显示(只能使用全局变量A和T两种字符串类型，其它类型无效，请参照天下第一设置)</p>
+<p class="STYLE1">直接给变量写值NPC就会自动更名</p>
+<p class="STYLE1">例如：</p>
+<p class="STYLE1">天下第一战士		3	321	340	A14		0	35	0	0	0<br>
+  天下第一战士		3	324	340	A15		0	36	0	0	0<br>
+  天下第一法师		3	327	340	A16		0	37	0	0	0<br>
+  天下第一法师		3	330	340	A17		0	38	0	0	0<br>
+  天下第一道士		3	333	340	A18		0	39	0	0	0<br>
+  天下第一道士		3	336	340	A19		0	40	0	0	0</p>
+<p class="STYLE1">脚本</p>
+<p class="STYLE1">[@main]<br>#if<br>
+  #act<br>
+  MOV A14 &lt;$USERALLNAME&gt;\天下第一战士</p>
+<p class="STYLE1">&nbsp;</p>
+</BODY>
+</HTML>
+
+ 

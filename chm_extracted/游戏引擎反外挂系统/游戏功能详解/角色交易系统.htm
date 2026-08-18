@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+<TITLE>角色交易系统,账号交易买卖，角色出售[!]</TITLE>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</HEAD>
+<BODY>
+<P><STRONG><FONT size=5>角色出售、角色交易系统</FONT></STRONG></P>
+<P><font size="2"><span class="STYLE2"><strong>功能：</strong>角色交易功能说明</span><br><br><br>
+      <strong>查看详细信息脚本：</strong><br>
+
+查看角色属性栏最下面的“其他”读取的是SellPlayerInfo.txt文本，手动创建后复制下面的脚本即可！<br>
+SellPlayerInfo.txt 是显示出售角色信息中的“其他”中的内容，置于 Mir200\Envir\ 目录下。<br>
+和npc写法相同，不要任何标签和[@main]，不支持触发&lt;触发/@不支持&gt;，主要用于显示一些角色信息无法显示的各种变量属性<br><br>
+
+下方为 SellPlayerInfo.txt 文本内容示范：<br><br>
+用户名:&lt;$UserName&gt;\<br>
+等级:&lt;$Level&gt;\<br>
+转生等级:&lt;$ReLevel&gt;\<br><br>
+
+
+;******************************************分界线******************************************<br><br><br><br>
+
+<strong>功能操作命令：</strong><br><br>
+
+检测自己是否在出售中：<br>
+CheckIsSellPlayer<br><br>
+
+检测自己是否为角色出售委托人<br>
+CheckIsSellPlayDelegator<br><br>
+
+打开角色出售对话框：<br>
+OpenAddSellPlayerDlg<br><br>
+
+获取委托自己出售的角色数量<br>
+GetSellPlayerCount<br><br>
+
+取消某个委托自己出售的角色<br>
+DelSellPlayer 角色名<br><br>
+
+打开取消角色出售对话框<br>
+OpenDelSellPlayerDlg<br><br>
+
+打开角色出售商店<br>
+OpenSellPlayerShopDlg<br><br>
+
+中止添加角色出售 （仅用于 QFunction-[@PlayerSelling]或[@BeforePlayerSelling]中使用）<br>
+BreakAddSellPlayer<br><br><br>
+
+
+
+
+
+
+
+;-------------------------------<strong>Npc示范脚本：</strong>----------------------------<br><br>
+&lt;我要出售角色/@我要出售角色&gt;   &lt;取消角色出售委托/@取消角色出售委托&gt; \  \<br>
+&lt;我要购买角色/@我要购买角色&gt;<br><br>
+
+[@我要出售角色]<br>
+#if<br>
+CheckIsSellPlayer<br>
+#act<br>
+SendMsg 6 您已经在出售中<br>
+break<br><br>
+
+#if<br>
+CheckIsSellPlayDelegator<br>
+#act<br>
+SendMsg 6 您是别人的委托人，不能出售，如果要出售请先取消委托<br>
+break<br><br>
+
+#if<br>
+#act<br>
+;打出角色出售对话框，在此前可以加出售条件判断<br>
+; 此前加的条件可能会被构造的非法封包绕过，建议在QFunction-[@PlayerSelling]或[@BeforePlayerSelling]触发中检测<br>
+OpenAddSellPlayerDlg<br><br>
+
+
+[@取消角色出售委托]<br>
+#if <br>
+#act<br>
+GetSellPlayerCount n0<br>
+;获取正在委托自己出手的信息到变量中，N0修改为服务端没用到其他N变量<br><br>
+
+#if <br>
+Equal n0 0<br>
+;判断上面的变量是否为0，如上面N0修改了，本项N0同步修改<br>
+#act<br>
+SendMsg 6 没有委托您出售的角色<br>
+break<br>
+#elseact<br>
+OpenDelSellPlayerDlg<br><br>
+
+[@我要购买角色]<br>
+#if <br>
+#act<br>
+OpenSellPlayerShopDlg<br><br><br><br>
+
+
+;-------------------------------<strong>触发：QFunction </strong>----------------------------<br><br>
+
+QFunction触发字段说明：<br>
+1、添加出售角色委托人同意之后触发：@PlayerSelling <br>
+2、添加出售在询问委托人确认前触发：@BeforePlayerSelling <br>
+3、角色出售成功触发：@PlayerSold  <br><br>
+4、购买角色成功触发：@PlayerBuyIn  <br><br>
+
+
+;-------------------------------<strong>QFunction触发示例</strong>----------------------------<br><br>
+
+[@PlayerSold]<br>
+#act<br>
+;交易成功后将售出的角色强行离婚<br>
+unmarry requestunmarry force<br>
+break<br><br>
+
+[@BeforePlayerSelling]<br>
+#if<br>
+#act<br>
+SendMsg 6 委托人：&lt;$SellPlayDelegater&gt;<br>
+SendMsg 6 出售货币：&lt;$SellPlayMoneyType&gt;<br>
+;(1:元宝；2:游戏点；3:金币；4:金刚石；5:灵符)<br>
+SendMsg 6 出售价格：&lt;$SellPlayMoneyValue&gt;<br><br>
+
+#if<br>
+not checklevel 300<br>
+#act<br>
+BreakAddSellPlayer<br>
+SendMsg 6 您的等级不够，不能出售<br>
+break<br><br>
+
+#or<br>
+SMALL &lt;$SellPlayMoneyValue&gt; 10<br>
+LARGE &lt;$SellPlayMoneyValue&gt; 1000000<br>
+#act<br>
+BreakAddSellPlayer<br>
+SendMsg 6  请输入正确的价格范围：（10-100W）<br>
+break<br><br>
+
+[@PlayerSelling]<br>
+#or<br>
+SMALL &lt;$SellPlayMoneyValue&gt; 10<br>
+LARGE &lt;$SellPlayMoneyValue&gt; 1000000<br>
+#act<br>
+BreakAddSellPlayer<br>
+SendMsg 6  请输入正确的价格范围：（10-100W）<br>
+break<br>
+
+<br><br><br><br>
+
+
+说明：<br>
+@PlayerSelling出售前最后一个触发，可用于检测一些特殊项，至于检测什么自己决定<br>
+
+@BeforePlayerSelling 为向委托人发送请求前触发，比如检查等级，出售价格等，如果在 @PlayerSelling 中触发，感觉不太友好，因为折腾半天到最后一步提示条件不足，不够优雅，简单检测可以用在@BeforePlayerSelling 中进行<br><br>
+
+委托人是他人或自己另外个角色都会进行触发，因为触发为出售人的QF触发，一般用于检测<br><br><br><br>
+
+;-------------------------------<strong>购买角色成功QFunction触发示例</strong>----------------------------<br><br>
+
+变量（仅@PlayerBuyIn中可用）：<br><br>
+
+购买的角色名：&lt;$PlayerBuyUser&gt;<br>
+角色出售委托人：&lt;$PlayerBuyUserDelegater&gt;<br>
+角色出售价格：&lt;$PlayerBuyPrices&gt;<br>
+角色出售货币类型文本：&lt;$PlayerBuyMoneyType&gt;<br>
+角色出售货币类型值：&lt;$PlayerBuyMoneyTypeValue&gt;；0:元宝; 1:游戏点; 2:金币；3:金钢石; 4:灵符<br><br>
+
+[@PlayerBuyIn]<br>
+#or<br>
+SMALL &lt;$PlayerBuyPrices&gt; 10<br>
+LARGE &lt;$PlayerBuyPrices&gt; 1000000<br>
+#ACT<br>
+StopBuyUser<br>
+SendMsg 6  购买失败....价格要求大于10并且小于100W<br>
+break<br>
+#if<br>
+#ACT<br>
+SendMsg 6 购买角色“&lt;$PlayerBuyUser&gt;”（委托人：&lt;$PlayerBuyUserDelegater&gt;）成功触发；价格：&lt;$PlayerBuyPrices&gt;&lt;$PlayerBuyMoneyType&gt;(货币类型值：&lt;$PlayerBuyMoneyTypeValue&gt;)<br>
+break
+
+
+<br><br><br>
+
+以上为简单脚本，各种检测 需GM自己完善，已经成功后触发需要解除什么关系的 需GM自己加<br><br>
+
+如需下架指定出售角色命令请查阅GM命令<br><br>
+
+角色交易系统可和<a href="/游戏引擎反外挂系统/游戏功能详解/修改指定账号的注册信息.html">修改指定账号的注册信息命令配合使用</a><br><br>
+
+;******************************************分界线******************************************<br><br>
+购买角色前触发：@BeginBuyUser<br>
+中止人物购买角色：StopBuyUser，仅用于@BeginBuyUser中<br><br>
+
+[@BeginBuyUser]<br>
+#ACT<br>
+StopBuyUser<br>
+#SAY<br>
+购买的角色名：&lt;$PlayerBuyUser&gt;\<br>
+角色出售委托人：&lt;$PlayerBuyUserDelegater&gt;\<br>
+角色出售价格：&lt;$PlayerBuyPrices&gt;\<br>
+角色出售货币类型文本：&lt;$PlayerBuyMoneyType&gt;\<br>
+角色出售货币类型值：&lt;$PlayerBuyMoneyTypeValue&gt;；0:元宝; 1:游戏点; 2:金币；3:金钢石; 4:灵符<br><br>
+
+
+;******************************************分界线******************************************<br><br>
+
+<span class="style2"><strong>角色出售期间不要对该角色进行脚本或其他操作，上架后的角色数据为锁定状态一切操作无效（不要对出售中角色进行任何操作，比如丢弃、收回、 给予物品或货币改变等）！</strong></span><br>
+
+;******************************************分界线******************************************<br><br><br><br>
+
+角色出售 默认为本账号下另外个角色进行委托，如果不想账号下另外个角色，可以委托指定在线玩家帮忙代售，交易成功后货币直接进入委托人角色上！<br><br>
+
+角色出售 出售给指定玩家，意思是出售的角色在角色购买栏只有指定的这个玩家才看得到，其他玩家无法看到~~~~<br><br>
+
+
+为防止PK期间被人恶意输入委托人弹出对话框，角色交易采用委托在线其他玩家代售，则需要代售玩家使用命令@角色交易（此命令在M2上玩家命令中可自行修改）   打开和关闭是否允许接受委托，上线默认禁止<br><br>
+
+角色交易UI默认使用13周年UI，可在自定义UI中选择替换UI读取路径为你服的UI界面<br><br>
+
+********************母服务器须关闭角色交易功能。出售角色默认都是离线挂机状态，M2剔除离线挂机无法剔除这些出售中的角色。因为不是离线挂机状态无法查看角色属性，仓库，背包之类  ，可脚本给予无敌模式、观察模式或必须在或者不允许PK地图进行交易（M2-功能设置-脱机登录  勾选上“	怪物不攻击脱机人物”）********************<br><br>
+
+<br><br><br><br><br>
+
+

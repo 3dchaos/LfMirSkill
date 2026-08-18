@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>毫秒级个人定时器</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font size="5">毫秒级个人定时器</font></strong> </p>
+<font size="3"><span class="STYLE2"><strong>功能：</strong>毫秒级个人定时器</span><br />
+<strong>说明：</strong> 由于人物运行间隔在200毫秒+，计时器在250毫秒内可能无法做到很精确<br /><br /><br />
+
+
+
+
+
+格式：<br />
+    SETONTIMEREX 定时器索引(0-9) 定时间隔（单位为毫秒）执行次数（留空为无限制执行，需使用停止定时器方可关闭，填写3为执行3次后自动关闭定时器）<br />
+    SETOFFTIMEREX 定时器索引(0-9) //停止定时器 <br /><br />
+
+
+
+设置定时器编号0的间隔为300毫秒<br />
+[@Test]<br />
+#IF<br />
+#ACT<br />
+SETONTIMEREX  0 300<br /><br />
+
+
+
+
+
+
+QManage.txt:触发：<br />
+QM中的@OnTimerEx索引号<br />
+
+[@OnTimerEx0]<br />
+#ACT<br />
+SENDMSG 1 OnTimerEx0<br /><br />
+
+
+停止编号0的定时器<br />
+[@Test]<br />
+#IF<br />
+#ACT<br />
+SETOFFTIMEREX 0<br />
+
+
+
+
+
+
+
+
+
+<br /><br /><br />
+
+
+
+
+</body>
+
+</html>

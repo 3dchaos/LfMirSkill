@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>打印个人标识</title>
+</head>
+
+<body>
+<p><b>功能说明: 打印个人标识</b></p>
+
+<br /><br />
+
+
+
+
+[@打印个人标识]<br />
+&lt;开关标识1/@开关标识(1)&gt;   &lt;$flag(1)&gt;   &lt;&lt; 显示 0 或 1\<br />
+&lt;开关标识100/@开关标识(100)&gt;   <$flag(100)&gt;   &lt;&lt; 显示 0 或 1\<br /><br />
+
+[@开关标识]<br />
+#if<br />
+check [&lt;$scriptparam1&gt;] 0<br />
+#act<br />
+set [&lt;$scriptparam1&gt;] 1<br />
+sendmsg 7 ---------------标识:&lt;$scriptparam1&gt;，当前状态：&lt;$flag(&lt;$scriptparam1&gt;)&gt;（状态应显示为1）<br />
+goto @打印个人标识<br />
+#elseact<br />
+set [&lt;$scriptparam1&gt;] 0<br />
+sendmsg 7 ---------------标识:&lt;$scriptparam1&gt;，当前状态：&lt;$flag(&lt;$scriptparam1&gt;)&gt;（状态应显示为0）<br />
+goto @打印个人标识<br /><br /><br />
+
+
+
+
+
+
+
+;======================================================<br />
+
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

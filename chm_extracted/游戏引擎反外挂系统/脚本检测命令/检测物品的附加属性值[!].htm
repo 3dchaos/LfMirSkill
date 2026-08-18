@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>检测物品的附加属性值</title>
+<style type="text/css">
+<!--
+.STYLE1 {	color: #0000FF;
+	font-weight: bold;
+}
+-->
+</style>
+</head>
+
+<body>
+<p><strong><font color="#0000ff" size="2">功</font></strong><font color="#0000ff" size="2"><strong>能：</strong></font> 获取物品的附加属性值 </p>
+<p><span class="STYLE1">格式:</span> 格式:   CHECKITEMADDVALUE 装备位置(-1时是升级OK框中的装备, boxitem0 -boxitem7为自定义OK框，0-51时是穿在身上的装备) 属性位置(0-18) (符号 &lt; &gt; =) 值 保存变量 </p>
+<p>物品位置:<br>
+  0 盔甲<br>
+  1 武器<br>
+  2 照明物（蜡烛，此物品属性升级无效）<br>
+  3 项链<br>
+  4 头盔<br>
+  5 右手镯<br>
+  6 左手镯<br>
+  7 右戒指<br>
+  8 左戒指<br>
+  9 无(放护身符位置)<br>
+  10 腰带<br>
+  11 鞋子<br>
+12 宝石</p>
+<p>盔甲<br>
+  0 防御<br>
+  1 魔御<br>
+  2 攻击<br>
+  3 魔法<br>
+  4 道术<br>
+  5-13 无效果<br>
+  14 持久<br>
+15 所需等级（不支持混合等级需求，如指定职业及指定等级组合）<br>
+16 刺术<br>
+17 箭术<br>
+18 武力</p>
+
+<p>武器<br>
+  0 DC2<br>
+  1 MC2<br>
+  2 SC2<br>
+  3 幸运<br>
+  4 诅咒<br>
+  5 准确<br>
+  6 攻击速度<br>
+  7 强度<br>
+  8-9 暂不知道<br>
+  10 需开封<br>
+  11-13 暂不知道<br>
+  14 持久<br>
+15 所需等级（不支持混合等级需求，如指定职业及指定等级组合）<br>
+16 刺术<br>
+17 箭术<br>
+18 武力</p>
+
+<p>头盔<br>
+  0 防御<br>
+  1 魔御<br>
+  2 攻击<br>
+  3 魔法<br>
+  4 道术<br>
+  5 佩带需求<br>
+  6 佩带级别<br>
+  7-13 无效果<br>
+  14 持久<br>
+15 所需等级（不支持混合等级需求，如指定职业及指定等级组合）<br>
+16 刺术<br>
+17 箭术<br>
+18 武力</p>
+
+
+<p>项链<br>
+  0 AC2<br>
+  1 MAC2<br>
+  2 DC2<br>
+  3 MC2<br>
+  4 SC2<br>
+  6 佩带需求<br>
+  7 佩带级别<br>
+  8 reserved<br>
+  9-13 暂不知道<br>
+  14 持久<br>
+15 所需等级（不支持混合等级需求，如指定职业及指定等级组合）<br>
+16 刺术<br>
+17 箭术<br>
+18 武力</p>
+
+<p>手镯<br>
+  0 AC2<br>
+  1 MAC2<br>
+  2 DC2<br>
+  3 MC2<br>
+  4 SC2<br>
+  6 佩带需求<br>
+  7 佩带级别<br>
+  8-13 无效果<br>
+  14 持久<br>
+15 所需等级（不支持混合等级需求，如指定职业及指定等级组合）<br>
+16 刺术<br>
+17 箭术<br>
+18 武力</p>
+
+
+
+<p>戒指<br>
+  0 AC2<br>
+  1 MAC2<br>
+  2 DC2<br>
+  3 MC2<br>
+  4 SC2<br>
+  6 佩带需求<br>
+  7 佩带级别<br>
+  8-13 无效果<br>
+  14 持久<br>
+15 所需等级（不支持混合等级需求，如指定职业及指定等级组合）<br>
+16 刺术<br>
+17 箭术<br>
+18 武力</p>
+
+
+<p>例子:?<br>
+  #IF<br>
+  CheckItemAddValue 0 0 &gt; 1<br>
+  #ACT<br>
+  GETITEMADDVALUE 0 0 &lt;$STR(M10)&gt;<br>
+  ;H.GETITEMADDVALUE 0 0 &lt;$STR(M10)&gt;<br>
+  #SAY<br>
+  你的盔甲附加了&lt;$STR(M10)&gt;点防御属性.</p>
+</body>
+</html>

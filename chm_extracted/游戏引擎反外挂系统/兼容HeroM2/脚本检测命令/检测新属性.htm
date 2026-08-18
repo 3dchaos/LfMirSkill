@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>检测新属性</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<BODY>
+<P><FONT size=2><FONT face=Fixedsys>功能: 检测当前装备是否附加了新属性. 专用登录器.<BR></FONT><FONT 
+face=Fixedsys><FONT color=#000000>格式: CheckNewItemValue 位置(0-18) 属性(0-5) 
+操作符(&lt;,=,&gt;) 值(1-100)<BR></FONT>说明: <FONT color=#000000>属性 0=致命一击 1=攻击伤害增加 
+2=物理伤害减少 3=魔法伤害减少 4=攻击伤害反弹 
+5=人物体质增加<BR> 位置说明：-1 升级框， 0-18装备位置(新增位置：boxitem0 - boxitem7 对应8个框)<BR><BR><BR>例子:<BR><BR>#IF<BR>CheckNewItemValue 1 0 &gt; 
+5<BR>#SAY<BR>你的武器附加了5%的致命一击属性.</FONT></FONT></FONT></P>
+<P><FONT face=Fixedsys size=2></FONT>&nbsp;</P>
+<P><FONT face=Fixedsys size=2>#IF<BR>CheckNewItemValue 1&nbsp;1 &gt; 
+5<BR>#SAY<BR>你的武器附加了5%的攻击伤害增加属性.</FONT></P>
+<P><FONT face=Fixedsys size=2></FONT>&nbsp;</P>
+<P><FONT face=Fixedsys size=2>#IF<BR>CheckNewItemValue&nbsp;0&nbsp;5 &gt; 
+5<BR>#SAY<BR>你的衣服附加了5点人物体质属性.
+<BR><BR>
+
+
+<b>检测命令不包含天生元素属性（即数据库字段设置的属性）</b><BR><BR>
+</FONT><FONT color=#000000></P>
+<P><BR><FONT face=Fixedsys size=2></FONT></FONT><BR></P></BODY>
+</html>

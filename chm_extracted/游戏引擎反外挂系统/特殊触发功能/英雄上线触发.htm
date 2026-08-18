@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>英雄上线触发</title>
+</head>
+
+<body>
+
+<p>英雄上线触发 @HeroLogin 注意这个触发是由主人执行的所以对英雄的操作请在前面加H</p>
+<p><b><font color="#ff0000">QManage.txt里的配置脚本</font><font color="#ff0000" size="6"><br>
+<br>
+</font></b>[@HeroLogin]<br>
+#if<br>
+H.CHECKNAMELIST ..\QuestDiary\数据文件\英雄名单.txt<br>
+#act<br>
+H.DELSKILL 破魂斩<br>
+H.DELSKILL 劈星斩<br>
+H.DELSKILL 雷霆一击<br>
+H.DELSKILL 噬魂沼泽<br>
+H.DELSKILL 末日审判<br>
+H.DELSKILL 火龙气焰<br>
+H.delnamelist ..\QuestDiary\数据文件\英雄名单.txt<br>
+#IF<br>
+H.ISNEWHUMAN<br>
+H.gender man<br>
+#ACT<br>
+H.give 恶魔长袍(男) 1<br>
+H.give 骨玉权杖 1<br>
+H.TakeOnitem 骨玉权杖 1<br>
+H.TakeOnitem 恶魔长袍(男) 0<br>
+H.give 超级金创药 4<br>
+H.give 超级魔法药 3<br>
+SENDMSG 4 恭喜&lt;$USERNAME&gt;您的英雄领取了装备<br>
+break<br>
+#IF<br>
+H.ISNEWHUMAN<br>
+H.gender WOMAN<br>
+#ACT<br>
+H.give 恶魔长袍(女) 1<br>
+H.give 骨玉权杖 1<br>
+H.TakeOnitem 骨玉权杖 1<br>
+H.TakeOnitem 恶魔长袍(女) 0<br>
+H.give 超级金创药 4<br>
+H.give 超级魔法药 3<br>
+SENDMSG 4 恭喜&lt;$USERNAME&gt;您的英雄领取了装备<br>
+break<br>
+#IF<br>
+H.ISNEWHUMAN<br>
+H.gender man<br>
+#ACT<br>
+H.give 战神盔甲(男) 1<br>
+H.give 裁决之杖 1<br>
+H.TakeOnitem 战神盔甲(男) 0<br>
+H.TakeOnitem 裁决之杖 1<br>
+H.give 超级金创药 4<br>
+H.give 超级魔法药 3<br>
+SENDMSG 4 恭喜&lt;$USERNAME&gt;您的英雄领取了装备<br>
+break<br>
+#IF<br>
+H.ISNEWHUMAN<br>
+H.gender WOMAN<br>
+#ACT<br>
+H.give 战神盔甲(女) 1<br>
+H.give 裁决之杖 1<br>
+H.TakeOnitem 战神盔甲(女) 0<br>
+H.TakeOnitem 裁决之杖 1<br>
+H.give 超级金创药 4<br>
+H.give 超级魔法药 3<br>
+SENDMSG 4 恭喜&lt;$USERNAME&gt;您的英雄领取了装备<br>
+break<br>
+#IF<br>
+H.ISNEWHUMAN<br>
+H.gender man<br>
+#ACT<br>
+H.give 幽灵战衣(男) 1<br>
+H.give 龙纹剑 1<br>
+H.TakeOnitem 幽灵战衣(男) 0<br>
+H.TakeOnitem 龙纹剑 1<br>
+H.give 超级金创药 4<br>
+H.give 超级魔法药 3<br>
+SENDMSG 4 恭喜&lt;$USERNAME&gt;您的英雄领取了装备<br>
+break<br>
+#IF<br>
+H.ISNEWHUMAN<br>
+H.gender WOMAN<br>
+#ACT<br>
+H.give 幽灵战衣(女) 1<br>
+H.give 龙纹剑 1<br>
+H.TakeOnitem 幽灵战衣(女) 0<br>
+H.TakeOnitem 龙纹剑 1<br>
+H.give 超级金创药 4<br>
+H.give 超级魔法药 3<br>
+SENDMSG 4 恭喜&lt;$USERNAME&gt;您的英雄领取了装备<br>
+break<br>
+　</p>
+
+</body>
+
+</html>

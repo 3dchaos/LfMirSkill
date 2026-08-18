@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>调整修改下次攻击伤害比例</title>
+</head>
+</br></br></br></br></br></br>
+<body>
+<p>格式: SetNextDamage 参数1</p>
+参数1 下次伤害百分比 不能为0和负数 </br>
+低于100 伤害低于正常值 </br></br>
+
+;例1</br>
+#act</br>
+SetNextDamage 300 </br>
+#say</br>
+下次攻击 伤害提高到300%</br></br></br>
+
+;例2</br></br>
+[@Attack]</br>
+#act</br>
+&lt;$CURRRTARGETNAME&gt;.SetNextDamage 50</br>
+#say</br>
+目标角色的下次攻击伤害 为其正常伤害的50%</br></br></br></br>
+
+
+魔法触发请使用@MagicAttack，不要使用@MagSelfFunc</br></br>
+
+
+[@MagSelfFunc33] 可以理解为这个是释放魔法的时候触发。</br></br>
+
+
+@MagicAttack这个可以理解为攻击完成后触发。</br></br></br></br></br></br></br></br></br></br>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

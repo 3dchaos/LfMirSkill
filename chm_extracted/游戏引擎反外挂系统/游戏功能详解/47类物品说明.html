@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>47类右键准星物品说明</TITLE>
+<META content=zh-cn http-equiv=Content-Language>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+<STYLE type=text/css>
+<!--
+body {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+h1 {
+	font-size: 9px;
+}
+h2 {
+	font-size: 9px;
+}
+body,td,th {
+	font-size: 12px;
+}
+.style3 {
+		font-size: 12px;
+		color: #FF0000;
+		font-weight: bold;
+}
+.style2 {		color: #0000FF;
+		font-weight: bold;
+}
+.style8 {color: #0000FF}
+.style7 {color: #FF0000}
+.style10 {color: #0000FF; font-weight: bold; }
+.style11 {color: #FF00FF}
+-->
+</STYLE>
+
+<META name=GENERATOR content="MSHTML 11.00.10570.1001"></HEAD>
+<BODY>
+<P><BR><FONT size=3>新增物品分类47，物品可叠加使用，类似宝石镶嵌~和31类的··结合产物，背包直接执行</FONT></P>
+<P><FONT size=3>StdMode=47 新增扩展物品&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+可叠加<BR>Shape=50， 物品使用一次后消失 , 准星对准物品点击了 和宝石镶嵌那样视为使用<BR>Shape=51， 
+物品可以一直使用，直到手动删除</FONT></P>
+<P><FONT size=3>右键使用后 鼠标变成准星模式</FONT></P>
+<P><FONT size=3>触发：<BR>以上扩展2种类型的物品<BR><STRONG><FONT color=#800000>人物触发 
+QF中的&nbsp; [@StdmodeShowX]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; X=物品的Anicount<BR>英雄触发 
+QF中的&nbsp; [@HeroStdmodeShowX]&nbsp; 
+X=物品的Anicount</FONT></STRONG><BR>-----------------------------------------------------------<BR>增加NPC变量（变量名带G_可显示改名后的物品名，详见下方示范脚本）:<BR>当前使用物品名：&lt;$UseItemName&gt;, 
+&lt;$H.UseItemName&gt;<BR>当前使用物品唯一ID：&lt;$UseItemMakeIndex&gt; 
+&lt;$H.UseItemMakeIndex&gt;</FONT></P>
+<P><FONT size=3>+当前准星使用对象物品名：&nbsp;&nbsp;&nbsp; 
+&lt;$BagItemName&gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+&lt;$H.BagItemName&gt;<BR>+当前准星使用对象物品唯一ID：&lt;$BagItemMakeIndex&gt;&nbsp; 
+&lt;$H.BagItemMakeIndex&gt;<BR>;==========================================================</FONT></P>
+<P><FONT color=#ff0000 size=3><STRONG>·脚本示范</STRONG></FONT></P>
+<FONT size=3>[@StdModeShow1]<BR>#if<BR>#act<BR>SendMsg 6 
+人物当前使用的物品名:&lt;$UseItemName&gt;，唯一ID:&lt;$UseItemMakeIndex&gt;<BR>SendMsg 6 
+使用物品目标名字:&lt;$BagItemName&gt;,唯一ID:&lt;$BagItemMakeIndex&gt;</FONT></br>
+<FONT size=3>SendMsg 6 邪恶の力量到此一游</FONT></br>
+<FONT size=3>LinkBagItem &lt;$BagItemMakeIndex&gt;</FONT></br>
+<FONT size=3>;修改物品星星数量<BR>CHANGEITEMUPGRADECOUNT -1 + 1</FONT></br>
+<FONT size=3>UpdateItem -1<BR>ClearLinkItem</FONT></br>
+<FONT size=3>break</FONT></br></br></br>
+<P><FONT size=3>[@HeroStdModeShow2]<BR>#if<BR>#act<BR>SendMsg 6 
+英雄当前使用的物品名:&lt;$H.UseItemName&gt;，唯一ID:&lt;$H.UseItemMakeIndex&gt;<BR>SendMsg 6 
+英雄物品目标名字:&lt;$H.BagItemName&gt;,唯一ID:&lt;$H.BagItemMakeIndex&gt;</FONT></br>
+<FONT size=3>H.LinkBagItem &lt;$H.BagItemMakeIndex&gt;</FONT></br>
+<FONT size=3>;修改物品星星数量<BR>H.CHANGEITEMUPGRADECOUNT -1 + 1</FONT>
+<FONT size=3>H.UpdateItem -1<BR>
+H.ClearLinkItem<BR></FONT>
+<FONT size=3>break</FONT></br></br></br></br></br>
+
+
+<FONT size=3>[@StdModeShow1]</br>
+<FONT size=3>#if</br>
+<FONT size=3>#act</br>
+<FONT size=3>;$G_UseItemName 和$G_BagItemName支持改名后的名称显示，不带G_则为数据库名字</br>
+<FONT size=3>SendMsg 6 人物当前使用的物品名:&lt;$UseItemName&gt; （&lt;$G_UseItemName&gt; ），唯一ID:&lt;$UseItemMakeIndex&gt; </br>
+<FONT size=3>SendMsg 6 使用物品目标名字:&lt;$BagItemName&gt; （&lt;$G_BagItemName&gt; ）,唯一ID:&lt;$BagItemMakeIndex&gt; </br>
+<FONT size=3>break</br></br></br>
+</BODY></HTML></br>

@@ -1,0 +1,34 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>复活命令</title>
+</head>
+
+<body>
+<p>说明: 给予角色有限时间的复活功能(此命令不受复活间隔控制，可以按照设置参数无限复活，按需使用)</p>
+
+
+格式：<br />
+命令: Setreborn 参数一 参数二 <br />
+参数一 复活次数<br />
+参数二 命令持续有效时间<br /><br /><br />
+
+
+
+
+[@测试脚本]<br />
+#act<br />
+Setreborn 10  300<br />
+SendMsg 6 npc设置复活10次，有效时间5分钟<br /><br />
+
+------------------------------------------------------qf触发<br /><br />
+[@NpcRevival]<br />
+#act<br />
+SendMsg 6 命令剩余复活次数：&lt;$NpcRebornCount&gt;，已使用复活次数&lt;$TriggerNpcRebornCount&gt;<br /><br />
+
+
+
+</body>
+</html>

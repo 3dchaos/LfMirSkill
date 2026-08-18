@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>自定义UI中自定义按钮使用,预留按钮</title>
+</head>
+
+<body>
+<p>自定义UI部分界面增加自定义按钮（预留按钮），自定义UI中开启后QF使用以下脚本来检测按钮编号 和使用</p>
+</br></br></br>
+QF:</br></br>
+[@CustomButtonClick]</br>
+#act</br>
+SENDMSG 7  按钮点击编号为&lt;$CustomButtonID&gt;</br>
+</br>
+#IF</br>
+equal &lt;$CustomButtonID&gt; 50</br>
+#ACT</br>
+SENDMSG 7 你触发了50编号的按钮</br>
+break</br></br></br></br>
+
+
+脚本命令：</br>
+ShowCustomButton 编号 显示/隐藏(0:隐藏， 1:显示）</br></br></br>
+
+
+
+
+预留编号:</br>
+主界面       （0-9）</br>
+背包          （20-24）</br>
+系统商铺   （40-42）</br>
+老行会     （30-32）</br>
+新行会       （50-52）</br>
+装备           （60-62）</br>
+时装           （70-71）</br>
+状态           （80-82）</br>
+属性           （90-92）</br>
+称号           （100-102）</br>
+技能           （110-112）</br>
+出战           （120-129）</br>
+神佑        （130-132）</br>
+首饰盒      （140-142）</br>
+内功状态	（300-302）</br>
+内功技能	（310-312）</br>
+内功经络	（3320-322）</br>
+内功连击	（330-332）</br>
+内挂界面        （340-342）</br>
+英雄头像 (400-402) 3个预留按钮</br>
+英雄背包 (410-414) 5个预留按钮</br>
+英雄装备 (420-422) 3个预留按钮</br>
+英雄时装 (430-432) 3个预留按钮</br>
+英雄状态 (440-442) 3个预留按钮</br>
+英雄属性 (450-452) 3个预留按钮</br>
+英雄称号 (460-462) 3个预留按钮</br>
+英雄技能 (470-472) 3个预留按钮</br>
+英雄神佑 (480-482) 3个预留按钮</br>
+英雄首饰盒 (490-492) 3个预留按钮</br>
+英雄内功状态 (500-502) 3个预留按钮</br>
+英雄内功技能 (510-512) 3个预留按钮</br>
+英雄内功经络 (520-522) 3个预留按钮</br>
+英雄内功连击 (530-532) 3个预留按钮</br>
+他人装备  (800-802)</br>
+他人时装  (810-812)</br>
+他人称号  (820-822)</br>
+他人神佑  (830-832)</br>
+他人首饰  (840-842)</br>
+宠物界面  (850-858)</br></br>
+
+
+点击他人装备按钮脚本：</br>
+[@CustomButtonClick]></br>
+#IF></br>
+equal &lt;$CustomButtonID&gt; 800</br>
+#ACT></br>
+SENDMSG 7 你触发了他人装备栏自定义按钮1 </br>
+SENDMSG 7 他人名称&lt;$USERSTATENAME&gt;</br>
+break></br>
+
+
+
+</br></br></br></br></br></br>
+
+
+</body>
+</html>

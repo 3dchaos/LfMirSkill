@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>攻击触发</title>
+</head>
+
+<body>
+<p>QFunction-0 </p>
+<p>;所有触发只有攻击到怪物才会触发，有些魔法不会触发，如魔法盾<br>
+  ;======================魔法攻击触发==========================<br>
+  [@MagicStruck]<br>
+  #IF<br>
+  CHECKCURRTARGETRACE = 0<br>
+  #ACT
+  <br>
+  SENDMSG 6 你被人物【&lt;$CURRRTARGETNAME&gt;】攻击了。使用魔法ID=&lt;$CURRRUSEMAGICID&gt;  255 253<br>
+  BREAK<br>
+  #IF<br>
+  CHECKCURRTARGETRACE = 1<br>
+  #ACT
+  <br>
+  SENDMSG 6 你被英雄【&lt;$CURRRTARGETNAME&gt;】攻击了。使用魔法ID=&lt;$CURRRUSEMAGICID&gt;  255 253<br>
+  BREAK<br>
+  #IF<br>
+  CHECKCURRTARGETRACE = 151<br>
+  #ACT
+  <br>
+  SENDMSG 6 你被分身【&lt;$CURRRTARGETNAME&gt;】攻击了。使用魔法ID=&lt;$CURRRUSEMAGICID&gt;  255 253<br>
+  BREAK<br>
+  #IF<br>
+  CheckCurrTargetSlave<br>
+  #ACT
+  <br>
+  SENDMSG 6 你被宝宝【&lt;$CURRRTARGETNAME&gt;】攻击了。。宝宝主人：【&lt;$CurTargetMasterName&gt;】  使用魔法ID=&lt;$CURRRUSEMAGICID&gt;  255 253<br>
+  BREAK<br>
+</p>
+<p>#IF<br>
+  #ACT
+  <br>
+  SENDMSG 6 你被怪物【&lt;$CURRRTARGETNAME&gt;】攻击了。使用魔法ID=&lt;$CURRRUSEMAGICID&gt;  255 253<br>
+  BREAK<br>
+</p>
+<p>[@MagicAttack]<br>
+  #IF<br>
+  CHECKCURRTARGETRACE = 0<br>
+  #ACT
+  <br>
+  SENDMSG 6 你攻击了人物【&lt;$CURRRTARGETNAME&gt;】。使用魔法ID=&lt;$CURRRUSEMAGICID&gt;  255 249<br>
+  BREAK<br>
+</p>
+<p>#IF<br>
+  #ACT
+  <br>
+SENDMSG 6 你攻击了怪物【&lt;$CURRRTARGETNAME&gt;】。&lt;$ATTACKMONSTER_NAME&gt;，锁定目标&lt;$ATTACKMONSTER_NAMEEX&gt;。&lt;$ATTACKMONSTER_MAXHP&gt; 使用魔法ID=&lt;$CURRRUSEMAGICID&gt; 255 249<br>
+  BREAK</p>
+<p>;======================物理攻击触发==========================<br>
+  [@Struck]<br>
+#IF<br>
+  CHECKCURRTARGETRACE = 0<br>
+  #ACT
+  <br>
+  SENDMSG 6 你被人物【&lt;$CURRRTARGETNAME&gt;】攻击了。使用魔法ID=&lt;$CURRRUSEMAGICID&gt;  255 253<br>
+  BREAK<br>
+  #IF<br>
+  CHECKCURRTARGETRACE = 1<br>
+  #ACT
+  <br>
+  SENDMSG 6 你被英雄【&lt;$CURRRTARGETNAME&gt;】攻击了。使用魔法ID=&lt;$CURRRUSEMAGICID&gt;  255 253<br>
+  BREAK<br>
+  #IF<br>
+  CHECKCURRTARGETRACE = 151<br>
+  #ACT
+  <br>
+  SENDMSG 6 你被分身【&lt;$CURRRTARGETNAME&gt;】攻击了。使用魔法ID=&lt;$CURRRUSEMAGICID&gt;  255 253<br>
+  BREAK<br>
+</p>
+<p>#IF<br>
+  #ACT
+  <br>
+  SENDMSG 6 你被怪物【&lt;$CURRRTARGETNAME&gt;】攻击了。使用魔法ID=&lt;$CURRRUSEMAGICID&gt; 255 253<br>
+  BREAK<br>
+</p>
+<p>[@Attack]<br>
+  #IF<br>
+  CHECKCURRTARGETRACE = 0<br>
+  #ACT
+  <br>
+  SENDMSG 6 你攻击了人物【&lt;$CURRRTARGETNAME&gt;】。使用魔法ID=&lt;$CURRRUSEMAGICID&gt; 255 249<br>
+  BREAK</p>
+<p>#IF<br>
+  #ACT
+  <br>
+SENDMSG 6 你攻击了怪物【&lt;$CURRRTARGETNAME&gt;】。&lt;$ATTACKMONSTER_NAME&gt;，锁定目标&lt;$ATTACKMONSTER_NAMEEX&gt;。&lt;$ATTACKMONSTER_MAXHP&gt; 使用魔法ID=&lt;$CURRRUSEMAGICID&gt; 255 249<br>
+BREAK
+
+<p>;======================下面变量获取怪物完整名字==========================<br><br>
+
+增加技能锁定目标名（有可能为空，比倚天辟地等 等无鼠标指向 、点击、魔法锁定的目标时）<br>
+
+&lt;$ATTACKMONSTER_NAMEEX&gt;<br><br>
+
+
+增加变量以显示完整名（不去数字）：$CURRRTARGETFULLNAME  <br><br><br>
+
+上面演示脚本中变量不获取怪物名字后面的数字：$CURRRTARGETNAME<br><br><br><br>
+
+提供2种变量大家自己按需使用！<br>
+</p>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>检查人物技能(扩展)</TITLE>
+</HEAD>
+<BODY>
+<P>检查人物技能<BR><BR>功能：<BR>检查人物技能</P>
+<P>格式：<BR>
+CHECKSKILL 技能名称 检测符(&gt;,&lt;,=) 等级 是否检测强化技能(0或为空时为技能等级,1为强化技能等级)</P>
+<P>例：<BR>
+  [@main]<BR>
+  #IF<BR>
+  CHECKSKILL 冰咆哮 = 0 1<BR>
+  #ACT<BR>
+  SKILLLEVEL 冰咆哮 = 1   1<BR>
+SENDMSG 6 冰咆哮已修炼到强化一重</P>
+<P>相关命令：<BR>练习技能：<FONT color=#000000 
+size=2><A href="../功能操作命令/练习技能.htm">ADDSKILL</A></FONT><BR>
+删除技能：<A href="../功能操作命令/删除指定技能.htm">DELSKILL<BR>
+</A>删除非本职业所有技能：<A 
+href="../功能操作命令/删除非本职业的所有技能.htm">DELNOJOBSKILL<BR>
+</A>删除所有技能：<A 
+href="../功能操作命令/删除所有技能.htm"&gt;CLEARSKILL</A></P>
+<BR>英雄练习技能：<FONT color=#000000 
+size=2>H.ADDSKILL</FONT><BR>
+删除英雄技能：H.DELSKILL<BR>
+</A>删除英雄非本职业所有技能：H.DELNOJOBSKILL<BR>
+</A>删除所有技能：H.CLEARSKILL</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P><B>强化技能升级，技能栏"升级"鼠标移上去提示的配置文件：客户端目录\data\SkillUpgradeDesc.Dat</B>(以下为示例：) </P>
+
+;技能类型(普通技能/内功技能),技能名,需要强化等级,强化描述(描述使用,换行 参考9重)<BR>
+普通技能,攻杀剑术,1,111111111111<BR>
+普通技能,攻杀剑术,2,222222222222<BR>
+普通技能,攻杀剑术,3,333333333333333<BR>
+普通技能,攻杀剑术,4,44444444444444444<BR>
+普通技能,攻杀剑术,5,5555555555555555555555<BR>
+普通技能,攻杀剑术,6,6666666666666666666666<BR>
+普通技能,攻杀剑术,7,77777777777777777<BR>
+普通技能,攻杀剑术,8,8888888888888888888<BR>
+普通技能,攻杀剑术,9,升到9级要好多毛线的,你确定要升级????????<BR>
+</BODY>
+</HTML>
+
+ 

@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>循环脚本</TITLE>
+</HEAD>
+<BODY>
+
+
+</br></br></br>
+
+
+
+[@MAIN]</br>
+ &lt;111/@111&gt;           &lt;222/@222&gt;        &lt;$STR(N1)&gt;</br></br></br></br></br>
+
+; ******************************************尽可能不要用这种写法，递归调用容易产生栈溢出</br>
+[@111]</br>
+#IF</br>
+SMALL N1 2000</br>
+#ACT</br>
+Inc N1 1</br>
+SendMsg 6 &gt; $STR(N1)&gt;</br>
+GOTO @111</br>
+BREAK</br>
+;这种脚本递归调用产生的 Stack overflow，堆栈溢出，递归层次多时有可能产生这样的问题。换成新的写法，用 while / endwhile</br></br></br></br>
+
+; ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★推荐这种写法</br>
+[@222]</br>
+#IF</br>
+#ACT</br>
+;为方便测试每次执行脚本前将变量设置为1，本示例脚本可无视MOV</br>
+;MOV N1 1</br>
+;循环开始，While   变量/值   比较符号(&gt;  &lt; =)  变量/值；循环写在 #ACT中</br>
+While N1  &lt; 1000</br>
+SendMsg 6 &lt;$STR(N1)&gt;</br>
+Inc N1 1</br>
+EndWhile</br>
+;循环结束 EndWhile</br>
+SendMsg 6 aaaaaa</br></br></br></br>
+
+
+
+
+
+
+<p></p>
+</BODY>
+</HTML>
+
+ 

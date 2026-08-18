@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>调整人物属性百分比</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font size="5">调整人物属性百分比</font></strong> </p>
+<font size="3"><span class="STYLE2"><strong>功能：</strong>调整人物属性百分比</span><br />
+<strong>格式：</strong>ChangeHumAbilityPercentage 属性(1-29) 操作符(+ = -) 数值 时间秒<br />
+<span class="STYLE1">说明:</span> 属性1-29分别对应值<br>
+1、防御下限<br>
+2、防御上限<br>
+3、魔御下限<br>
+4、魔御上限<br>
+5、攻击下限<br>
+6、攻击上限<br>
+7、魔法下限<br>
+8、魔法上限<br>
+9、道术下限<br>
+10、道术上限<br>
+11、MaxHP<br>
+12、MaxMP<br>
+13、内功攻击伤害减<br>
+14、HP恢复<br>
+15、MP恢复<br>
+16、毒恢复<br>
+17、毒躲避<br>
+18、魔法躲避<br>
+19、准确<br>
+20、敏捷<br>
+21、幸运<br>
+22、内功伤害增加<br>
+23、内力值<br>
+24、刺术下限<br>
+25、刺术上限<br>
+26、箭术下限<br>
+27、箭术上限<br>
+28、武力下限<br>
+29、武力上限<br><br>
+
+<p><font face="楷体" color="#ff0000" size="4"><strong>*注意：调整后的效果只在人物在线时有效,不带时间在线一直有效</strong></font></p>
+
+
+
+<br /><br /><br /><br />
+例子：<br />
+[@main]<br />
+#IF<br />
+#ACT<br />
+ChangeHumAbilityPercentage 2 + 10 60<br />
+#SAY<br />
+你的防御上限增加10%.60秒后恢复<br /><br /><br /><br />
+
+注：ChangeHumAbilityPercentage支持多级脚本<br /><br />
+
+ 
+[@main]<br />
+#if<br />
+#act<br />
+M.ChangeHumAbilityPercentage 2 = 90 10<br />
+#SAY<br />
+目标防御降低为90%,持续10秒。<br /><br />
+
+ 
+注：支持调整人物原始属性，减少属性为累计属性，<br />
+如：人物100点攻击，命令减少100%，那么人物攻击变成0，更换装备都没有用，必须时间到或者恢复原始属性ChangeHumAbilityPercentage 2 = 100 即可<br /><br />
+
+百分比降低目标防御尽量用=去做不然多次触发会累计降低或者累计增加<br />
+
+
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>拆解物品</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<BODY>
+<P><FONT face=Arial size=2><FONT face=Fixedsys>功能: 
+可简单实现物品拆解,升级,回收等功能.<BR></FONT></FONT><FONT face=Arial size=2><FONT 
+face=Fixedsys>格式: OpenItemBoxEx 标号(1-1000) 是否回收(0,1) 提示信息<BR>说明: 
+标号代表要执行的脚本编号,提示信息是登录器显示的简单提示.<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+放入的物品名字保存在人物的S0变量中.<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 放入的物品的持久放在人物的N0变量中.<BR>注意: 
+脚本文件头必须加入@ReclaimItem<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+N0中保存的持久1000=游戏中1点持久,20000=20点持久.<BR><BR><BR>相关检测脚本命令:EQUAL&nbsp; <A href="检查字符串是否在指定的文件中.htm">CheckTextList</A><BR>例如:实现装备拆解功能.<BR><BR>(@ReclaimItem 
+)<BR>[@main]<BR>是否要把圣战戒指拆解为3个力量戒指.\<BR>是否要把天尊戒指拆解为3个泰坦戒指.\<BR></FONT></FONT><FONT 
+face=Arial size=2><FONT 
+face=Fixedsys>是否要把法神戒指拆解为3个紫碧螺戒指.\<BR>&lt;开始拆解/@拆解_戒指&gt;<BR><BR>[@拆解_戒指]<BR>#IF<BR>#ACT<BR>OpenItemBoxEx 
+1 1 拆解戒指类物品<BR><BR><BR>Q-Function.txt中脚本:<BR>[@GetBoxItem1]<BR>#IF<BR>EQUAL S0 
+圣战戒指<BR>#ACT<BR>Give&nbsp;力量戒指 3<BR>Break<BR><BR>#IF<BR>EQUAL S0 
+天尊戒指<BR>#ACT<BR>Give&nbsp;泰坦戒指 3<BR>Break<BR><BR>#IF<BR>EQUAL S0 
+法神戒指<BR>#ACT<BR>Give&nbsp;紫碧螺 
+3<BR>#ELSEACT<BR>ReclaimItem<BR>#ELSESAY<BR>请放入&lt;圣战戒指&gt; &lt;天尊戒指&gt; 
+&lt;法神戒指&gt;<BR></FONT></FONT></P></BODY>
+</html>

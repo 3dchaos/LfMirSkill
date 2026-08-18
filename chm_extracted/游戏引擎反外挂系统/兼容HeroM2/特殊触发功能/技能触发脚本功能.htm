@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>技能触发脚本功能</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<BODY>
+<P><FONT size=2><FONT face=Fixedsys><FONT color=#ff0000>说明:</FONT> 
+默认技能触发脚本功能没有开启,在功能设置\其他控制中开启之后才有效.<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</FONT></FONT></P>
+<P><FONT face=Fixedsys size=2>增加魔法触发功能.自身技能触发. 
+Q-Function.txt中[@MagSelfFuncX]段,其中X表示要触发的魔法ID<BR>增加魔法触发功能.对目标人物使用时自身触发. 
+Q-Function.txt中[@MagTagFuncX] 段,其中X表示要触发的魔法ID<BR>增加魔法触发功能.目标人物技能触发. 
+Q-Function.txt中[@MagTagFuncExX] 段,其中X表示要触发的魔法ID</FONT><FONT face=Fixedsys 
+size=2> <BR>增加魔法触发功能.目标怪物技能触发. Q-Function.txt中[@MagMonFuncX] 
+段,其中X表示要触发的魔法ID</FONT></P>
+<P><FONT face=Fixedsys size=2></FONT>&nbsp;</P>
+<P><FONT face=Fixedsys size=2>例子:使用治愈术时触发脚本</FONT></P>
+<P><FONT face=Fixedsys size=2>[@MagSelfFunc2]<BR>#ACT<BR>SendMsg 5 
+自己加血<BR>[@MagTagFunc2]<BR>#ACT<BR>SendMsg 5 
+给别人加血<BR>[@MagMonFunc2]<BR>#ACT<BR>SendMsg 5 给怪物加血.</FONT></P></BODY>
+</html>

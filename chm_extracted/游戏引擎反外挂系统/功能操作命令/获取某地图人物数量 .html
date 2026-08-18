@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>获取某地图人物数量 [!]</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>获取某地图人物数量 .</FONT></FONT></P>
+
+
+格式: GetMapHumanCount 地图名 不算假人(0：算假人，1：不算假人) 保存变量</P>
+
+
+<P>示列：<br>
+
+
+
+
+<P>[@mail]<br>
+#ACT<br>
+GetMapHumanCount 3 1 N1<br>
+SENDMSG 6 地图3一共有&lt;$STR(N1)&gt;个真实玩家<br><br><br><br>
+
+
+如：&lt;$STR(N1)&gt;无法获取地图号N开头的地图，那么可以将常量更换为：&lt;$const(n1)&gt;<br>
+
+</P>
+</BODY>
+</HTML>

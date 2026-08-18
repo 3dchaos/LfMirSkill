@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>自动穿戴指定物品唯一ID的物品到身上</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font size="5">自动穿戴指定序列号的装备到身上</font></strong> </p>
+<font size="2"><span class="STYLE2"><strong>功能：</strong>通用物品唯一ID自动穿戴装备到身上</span><br />
+<strong>格式：</strong>AutoTakeOnItemEx 物品唯一ID  穿戴位置<br />
+<strong>说明：</strong>自动穿戴指定序列号的物品（佩戴类型要和位置相符合，不能衣服穿到其它位置）<br /><br />
+
+
+
+<p><font face="楷体" color="#ff0000" size="5"><strong>*例子</strong></font></p>
+
+
+[@main]<br />
+#ACT<br />
+ChangeItemIndex 23123789 1   <br />
+sendmsg 6 将序列号为23123789的武器穿戴到身上武器位置<br /><br /><br /><br /><br /><br /><br />
+
+
+
+
+
+<div class="joplin-table-wrapper">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">物品位置代码</th>
+<th style="text-align:left">物品位置说明 (所有装备位置参考如下）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">-1</td>
+<td style="text-align:left">升级框</td>
+</tr>
+<tr>
+<td style="text-align:left">boxitem0-boxitem7</td>
+<td style="text-align:left">OK框</td>
+</tr>
+<tr>
+<td style="text-align:left">0</td>
+<td style="text-align:left">盔甲</td>
+</tr>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">武器</td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left">照明物（蜡烛，此物品属性升级无效）</td>
+</tr>
+<tr>
+<td style="text-align:left">3</td>
+<td style="text-align:left">项链</td>
+</tr>
+<tr>
+<td style="text-align:left">4</td>
+<td style="text-align:left">头盔</td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left">左手镯</td>
+</tr>
+<tr>
+<td style="text-align:left">6</td>
+<td style="text-align:left">右手镯</td>
+</tr>
+<tr>
+<td style="text-align:left">7</td>
+<td style="text-align:left">左戒指</td>
+</tr>
+<tr>
+<td style="text-align:left">8</td>
+<td style="text-align:left">右戒指</td>
+</tr>
+<tr>
+<td style="text-align:left">9</td>
+<td style="text-align:left">护身符</td>
+</tr>
+<tr>
+<td style="text-align:left">10</td>
+<td style="text-align:left">腰带</td>
+</tr>
+<tr>
+<td style="text-align:left">11</td>
+<td style="text-align:left">鞋子</td>
+</tr>
+<tr>
+<td style="text-align:left">12</td>
+<td style="text-align:left">宝石</td>
+</tr>
+<tr>
+<td style="text-align:left">13</td>
+<td style="text-align:left">斗笠</td>
+</tr>
+<tr>
+<td style="text-align:left">14</td>
+<td style="text-align:left">军鼓</td>
+</tr>
+<tr>
+<td style="text-align:left">15</td>
+<td style="text-align:left">马牌</td>
+</tr>
+<tr>
+<td style="text-align:left">16</td>
+<td style="text-align:left">盾牌</td>
+</tr>
+<tr>
+<td style="text-align:left">17</td>
+<td style="text-align:left">灵玉</td>
+</tr>
+<tr>
+<td style="text-align:left">18</td>
+<td style="text-align:left">时装衣服</td>
+</tr>
+<tr>
+<td style="text-align:left">19</td>
+<td style="text-align:left">时装武器</td>
+</tr>
+<tr>
+<td style="text-align:left">20</td>
+<td style="text-align:left">时装项链</td>
+</tr>
+<tr>
+<td style="text-align:left">21</td>
+<td style="text-align:left">时装头盔</td>
+</tr>
+<tr>
+<td style="text-align:left">22</td>
+<td style="text-align:left">时装左手镯</td>
+</tr>
+<tr>
+<td style="text-align:left">23</td>
+<td style="text-align:left">时装右手镯</td>
+</tr>
+<tr>
+<td style="text-align:left">24</td>
+<td style="text-align:left">时装左戒指</td>
+</tr>
+<tr>
+<td style="text-align:left">25</td>
+<td style="text-align:left">时装右戒指</td>
+</tr>
+<tr>
+<td style="text-align:left">26</td>
+<td style="text-align:left">时装勋章</td>
+</tr>
+<tr>
+<td style="text-align:left">27</td>
+<td style="text-align:left">时装腰带</td>
+</tr>
+<tr>
+<td style="text-align:left">28</td>
+<td style="text-align:left">时装靴子</td>
+</tr>
+<tr>
+<td style="text-align:left">29</td>
+<td style="text-align:left">时装宝石</td>
+</tr>
+<tr>
+<td style="text-align:left">30-35</td>
+<td style="text-align:left">首饰盒</td>
+</tr>
+<tr>
+<td style="text-align:left">40-51</td>
+<td style="text-align:left">生肖盒</td>
+</tr>
+<tr>
+<td style="text-align:left">70-75</td>
+<td style="text-align:left">时装生肖盒</td>
+</tr>
+<tr>
+<td style="text-align:left">80-91</td>
+<td style="text-align:left">时装生肖盒</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>200-249</strong></td>
+<td style="text-align:left"><strong>自定义装备框</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</body>
+
+</html>

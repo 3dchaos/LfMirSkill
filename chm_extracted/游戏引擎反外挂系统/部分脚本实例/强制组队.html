@@ -1,0 +1,66 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>强制组队脚本</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>强制组队脚本.</FONT></FONT></P></br></br></br></br></br>
+
+(@@InPutString	@@InPutInteger)</P>
+
+[@强制组队]</br>
+#if</br>
+#act</br>
+mov S10</br>
+#say</br>
+  \</br>
+&lt;请直接输入对方的游戏角色名称即可强制他跟你组队！/SCOLOR=150&gt;\</br>
+  \    \</br>
+&lt;请输入角色名字：/SCOLOR=253&gt;&lt;点击此处输入名字/@@inputstring10(请正确输入需要组队的角色名字:)&gt;\</br>
+  \</P>
+
+
+[@inputstring10]</br>
+#if</br>
+#act</br>
+goto @开始组队</br>
+break</P>
+
+[@MsgFilter]</br>
+#ACT</br>
+MESSAGEBOX 输入数据中包含了非法字符,请重新编辑!</P>
+
+[@开始组队]</br>
+#if</br>
+CheckOnline &lt;$STR(S10)&gt;</br>
+#act</br>
+CreatGroup &lt;$STR(S10)&gt;</br>
+break</br>
+#elsesay</br>
+\　\</br>
+错误：&lt;玩家『&lt;$STR(S10)&gt;』已经下线，只能针对在线人物使用。/SCOLOR=254&gt;\</br>
+　\</br>
+&lt;返回/@强制组队&gt;\</br>
+&lt;关闭/@exit&gt;\　\</P></br>
+
+
+[@CreatGroupOK]</br>
+#say</br>
+  \
+操作成功，玩家&lt;$STR(S10)&gt;已被你开始组队！</br>
+  \</br>
+  \</br>
+&lt;返回/@强制组队&gt;\</br>
+&lt;关闭/@exit&gt;\　\</br></br></br>
+
+
+
+★★★★★★★有禁止符号时执行当前npc的脚本@InputStringFilter, @InputIntegerFilter</br>
+
+禁止符号在M2-列表信息一设置</br>

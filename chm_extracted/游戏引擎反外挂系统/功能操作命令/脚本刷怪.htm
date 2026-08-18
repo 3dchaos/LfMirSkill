@@ -1,0 +1,48 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>脚本刷怪</title>
+</head>
+
+<body>
+
+<p><font color="#0000FF"><b>脚本刷怪</b></font></p>
+<font face="Arial" size="2">
+<p><font size="2"><font face="Fixedsys"><strong><font color="#0000ff">格式：</font><br>
+</strong>&nbsp;&nbsp; &nbsp;MONGENEX 地图名称 坐标X 坐标Y 怪物名称 范围 数量 名字颜色(0-255、 为空为默认颜色) 内功怪物(0,1) 国家ID 是否可攻击同国家的玩家(0,1)   不同国家怪物是否可PK(0,1)    怪物能否被同国家的人攻击(0,1)    体型大小（空或100为默认大小） <br>
+<br>
+</strong>&nbsp;&nbsp; &nbsp;注意：请不要跨界留空（如不要颜色只需要内功怪物时名字颜色参数必须有，如果只要名字颜色后面不要可在颜色值后留空） 名字颜色支持变量<br>
+<b>
+<font color="#0000FF">示例：<br>
+</font></b>
+</font><font face="Fixedsys" size="2"><br>
+</font></font><font face="Fixedsys">[@main]<br>
+#IF<br>
+#ACT<br>
+</font><font face="Fixedsys" size="2">MONGENEX D717 100 100 白野猪 100 50</font></font><font color="#800080" face="Fixedsys" size="2"><br>
+</font><font face="Fixedsys" size="2"><br>
+　</font></p><br><br>
+
+
+简单的刷怪命令：<br>
+MonGen 怪物名 X Y 国家ID 怪物能否攻击同国家的人(0,1) 同国家的怪物能否相互攻击(0,1)    怪物能否被同国家的人来攻击(0,1)  <br><br>
+
+GM刷怪命令：<br>
+@mob 怪物名 数量 等级 国家ID 怪物是否可以攻击同国家的玩家(0不可；1可以)      不同国家怪物是否可PK(0不PK；1PK)     固定颜色(空为默认，0-255：固定颜色)  <br><br>
+
+
+服务端刷怪文件格式：<br>
+MonGen.txt 格式：地图 坐标X 坐标Y 怪物名字 范围 数量 间隔 集中刷新坐标机率 名字颜色(0~255) 内功怪物(0,1) 国家ID 怪物能否攻击同国家的人(0,1)  不同国家的怪物能否相互攻击(0,1)    怪物能否被同国家的人来攻击(0,1)  <br><br>
+
+注： 0 = 不可， 1 =可以
+<br><br><br><br>
+<br><br>
+
+
+
+
+</body>
+
+</html>

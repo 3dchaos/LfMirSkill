@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>检测身上指定装备名字 获取looks保存到变量</title>
+</head>
+
+<body>
+<P><FONT size=2><STRONG><FONT color=#0000ff>功能：</FONT></STRONG><BR>&nbsp;&nbsp;&nbsp; 检测身上指定装备名字 获取looks保存到变量</FONT></P>
+<p>格式: CheckItemwLooks  装备名称 变量名(变量名可以不填)</BR>
+有指定装备返回真，否则返回假</p>
+<p>[@main]<br />
+#IF<br />
+CheckItemwLooks 传送戒指 N0<br />
+  #ACT<br />
+SENDMSG 0 测试成功&lt;$Str(n0)&gt;<br />
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

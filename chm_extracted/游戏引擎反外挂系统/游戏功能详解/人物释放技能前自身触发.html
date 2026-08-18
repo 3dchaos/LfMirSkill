@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>人物释放技能前自身触发</title>
+</head>
+
+<body>
+<p>功能说明：当人物使用技能前，自身触发</p>
+
+</br></br>
+
+;触发字段</br>
+[@BeginMagic]</br>
+;变量</br>
+&lt;$MagicID&gt;</br>
+&lt;$MagicName&gt;</br>
+&lt;$MagicTarget&gt;</br>
+&lt;$MagicTargetRace&gt;</br>
+;操作命令</br>
+中断技能使用命令:StopMagic</br></br>
+
+范例:</br>
+[@BeginMagic]</br>
+#IF</br>
+EQUAL &lt;$MagicName&gt; 野蛮冲撞</br>
+EQUAL &lt;$MagicTargetRace&gt; 0</br>
+&lt;$MagicTarget&gt;.CheckFenghao 不动如山</br>
+#ACT</br>
+StopMagic</br>
+Sendmsg 7 目标拥有称号不动如山,无法对其释放野蛮冲撞.</br>
+
+
+
+
+
+
+</br></br></br>
+
+------------------------------------------</br></br></br></br>
+
+英雄使用技能前，自身触发：</br>
+@H.BeginMagic</br></br>
+
+变量：</br>
+&lt;$H.MagicID&gt;</br>
+&lt;$H.MagicName&gt;</br>
+&lt;$H.MagicTarget&gt;</br>
+&lt;$H.MagicTargetRace&gt;</br></br></br>
+
+
+
+
+[@BeginMagic]</br>
+#IF</br>
+#ACT</br>
+;N998 N999 是获取鼠标游戏地图坐标的变量，请不要再服务端中使用这2个变量</br>
+;&lt;$MouseX> &lt;$MouseY>是获取鼠标游戏窗口坐标变量</br>
+SENDMSG 5 鼠标窗口坐标为变量为：&lt;$MouseX&gt; &lt;$MouseY&gt;</br>
+SENDMSG 5 鼠标游戏地图坐标为变量为：&lt;$STR(N998)&gt;  &lt;$STR(N999)&gt;</br></br></br>
+
+
+
+
+;操作命令</br>
+中断技能使用命令:H.StopMagic支持</br></br>
+范例:</br>
+[@H.BeginMagic]</br>
+#if</br>
+equal &lt;$H.MagicName&gt; 英雄雷电术</br>
+#act</br>
+H.StopMagic</br>
+#elseact</br>
+sendmsg 6 英雄技能（ID：&lt;$H.MagicID&gt;；技能：&lt;$H.MagicName&gt;；目标：&lt;$H.MagicTarget&gt;；目标类型：&lt;$H.MagicTargetRace&gt;）</br>
+
+
+
+
+
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

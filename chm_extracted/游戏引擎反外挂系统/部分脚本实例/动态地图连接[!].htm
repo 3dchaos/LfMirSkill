@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>动态地图连接[!]</TITLE>
+<style type="text/css">
+<!--
+.STYLE1 {font-family: "新宋体"}
+-->
+</style>
+</HEAD>
+<BODY>
+<P><strong>动态地图连接</strong></P>
+<P>增加动态地图连接命令<br>
+ADDMAPGATE 连接名称(为了区别其他连接) 地图号 X(小于0时随机坐标) Y(小于0时随机坐标) 范围 到达地图号 到达地图坐标X(小于0时随机坐标) 到达地图坐标Y(小于0时随机坐标) 有效时间秒(时间到了自动删除该连接,该参数为空时不限时间) </P>
+<p>删除动态地图连接命令<br>
+  DELMAPGATE 连接名称 地图号</p>
+<p>获取动态地图连接坐标<br>
+  GETMAPGATE 连接名称 地图号 变量1(保存X坐标) 变量2(保存Y坐标) 变量3(保存到达地图号) 变量4(保存到达地X坐标) 变量5((保存到达地Y坐标))</p>
+<p>[@AddMapGate]<br>
+  #ACT<br>
+  AddMapGate 连接 3 335 330 1 0 335 268 30<br>
+  GetMapGate 连接 3 &lt;$STR(G10)&gt; &lt;$STR(G11)&gt; &lt;$STR(S10)&gt; &lt;$STR(G12)&gt; &lt;$STR(G13)&gt;<br>
+  SENDMSG 6 增加地图新连接30秒后删除:[&lt;$STR(G10)&gt;:&lt;$STR(G11)&gt;]到达地图:&lt;$STR(S10)&gt;到达坐标[&lt;$STR(G12)&gt;:&lt;$STR(G13)&gt;]</p>
+<p>[@DelMapGate]<br>
+  #ACT<br>
+  DelMapGate 连接 3</p>
+
+
+===================================================================================================================================
+<P><FONT size=2>脚本命令添加动态地图链接</FONT></FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT></STRONG></FONT></P>
+<P>[@main]<br>
+  &lt;增加地图连接1/@main1>\<br>
+<P>[@main1]<br>
+#if<br>
+#ACT<br>
+;连接名称为了区别其他的可以随便 地图名称 地图坐标X 地图坐标Y 入口范围  到达地图名称 到达地图坐标X 到达地图坐标Y  链接点有效时间（秒） 传送门样式(1--5,0或空为无传送门) <br>
+ADDMAPGATE  盟重省到比奇城 3 330 330 0 0 346 186 100 1</p>
+
+
+<p>[@DelMapGate]<br>
+  #ACT<br>
+  DelMapGate 盟重省到比奇城</p>
+</BODY>
+</HTML>
+
+ 

@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>物品捡取和丢弃触发</title>
+</head>
+
+<body>
+
+<p>QFunction-0.txt功能脚本增加以下内容</p>
+<p>在列表信息二选择需要触发的物品后在功能脚本增加：</p>
+[@DropItem]<br>
+#if<br>
+#act<br>
+SENDMSG 0 玩家&lt;$USERNAME&gt;在&lt;$MapTitle&gt;坐标&lt;$X&gt;：&lt;$Y&gt;扔掉了&lt;$PICKDROPITEMNAME&gt;<br>
+break</p>
+
+[@PickUpItem]<br>
+#if<br>
+#act<br>
+SENDMSG 0 玩家&lt;$USERNAME&gt;在&lt;$MapTitle&gt;坐标&lt;$X&gt;：&lt;$Y&gt;捡到&lt;$PICKDROPITEMNAME&gt;<br>
+break</p>
+
+<br>&lt;$PICKDROPITEMNAME&gt;   捡起和丢弃的物品名称<br>
+
+
+<p>以上脚本为捡起物品和扔物品触发.触发条件需要在列表信息二增加物品规则..</p><br><br>
+
+;=================================================下面为新增=====================================<br><br>
+
+
+增加捡起物品QF触发命令@PickUpItemEX ，此触发不需要任何物品规则，捡起任何物品都触发<br><br>
+
+[@PickUpItemEX]<br>
+#if<br>
+#act<br>
+SENDMSG 0 玩家&lt;$USERNAME&gt;在&lt;$MapTitle&gt;坐标&lt;$X&gt;：&lt;$Y&gt;捡到&lt;$PICKDROPITEMNAME&gt;<br>
+break</p>
+
+<br>英雄捡起触发：H.PickUpItemEX   <br>
+
+</body>
+
+</html>

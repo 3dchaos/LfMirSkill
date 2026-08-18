@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>设置怪物爆率倍数[!]</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+<style type="text/css">
+<!--
+.STYLE1 {color: #FF0000}
+-->
+</style>
+</head>
+
+<BODY>
+<P><STRONG>功能：</STRONG><BR>
+设置杀怪爆率倍数</P>
+<p><STRONG>格式：<BR>
+  </STRONG>KILLMONBURSTRATE 倍率（实际倍率除以100）有效时间<span class="STYLE1">(时间为0或者为空时表示在线一直有效) 参数3 为0时下线不保存 为1时下线保存爆率倍数  ,参数4：0或者留空为给予时候提示，1为给予时候不提示（普遍用于登录触发防止提示二次） </span><BR>
+倍率 为杀怪爆率倍数，倍数除以100为真正的倍率(200 为 2 倍爆率，150 为1.5倍)   <STRONG>支持变量操作</STRONG> </p>
+<p>&lt;$KILLMONBURSTRATE&gt; 人物杀怪暴率倍数;<br>
+&lt;$KILLMONBURSTRATETIME&gt; 人物杀怪暴率倍数时间<BR>
+  <BR>
+  ;==========================================<BR>
+  [@KILLMONBURSTRATE]<BR>
+  #IF<BR>
+  #ACT<BR>
+ KILLMONBURSTRATE 200   600 1 <BR>
+  #SAY<BR>
+您当前杀怪爆率倍数 两倍 时长600秒 下线保存爆率倍数<BR>
+;==========================================<br>
+  <br>
+  200 为除以2<br>
+  如<br>
+  1/100 麻痹戒指<br>
+  2倍后为：<br>
+  1/50  麻痹戒指<br>
+因为涉及到元素也有爆率倍数，将脚本命令的爆率倍丢在最前面计算。如果有元素爆率那么再从脚本命令的1/50 再进行计算！</p>
+<p><span class="STYLE1">[@KILLMONBURSTRAT]<BR>
+#IF<BR>
+#ACT<BR>
+KILLMONBURSTRATE 200   0 1 <BR>
+#SAY<BR>
+您当前怪物爆率倍数为 2倍，有效时间永久 就算服务器重启也有效 参数3为0时 小退倍数消失</span></p>
+<p>&nbsp;</p>
+注：因为涉及到元素也有爆率倍数，将脚本命令的爆率倍丢在最前面计算。</p>
+如最终爆率1/45计算方式：<BR>
+物品掉落几率是 1/100，角色的元素爆率增加为 10%，命令爆率倍数为2，那么物品的掉落几率为  1/100 * 2 = 1/(50*90%) = 1/45</p>
+
+
+<p><BR>
+</p>
+</BODY>
+</html>

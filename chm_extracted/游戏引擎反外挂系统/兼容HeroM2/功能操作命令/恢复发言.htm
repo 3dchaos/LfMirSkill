@@ -1,0 +1,26 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>禁言、恢复发言</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+</BR></BR></BR></BR>
+恢复人物发言.（脚本中 Shutup 和 ReleaseShutup 为引擎GM解除禁言命令，请修改为您引擎设置的命令）</BR></BR>
+
+[@禁言]</BR>
+#IF</BR>
+#ACT</BR>
+Gmexecute Shutup Self 888888</BR>
+SendMsg 5 您被禁言了.</BR>
+break</BR>
+</BR></BR>
+[@解除禁言]</BR>
+#IF</BR>
+#ACT</BR>
+Gmexecute ReleaseShutup Self</BR>
+SendMsg 5 您可以正常聊天了.</BR></BR></BR></BR>
+
+</html>

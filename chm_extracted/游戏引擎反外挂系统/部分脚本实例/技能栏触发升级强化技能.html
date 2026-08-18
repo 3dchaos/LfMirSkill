@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>技能栏升级强化技能[!]</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>技能栏升级强化技能.</FONT></FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT>技能数据库 CanUpgrade字段设置0或留空则不显示升级按钮 ，设置1允许升级，设置2不允许升级（显示升级按钮）  MaxupgradeLv字段为强化多少重后不再显示升级按钮</STRONG></FONT></P>
+<P>示列：<br>
+
+<B>技能面板上点击"升级"按钮，结合Messagebox命令，可关联到QF内容中，如触发[@SkillLevelExX]段  X为技能ID编号</b></p>
+<B>人物技能升级触发：QF中，[@SkillLevelExX]段  X为技能ID编号......英雄技能升级触发：QF中，[@HeroSkillLevelExX]段  X为技能ID编号</b></p>
+
+
+[@SkillLevelEx11]<BR>
+#IF<BR>
+CheckSkill 雷电术 > 8 1<BR>
+#ACT<BR>
+Sendmsg 7 强化雷电术已升至最高等级九级，无法继续升级！<BR>
+#ELSEACT<BR>
+MESSAGEBOX 是否确定使用10张书页，升级强化雷电术至下一等级？ @确定11 @取消<BR>
+Break</p>
+
+[@确定11]<BR>
+#IF<BR>
+checkitem 书页 > 9<BR>
+#ACT<BR>
+SKILLLEVEL	雷电术 + 1 1<BR>
+MESSAGEBOX 提示：恭喜您的雷电术又熟练提升了1级<BR>
+break<BR>
+#ELSEsay<BR>
+你没有学习此技能或者没有10张书页，请您达到条件了再来吧！</p>
+
+
+<B>注：以上为简单模式，仅供参考，也可以做的更精细点，如每次升级需要的材料数量分别设置；技能exp经验值升满才允许强化<BR><BR><BR></B>
+
+
+
+
+===========================================================================================================<BR>
+备注文件：SkillUpgradeDesc.Dat 位于客户端DATA目录，编写好集成到登陆器即可！<BR>
+;技能类型(普通技能/内功技能),技能名,需要强化等级,强化描述<BR>
+普通技能,攻杀剑术,1,111111111111<BR>
+普通技能,攻杀剑术,2,222222222222<BR>
+普通技能,攻杀剑术,3,333333333333333<BR>
+普通技能,攻杀剑术,4,44444444444444444<BR>
+普通技能,攻杀剑术,5,5555555555555555555555<BR>
+普通技能,攻杀剑术,6,6666666666666666666666<BR>
+普通技能,攻杀剑术,7,77777777777777777<BR>
+普通技能,攻杀剑术,8,8888888888888888888<BR>
+普通技能,攻杀剑术,9,升到9级要好多毛线的,你确定要升级????????<BR>
+
+<B>注：技能备注为技能等级后描述，换行使用,号换行<BR></B>
+
+</P>
+</BODY>
+</HTML>

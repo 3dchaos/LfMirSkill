@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=gb2312">
+<META name="GENERATOR" content="QuickCHM">
+<TITLE>检测装备元素属性</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><STRONG><FONT color=#0000ff>功能：</FONT></STRONG><BR>&nbsp;&nbsp;&nbsp; 检测装备元素属性</FONT></P>
+<P><FONT size=2><STRONG><FONT color=#0000ff>格式：</FONT><BR></STRONG>&nbsp;CHECKNEWITEMVALUE 位置(-1时是OK框中的装备, 0-12时是穿在身上的装备) 属性(0-10) 检测符(&lt;,&gt;,=) 值(1-100)<BR><BR><BR><BR><BR>
+
+
+
+
+(0)暴击几率增加 1~100%<BR>
+(1)增加攻击伤害 1~100%<BR>
+(2)物理伤害减少 1~100%<BR>
+(3)魔法伤害减少 1~100%<BR>
+(4)忽视目标防御 1~100%<BR>
+(5)所有伤害反弹 1~100%<BR>
+(6)增加目标暴率 1~100%<BR>
+(7)人物体力增加 1~100%<BR>
+(8)人物魔力增加 1~100%<BR>
+(9)怒气恢复增加 1~100%<BR>
+(10)合击攻击增加 1~100%<BR>
+
+......
+<BR><BR><BR><BR>
+<b>检测命令不包含天生元素属性（即数据库字段设置的属性）</b><BR><BR>
+
+[@main]<BR>
+#IF<BR>
+CHECKNEWITEMVALUE 0 0  &gt; 10 <BR>
+#SAY<BR>
+衣服的暴击元素大于10%<BR><BR><BR><BR><BR>
+
+
+</BODY>
+</HTML>

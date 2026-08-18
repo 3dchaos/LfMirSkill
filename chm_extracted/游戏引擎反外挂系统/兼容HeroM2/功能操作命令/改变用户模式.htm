@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>改变用户模式</title>
+<style>
+<!--
+div{word-break:break-all;word-wrap:break-word}.t{border:1px solid #c7d6e1;margin:0px auto 8px;}.t2{border-top:#c7d6e1 1px solid;margin:0px auto 5px;}.t{padding:1px}.t {padding:0}th{word-break:break-all;word-wrap:break-word}.r_one{background:#f9f9f9;}.tr1 th{padding:5px 10px;text-align:left;vertical-align:top;font-weight:normal;}.tr1 th{border-right:1px solid #e6e6e6;}.tpc_content{font-size:14px;font-family:Arial;padding:0 2% 0 0.5%;margin:0 0 2%}-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font color="#0000ff" size="2">功</font></strong><font color="#0000ff" size="2"><strong>能：<br>
+&nbsp;&nbsp;</strong></font>增加脚本命令ChangeModeEx<br>
+改变人物当前模式(无敌,隐身,生命,魔法,攻击力,魔法力,道术力,攻击速度,禁止攻击)</p>
+
+<p>格式: ChangeModeEx 模式(1-10) 时间(1-65535) 附加值(1-21e)<br>
+  说明: 1=无敌 2=隐身 3=HP 4=MP 5=攻击力 6=魔法力 7=道术力 8=攻击速度 9=禁止攻击 10=锁定 11=护身 12=防麻痹 13=破复活 14=传送 15=防止冰封<br>
+  第三个参数无敌,隐身,禁止攻击时没有使用.<br>
+模式为11时，第三个参数为护身掉蓝比例(参数3设置100 表示遭遇攻击护身吸收所有伤害，设置50则只吸收一半)<br>
+模式为12时，第三个参数为防御麻痹几率(参数3设置100 表示100%防御麻痹，设置50则为50%防御麻痹)<br>
+模式为13时，第三个参数为破复活几率(参数3设置100 表示100%破复活，设置50则为50%几率破复活)</p></p>
+<p><br>
+  <font color="#0000ff" size="2"><strong><br>
+例子：<br>
+</strong></font><br>
+[@Test]<font color="#0000ff" size="2"><strong><br>
+</strong></font>#IF<br>
+#ACT<br>
+ChangeModeEx 1 60<br>
+#SAY<br>
+给你1分钟的无敌时间,好好利用哦!</p>
+<p>#IF<br>
+  #ACT<br>
+  ChangeModeEx 5 60 20<br>
+  #SAY<br>
+  60秒之内攻击力增加20点.</p>
+
+
+
+
+提示：改变英雄当前模式命令为：H.ChangeModeEx</P>
+<br><br><br><br>
+
+修改ChangeModeEx 命令支持用时间来解除<br><br>
+
+比如锁定 人物被锁定60秒，如果再次使用锁定10秒的脚本则按最后次附加的时间为准，那么就是10秒锁定倒计时，如果设置1则表示1秒后解除，设置0就是立即解除状态！！！！<br><br>
+
+如：<br>
+changemodeex 10 10 ;锁定玩家10秒<br>
+如果想用下面这个命令来解除锁定<br>
+changemodeex 10 0 <br>
+无效，而且M2会提示错误，参数2不允许为0<br><br><br><br>
+注：ChangeModeEx支持多级脚本</P>
+</body>
+
+</html>

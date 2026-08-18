@@ -1,0 +1,273 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>宠物说明</TITLE>
+<META content="text/html; charset=gb2312" http-equiv=Content-Type>
+<STYLE type=text/css>
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</STYLE>
+
+<META name=GENERATOR content="MSHTML 11.00.10570.1001"></HEAD>
+<BODY>
+<P><STRONG><FONT size=5>宠物说明</FONT></STRONG></P>
+<P><FONT 
+color=#ff0000><STRONG>宠物功能开启及设置:M2－》选项－》宠物设置</STRONG></FONT><BR><BR><BR><STRONG><FONT 
+color=#ff0000>1.数据库说明</FONT></STRONG></P>
+<P><STRONG><FONT color=#ff0000>StdItems:</FONT></STRONG></P>
+<P>【★★★★默认宠物蛋必加，名字不要变★★★★★】</P>
+<P><STRONG><FONT 
+color=#ff0080>100,宠物蛋,91,0,,,,,3710,,,,,,,,,,,,,,,,255,0,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0<BR></FONT></STRONG><FONT 
+color=#000000>101,白野猪,92,0,,,,,3710,,,,,,,,,,,,,,,,255,0,0,0,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</FONT><BR>103,宠物技能,93,0,1,17,1000,1,1964,0,22,95,0,0,0,0,0,0,0,0,0,0,0,0,251,,,,,0,0,0,0,0,1,2,3,4,5,6,7,8,9,0,0,0,0,0,0,0,0,0,0,0,0,0<BR>102,捕捉网,94,3,1,16,3,0,1195,10000,2,5,0,0,0,0,0,0,0,0,0,0,0,0,251,,,,,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0<BR></P>
+<P>宠物技能物品（Stdmode：93），字段加成<FONT 
+color=#ff0000>主人</FONT>属性：<BR>AC：&nbsp;&nbsp;&nbsp;&nbsp; 
+准确<BR>AC2：&nbsp;&nbsp;&nbsp;&nbsp;敏捷<BR>MAC：&nbsp;&nbsp;&nbsp; 
+幸运<BR>MAC2：&nbsp;&nbsp;&nbsp;攻击速度<BR>DC：&nbsp;&nbsp;&nbsp;&nbsp; 
+中毒恢复<BR>DC2：&nbsp;&nbsp;&nbsp; 毒物躲避<BR>MC：&nbsp;&nbsp;&nbsp;&nbsp; 
+魔法恢复<BR>MC2：&nbsp;&nbsp;&nbsp;&nbsp;魔法躲避<BR>SC：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;体力恢复<BR>SC2：<BR>DuraMax：负重(穿戴)<BR>Overlap：负重（背包）<BR>Element，Element1....Element23：元素属性<BR></P>
+<P>自定义宠物蛋（Stdmode=92）名字为数据库已有怪物名称 字段为宠物初始属性</P>
+<P>AC：&nbsp;&nbsp;&nbsp;&nbsp; 
+防御下限<BR>AC2：&nbsp;&nbsp;&nbsp;&nbsp;防御上限<BR>MAC：&nbsp;&nbsp;&nbsp; 
+魔御下限<BR>MAC2：&nbsp;&nbsp;&nbsp;魔御上限<BR>DC：&nbsp;&nbsp;&nbsp;&nbsp; 
+攻击下限<BR>DC2：&nbsp;&nbsp;&nbsp; 攻击上限<BR>MC：&nbsp;&nbsp;&nbsp;&nbsp; 
+魔法下限<BR>MC2：&nbsp;&nbsp;&nbsp;&nbsp;魔法上限<BR>SC：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;道术下限<BR>SC2：&nbsp;&nbsp;&nbsp; 
+道术上限<BR>Level：&nbsp; 初始等级<BR><BR><STRONG><FONT 
+color=#ff0000>Magic:</FONT></STRONG><BR>90,宠物捕捉,2,70,5,50,60,2,20,20,0,18,50,21,100,24,200,26,400,28,800,30,1600,33,3200,36,6400,39,12800,42,25600,46,51200,50,102400,55,204800,60,409600,66,819200,60,,3,,技能</P>
+<P>---------------------------------------------------------------------------------------------------------------------------------------------------------------------</P>
+<P><STRONG><FONT 
+color=#ff0000>2.QFunction触发说明</FONT></STRONG><BR><BR><STRONG><FONT 
+color=#800000>·宠物召唤触发<BR></FONT></STRONG>[@GamePetRecall]<BR>#ACT<BR>SendMsg 5 
+召唤宠物&lt;$GamePetName&gt;<BR><BR><STRONG><FONT color=#800000>·收回宠物 / 
+宠物死亡触发</FONT></STRONG><BR>[@GamePetRetake]<BR>#ACT<BR>SendMsg 5 收回宠物 
+&lt;$GamePetName&gt;</P>
+<P><BR><STRONG><FONT color=#800000>·宠物升级触发&nbsp; 
+宠物等级变量&lt;$GamePetLevel&gt;&nbsp; 
+宠物数量变量&lt;$GamePetCount&gt;</FONT></STRONG><BR>[@GamePetLevelUp]<BR>#ACT<BR>SendMsg 
+5 你的宠物 &lt;$GamePetName&gt;升级了，当前等级&lt;$GamePetLevel&gt;</P>
+<P><BR><STRONG><FONT color=#800000>·双击宠物技能物品触发 QF中的 
+[@GamePetTrainingMagic]<BR>·NPC命令：中断宠物技能学习 BreakGamePetTrainingMagic<BR>·NPC变量 - 
+宠物技能名：&lt;$GamePetMagicName&gt;</FONT></STRONG><BR>[@GamePetTrainingMagic]<BR>#act<BR>sendmsg 
+7 &lt;$GamePetName&gt;准备学习技能（技能编号 :&lt;$GamePetMagicID&gt;；技能名 
+:&lt;$GamePetMagicName&gt;)，技能位置&lt;$GamePetMagicIndex&gt;<BR>BreakGamePetTrainingMagic<BR>sendmsg 
+6 已经中断了宠物技能学习<BR><BR><STRONG><FONT color=#800000>·宠物列表选择触发 QF中的 
+[@GamePetSelect]&nbsp;&nbsp; 
+*新增（打开宠物界面也会触发,返回变量为上次选择)<BR>·NPC变量（仅用于@GamePetSelect）：宠物列表中选择索引 
+&lt;$SelectGamePetIndex&gt;； 
+宠物列表选择名：&lt;$SelectGamePetName&gt;</FONT></STRONG><BR>[@GamePetSelect]<BR>#act<BR>sendmsg 
+7 
+选择宠物列表中的第&lt;$SelectGamePetIndex&gt;个宠物&lt;$SelectGamePetName&gt;<BR><BR><STRONG><FONT 
+color=#800000>·宠物学习技能触发：</FONT></STRONG><BR>[@GamePetAddMagic]<BR>当前学习技能编号：&lt;$GamePetMagicID&gt;<BR>当前学习技能位置：&lt;$GamePetMagicIndex&gt;<BR><BR>[@GamePetAddMagic]<BR>#act<BR>sendmsg 
+7 &lt;$GamePetName&gt;学习了技能（技能编号 
+:&lt;$GamePetMagicID&gt;)，技能位置&lt;$GamePetMagicIndex&gt;<BR><BR><STRONG><FONT 
+color=#800000>·宠物捡物触发人物的QF拾取触发</FONT></STRONG></P>
+<P>@PickUpItem<BR>@PickUpItems<BR>@PickUpItemEx<BR></P>
+<P><STRONG><FONT 
+color=#800000>·增加宠物返回到背包后触发：<BR></FONT></STRONG>[@PetToEgg]<BR>#IF<BR>#ACT<BR>LinkBagItem 
+&lt;$BagItemMakeIndex&gt;<BR>SetCustomItemAbil -1 0 0 250<BR>SetCustomItemAbil 
+-1 0 1 50<BR>SetCustomItemAbil -1 0 2 0<BR>SetCustomItemValue -1 0 = 
+1500<BR>UpdateItem -1<BR>Sendmsg 7 返回一个蛋"&lt;$BagItemName&gt;"并修改资质为1500</P>
+<P><STRONG><FONT 
+color=#800000>·增加双击宠物蛋放入到列表中触发</FONT></STRONG><BR>[@EggToPet]<BR>#IF<BR>#ACT<BR>LinkBagItem 
+&lt;$BagItemMakeIndex&gt;<BR>GetCustomItemValue -1 0 N1 N2<BR>Sendmsg 7 
+当前宠物蛋"&lt;$BagItecmName&gt;"的资质为&lt;$STR(N1)&gt;</P>
+<P><STRONG><FONT color=#ff0000>3.宠物操作命令说明</FONT></STRONG></P>
+
+<P><BR><BR><STRONG><FONT color=#800000>·直接从宠物列表中删除宠物(序号0开始)：GamePetToBag 
+宠物序号<BR></FONT></STRONG><BR>#if<BR>#act<BR>DeleteGamePet 0 
+<BR><BR><BR>
+
+<P><BR><BR><STRONG><FONT color=#800000>·将宠物变成蛋放回到背包：GamePetToBag 
+宠物序号<BR></FONT></STRONG><BR>#if<BR>#act<BR>GamePetToBag 0 
+<BR><BR><BR>
+
+
+<BR><BR><STRONG><FONT 
+color=#800000>·检测宠物技能<BR></FONT></STRONG>#if<BR>CheckGamePetSkillMagic 
+宠物技能3<BR>#act<BR>DelGamePetMagic 宠物技能3<BR><BR><BR><STRONG><FONT 
+color=#800000>·给予宠物蛋</FONT></STRONG></P>
+<P>GiveGamePet&nbsp;怪物名&nbsp;&nbsp;N变量(存储蛋的MakeIndex，可选变量 可不填,)</P>
+;给一个修改属性的蛋蛋，如果就数据库的蛋无需变量直接给予！<BR>
+<P>[@测试给宠物]<BR>#IF<BR>#ACT<BR>GiveGamePet&nbsp;白野猪&nbsp;&nbsp;N1<BR>LinkBagItem&nbsp;&lt;$STR(N1)&gt;<BR>SetCustomItemAbil&nbsp;-1&nbsp;0&nbsp;0&nbsp;250<BR>SetCustomItemAbil&nbsp;-1&nbsp;0&nbsp;1&nbsp;50<BR>SetCustomItemAbil&nbsp;-1&nbsp;0&nbsp;2&nbsp;0<BR>SetCustomItemValue&nbsp;-1&nbsp;0&nbsp;=&nbsp;1500<BR>UpdateItem&nbsp;-1<BR>Sendmsg&nbsp;7&nbsp;返回一个蛋并修改资质为1500<BR><BR><STRONG><FONT 
+color=#800000>·清除当前召唤的宠物技能<BR></FONT></STRONG>ClearGamePetMagic 
+敏捷技能<BR><BR><STRONG><FONT 
+color=#800000>·给予宠物经验</FONT></STRONG><BR>GamePetChangeExp 操作符(+，-，=) 
+值<BR><BR>
+
+<STRONG><FONT color=#800000>·设置宠物攻击力倍数<BR></FONT></STRONG>
+SetGamePetAttackHumPowerRate 攻击人物威力倍率(0不攻击人物,当前值除以100为实际倍数)<BR><BR>
+
+
+<STRONG><FONT color=#800000>·调整宠物攻击人物威力(数值)<BR></FONT></STRONG>
+SetGamePetAttackHumPowerRateEx 操作符(+/-/=)  值<BR><BR>
+
+<STRONG><FONT color=#800000>·获取宠物攻击人物威力(数值)<BR></FONT></STRONG>
+GetGamePetAttackHumPowerRate 变量<BR><BR>
+
+<STRONG><FONT color=#800000>·检测宠物是否召唤</FONT></STRONG><BR>CheckCallGamePet<BR><BR><STRONG><FONT 
+color=#800000>·检测宠物等级</FONT></STRONG><BR>CheckGamePetLevel 操作符(&gt;/=/&lt;) 
+等级<BR><BR><STRONG><FONT 
+color=#800000>·调整宠物等级<BR></FONT></STRONG>ChangeGamePetLevel 操作符(+/-/=) 
+数值<BR><BR><STRONG><FONT color=#800000>·召唤宠物：</FONT></STRONG><BR>RecallGamePet 
+宠物名(当为空时，表示召唤最后一次召唤的宝宝）<BR><BR><STRONG><FONT 
+color=#800000>·调整宠物蛋属性</FONT></STRONG><BR>ChangeGamePetEggAbil 
+物品位置(-1或boxitem0-boxitem7) 属性类型(参考下面) 操作符(+-=) 值<BR>属性类型：<BR>1: 等级<BR>2: 
+HP<BR>3: MP<BR>4: EXP<BR><BR><STRONG><FONT 
+color=#800000>·获取宠物蛋属性：</FONT></STRONG><BR><FONT 
+color=#008000><STRONG>》GetGamePetEggAbil 物品位置(-1或boxitem0-boxitem7) 属性类型 
+变量名</STRONG><BR></FONT>属性类型：<BR>1: 等级<BR>2: HP<BR>3: MP<BR>4: EXP<BR>5: 
+MaxHP<BR>6: MaxMP<BR>7: MaxEXP<BR>8: 防御下限<BR>9: 防御上限<BR>10: 魔防下限<BR>11: 
+魔防上限<BR>12: 攻击下限<BR>13: 攻击上限<BR>14: 魔法下限<BR>15: 魔法上限<BR>16: 道术下限<BR>17: 
+道术上限<BR><STRONG><FONT color=#008000>》获取：GetItemFieldValue&nbsp; 物品位置 属性名称 变量名</FONT></STRONG></P>
+;Uelement0……uelement23为元素属性，其中元素属性3-10为技能1-8<BR>
+<P>GetItemFieldValue&nbsp;&nbsp;-1&nbsp;&nbsp;uelement3&nbsp;&nbsp; 
+N$技能1<BR>GetItemFieldValue&nbsp;&nbsp;-1&nbsp;&nbsp;uelement4&nbsp;&nbsp; 
+N$技能2<BR>GetItemFieldValue&nbsp;&nbsp;-1&nbsp;&nbsp;uelement5&nbsp;&nbsp; 
+N$技能3<BR>GetItemFieldValue&nbsp;&nbsp;-1&nbsp;&nbsp;uelement6&nbsp;&nbsp; 
+N$技能4<BR>GetItemFieldValue&nbsp;&nbsp;-1&nbsp;&nbsp;uelement7&nbsp;&nbsp; 
+N$技能5<BR>GetItemFieldValue&nbsp;&nbsp;-1&nbsp;&nbsp;uelement8&nbsp;&nbsp; 
+N$技能6<BR>GetItemFieldValue&nbsp;&nbsp;-1&nbsp;&nbsp;uelement9&nbsp;&nbsp; 
+N$技能7<BR>GetItemFieldValue&nbsp;&nbsp;-1&nbsp;&nbsp;uelement10&nbsp;&nbsp;N$技能8</P>
+<P>返回值为技能在数据库中的 Idx 值+1&nbsp; 例如:你技能一IDX为100 则获取的返回值为101</P>
+<P><STRONG><FONT color=#008000>》设置：SetItemFieldValue&nbsp; 物品位置 属性名称 
+变量名</FONT></STRONG></P>
+属性支持dura, duramax, upgradecount, Value0……Value13, uelement0……uelement23<BR>
+说明： Value0……Value13为极品属性；uelement0……uelement23为元素属性<BR>
+<P>SetItemFieldValue&nbsp;&nbsp;-1&nbsp;&nbsp;uelement3&nbsp;&nbsp; 
+N$技能1<BR>SetItemFieldValue&nbsp;&nbsp;-1&nbsp;&nbsp;uelement4&nbsp;&nbsp; 
+N$技能2<BR>SetItemFieldValue&nbsp;&nbsp;-1&nbsp;&nbsp;uelement5&nbsp;&nbsp; 
+N$技能3<BR>SetItemFieldValue&nbsp;&nbsp;-1&nbsp;&nbsp;uelement6&nbsp;&nbsp; 
+N$技能4<BR>SetItemFieldValue&nbsp;&nbsp;-1&nbsp;&nbsp;uelement7&nbsp;&nbsp; 
+N$技能5<BR>SetItemFieldValue&nbsp;&nbsp;-1&nbsp;&nbsp;uelement8&nbsp;&nbsp; 
+N$技能6<BR>SetItemFieldValue&nbsp;&nbsp;-1&nbsp;&nbsp;uelement9&nbsp;&nbsp; 
+N$技能7<BR>SetItemFieldValue&nbsp;&nbsp;-1&nbsp;&nbsp;uelement10&nbsp;&nbsp;N$技能8</P>
+<P>设置值为技能在数据库中的 Idx 值+1&nbsp; 例如:你技能一IDX为100 则获取的返回值为101</P>
+<P><BR><STRONG><FONT color=#800000>·打开宠物界面命令</FONT></STRONG><BR>OpenGamePetDlg 
+<BR><BR><STRONG><FONT 
+color=#800000>·打开宠物背包（坐标X、Y均为0时，表示不设置坐标)</FONT></STRONG><BR>OpenGamePetBag 坐标X 
+坐标Y<BR><BR><BR><STRONG><FONT 
+color=#800000>·npc命令收回宠物</FONT></STRONG><BR>#if<BR>#act<BR>RetakeGamePet<BR>SENDMSG 
+6 
+你的宠物已经收回<BR><BR><BR>；------------------------------------------------------------------------<BR><BR>#if<BR>CheckCallGamePet<BR>#act<BR>SENDMSG 
+6 你的宠物等级是：&lt;$GamePetLevel&gt;<BR>ChangeGamePetLevel + 10<BR>SENDMSG 6 
+调整后的宠物等级是：&lt;$GamePetLevel&gt;<BR>#elseact<BR>RecallGamePet<BR>OpenGamePetBag 
+10 
+10<BR><BR>；------------------------------------------------------------------------<BR><BR><STRONG><FONT 
+color=#800000>·设置当前召唤的宠物是否可捡物</FONT></STRONG> <BR>SetGamePetEnablePick 
+参数值<BR>参数值：<BR>0：由宠物设置中的“允许宠物捡取物品”选项决定<BR>1：允许捡物<BR>2：禁止捡物<BR><BR>；------------------------------------------------------------------------<BR><BR><STRONG><FONT 
+color=#800000>·修改当前召唤的宠物属性值：【修改的属性不保存，当收回宠物再重新召唤时，属性值还原】</FONT></STRONG><BR>ChangeGamePetAbility 
+属性类型 值<BR>0: HP<BR>1: MaxHP<BR>2: MP<BR>3: MaxMP<BR>4: AC1<BR>5: AC2<BR>6: 
+MAC1<BR>7: MAC2<BR>8: DC1<BR>9: DC2<BR>10: MC1<BR>11: MC2<BR>12: SC1<BR>13: 
+SC2<BR>14: 攻击速度<BR>15: 移动速度 <BR>30: 属性有效时间（秒，空或0表示不检测时间）<BR><BR><STRONG><FONT 
+color=#800000>·获取当前召唤宠物的属性修改值(ChangeGamePetAbility 
+命令增加的属性，可以理解为附加属性)</FONT></STRONG><BR>GetGamePetAbility 属性类型 
+变量<BR><BR><STRONG><FONT 
+color=#800000>·获取当前召唤宠物的属性<BR></FONT></STRONG>GetGamePetAbilityEx 属性类型 
+变量<BR><BR><STRONG><FONT 
+color=#800000>·重新计算宠物属性(重算属性是修改属性后重算修改的属性,可多次修改后一次计算)：<BR></FONT></STRONG>RecalcGamePetAbility<BR><BR>#if<BR>CheckCallGamePet<BR>#act<BR>GetGamePetAbility 
+1 N1<BR>Inc N1 100<BR>ChangeGamePetAbility 1 
+N1<BR>RecalcGamePetAbility<BR>SendMsg 6 
+修改宠物MaxHP增加值为：&lt;$str(N1)&gt;<BR><BR>；------------------------------------------------------------------------<BR><BR><FONT 
+color=#800000><STRONG>·获取当前召唤宠物技能数量：</STRONG><BR></FONT>GetGamePetMagicCount 
+变量名<BR>；------------------------------------------------------------------------<BR><BR><FONT 
+color=#800000><STRONG>·获取当前召唤宠物技能位置对应技能信息</STRONG></FONT><BR>GetGamePetMagicInfo 
+技能位置 技能ID变量 技能名变量<BR><BR>[@获取宠物技能信息]<BR>#if 
+<BR>CheckCallGamePet<BR>#act<BR>GetGamePetMagicCount N1<BR>SendMsg 6 
+你当前宠物一个学习了&lt;$Str(N1)&gt;个技能<BR>GetGamePetMagicInfo 0 N1 S1<BR>SendMsg 6 
+你当前宠物技能0信息为（技能编号：&lt;$Str(N1)&gt;，技能名称：&lt;$Str(S1)&gt;）<BR>#elseact<BR>SendMsg 
+6 
+你还没有召唤宠物<BR>；------------------------------------------------------------------------<BR><BR><STRONG><FONT 
+color=#800000>·设置当前召唤宠物某个技能位置技能</FONT></STRONG><BR>GiveGamePetMagic 技能位置 
+技能名称<BR><BR>[@宠物技能位置2学技能]<BR>#if 
+<BR>CheckCallGamePet<BR>#act<BR>;感觉这个没有AddGamePetMagic好用，如果技能位有技能，会被覆盖<BR>GiveGamePetMagic 
+1 宠物技能1<BR>#elseact<BR>SendMsg 6 
+你还没有召唤宠物<BR>；------------------------------------------------------------------------<BR><BR><STRONG><FONT 
+color=#800000>·直接给一个宠物到宠物列表</FONT></STRONG><BR>GiveGamePetEx 
+宠物名称<BR><BR>[@直接给个宠物]<BR>#act<BR>GiveGamePetEx 红野猪<BR>#if<BR>not 
+CheckCallGamePet<BR>#act<BR>RecallGamePet 
+红野猪<BR>；------------------------------------------------------------------------<BR><BR><FONT 
+color=#800000><STRONG>·修改当前召唤的宠物外观/脸型</STRONG></FONT><BR>ChangeGamePetAppr 
+新的脸型(Appr) 有效时间(分钟)<BR><BR>[@修改宠物脸型]<BR>#if 
+<BR>CheckCallGamePet<BR>#act<BR>ChangeGamePetAppr 10 1<BR>sendmsg 6 
+你的宠物已经变成了食人花造型，有效时间1分钟<BR><BR><STRONG><FONT color=#800000>·宠物界面预留按钮9个 
+850-858</FONT></STRONG><BR>搜索帮助文档“预留按钮”，预留编号增加：<BR>宠物界面 
+（850-858）<BR>；------------------------------------------------------------------------<BR><BR><STRONG><FONT 
+color=#800000>·收回指定宠物</FONT></STRONG><BR>#if <BR>equal 白野猪 
+&lt;$GamePetName&gt;<BR>#act<BR>RetakeGamePet<BR><BR><BR><FONT 
+color=#800000><STRONG>·自定义修改宠物名字（不保存，重新召唤恢复）</STRONG><BR></FONT>ChangeGamePetName 
+新名称<BR><BR>#if<BR>CheckCallGamePet<BR>#act<BR>ChangeGamePetName 大花<BR>SENDMSG 6 
+你的宠物名字更改为【大花】<BR><BR>；------------------------------------------------------------------------<BR><BR><FONT 
+color=#800000><STRONG>·获取宠物列表中宠物数量 GetGamePetListCount 变量名<BR>·获取当前召唤的宠物在列表中的顺序 
+GetRecalGamePetIndex 变量名</STRONG></FONT><BR><BR>#act<BR>GetGamePetListCount 
+N0<BR>GetRecalGamePetIndex N1<BR>SendMsg 6 
+你的宠物列表共有宠物：&lt;$str(N0)&gt;个；当前召唤的宠物序号是：&lt;$str(N1)&gt;<BR><BR></P>
+<P><STRONG><FONT 
+color=#800000>·设置宠物不攻击</FONT></STRONG><BR>GamePetSetAttackOption 类型 值(0/1/2) 
+有效时间(0为在线有效)<BR>类型:<BR>&nbsp; 0: 
+允许宠物攻击&nbsp;&nbsp;;当值=0时，宠物是否攻击随全局参数；当值=1时，允许宠物攻击；当值=2时，禁止宠物攻击<BR>&nbsp; 1: 
+怪物不攻击宠物&nbsp;&nbsp;;当值=0时，随全局参数；当值=1时，开启此功能<BR>&nbsp; 2: 
+宠物不受任何攻击&nbsp;&nbsp;;当值=0时，随全局参数；当值=1时，开启此功能<BR></P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+#####################################################下方为2021-10-08增加############################################<BR><BR>
+
+宠物设置——》参数设置——》增加选项"杀怪触发[@GamePetKillMon]"<BR><BR>
+
+增加宠物（攻击-魔法）触发<BR>
+@GamePetAttack<BR>
+@GamePetMagicAttack<BR><BR>
+
+增加宠物（被攻击-被魔法）触发<BR>
+@GamePetStruck<BR>
+@GamePetMagicStruck<BR><BR>
+增加宠物（攻击-被攻击掉血前）触发、修改当前伤害血量<BR>
+@GamePetAttackDamage<BR>
+@GamePetStruckDamage<BR><BR>
+
+ 
+宠物自身坐标<BR>
+&lt;$Pet.X&gt;<BR>
+&lt;$Pet.Y&gt;<BR><BR>
+
+宠物血量<BR>
+&lt;$Pet.HP&gt;<BR>
+&lt;$Pet.MaxHP&gt;<BR><BR>
+
+宠物蓝：<BR>
+&lt;$Pet.MP&gt;<BR>
+&lt;$Pet.MaxMP&gt;<BR><BR>
+
+宠物攻击目标名称：<BR>
+&lt;$Pet.CurTargetName&gt;; 不带数字<BR>
+&lt;$Pet.CurTargetFullName&gt;<BR><BR>
+
+宠物当前攻击目标坐标<BR>
+&lt;$Pet.CurTargetX&gt;<BR>
+&lt;$Pet.CurTargetY&gt;<BR><BR>
+
+宠物当前击中目标HP<BR>
+&lt;$Pet.CurTargetHP&gt;<BR>
+&lt;$Pet.CurTargetMaxHP&gt;<BR><BR>
+
+
+宠物攻击目标掉血量<BR>
+&lt;$Pet.DamageValue&gt;<BR><BR>
+
+宠物杀死的怪物名称<BR>
+&lt;$Pet.KillMonName&gt;<BR><BR>
+
+
+;变量:当前伤害掉血量（仅用于以下触发）：&lt;$Pet.DamageValue&gt;<BR>
+[@GamePetAttackDamage]<BR>
+#ACT<BR>
+SENDMSG 6 宠物攻击目标，掉血量为&lt;$Pet.DamageValue&gt;，攻击加成10点血量<BR>
+Pet.ChangeDamageValue 0 + 10<BR><BR>
+
+[@GamePetStruckDamage]<BR>
+#ACT<BR>
+SENDMSG 6 宠物被攻击，掉血量为&lt;$Pet.DamageValue&gt;，抵御掉血量的50%<BR>
+Pet.ChangeDamageValue 1 - 50<BR><BR>
+
+
+
+<P>；------------------------------------------------------------------------<BR><BR><BR>注：常规普通的宠物捡物在引擎-列表信息1-设置允许捡取和优选捡起 
+（普通捡物品列表与常规英雄捡物同步（M2- 
+列表信息1设置允许捡起物品）,特殊需求用户可同步玩家内挂设置进行捡物品）<BR><BR>--------------------------------------------------<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR><BR></P></BODY></HTML>

@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>副本地图相关参数</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>副本地图</FONT></FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT></STRONG></FONT></P>
+
+<P>命令参数：</p>
+<P>MapInfo.txt中地图参数增加  FB(40,祖玛副本,0,1) 创建40个祖玛副本地图 第3个参数：0:限制队友必须有三职业; 1:不限制职业，队友都可进; 2:只允许自己进入; 3:允许行会进入 <br>
+第4个参数：副本创建1分钟后(未收回时)，允许延时进入副本时间(分)系统默认时间为1分钟.此参数为在1分钟时间基础上延长多少分,第5个参数为当退出副本地图，没人时候系统删除该副本时间，留空默认10秒<br></p>
+
+FB(40,祖玛副本,0,1,50)  50 意思是玩家创建副本后，进入后又退出地图，50秒内没人则回收副本地图！<br><br><br>
+
+
+================================================================== <br> 
+CANMOVEECTYPE  此命令为检测是否已经创建副本 格式：CANMOVEECTYPE 副本名称 <br> 
+CREATEECTYPE   此命令为创建副本，格式：CREATEECTYPE 副本名称 有效时间<br> 
+====================================================</p>
+<p>示列脚本：<br>
+[@main]<br>
+&lt;创建副本地图/@gon1&gt;  &lt;传送到副本地图/@gon12&gt;\<br>
+&lt;创建镜像副本/@gon111&gt; &lt;传送到镜像副本/@gon112&gt;\</p>
+
+
+[@gon1]<br>
+#IF<br>
+CANMOVEECTYPE 白日门副本<br>
+#ACT<br>
+SENDMSG 5 你已创建了一个白日门副本，不能重复创建....<br>
+#ELSEAct<br>
+;----------------------↓---此处的5为副本有效时间<br>
+CREATEECTYPE 白日门副本 5</p>
+
+[@gon111]<br>
+#IF<br>
+CANMOVEECTYPE 镜像副本<br>
+#ACT<br>
+SENDMSG 5 你已创建了一个镜像副本，不能重复创建....<br>
+#ELSEAct<br>
+CREATEECTYPE 镜像副本 3</p>
+
+
+[@gon12]<br>
+#IF<br>
+#ACT<br>
+MOVEECTYPE 白日门副本 38 42</p>
+
+[@gon112]<br>
+#IF<br>
+#ACT<br>
+MOVEECTYPE 镜像副本 331 270</p>
+
+
+[@CreateEctype_NoExists]<br>
+#IF<br>
+#ACT<br>
+MESSAGEBOX 创建副本地图失败，副本不存在！</p>
+
+[@CreateEctype_Fail]<br>
+#IF<br>
+#ACT<br>
+MESSAGEBOX 创建副本失败，副本人数已满，请稍候再试！</p>
+
+[@CreateEctype_Fail_GroupMaster]<br>
+#IF<br>
+#ACT<br>
+MESSAGEBOX 创建副本失败，必须组队队长才能创建！</p>
+
+[@CreateEctype_Fail_GuildMaster]<br>
+#IF<br>
+#ACT<br>
+MESSAGEBOX 创建副本失败，必须行会掌门才能创建！</p>
+
+
+[@CreateEctype_IN]<br>
+#IF<br>
+;此为如掌门或队长创建副本后,队友 行会成员创建时提示....<br>
+#ACT<br>
+SENDMSG 5  副本地图已经创建完成，可以直接进入了。</p>
+
+
+[@CreateEctype_IN_Time]<br>
+#IF<br>
+#ACT<br>
+;此为如掌门或队长创建副本后，成员或队友继续创建提示..<br>
+SENDMSG 5  副本已经存在..无法创建。</p>
+
+
+[@CreateEctype_OK]<br>
+#IF<br>
+#ACT<br>
+;副本创建成功提示..创建成功后默认已经初始化地图怪物和时间..<br>
+SENDMSG 5  副本地图创建成功，并初始化地图怪物成功<br>
+SENDMSG 5  副本地图创建成功，并初始化地图事件成功。</p>
+
+
+[@MoveEctype_Fail_Time]<br>
+#IF<br>
+#ACT<br>
+;当传送到副本地图超出设置时间给予提示........<br>
+SENDMSG 5 传到副本地图失败，超过可传送时间</p>
+
+[@MoveEctype_Fail]<br>
+#IF<br>
+#ACT<br>
+;当没有创建副本或者没有相关副本（组队，行会副本，坐标错误）进入时给予提示........<br>
+SENDMSG 5 传到副本地图失败</p>
+
+[@MoveEctype_OK]<br>
+#IF<br>
+#ACT<br>
+;成功进入副本地图给予提示......<br>
+SENDMSG 5 已传送到副本地图</p>
+
+;==============npc=====================================<br>
+;MerChant.txt 增加以下（和增加普通NPC一样增加）<br>
+副本地图	$g005副本	30	40	副本地图	0	12	0	0	0</p>
+Market_Def内脚本文件名不需要$如：副本地图-g005副本.txt </P>
+
+;======================================================<br>
+组队传送：<br>    
+副本组队传NPC命令 MoveGroupEctype 副本地图名 X Y <br>
+;======================================================</p>
+副本地图的名称（NPCMAP = 取NPC所在地图， SELF = 取人物当前所在地图， FBMAP = 取人物所在和创建的副本地图)<br>
+
+[@祖玛副本_触发刷怪]<br>
+#ACT<br>
+;MobEctypeMon 副本名称 X坐标 Y坐标 怪物名称 数量  范围 名称颜色  <br>  
+MobEctypeMon SELF 94 72 祖玛雕像 1 5    --------人物当前所在副本刷怪<br>
+MobEctypeMon FBMAP 94 72 祖玛雕像 1 5    --------人物创建的副本刷怪，可在创建成功触发刷怪<br>
+Break<br>
+;======================================================</p>
+
+<p>通过刷怪文件MonGen.txt刷怪：;副本地图刷怪不会重复刷新..进入一次刷怪.退出副本清理怪(如G005地图允许生成副本50个，分别为$g005副本_1----$g005副本_50 只需要下面一个刷怪文件即可)<br>
+;--------------------------------------------------<br>
+;副本名字       X坐标 Y坐标      怪物名称       范围   数量<br>
+$g005副本	36	44	暗之双头血魔	25	10<br>
+$g005副本	36	44	暗之双头血魔	25	10<br>
+$g005副本	36	44	暗之虹魔教主	25	10<br>
+$g005副本	36	44	暗之双头金刚	25	10<br>
+$g005副本	36	44	暗之沃玛教主	25	10<br>
+;======================================================</p>
+</BODY>
+</HTML>

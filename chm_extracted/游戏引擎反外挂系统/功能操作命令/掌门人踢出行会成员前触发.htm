@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>掌门人踢出行会成员前触发</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<body><FONT face=Arial size=2>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT color=#0000ff>功能:</FONT> 
+掌门人踢出行会成员前触发<BR><BR></FONT></FONT></P>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT 
+color=#0000ff>触发QF字段:<BR></FONT>@DelGuildMemBefore<BR></FONT></FONT></P>
+<P><FONT face=Fixedsys size=2>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT 
+color=#0000ff>终止退出行会命令:<BR></FONT>StopExitGuild<BR></FONT></FONT></P>
+<P><FONT face=Fixedsys size=2>
+</br></br></br></br>
+
+
+;行会成员退出行会前触发 并终止退出操作，掌门人操作不受限制，也不会触发（主要规避行会PK时门派成员恶意退出行会）</br></br>
+;QFunction-0.txt 触发如下</br></br>
+[@ExitGuildBefore]</br>
+#ACT</br>
+StopExitGuild</br>
+SENDMSG 7 【提示】禁止退出行会</br>
+break</br>
+</br></br></br></br></br>
+
+;掌门人将成员踢出行会前触发，并终止退出操作脚本</br></br>
+;QFunction-0.txt 触发如下</br></br>
+
+[@DelGuildMemBefore]</br>
+#ACT</br>
+StopExitGuild</br>
+sendmsg 6 不允许管理员删除行会成员&lt;$CurUserName&gt;</br>
+</br></br></br></br></br>
+
+
+</html>

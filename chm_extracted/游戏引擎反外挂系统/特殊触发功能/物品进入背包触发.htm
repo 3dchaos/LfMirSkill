@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>物品进入背包触发</title>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<body><FONT face=Arial size=2>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT color=#0000ff>功能说明:</FONT> 
+物品进入背包触发<BR><BR></FONT></FONT></P>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT 
+color=#0000ff>说明：</FONT>物品进入背包会触发QF内的 [@AddBag] 标签端<BR></FONT></FONT></P>
+<P><FONT face=Fixedsys size=2></br></br>
+
+
+</br></br>
+--------------------------------------------------------</br></br>
+
+物品进入背包QF触发</br></br>
+
+示例：</br></br>
+
+[@AddBag]</br>
+#if</br>
+#act</br>
+Sendmsg 6 提示:【&lt;$CurItemName&gt;】进到了你的背包！</br></br></br></br>
+
+
+
+示例2：</br></br>
+[@AddBag]</br>
+#IF</br>
+;检测条件脚本自己写</br>
+#ACT</br>
+LINKPICKUPITEM </br>
+;关联后就可以使用其他脚本命令对刚刚捡取的物品进行检测，或操作</br>
+;修改该物品的名称颜色</br>
+CHANGEITEMNAMECOLOR -1 253</br>
+;修改物品星星数量</br>
+CHANGEITEMUPGRADECOUNT -1 + 1</br>
+;修改后的参数，刷新到客户端</br>
+UpdateItem -1</br>
+Sendmsg 6 提示:【&lt;$CurItemName&gt;】进到了你的背包，物品序列号:&lt;$CurItemMakeIndex&gt;</br>
+break</br></br></br></br>
+
+示例3：</br></br>
+[@AddBag]</br>
+#IF</br>
+;检测条件自己写</br>
+#ACT</br>
+;LINKPICKUPITEM </br>
+GetItemFieldValue -1 makeindex N1</br>
+GetItemFieldValue -1 idx N2</br>
+GetItemFieldValue -1 hdc N3</br>
+;UpdateItem -1</br>
+Sendmsg 6 提示:【&lt;$CurItemName&gt;】进到了你的背包，物品序列号:&lt;$STR(N1)&gt;，物品idx:&lt;$STR(N2)&gt;，物品DC2:&lt;$STR(N3)&gt;</br>
+break</br></br></br></br>
+
+★★★★★★★★★★★★不要在此触发中写任何关于回收物品的操作，不然可能导致M2异常 ★★★★★★★★★★★★★</br></br></br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</br></br></br></br></br></br></br>
+
+
+
+
+</br></br></br></br></br>
+
+
+</html>

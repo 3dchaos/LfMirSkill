@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>获取宝宝所在位置信息</title>
+</head>
+
+<body>
+<p><b>功能说明: 获取宝宝所在位置</b></p>
+
+<br /><br />
+
+格式：GetSlavePosition 名字 保存变量Map 保存变量X 保存变量Y 是否只匹配显示名(0不检测数字  1检测数字)<br /><br />
+
+
+示范：<br />
+[@main]<br />
+#if<br />
+#act<br />
+GetSlavePosition 神兽 S$地图 N$X坐标 N$Y坐标 <br />
+Sendmsg 5 提示：您的神兽在&lt;$STR(S$地图)&gt;坐标(&lt;$STR(N$X坐标)&gt;,&lt;$STR(N$Y坐标)&gt;)<br /><br /><br />
+
+
+
+
+
+
+
+
+
+
+;======================================================<br />
+
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

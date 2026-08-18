@@ -1,0 +1,34 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>英雄死亡</title>
+</head>
+
+<body>
+
+<p><font size="2"><font color="#FF0000"><strong>功能：</strong></font><br>
+&nbsp;&nbsp;&nbsp;英雄死亡触发</font></p>
+<p><font size="2"><strong><font color="#FF0000">格式：</font></strong></font><font size="2"><br>
+　</font></p>
+<p><font size="2"><br>
+;==========================================<br>
+</font>[@HeroDie]<br>
+#IF<br>
+#ACT<br>
+SENDMSG 6 你英雄死亡了 255 249<br>
+BREAK</p>
+
+
+;-----------------------------------------------------------------------------------------------<br><br>
+[@HeroDie]<br>
+#IF <br>
+H.CHECKCURRTARGETRACE = 0<br>
+#ACT<br>
+sendmsg 6 &lt;$H.JOB&gt; <br>
+&lt;$HeroKiller&gt; .GAMEGIRD + 10<br>
+&lt;$HeroKiller&gt; .SendNewLineMsg 1 255 0 10 540 3 1 你击杀了拥有{狂暴之力的&lt;$H.CURRRTARGETNAME&gt; |250:0:1}获得{【10灵符】|249:0:1}奖励！<br><br><br><br><br>
+</body>
+
+</html>

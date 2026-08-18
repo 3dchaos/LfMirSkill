@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>DEFINE说明</title>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+</head>
+
+<body><FONT face=Arial size=2>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT color=#0000ff>功能说明:</FONT> 
+DEFINE<BR><BR></FONT></FONT></P>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT 
+color=#0000ff>说明：</FONT> DEFINE文件中ini内容注释符号为\\ 和 // 和 ;<BR></FONT></FONT></P>
+<P><FONT face=Fixedsys size=2></br></br>
+
+
+</br></br>
+--------------------------------------------------------</br></br>
+示例脚本：</br></br>
+
+;Mir200\Envir\Defines\全局常量配置.ini(以下内容为全局常量配置.ini文本中内容)</br>
+;================================================================================================================</br>
+;===============================================【全局常量配置】=================================================</br>
+;================================================================================================================</br>
+;声明命令 常量 常量内容  ;备注(;和//均可以在本文件中作为注释符号//和;后的内容不在被读取)</br></br>
+#Define			$全局常量			80			;这里是备注，用于备注这条变量用处，记性好的可以不用，记性不好时间久怕忘记的可以用</br>
+#Define			$常量测试			180			//这里是备注，用于备注这条变量用处记性好的可以不用，记性不好时间久怕忘记的可以用</br></br></br></br>
+
+
+
+;NPC内容(NPC脚本顶部需要加入该NPC调用的INI文件，下面是示范脚本)</br></br>
+
+
+#INCLUDE 全局常量配置.ini</br>
+[@MAIN]</br>
+#IF</br>
+CHECKLEVELEX > 0</br>
+#SAY</br>
+\ \ \</br>
+<>                  ($全局常量)     \ \</br>
+<>                  ($常量测试)    \</br>
+#ACT</br>
+BREAK</br>
+</br></br></br></br></br></br></br>
+
+
+
+
+</br></br></br></br></br>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>获取地图中某怪物的坐标[!]</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>获取地图中某怪物的坐标.</FONT></FONT></P>
+
+
+格式: CheckMapMonInfo 地图名称 怪物名称 X坐标变量  Y坐标变量 允许获取改名怪物(1获取，0或空为不获取)</P>
+
+
+<P>示列：<br>
+
+
+
+
+<P>[@mail]<br>
+#IF<br>
+CheckMapMonInfo 3 白野猪 n1 n2<br>
+#ACT<br>
+SENDMSG 6 盟重有个白野猪在&lt;$STR(N1)&gt;:&lt;$STR(N2)&gt;<br><br><br><br>
+
+
+</P>
+</BODY>
+</HTML>

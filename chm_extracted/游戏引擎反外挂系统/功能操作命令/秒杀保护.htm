@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>秒杀保护</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>&nbsp;&nbsp;&nbsp; 
+秒杀保护<BR><FONT 
+
+
+<FONT 
+color=#000000></FONT></P></FONT>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT><BR></STRONG>&nbsp;&nbsp;&nbsp; &nbsp; 
+ProtectHP 检测血量  保留血量  有效时间 是否为百分比<BR></FONT>
+
+</br></br></br>
+[@防秒杀百分比]</br>
+#act</br>
+ProtectHP 90 10 360 1</br>
+SENDMSG 6 该脚本的意思是，你的血量在大于等于90%的情况下，如果有人可以一刀秒杀你，你不会被秒杀，而是把你的血量降低到10%，并且触发QF字段[@ProtectHP]，有效期360秒</br></br>
+
+[@防秒杀]</br>
+#act</br>
+ProtectHP 100 10 360 0</br>
+SENDMSG 6 该脚本的意思是，你的血量在大于等于100的情况下，如果有人可以一刀秒杀你，你不会被秒杀，而是把你的血量降低到10，并且触发QF字段[@ProtectHP]，有效期360秒</br></br></br>
+------------------</br>
+;QF触发：</br></br>
+
+[@ProtectHP]</br>
+#ACT</br>
+防秒杀保护成功</br></br>
+
+[@HeroProtectHP]</br>
+#ACT</br>
+英雄防秒杀保护成功</br></br></br></br>
+
+英雄操作命令：H.ProtectHP</br>
+
+
+
+
+</FONT><FONT 
+size=2>。<BR>;==========================================</FONT></P>
+</BODY>
+</HTML>

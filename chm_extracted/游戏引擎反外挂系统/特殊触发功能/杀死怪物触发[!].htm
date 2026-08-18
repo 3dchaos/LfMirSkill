@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>杀死怪物时触发,杀怪触发</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<BODY><FONT face=宋体 size=2>
+<P dir=ltr style="MARGIN-RIGHT: 0px"><BR><FONT face=Fixedsys>功能: <FONT 
+color=#ff0000>杀死怪物时触发</FONT> <BR>说明: 
+对应地图参数中需要加入ONKILLMON才可生效!<BR>[@OnKillMob]<BR>#IF<BR>CheckKillMonName 
+白野猪<BR>#SAY<BR>你杀死一头白野猪!</FONT> </P>
+
+;=============================================================<BR><BR>
+人物杀死怪物时触发<b>(变量显示带怪物名称后面数字)</b><p>
+[@KillMon]<BR>
+#ACT<BR>
+SENDMSG 7 你杀死&lt;$KILLMONNAME&gt;<BR>
+break<p>
+
+英雄杀死怪物时触发<p>
+[@HeroKillMon]<BR>
+#ACT<BR>
+SENDMSG 7 你英雄杀死&lt;$H.KILLMONNAME&gt;<BR>
+break<p>
+<BR><BR><BR>
+------------------------------------------------------------------------<BR><BR><BR>
+<BR><BR><BR>
+人物杀死怪物时触发<b>(变量显示不包含怪物名称后面数字)</b><p>
+[@KillMon]<BR>
+#ACT<BR>
+SENDMSG 7 你杀死&lt;$KILLMONNAMEex&gt;<BR>
+break<p>
+
+英雄杀死怪物时触发<p>
+[@HeroKillMon]<BR>
+#ACT<BR>
+SENDMSG 7 你英雄杀死&lt;$H.KILLMONNAMEex&gt;<BR>
+break<p>
+
+
+<BR><BR>
+注： 英雄杀死怪物触发需要在英雄设置打开选项，否则共享人物触发<BR><BR>
+勾选后，英雄独立触发（英雄触发含英雄的宝宝和英雄分身杀死怪物触发）<BR><BR>
+</FONT></BODY>
+</html>

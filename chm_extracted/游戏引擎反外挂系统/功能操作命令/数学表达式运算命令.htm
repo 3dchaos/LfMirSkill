@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>数学表达式运算命令</title>
+<style>
+<!--
+div{word-break:break-all;word-wrap:break-word}.t{border:1px solid #c7d6e1;margin:0px auto 8px;}.t2{border-top:#c7d6e1 1px solid;margin:0px auto 5px;}.t{padding:1px}.t {padding:0}th{word-break:break-all;word-wrap:break-word}.r_one{background:#f9f9f9;}.tr1 th{padding:5px 10px;text-align:left;vertical-align:top;font-weight:normal;}.tr1 th{border-right:1px solid #e6e6e6;}.tpc_content{font-size:14px;font-family:Arial;padding:0 2% 0 0.5%;margin:0 0 2%}-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font color="#0000ff" size="2">功</font></strong><font color="#0000ff" size="2"><strong>能：<br>
+&nbsp;&nbsp; </strong></font>数学表达式运算命令<br>
+FORMULATION 公式 结果保存变量<br>
+
+ <br> <br> <br>
+
+ 范例: <br> <br>
+
+FORMULATION &lt;$STR(N$切割倍率)&gt;/(&lt;$STR(N$人物切割值)&gt;+&lt;$STR(N10)&gt;)*100+&lt;$STR(N$人物切割值)&gt; N$切割值 <br> <br> <br>
+
+
+
+;下面的结果为0，被除数为0，脚本执行错误<br><br>
+#act<br>
+Formulation 1/(3-3)*5+6 N1<br>
+sendmsg 6 &lt;$STR(N1)&gt;<br><br>
+
+;注意：表达式被除数不能为0<br><br>
+
+;-----------------------------------------------------------------------------</br></br>
+
+2024-07-01 增加：ForMulAtion 命令内进行随机数值运算 </br></br>
+
+
+说明 </br>
+ForMulAtion Random(1,20) N$获取数据显示</br>
+取随机数值1到20之间取随机数</br></br>
+
+例子：</br>
+#IF</br>
+#ACT</br>
+ForMulAtion Random(1,20) N$获取数据显示</br>
+Sendmsg 6 &lt;$Str(N$获取数据显示)&gt;,显示数据为1-20之间的随机数值</br></br>
+
+例子：</br>
+#IF</br>
+#ACT</br>
+ForMulAtion Random(1,20)^2 N$获取数据显示</br>
+Sendmsg 6 &lt;$Str(N$获取数据显示)&gt;,显示数据为1-20之间的随机数值的平方</br>
+
+<br><br><br><br>
+
+
+
+ <br> <br> <br>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>屏幕中间显示公告</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<BODY>
+<P><FONT face=Arial><FONT face=Fixedsys size=2>功能: 在专用登录器屏幕的中间显示公告.<BR>格式: 
+SendCenterMsg 前景色 背景色 消息文字 模式 显示时间 倒计时标签  是否替换模式（0或空为不替换，不等于0为替换模式)  X坐标<BR>模式: 0=发送给自己 1=发送所有人物 2=发送行会 3=发送国家 
+4=发送当前地图. <BR>说明: 
+设置倒计时标签时可执行自定义脚本功能.<BR><BR><BR>例子:<BR></FONT></FONT><FONT face=Fixedsys 
+size=2>[@main]<BR></FONT><FONT size=2><FONT face=Fixedsys>#IF<BR></FONT><FONT 
+face=Fixedsys>#ACT<BR></FONT></FONT><FONT face=Fixedsys>SendCenterMsg 180 251 
+这是一个居中显示的公告.&nbsp;0 </FONT></P>
+<P><FONT face=Fixedsys size=2>例子:显示30秒.<BR></FONT><FONT face=Fixedsys 
+size=2>[@main]<BR></FONT><FONT face=Fixedsys size=2>#IF<BR></FONT><FONT 
+face=Fixedsys><FONT size=2>#ACT<BR></FONT>SendCenterMsg 180 251 
+这是一个居中显示的公告.&nbsp;0 30<BR><BR><BR>;以下功能需要2009-01之后的M2支持.<BR>执行倒计时标签(<FONT 
+color=#ff00ff>注意:文字提示中必须包含%d</FONT>):<BR><FONT size=2>[@main]<BR></FONT><FONT 
+face=Fixedsys size=2>#IF<BR></FONT><FONT face=Fixedsys><FONT 
+size=2>#ACT<BR></FONT>SendCenterMsg 180 251&nbsp;还剩余%d发放新手奖励.&nbsp;0 30 
+@GiveNewHumanItem<BR><BR><BR>QFunction中:<BR>[@GiveNewHumanItem]<BR>#IF<BR>#ACT<BR>Give 
+金条 1<BR>Give&nbsp;裁决之杖 1<BR>Give 圣战戒指 2<BR>Give 圣战手镯 2<BR>Give 圣战头盔 1<BR>Give 
+圣战项链 1<BR>Give 天魔神甲 
+1<BR><BR><BR><BR>例子:替换模式<BR>替换模式只在有倒计时标签时有效.<BR><BR>;以下例子说明如何使倒计时从新开始.<BR></FONT><FONT 
+size=2>[@main]<BR></FONT><FONT face=Fixedsys size=2>#IF<BR></FONT><FONT 
+face=Fixedsys><FONT size=2>#ACT<BR></FONT>SendCenterMsg 180 
+251&nbsp;还剩余%d离开本地图.&nbsp;0&nbsp;600 
+@ExitMap 1 <BR><BR></FONT>;执行替换模式使时间从新开始<BR><FONT size=2>[@main1]<BR></FONT><FONT 
+face=Fixedsys size=2>#IF<BR></FONT><FONT face=Fixedsys><FONT 
+size=2>#ACT<BR></FONT>SendCenterMsg 180 251&nbsp;还剩余%d离开本地图.&nbsp;5&nbsp;600 
+@ExitMap 1<BR><BR><BR><BR><BR>
+
+
+SendCenterMsg 180 251 这是一个<Text:文字内容{FCOLOR=252;FSIZE=12;FNAME=宋体}>居中显示的{<$USERNAME>|250:0}公告. 0 <BR>
+SendCenterMsg 180 251 图片数字测试<ImgNum:9:1234333:-3:0:0>看看效果<BR>
+
+<BR><BR><BR>
+</FONT><BR></FONT></P></BODY>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>地图参数限制人物在地图的时间（TimeMap）</title>
+</head>
+
+<body>
+<p>功能: 使用地图参数限制角色在地图内时间</p>
+<p>格式:TimeMap(3|5|1|@计时地图返回)</p>
+参数一到时间返回的地图代码<br />
+参数二  倒计时时间分钟计算<br />
+参数三 是否显示当前地图剩余倒计时<br />
+参数四 退出地图触发QF字段<br />
+<br /><br />
+
+
+（MapInfo.txt)<br /><br />
+[G001 质询屋] SAFE DAY QUIZ NOMANNOMON TimeMap(3|5|1)<br /><br />
+
+OR<br /><br />
+[G001 质询屋] SAFE DAY QUIZ NOMANNOMON TimeMap(3|5|1|@计时地图返回)<br /><br />
+
+QFunction-0.txt<br />
+[@计时地图返回]<br />
+#IF<br />
+#ACT<br />
+Sendmsg 5 返回地图。<br />
+;从地图出来时候触发，无论在线到时间出来还是小退后自动出地图，只要出地图就触发<br /><br /><br /><br />
+
+
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

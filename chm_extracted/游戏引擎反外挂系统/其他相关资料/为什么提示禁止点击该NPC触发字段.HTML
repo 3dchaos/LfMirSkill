@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>为什么提示禁止点击该NPC触发字段？</TITLE>
+</HEAD>
+<BODY>
+<P><STRONG><FONT 
+size=2>为什么提示禁止点击该NPC触发字段？</FONT></STRONG></P>
+
+<P><strong><font color="#FF0000">下面以一个死亡触发为例，不仅仅是死亡触发，引擎的所有触发都不允许玩家点击NPC触发，<br>
+例如：物品触发[@StdModeFunc]，套装触发[@GroupItemOn] [@GroupItemOff]，魔法触发[@MagTagFunc]，穿脱装备触发[@TakeOn] [@TakeOff]等等，就不一一举例了。</font></strong></P>
+<p>[@PlayDie]<br>
+  &lt;下一页/@下一页&gt;</p>
+<p>[@下一页]<br>
+  &lt;返回/@PlayDie&gt;</p>
+<p><strong><font color="#FF0000">;&lt;返回/@PlayDie&gt; 新引擎这里“@PlayDie”是引擎内部触发字段，禁止用户通过NPC点击来触发这个字段<br>
+  ;不仅仅“@PlayDie”不允许“@PlayDie1、 @PlayDie2、 @PlayDie死亡”等等都不允许，只有前面的字符和“@PlayDie”一样的后面不管增加什么字符都将不允许<br>
+  ;如果非要使用玩家点击NPC触发的，可以把上面的脚本改成如下,使用goto转一下</font></strong></p>
+<p>[@PlayDie]<br>
+  &lt;下一页/@下一页&gt;</p>
+<p>[@下一页]<br>
+  &lt;返回/@返回&gt;</p>
+<p>[@返回]<br>
+  #ACT<br>
+  goto @PlayDie</p>
+<p>---------------------------------------------------------------------------------------------------</p>
+<p><strong><font color="#FF0000">还有其他一些触发，也属于这类的，比如：</font></strong></p>
+<p><font color="#FF0000"><strong>DelayCall 5000 @再次复活<br>
+  SendCenterMsg 180 251 还剩余%d发放新手奖励. 0 30 @GiveNewHumanItem</strong></font></p>
+<p><font color="#FF0000"><strong>“@再次复活”和“@GiveNewHumanItem”就会变成引擎内部触发，也是不允许用使用NPC点击来触发的<br>
+  还有一些其他脚本命令带字段触发的，就不一一举例了。</strong></font></p>
+</BODY>
+</HTML>
+ 

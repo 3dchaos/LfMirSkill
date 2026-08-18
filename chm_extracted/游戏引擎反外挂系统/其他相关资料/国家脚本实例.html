@@ -1,0 +1,209 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>国战系统脚本实例</title>
+</head>
+
+<body>
+
+
+[@main]</br>
+测试1：&lt;加入一个国家/@加入国家&gt;</br>
+测试2：&lt;检查是否第一个国家的人/@检查是否加入国家&gt;</br>
+通用：&lt;国家信息/@国家信息&gt;\</br>
+&lt;国家人数/@国家人数&gt;     \</br></br>
+
+测试3：&lt;成为国王/@成为国王&gt;  测试4：&lt;检查是否第一个国家国王/@检查是否国王&gt;   测试5：&lt;检查是否国王/@检查是否国王2&gt;   \</br>
+测试7：&lt;叛国/@叛国&gt; 测试8：&lt;更改国家为中国/@修改中国字&gt;\</br>
+测试8：&lt;国家资金/@国家资金&gt;</br>
+测试6：&lt;修改国家名字/@@InPutString60&gt;  &lt;国家资金检测/@国家资金2&gt;    </br>
+-----------------------------------------\</br>
+新序列：\</br>
+&lt;国家一刷兵过/@shanglu&gt;  &lt;国家二刷兵过/@shanglu1&gt;  &lt;国家消息/@国家消息&gt;</br></br>
+
+[@国家消息]</br>
+#IF</br>
+#ACT</br>
+SuperMoveMsg 8 这是一个居中显示的公告. 3 </br></br></br>
+
+
+
+[@shanglu]</br>
+#if</br>
+#act</br>
+MISSION 3 320;320,320 320;330,320</br>
+PARAM1 333</br>
+PARAM2 333</br>
+PARAM3 1</br>
+PARAM4 1</br>
+PARAM5 1</br>
+PARAM6 0</br>
+PARAM7 1</br>
+PARAM8 1</br>
+PARAM9 0</br>
+MOBPLACE 黑野猪</br>
+sendmsg 6 刷新成功。</br>
+break</br></br></br>
+
+[@shanglu1]</br>
+#if</br>
+#act</br>
+MISSION 3 320;320,320 320;330,320</br>
+PARAM1 333</br>
+PARAM2 333</br>
+PARAM3 1</br>
+PARAM4 1</br>
+PARAM5 2</br>
+PARAM6 0</br>
+PARAM7 1</br>
+PARAM8 2</br>
+PARAM9 1</br>
+MOBPLACE 红野猪</br>
+sendmsg 6 刷新成功。</br>
+break</br></br></br>
+
+
+[@加入国家]</br>
+#IF</br>
+CheckNation 0</br>
+#ACT</br>
+JoinNation 2</br>
+#SAY</br>
+你加入了一个国家.</br>
+#ELSESAY</br>
+你已经加入了国家.</br></br></br>
+
+
+
+[@检查是否加入国家]</br>
+#IF</br>
+CheckNation 1</br>
+#SAY</br>
+你是编号1国家的人</br>
+#ELSESAY</br>
+你不是编号1国家的人.</br></br></br>
+
+
+[@国家信息]</br>
+当前你加入了编号为&lt;$NATION&gt;的&lt;$NATIONNAME&gt; 该国共有：&lt;$NATIONPEOPLE&gt;人\</br></br>
+
+
+[@检查是否国王]</br>
+#IF</br>
+IsNationKing 1</br>
+#SAY</br>
+你是编号1国家的国王</br>
+#ELSESAY</br>
+你不是编号1国家的国王</br></br>
+
+
+[@检查是否国王2]</br>
+#IF</br>
+IsNationKing</br>
+#SAY</br>
+你是国王</br>
+#ELSESAY</br>
+你不是国王</br></br>
+
+[@叛国]</br>
+#IF</br>
+#ACT</br>
+ExitNation</br>
+#SAY</br>
+叛国成功.</br>
+#ELSESAY</br>
+叛国失败</br></br>
+
+[@国家资金2]</br>
+#IF</br>
+#ACT</br>
+SetNationValue 0 0 > 1</br>
+#SAY</br>
+成功.</br>
+#ELSESAY</br>
+失败</br></br>
+
+[@国家资金]</br>
+国家信息展示：\</br>
+金币:&lt;$NationGold&gt;  建筑能力:&lt;$NationBuilding&gt;  军事能力:&lt;$NationArm&gt;  经济能力:&lt;$NationEconomy&gt;  政治能力:&lt;$NationPolitics&gt;  国家贡献:&lt;$NationContribution&gt;  地图数:&lt;$NationMaps&gt;\</br>
+临时调整面板 \</br>
+对编号&lt;0-6/@@InPutString61&gt;中的&lt;$STR(N$临时类型)&gt;进行&lt;$STR(S$加减操纵)&gt; &lt;加减操作/@@InPutString62&gt; &lt;数量为/@@InPutString63&gt; &lt;$STR(N$临时数量)&gt;处理。 &lt;开始/@条件开始&gt;</br></br></br>
+
+
+
+[@InPutString61]</br>
+#IF</br>
+#ACT</br>
+mov &lt;$STR(N$临时类型)&gt; &lt;$STR(S61)&gt;</br>
+goto @国家资金</br>
+
+[@InPutString62]</br>
+#IF</br>
+#ACT</br>
+mov &lt;$STR(S$加减操纵)&gt; &lt;$STR(S62)&gt;</br>
+goto @国家资金</br></br>
+
+[@InPutString63]</br>
+#IF</br>
+#ACT</br>
+mov &lt;$STR(N$临时数量)&gt; &lt;$STR(S63)&gt;</br>
+goto @国家资金</br></br>
+
+[@条件开始]</br>
+#IF</br>
+#ACT</br>
+SetNationValue 0 &lt;$STR(N$临时类型)&gt; &lt;$STR(S$加减操纵)&gt; &lt;$STR(N$临时数量)&gt;</br>
+MESSAGEBOX ！！！！！</br>
+goto @国家资金</br></br>
+
+[@国家人数]</br>
+#IF</br>
+CheckNationHumCount > 100</br>
+#SAY</br>
+当前国家大于1人. </br>
+#ELSESAY</br>
+目前你的国家还没有这么强大</br></br></br>
+
+
+[@InPutString60]</br>
+#IF</br>
+CheckNationNameExists &lt;$STR(S60)&gt;</br>
+#ACT</br>
+#SAY</br>
+修改失败 国家已存在</br>
+#ELSEACT</br>
+SetNationName 1 &lt;$STR(S60)&gt;</br>
+#ELSESAY</br>
+修改完成</br></br></br>
+
+[@修改中国字]</br>
+#IF</br>
+#ACT</br>
+SetNationName 1 华夏帝国</br>
+#SAY</br>
+修改成功</br>
+#ELSESAY</br>
+修改失败</br></br></br>
+
+
+
+
+
+
+
+
+
+[@成为国王]</br>
+#IF</br>
+#ACT</br>
+SetNationKing 1</br>
+#SAY</br>
+你现在是国家1的国王了</br></br></br>
+
+
+
+</body>
+
+</html>

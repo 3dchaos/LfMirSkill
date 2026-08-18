@@ -1,0 +1,57 @@
+<title>检测杀人者是人物还是怪物</title><p>检测杀人者是人物还是怪物</p>
+<p><font size="2"><font color="#FF0000"><strong>功能：</strong></font><br />
+&nbsp;&nbsp;&nbsp;人物是被怪物杀死还是玩家杀死</font> 死亡触发</p>
+<p><font size="2"><strong><font color="#FF0000">格式：</font></strong></font></p>
+<p><font size="2">  ;==========================================<br />
+  </font>[@PlayDie]<br />
+  #IF<br />
+  CHECKCURRTARGETRACE = 0<br />
+  #ACT<br />
+  SENDMSG 6 你被人物【&lt;$CURRRTARGETNAME&gt;】杀死了 255 249<br />
+  BREAK</p>
+<p>#IF<br />
+  CHECKCURRTARGETRACE = 1<br />
+  #ACT<br />
+  SENDMSG 6 你被英雄【&lt;$CURRRTARGETNAME&gt;】杀死了 255 249<br />
+  BREAK</p>
+<p>#IF<br />
+  CHECKCURRTARGETRACE = 151<br />
+  #ACT<br />
+  SENDMSG 6 你被分身【&lt;$CURRRTARGETNAME&gt;】杀死了 255 249<br />
+  BREAK</p>
+#OR<br />
+;检测是否被NPC命令杀死，如KILL杀死，10和15分别人普通NPC和常规NPC，一般情况用不上本项检测<br />
+CHECKCURRTARGETRACE = 10<br />
+CHECKCURRTARGETRACE = 15<br />
+#ACT<br />
+SENDMSG 6 被NPC命令杀死了<br />
+BREAK<br />
+<p>#IF<br />
+  #ACT<br />
+  SENDMSG 6 你被怪物【&lt;$CURRRTARGETNAME&gt;】杀死了 255 249<br />
+  BREAK</p>
+<p>;======================下面变量获取角色和怪物完整名字==========================<br><br>
+
+增加变量以显示完整名（不去数字）：&lt;$CURRRTARGETFULLNAME&gt;  <br><br><br>
+
+上面演示脚本中变量不获取角色以及怪物名字后面的数字：&lt;$CURRRTARGETNAME&gt;<br><br><br><br>
+
+提供2种变量大家自己按需使用！<br><br><br><br><br><br>
+
+
+
+
+
+
+其它相关检测命令说明：</BR>
+KillByHum 检测人物杀死为显示人物，宝宝杀死则为怪物（非人物）</BR>
+CheckKillByHum 检测为凶手为人物包含人物的任意下属 （含宝宝，英雄和英雄宝宝均检测为人物）</BR>
+$KILLER 变量显示配合CheckKillByHum 检测，凶手名字全部为人物名字（无论是宝宝，英雄和英雄宝宝均显示人物名字）</BR></BR></BR>
+
+[@PlayDie]</BR>
+#IF</BR>
+CheckKillByHum </BR>
+#ACT</BR>
+SendMsg 5 玩家 &lt;$KILLER&gt; 在%m 把你干死了!</BR>
+#ELSEACT</BR>
+SendMsg 5 怪物 &lt;$KILLER&gt; 在%m 把你干死了!</BR></BR>

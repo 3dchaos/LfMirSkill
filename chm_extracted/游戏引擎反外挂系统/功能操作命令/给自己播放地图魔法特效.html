@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>播放地图魔法特效（仅自己可见）</title>
+</head>
+
+<body>
+<B>播放地图魔法特效（仅自己可见）</B><br />
+<p>格式: SelfMapEffect 地图名称 X Y WIL文件序号 开始图片数 播放图片张数 播放次数(-1为无限次数) 播放速度(毫秒) 播放效果(0普通 1特效) (该参数值范围0~5，0表示没有亮度，在关闭禁止免蜡时有效) ID<br />
+<p>WIL文件序号是在M2里编辑好的，详见M2-查看-列表信息二-WIL资源</p>
+<p>[@main]<br />
+  #ACT<br />
+  SelfMapEffect 3 330 330 1 10 20 1 200 1 3 1<br />
+</p>
+
+===================================================================================== <br />
+<B>停止地图魔法播放（停止哪个特效通过参数来判断，参数一致的特效将被停止）</B><br />
+关闭指定特效（参数同 SelfMapEffect 一样，参数一样的删除） 0 - n，指定id（为空表示-1）个特效id可以重复，删除时，指定id的全删  <br /><br />
+
+<p>[@main]<br />
+  #ACT<br />
+  delMapEffect 3 330 330 1 10 20 1 200 1 3 1<br />
+</p>
+
+</body>
+</html>

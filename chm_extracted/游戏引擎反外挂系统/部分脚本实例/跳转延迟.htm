@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>跳转，延迟</TITLE>
+</HEAD>
+<BODY>
+<P>DELAYGOTO 时间(毫秒) 触发字段 换地图是否删除此延时(0或为空时=不删除 1=删除)</P>
+<P>DELAYGOTO 20 @火龙珠  表示20毫秒<br>
+</P>
+<P>  <FONT color=#0000ff 
+size=2>实例：</FONT><BR>
+----------------------------------------------------------------------------</P>
+<P>[@main]<BR>&lt;延迟跳转<A>/@DelayGoto</A>&gt; &lt;清除延迟<A>/@ClearDelayGoto</A>&gt; 
+&lt;得到物品<A>/@giveonground&gt;\</A> 
+\<BR>&lt;返回<A>/@main</A>&gt;<BR>[@giveonground]<BR>#if<BR>#act<BR>&nbsp; 
+GIVEONGROUND 屠龙 5<BR>[@DelayGoto]<BR>#if<BR>#act<BR>&nbsp; DELAYGOTO 3 
+@DelayLabel<BR>#say<BR>&lt;清除延迟<A>/@ClearDelayGoto</A>&gt;<BR>[@DelayLabel]<BR>#say<BR>延迟跳转测试成功！\ 
+\<BR>&lt;返回<A>/@next</A>&gt;<BR>[@ClearDelayGoto]<BR>#if<BR>#act<BR>&nbsp; 
+CLEARDELAYGOTO<BR>#say<BR>延迟跳转已清除.\ \<BR>&lt;返回<A>/@next</A>&gt; </P>
+<P>　</P>
+<P>------------------------------------------------------------------------;</P>
+</BODY>
+</HTML>
+
+ 

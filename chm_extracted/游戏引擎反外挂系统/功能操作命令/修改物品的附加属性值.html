@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>修改物品的附加属性值</title>
+<style>
+<!--
+div{word-break:break-all;word-wrap:break-word}.t{border:1px solid #c7d6e1;margin:0px auto 8px;}.t2{border-top:#c7d6e1 1px solid;margin:0px auto 5px;}.t{padding:1px}.t {padding:0}th{word-break:break-all;word-wrap:break-word}.r_one{background:#f9f9f9;}.tr1 th{padding:5px 10px;text-align:left;vertical-align:top;font-weight:normal;}.tr1 th{border-right:1px solid #e6e6e6;}.tpc_content{font-size:14px;font-family:Arial;padding:0 2% 0 0.5%;margin:0 0 2%}.STYLE1 {
+	color: #0000FF;
+	font-weight: bold;
+}
+-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font color="#0000ff" size="2">功</font></strong><font color="#0000ff" size="2"><strong>能：</strong></font> 修改物品的附加属性值 </p>
+<p><span class="STYLE1">格式:</span> CHANGEITEMADDVALUE 装备位置(-1时是升级OK框中的装备, boxitem0 -boxitem7是自定义OK框，0-51时是穿在身上的装备) 属性位置(0-18) (符号 + - =) 值 <br>
+修改英雄物品的附加属性值命令：H.CHANGEITEMADDVALUE 装备位置(-1时是OK框中的装备, 0-51时是穿在身上的装备) 属性位置(0-18) (符号 + - =) 值 <br>
+  <span class="STYLE1"> </span></p>
+<p>物品位置:<br>
+  0 盔甲<br>
+  1 武器<br>
+  2 照明物（蜡烛，此物品属性升级无效）<br>
+  3 项链<br>
+  4 头盔<br>
+  5 右手镯<br>
+  6 左手镯<br>
+  7 右戒指<br>
+  8 左戒指<br>
+  9 无(放护身符位置)<br>
+  10 腰带<br>
+  11 鞋子<br>
+12 宝石</p>
+<p>盔甲<br>
+  0 防御<br>
+  1 魔御<br>
+  2 攻击<br>
+  3 魔法<br>
+  4 道术<br>
+  5-13 无效果<br>
+  14 持久<br>
+15 所需等级（不支持混合等级需求，如指定职业及指定等级组合）<br>
+16 刺术<br>
+17 箭术<br>
+18 武力</p>
+
+
+<p>武器<br>
+  0 DC2<br>
+  1 MC2<br>
+  2 SC2<br>
+  3 幸运<br>
+  4 诅咒<br>
+  5 准确<br>
+  6 攻击速度<br>
+  7 强度<br>
+  8-9 暂不知道<br>
+  10 需开封<br>
+  11-13 暂不知道<br>
+  14 持久<br>
+15 所需等级（不支持混合等级需求，如指定职业及指定等级组合）<br>
+16 刺术<br>
+17 箭术<br>
+18 武力</p>
+
+<p>头盔<br>
+  0 防御<br>
+  1 魔御<br>
+  2 攻击<br>
+  3 魔法<br>
+  4 道术<br>
+  5 佩带需求（无效）<br>
+  6 佩带级别（无效）<br>
+  7-13 无效果<br>
+  14 持久<br>
+15 所需等级（不支持混合等级需求，如指定职业及指定等级组合）<br>
+16 刺术<br>
+17 箭术<br>
+18 武力</p>
+
+<p>项链<br>
+  0 AC2<br>
+  1 MAC2<br>
+  2 DC2<br>
+  3 MC2<br>
+  4 SC2<br>
+  6 佩带需求（无效）<br>
+  7 佩带级别（无效）<br>
+  8 reserved<br>
+  9-13 暂不知道<br>
+  14 持久<br>
+15 所需等级（不支持混合等级需求，如指定职业及指定等级组合）<br>
+16 刺术<br>
+17 箭术<br>
+18 武力</p>
+
+<p>手镯<br>
+  0 AC2<br>
+  1 MAC2<br>
+  2 DC2<br>
+  3 MC2<br>
+  4 SC2<br>
+  6 佩带需求（无效）<br>
+  7 佩带级别（无效）<br>
+  8-13 无效果<br>
+  14 持久<br>
+15 所需等级（不支持混合等级需求，如指定职业及指定等级组合）<br>
+16 刺术<br>
+17 箭术<br>
+18 武力</p>
+
+<p>戒指<br>
+  0 AC2<br>
+  1 MAC2<br>
+  2 DC2<br>
+  3 MC2<br>
+  4 SC2<br>
+  6 佩带需求（无效）<br>
+  7 佩带级别（无效）<br>
+  8-13 无效果<br>
+  14 持久<br>
+15 所需等级（不支持混合等级需求，如指定职业及指定等级组合）<br>
+16 刺术<br>
+17 箭术<br>
+18 武力</p>
+<br><br><br><br>
+
+
+功能：读取物品的附加属性值<br>
+格式：GetItemAddValue  装备位置(-1时是升级OK框中的装备, boxitem0 -boxitem7是自定义OK框，0-51时是穿在身上的装备) 属性位置(0-18)   变量名<br><br>
+
+<br>
+  <font color="#0000ff" size="2"><strong><br>
+  例子：<br>
+  </strong></font><br>
+  [@Test]<font color="#0000ff" size="2"><strong><br>
+  </strong></font> #IF<br>
+  <a href="../脚本检测命令/检查人物附加属性点数.htm">CheckItemAddValue</a> 0 0 &gt; 1<br>
+  #ACT<br>
+  <a href="获取物品的附加属性值.html">GETITEMADDVALUE</a> 0 0 &lt;$STR(M10)&gt;<br>
+  #SAY<br>
+  你的盔甲附加了&lt;$STR(M10)&gt;点防御属性. </p>
+
+英雄获取物品的附加属性值H.GETITEMADDVALUE</p>
+</body>
+
+</html>

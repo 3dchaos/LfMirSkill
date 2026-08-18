@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=gb2312">
+<META name="GENERATOR" content="QuickCHM">
+<TITLE>获取组队成员数量(组队相关命令)</TITLE>
+<style type="text/css">
+body{
+font-family:"宋体";
+font-size:12px}
+</style>
+</HEAD>
+<BODY>
+<P>获取组队成员数量</P>
+<P>GETGROUPCOUNT 变量名  范围(当范围为空或0时，获取所有队员数量，当范围>0时，获取队长指定范围内队员的数量） <BR><BR>
+[@GETGROUPCOUNT]<BR>
+#if<BR>
+CheckGroupLeader<BR>
+#act<BR>
+GETGROUPCOUNT&nbsp;P1<br>
+sendmsg 6  你当前组队的队友有&lt;$STR(P1)&gt;人<BR>
+#elseact<BR>
+sendmsg 6 你不是队长</P>
+
+[@GETGROUPCOUNT]<BR>
+#if<BR>
+CheckGroupLeader<BR>
+#act<BR>
+GETGROUPCOUNT&nbsp;P1 5<br>
+sendmsg 6  你5格范围内当前组队的队友有&lt;$STR(P1)&gt;人<BR>
+#elseact<BR>
+sendmsg 6 你不是队长</P>
+<BR>
+<BR><BR><BR>
+
+
+
+<P>自动退出组队命令(个人通过脚本执行)</P>
+#act<BR>
+exitGroup<BR>
+SENDMSG 6 你已经主动离开了队伍<BR>
+
+<BR><BR><BR>
+
+
+
+<P>删除队友功能: （只有队长才能用此命令,才会生效 ）</P>
+#if<BR>
+CheckGroupLeader<BR>
+#act<BR>
+DELETEGROUPMENBER 成员名<BR>
+SENDMSG 6 你被队长踢出了队伍！<BR>
+#elseact<BR>
+sendmsg 6 你不是队长</P>
+
+
+
+
+
+</BODY>
+</HTML>

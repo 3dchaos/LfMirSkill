@@ -1,0 +1,31 @@
+<title>增加怪物爆物品（直接调用怪物爆率免去杀怪过程直接触发爆率文件）</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+<p><strong><font size="5">增加怪物爆物品（免去杀怪过程直接触发爆率文件）</font></strong></p>
+<p>-----------------------------------直接调用怪物爆率（免去杀怪过程直接触发爆率文件）---------------------------<br /><br /><br /><br /><br />
+
+
+增加爆怪物物品（免去杀怪过程直接触发爆率文件）<br /><br /><br />
+
+格式：ScatterMonItems 怪物名称  地图 X Y<br />
+;使用地图一般为要求爆在怪物身边，当地图为空时，坐标无效（地图和坐标为空则为人物身边）<br /><br /><br />
+
+
+[@获取白野猪爆率]<br />
+#act<br />
+ScatterMonItems 白野猪<br /><br /><br />
+
+
+
+
+[@KillMon]<br />
+#act<br />
+SENDMSG 7 你杀死&lt;$KILLMONNAME&gt;<br />
+;RandomMove 3<br />
+ScatterMonItems 半兽人 &lt;$KillMonMap&gt; &lt;$KillMonX&gt; &lt;$KillMonY&gt;<br />
+
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

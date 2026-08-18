@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>自定义命令输入参数[!]</TITLE>
+</HEAD>
+<BODY>
+<p>获取用户自定义命令输入参数&lt;$PARAM(0)&gt; &lt;$PARAM(1)&gt; &lt;$PARAM(2)&gt; &lt;$PARAM(3)&gt; &lt;$PARAM(4)&gt; &lt;$PARAM(5)&gt; &lt;$PARAM(6)&gt;</p>
+<p>借用群里的范例 无测试 自己斟酌后在用</p>
+<p>[@usercmd1]<br>
+  #IF<br>
+  checkGold 9999<br>
+  #ACT<br>
+  MOV N9 0 <br>
+  MOV S9<br>
+  GOTO @字符过滤<br>
+  #ELSEACT<br>
+  SENDMSG SENDMSG 7 提示：您的金币不足1W。<br>
+BREAK</p>
+<p>[@字符过滤]<br>
+  #IF<br>
+  checkcontainstext &lt;$PARAM(1)&gt; &lt;$Str(S9)&gt;<br>
+  #ACT<br>
+  SENDMSG 7 提示：该信息包含敏感字符<br>
+  BREAK</p>
+<p>#IF<br>
+  LARGE N9 50<br>
+  #ACT<br>
+  TAKE 金币 10000<br>
+  SendCenterMsg 180 251 &lt;$USERNAME&gt;:&lt;$STR(S9)&gt; 0 30 <br>
+  BREAK<br>
+  #ELSEACT<br>
+  getrandomtext .\..\..\..\RunGate\WordFilter.txt S9 &lt;$Str(N9)&gt;<br>
+  INC N9 1<br>
+  SENDMSG 6 现在N9=&lt;$Str(N9)&gt;, S9=&lt;$Str(S9)&gt;<br>
+  GOTO @字符过滤</p>
+</BODY>
+</HTML>
+
+ 

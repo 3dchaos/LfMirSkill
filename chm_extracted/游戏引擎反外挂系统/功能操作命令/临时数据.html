@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>人物/英雄临时数据命令</title>
+</head>
+
+<body>
+</BR>
+</BR>
+</BR>
+</BR>
+</BR>
+格式：SetTempDBMode 开/关(0：关；非0:开）         </BR>
+注意：开启临时数据模式后数据不在保存到数据库，关闭临时模式或重新退出/小退进入游戏人物将读取开启临时模式前的数，临时数据模式期间该角色数据都不会保存到数据库 </BR>
+临时数据模式，不允许使用：修改人物或英雄名，禁止无限仓，拍卖行，个人商店操作(M2数据库)。另避免临时数据人物和正常数据人物在一张地图，防止临时数据角色丢弃物品被正常数据人物拾取  </BR>
+
+</BR>
+关闭临时数据模式后，数据会恢复到上一次保存的状态，且能正常保存
+</BR></BR></BR></BR>
+
+
+
+[@开启]</BR>
+#ACT</BR>
+SetTempDBMode 1</BR>
+SENDMSG 4 开启临时数据模式</BR></BR>
+
+[@关闭]</BR>
+#act</BR>
+SetTempDBMode 0</BR>
+SENDMSG 4 关闭临时数据模式,数据恢复到开启临时数据前</BR></BR>
+
+
+;关闭临时数据同时保存数据，一般用于个人闯关，闯关成功数据正常保存..闯关失败则可以去掉最后一个参数1清除所有奖励，恢复到闯关前的数据</BR>
+[@关闭1]</BR>
+#act</BR>
+SetTempDBMode 0 1</BR>
+SENDMSG 4 关闭临时数据模式,数据正常保存</BR></BR>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

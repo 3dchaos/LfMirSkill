@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>自定义按钮倒计时触发</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>自定义按钮倒计时触发</FONT></FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT></STRONG></FONT></P>
+
+<P>命令参数：</p>
+<P>SetClientBuff  WIL文件序号 序号(1~200)  图片序号 倒计时间(-1时按钮，大于0是倒计时) X坐标 Y坐标 文字备注   (开启)<br>
+
+倒时触发[@CloseClientBuffX]X是序号。</p>
+
+
+
+<P>CloseClientBuff 序号(1~200)                                         (关闭命令)</p>
+
+
+
+<br><br>
+
+------------------------------------<br><br>
+注：倒计时最长时间为2100000秒，-1为不显示倒计时！<br><br>
+--------------------------------------<br><br>
+增加隐藏/显示屏幕SetClientBuff图标<br><br>
+
+隐藏指定编号BUFF图标：<br>
+  ShowClientBuff 1-200  显示/隐藏(1：显示；0隐藏）<br><br>
+
+隐藏所有编号BUFF图标：<br>
+  ShowClientBuff 0 显示/隐藏(1：显示；0隐藏）<br><br><br><br>
+
+
+示例：<br>
+;隐藏所有BUFF图标<br>
+ShowClientBuff 0 0<br><br>
+
+;显示所有BUFF图标<br>
+ShowClientBuff 0 1<br><br>
+
+;隐藏编号5的BUFF图标<br>
+ShowClientBuff 5 0<br><br>
+
+;显示编号5的BUFF图标<br>
+ShowClientBuff 5 1<br><br>
+--------------------------------------图片点击触发（不管是否按钮模式还是倒计时模式都触发）：<br><br>
+
+SetClientBuff 支持1-200，点击触发：[@ClientBuffClickX] X表示序号; 
+
+
+</BODY>
+</HTML>

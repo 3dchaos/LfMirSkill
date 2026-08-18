@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>检测魔法盾是否启用</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<body><FONT face=Arial size=2>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT color=#0000ff>功能:</FONT> 
+检测魔法盾、武力盾、道力盾是否开启状态<BR><BR></FONT></FONT></P>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT 
+color=#0000ff>格式:<BR></FONT>CheckShieldStateOpen&nbsp;&nbsp; 
+ 参数1(0:武力盾;1:魔法盾;2:道力盾)<BR></FONT></FONT></P>
+<P><FONT face=Fixedsys size=2>
+</br></br></br></br>
+
+;检测防御盾是否开启 CheckShieldStateOpen 参数1(0:武力盾;1:魔法盾;2:道力盾)</br></br>
+[@测试]</br>
+#IF</br>
+CheckShieldStateOpen 0</br>
+#ACT</br>
+sendmsg 5 武力盾防御已开启</br></br>
+
+#IF</br>
+CheckShieldStateOpen 1</br>
+#ACT</br>
+sendmsg 5 魔法盾防御已开启</br></br>
+
+#IF</br>
+CheckShieldStateOpen 2</br>
+#ACT</br>
+sendmsg 5 道力盾防御已开启</br></br></br></br></br>
+
+
+</html>

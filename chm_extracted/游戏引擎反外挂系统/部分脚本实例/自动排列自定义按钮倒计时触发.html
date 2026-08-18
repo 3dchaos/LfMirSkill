@@ -1,0 +1,96 @@
+<title>自动排列自定义按钮倒计时触发</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+<P><strong><font size="5">自动排列自定义按钮倒计时触发</font></strong></p>
+<P>-----------------------------------自动排列自定义按钮倒计时触发---------------------------<br /><br /><br /><br /><br />
+
+
+
+
+注：SetArrBuff  (是不指定坐标，而指定分组的)具体参阅 引擎--选项-》客户端设置-》按钮自动排列<br />
+
+
+
+自动排列自定义按钮倒计时触发 SetArrBuff<br />
+;参数1：分组编号(1-7)<br />
+;参数2：按钮序号(1-200)<br />
+;参数3：WIL文件序号<br />
+;参数4：图片序号<br />
+;参数5：倒计时间(-1时按钮，大于0是倒计时)<br />
+;参数6：剩余下多时间开始闪烁<br />
+;参数7：闪烁图片开始序号<br />
+;参数8：闪烁图片数量<br />
+;参数9：文字备注<br />
+;参数10：倒计时间X坐标<br />
+;参数11：倒计时间Y坐标<br />
+;参数12：配合倒计时使用参数大于0参数13生效<br />
+;参数13：倒计结束后 图片序号<br /><br />
+
+示例：<br />
+SetArrBuff 1 1 1 130 10 3 130 4 测试倒计时功能 <br />
+SetArrBuff 1 2 1 130 100 10 130 4  测试倒计时功能<br />
+SetArrBuff 1 3 1 130 80 10 130 4 测试倒计时功能<br />
+SetArrBuff 1 4 1 130 60 10 130 4 测试倒计时功能<br />
+SetArrBuff 1 5 1 130 30 10 130 4 测试倒计时功能<br /><br />
+
+
+
+按钮点击触发（按需使用，不需要点击则无法增加点击触发）<br />
+SetArrBuff 支持1-200，点击触发: [@ArrBuffClickX]X表示序号 (点击触发，不管是按钮还是倒计时都可以点击触发)<br /><br />
+
+
+
+
+
+
+
+
+关闭命令：（具体使用参考原到计时命令SetClientBuff）<br />
+CloseArrBuff<br /><br />
+
+
+
+隐藏/显示屏幕SetArrBuff图标命令  （（具体使用参考原到计时命令SetClientBuff））<br />
+ShowArrBuff<br /><br />
+
+
+
+;QF触发 点击触发<br />
+[@ArrBuffClick1]<br />
+#act<br />
+sendmsg 7 自动排列按钮点击1<br /><br />
+
+;QF触发 到时间触发<br />
+[@CloseArrBuff1]<br />
+#act<br />
+sendmsg 7 自动排列倒计时1关闭<br /><br />
+
+[@CloseArrBuff2]<br />
+#act<br />
+sendmsg 7 自动排列倒计时2关闭<br /><br />
+
+[@CloseArrBuff3]<br />
+#act<br />
+sendmsg 7 自动排列倒计时3关闭<br /><br />
+
+[@CloseArrBuff4]<br />
+#act<br />
+sendmsg 7 自动排列倒计时4关闭<br /><br />
+
+[@CloseArrBuff5]<br />
+#act<br />
+sendmsg 7 自动排列倒计时5关闭<br /><br /><br />
+
+
+
+
+
+ <br /><br />
+
+
+
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

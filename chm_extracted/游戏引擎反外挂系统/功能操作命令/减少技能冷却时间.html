@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>减少技能冷却时间</title>
+</head>
+
+<body>
+<p>功能说明: 减少技能冷却时间</p>
+设置技能冷却时间减少: </br>
+ SetSkillDecCD  技能名称 操作符(+/-/=) 时间（秒)</br></br>
+
+获取减多少技能冷却时间：</br>
+  GetSkillDecCD  技能名称 变量名</br></br>
+
+获取当前的技能冷却时间：</br>
+  GetSkillCD  技能名称 变量名</br></br>
+
+技能CD清零(一般用不上，直接清除技能CD)：</br>
+ClearSkillCD 技能名称</br></br></br>
+
+
+#act</br>
+SetSkillDecCD 烈火剑法 = 2</br>
+
+; 烈火剑法缩短3秒的CD时间</br>
+SetSkillDecCD 烈火剑法 + 1</br>
+ 
+GetSkillDecCD 烈火剑法 N1</br>
+GetSkillCD 烈火剑法 N2</br>
+SENDMSG 6 烈火剑法缩短CD时间&lt;$Str(N1)&gt;秒，当前冷确时间为&lt;$Str(N2)&gt;秒</br></br></br></br>
+
+**************************</br>
+
+英雄技能使用命令加H.               如H.SetSkillDecCD </br></br></br></br>
+
+
+**************************</br>
+
+
+附：连击技能减少CD间隔使用方式：</br></br>
+
+减少连击技能间隔</br>
+SetSkillDecCD [连击技能] = 3</br>
+GetSkillDecCD [连击技能] N1</br>
+GetSkillCD [连击技能] N2</br>
+sendmsg 6 减少连击技能攻击间隔&lt;$STR(N1)&gt;秒，当前连击间隔&lt;$STR(N2)&gt;秒</br></br></br></br>
+
+**************************</br>
+
+
+技能冷却时间减少只支持以下有CD的技能：</br>
+
+ 分身术</br>
+ 乾坤大挪移</br>
+ 护体神盾</br>
+ 倚天辟地</br>
+ 十步一杀</br>
+ 旋风斩</br>
+ 彻地钉</br>
+ 烈火       </br>      
+ 狮子吼</br>
+ 擒龙手</br>
+ 逐日剑法</br>
+ 龙影剑法</br>
+ 雷霆剑法</br>
+ 开天斩</br>
+ 野蛮冲撞</br>
+ 冰咆哮</br>
+ 灭天火</br>
+ 流星火雨</br>
+ 冰霜雪雨</br>
+ 冰霜群雨</br>
+ 五雷轰</br>
+ 召唤骷髅</br>
+ 召唤神兽</br>
+ 新诅咒术</br>
+ 噬血术</br>
+ 召唤月灵</br>
+ 召唤圣兽</br>
+ 裂神符</br>
+ 死亡之眼</br>
+ 幽冥火符</br>
+ 施毒术</br>
+ 群体施毒术</br>
+ 无极真气</br>
+ 禁锢术</br>
+ 心灵召唤</br>
+ 断空斩</br>
+ 血魄一击</br></br>
+ 以及所有自定义技能</br></br></br></br></br>
+
+对他人使用需变量传递</br></br></br></br>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

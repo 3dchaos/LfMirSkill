@@ -1,0 +1,688 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTTP请求与JSON处理功能说明</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 20px;
+        }
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.4;
+            white-space: pre-wrap;
+        }
+        .code-inline {
+            background: #f8f9fa;
+            color: #e74c3c;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f8ff;
+        }
+        .example {
+            background: #e8f4fc;
+            border-left: 5px solid #3498db;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .note {
+            background: #fff8e1;
+            border-left: 5px solid #ffc107;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .warning {
+            background: #ffebee;
+            border-left: 5px solid #f44336;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #3498db, transparent);
+            margin: 40px 0;
+        }
+        .param-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .param-list li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .param-list li:before {
+            content: "•";
+            color: #3498db;
+            font-size: 1.5em;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+        .func-logic {
+            background: #f0f7ff;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .func-logic ol {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+        .func-logic li {
+            margin-bottom: 10px;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HTTP请求与JSON处理功能说明</h1>
+
+
+
+        <pre class="code-block">功能说明：向指定网络地址提交数据
+
+
+
+参数说明
+HttpGet 请求地址 NPC触发标签 返回内容保存到变量
+
+HttpPost 请求地址 请求体内容 请求体类型 NPC触发标签 返回内容保存到变量
+请求体类型 支持
+- form：按表单发送，自动编码 key/value
+- json：按 application/json; charset=utf-8 发送，正文自动转 UTF-8
+- text：按 text/plain; charset=utf-8 发送，正文自动转 UTF-8
+
+执行结果
+
+- 请求在线程里异步执行
+- 成功或失败后，都会把返回文本写入 内容保存到变量
+- 然后跳转到 NPC触发标签
+
+;------------------------------------------------------------------------------------------------------------------
+
+[@HttpGet请求]
+#ACT
+HttpGet https://webhook.site/b42ecf85-b0eb-4aa2-88d0-b31e382e4cc7 @HttpGetBack S100
+BREAK
+
+[@HttpGetBack]
+#SAY
+Get返回:\
+&lt;$STR(S100)&gt;
+
+;------------------------------------------------------------------------------------------------------------------
+
+[@HttpPost提交表单]
+HttpPost https://postman-echo.com/post p1=请求内容&p2=22344 form @PostFormBack S100
+
+[@PostFormBack]
+#SAY
+Post表单返回:\
+&lt;$STR(S100)&gt;
+
+;------------------------------------------------------------------------------------------------------------------
+
+[@HttpPost提交JSON]
+#ACT
+HttpPost https://postman-echo.com/post {"username":"lfm2","msg":"你好"} json @PostJsonBack S100
+
+[@PostJsonBack]
+#ACT
+JsonGetNodeValue S100 data.username S1
+JsonGetNodeValue S100 data.msg S2
+#SAY
+UserName:&lt;$STR(S1)&gt;\
+Msg:&lt;$STR(S2)&gt;\
+Post Json返回:\
+&lt;$STR(s100)&gt;
+
+;------------------------------------------------------------------------------------------------------------------
+
+[@HttpPost提交Text]
+#ACT
+HttpPost https://postman-echo.com/post 这是一段普通文本 text @PostTextBack S100
+BREAK
+
+[@PostTextBack]
+#SAY
+Post Text返回:\
+&lt;$STR(S100)&gt;
+
+
+========================分界线====================================================================
+
+
+下面所有示例中，Json内容(S1)中为:{"user":{"name":"tom","level":55,"items":[1001,1002,1003],"info":{"vip":1},"remark":null}}
+
+•• 条件命令
+
+1、检查某个节点是否存在：CheckJsonNodeExists Json内容 节点路径
+- 说明：节点值是 null 时，也算存在
+- 示例：
+#IF
+CheckJsonNodeExists S1 user.name
+#ACT
+SENDMSG 6 user.name 存在
+
+2、检测指定节点是否存在且为数组：CheckJsonNodeIsArray Json内容 节点路径
+- 示例：
+#IF
+CheckJsonNodeIsArray S1 user.items
+#ACT
+SENDMSG 6 user.items 是数组
+
+3、检测指定节点是否存在且为对象：CheckJsonNodeIsObject Json内容 节点路径
+- 示例：
+#IF
+CheckJsonNodeIsObject S1 user.info
+#ACT
+SENDMSG 6 user.info 是对象
+
+4、检测指定节点是否存在且值为null：CheckJsonNodeIsNull Json内容 节点路径
+- 示例：
+#IF
+CheckJsonNodeIsNull S1 user.remark
+#ACT
+SENDMSG 6 user.remark 是 null
+
+--------------------------------------------------------------------------------------------
+
+••动作命令
+
+1、获取节点值并写入变量：JsonGetNodeValue Json内容 节点路径 输入变量 默认值
+- 说明：
+    - 节点存在则取值
+    - 节点不存在则写默认值
+    - JSON格式错误或路径非法会报脚本错误
+- 示例：
+#ACT
+JsonGetNodeValue S1 user.name &lt;$STR(S2)&gt; 未知
+SENDMSG 6 名字:&lt;$STR(S2)&gt;
+
+#ACT
+JsonGetNodeValue S1 user.job &lt;$STR(S2)&gt; 战士
+SENDMSG 6 职业:&lt;$STR(S2)&gt;
+
+2、获取数组长度并写入变量：JsonGetNodeArrLen Json内容 节点路径 输出变量 默认值
+- 说明：
+    - 节点存在且为数组，返回数组长度
+    - 节点不存在，写默认值
+    - 节点存在但不是数组，会报脚本错误
+
+- 示例：
+#ACT
+JsonGetNodeArrLen S1 user.items &lt;$STR(S3)&gt; 0
+SENDMSG 6 数组长度:&lt;$STR(S3)&gt;
+
+#ACT
+JsonGetNodeArrLen S1 user.list &lt;$STR(S4)&gt; 0
+SENDMSG 6 list长度:&lt;$STR(S4)&gt;
+
+--------------------------------------------------------------------------------------------
+路径示例
+
+- user.name
+- user.level
+- user.items
+- user.items[0]
+- user.info.vip
+- user.remark
+
+
+--------------------------------------------------------------------------------------------
+完整组合示例
+
+#IF
+#ACT
+Mov S1 {"user":{"name":"tom","level":55,"items":[1001,1002,1003],"info":{"vip":1},"remark":null}}
+
+#IF
+CheckJsonNodeExists S1 user.name
+CheckJsonNodeIsArray S1 user.items
+#ACT
+JsonGetNodeValue S1 user.name S2 未知
+JsonGetNodeArrLen S1 user.items N1 0
+SENDMSG 6 名字:&lt;$STR(S2)&gt;
+SENDMSG 6 items数量:&lt;$STR(N1)&gt;
+
+;N2为下标；下标置0
+Mov N2 0
+While N2 < N1
+
+;拼接字符串
+TextConcat S2 user.items[ &lt;$STR(N2)&gt; ]
+
+;从Json内容S1中，取User.Items[0]的值到S3中，默认值为空
+JsonGetNodeValue S1 S2 S3
+
+SENDMSG 6 &lt;$STR(S2)&gt;:&lt;$STR(S3)&gt;
+Inc N2 1
+EndWhile
+
+;输出：
+;名字:tom;
+;items数量:3
+;user.items[0]:1001
+;user.items[1]:1002
+;user.items[1]:1003
+
+#ELSEACT
+SENDMSG 6 条件不满足
+
+
+
+</pre>
+
+        <h2>功能概述</h2>
+        <p>本文档提供了两种核心功能：HTTP网络请求（GET/POST）和JSON数据处理。通过脚本命令，可以实现与外部服务器的数据交互，并对返回的JSON格式数据进行解析和操作。</p>
+
+        <h2>HTTP请求功能</h2>
+
+        <h3>1. HttpGet 请求</h3>
+        <p>向指定URL发送GET请求，并将服务器响应内容保存到变量中。</p>
+        <div class="code-block">HttpGet 请求地址 NPC触发标签 返回内容保存到变量</div>
+
+        <h4>参数说明</h4>
+        <table>
+            <tr>
+                <th>参数位置</th>
+                <th>参数名</th>
+                <th>说明</th>
+                <th>示例</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>请求地址</td>
+                <td>完整的HTTP/HTTPS URL</td>
+                <td>https://webhook.site/b42ecf85...</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>NPC触发标签</td>
+                <td>请求完成后跳转执行的脚本标签</td>
+                <td>@HttpGetBack</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>返回内容保存到变量</td>
+                <td>存储服务器返回文本的变量名</td>
+                <td>S100</td>
+            </tr>
+        </table>
+
+        <h4>使用示例</h4>
+        <div class="code-block">
+[@HttpGet请求示例]</br>
+#ACT</br>
+HttpGet https://webhook.site/b42ecf85-b0eb-4aa2-88d0-b31e382e4cc7 @HttpGetBack S100</br>
+BREAK</br></br>
+
+[@HttpGetBack]</br>
+#SAY</br>
+Get返回:\</br>
+&lt;$STR(S100)&gt;</br></div>
+
+        <h3>2. HttpPost 请求</h3>
+        <p>向指定URL发送POST请求，支持多种内容类型。</p>
+        <div class="code-block">HttpPost 请求地址 请求体内容 请求体类型 NPC触发标签 返回内容保存到变量</div>
+
+        <h4>参数说明</h4>
+        <table>
+            <tr>
+                <th>参数位置</th>
+                <th>参数名</th>
+                <th>说明</th>
+                <th>示例</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>请求地址</td>
+                <td>完整的HTTP/HTTPS URL</td>
+                <td>https://postman-echo.com/post</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>请求体内容</td>
+                <td>要发送的数据内容</td>
+                <td>p1=请求内容&p2=22344 或 {"username":"lfm2","msg":"你好"}</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>请求体类型</td>
+                <td>数据发送格式，支持：<span class="code-inline">form</span>, <span class="code-inline">json</span>, <span class="code-inline">text</span></td>
+                <td>form</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>NPC触发标签</td>
+                <td>请求完成后跳转执行的脚本标签</td>
+                <td>@PostFormBack</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>返回内容保存到变量</td>
+                <td>存储服务器返回文本的变量名</td>
+                <td>S100</td>
+            </tr>
+        </table>
+
+        <h4>请求体类型详解</h4>
+        <ul class="param-list">
+            <li><strong>form</strong>: 按表单格式发送，<span class="code-inline">key=value</span> 对会自动进行URL编码</li>
+            <li><strong>json</strong>: 按 <span class="code-inline">application/json; charset=utf-8</span> 发送，正文自动转换为UTF-8编码</li>
+            <li><strong>text</strong>: 按 <span class="code-inline">text/plain; charset=utf-8</span> 发送，正文自动转换为UTF-8编码</li>
+        </ul>
+
+        <h4>Post请求示例</h4>
+
+        <h5>提交表单数据 (form)</h5>
+        <div class="code-block">
+[@HttpPost提交表单]</br>
+#ACT</br>
+HttpPost https://postman-echo.com/post p1=请求内容&p2=22344 form @PostFormBack S100</br>
+BREAK</br></br>
+
+[@PostFormBack]</br>
+#SAY</br>
+Post表单返回:\</br>
+&lt;$STR(S100)&gt;</br></div>
+
+        <h5>提交JSON数据 (json)</h5>
+        <div class="code-block">
+[@HttpPost提交JSON]</br>
+#ACT</br>
+HttpPost https://postman-echo.com/post {"username":"lfm2","msg":"你好"} json @PostJsonBack S100</br>
+BREAK</br></br>
+
+[@PostJsonBack]</br>
+#ACT</br>
+JsonGetNodeValue S100 data.username S1</br>
+JsonGetNodeValue S100 data.msg S2</br>
+#SAY</br>
+UserName:&lt;$STR(S1)&gt;\</br>
+Msg:&lt;$STR(S2)&gt;\</br>
+Post Json返回:\</br>
+&lt;$STR(S100)&gt;</br></div>
+
+        <h5>提交文本数据 (text)</h5>
+        <div class="code-block">
+[@HttpPost提交Text]</br>
+#ACT</br>
+HttpPost https://postman-echo.com/post 这是一段普通文本 text @PostTextBack S100</br>
+BREAK</br></br>
+
+[@PostTextBack]</br>
+#SAY</br>
+Post Text返回:\</br>
+&lt;$STR(S100)&gt;</br></div>
+
+        <div class="note">
+            <h4>执行结果说明</h4>
+            <ul>
+                <li>所有HTTP请求都在<strong>异步线程</strong>中执行，不会阻塞主脚本</li>
+                <li>无论请求成功或失败，返回的文本内容都会被写入指定的<strong>返回内容保存到变量</strong></li>
+                <li>请求完成后，脚本会自动跳转到指定的<strong>NPC触发标签</strong>继续执行</li>
+            </ul>
+        </div>
+
+        <div class="section-divider"></div>
+
+        <h2>JSON处理功能</h2>
+        <p>以下所有示例中，假设变量 <span class="code-inline">S1</span> 中的JSON内容为：<br>
+        <span class="code-inline">{"user":{"name":"tom","level":55,"items":[1001,1002,1003],"info":{"vip":1},"remark":null}}</span></p>
+
+        <h3>条件命令 (检查命令)</h3>
+
+        <h4>1. CheckJsonNodeExists - 检查节点是否存在</h4>
+        <div class="code-block">CheckJsonNodeExists Json内容 节点路径</div>
+        <p><strong>说明</strong>: 检查JSON中指定路径的节点是否存在。即使节点值为 <span class="code-inline">null</span>，也被视为存在。</p>
+
+        <h5>示例</h5>
+        <div class="code-block">
+#IF</br>
+CheckJsonNodeExists S1 user.name</br>
+#ACT</br>
+SENDMSG 6 user.name 存在</div>
+
+        <h4>2. CheckJsonNodeIsArray - 检查节点是否为数组</h4>
+        <div class="code-block">CheckJsonNodeIsArray Json内容 节点路径</div>
+        <p><strong>说明</strong>: 检查指定节点是否存在且其值是否为数组类型。</p>
+
+        <h5>示例</h5>
+        <div class="code-block">
+#IF</br>
+CheckJsonNodeIsArray S1 user.items</br>
+#ACT</br>
+SENDMSG 6 user.items 是数组</div>
+
+        <h4>3. CheckJsonNodeIsObject - 检查节点是否为对象</h4>
+        <div class="code-block">CheckJsonNodeIsObject Json内容 节点路径</div>
+        <p><strong>说明</strong>: 检查指定节点是否存在且其值是否为对象（字典）类型。</p>
+
+        <h5>示例</h5>
+        <div class="code-block">
+#IF</br>
+CheckJsonNodeIsObject S1 user.info</br>
+#ACT</br>
+SENDMSG 6 user.info 是对象</div>
+
+        <h4>4. CheckJsonNodeIsNull - 检查节点值是否为null</h4>
+        <div class="code-block">CheckJsonNodeIsNull Json内容 节点路径</div>
+        <p><strong>说明</strong>: 检查指定节点是否存在且其值是否为 <span class="code-inline">null</span>。</p>
+
+        <h5>示例</h5>
+        <div class="code-block">
+#IF</br>
+CheckJsonNodeIsNull S1 user.remark</br>
+#ACT</br>
+SENDMSG 6 user.remark 是 null</div>
+
+        <h3>动作命令 (操作命令)</h3>
+
+        <h4>1. JsonGetNodeValue - 获取节点值</h4>
+        <div class="code-block">JsonGetNodeValue Json内容 节点路径 输出变量 默认值</div>
+        <p><strong>说明</strong>:</p>
+        <ul class="param-list">
+            <li>节点存在则读取其值并写入输出变量</li>
+            <li>节点不存在则将默认值写入输出变量</li>
+            <li>JSON格式错误或路径非法会报脚本错误</li>
+        </ul>
+
+        <h5>示例</h5>
+        <div class="code-block">
+; 节点存在的情况</br>
+#ACT</br>
+JsonGetNodeValue S1 user.name S2 未知</br>
+SENDMSG 6 名字:&lt;$STR(S2)&gt;</br>
+; 输出: 名字:tom</br>
+; 节点不存在的情况</br>
+#ACT</br>
+JsonGetNodeValue S1 user.job S2 战士</br>
+SENDMSG 6 职业:&lt;$STR(S2)&gt;</br>
+; 输出: 职业:战士</div>
+
+        <h4>2. JsonGetNodeArrLen - 获取数组长度</h4>
+        <div class="code-block">JsonGetNodeArrLen Json内容 节点路径 输出变量 默认值</div>
+        <p><strong>说明</strong>:</p>
+        <ul class="param-list">
+            <li>节点存在且为数组，返回数组长度到输出变量</li>
+            <li>节点不存在，将默认值写入输出变量</li>
+            <li>节点存在但不是数组，会报脚本错误</li>
+        </ul>
+
+        <h5>示例</h5>
+        <div class="code-block">
+; 获取数组长度</br>
+#ACT</br>
+JsonGetNodeArrLen S1 user.items S3 0</br>
+SENDMSG 6 数组长度:&lt;$STR(S3)&gt;</br>
+; 输出: 数组长度:3</br>
+; 节点不存在（非数组）</br>
+#ACT</br>
+JsonGetNodeArrLen S1 user.list S4 0</br>
+SENDMSG 6 list长度:&lt;$STR(S4)&gt;</br>
+; 输出: list长度:0</div></br>
+
+        <h3>JSON路径示例</h3>
+        <p>JSON路径使用点号(<span class="code-inline">.</span>)表示层级关系，数组使用方括号(<span class="code-inline">[]</span>)加索引：</p>
+        <ul class="param-list">
+            <li><span class="code-inline">user.name</span> - 获取user对象的name属性</li>
+            <li><span class="code-inline">user.level</span> - 获取user对象的level属性</li>
+            <li><span class="code-inline">user.items</span> - 获取user对象的items数组</li>
+            <li><span class="code-inline">user.items[0]</span> - 获取user对象的items数组的第一个元素</li>
+            <li><span class="code-inline">user.info.vip</span> - 获取user对象中info对象的vip属性</li>
+            <li><span class="code-inline">user.remark</span> - 获取user对象的remark属性</li>
+        </ul>
+
+        <h3>完整组合示例</h3>
+        <div class="code-block">
+#IF</br>
+#ACT</br>
+; 定义JSON数据</br>
+Mov S1 {"user":{"name":"tom","level":55,"items":[1001,1002,1003],"info":{"vip":1},"remark":null}}</br>
+
+#IF</br>
+; 条件检查</br>
+CheckJsonNodeExists S1 user.name</br>
+CheckJsonNodeIsArray S1 user.items</br>
+#ACT</br>
+; 获取节点值</br>
+JsonGetNodeValue S1 user.name S2 未知</br>
+; 获取数组长度</br>
+JsonGetNodeArrLen S1 user.items N1 0</br>
+SENDMSG 6 名字:&lt;$STR(S2)&gt;</br>
+SENDMSG 6 items数量:&lt;$STR(N1)&gt;</br>
+; 循环遍历数组</br>
+Mov N2 0</br>
+While N2 < N1</br>
+    ; 拼接路径字符串，如 "user.items[0]"</br>
+    TextConcat S2 user.items[ &lt;$STR(N2)&gt; ]</br>
+
+    ; 获取数组元素值</br>
+    JsonGetNodeValue S1 S2 S3</br>
+
+    SENDMSG 6 &lt;$STR(S2)&gt;:&lt;$STR(S3)&gt;</br>
+    Inc N2 1</br>
+EndWhile</br>
+
+; 输出结果：</br>
+; 名字:tom</br>
+; items数量:3</br>
+; user.items[0]:1001</br>
+; user.items[1]:1002</br>
+; user.items[2]:1003</br>
+
+#ELSEACT</br>
+SENDMSG 6 条件不满足</div>
+
+        <h2>功能逻辑总结</h2>
+        <div class="func-logic">
+            <h3>HTTP请求执行流程</h3>
+            <ol>
+                <li>脚本执行 <span class="code-inline">HttpGet</span> 或 <span class="code-inline">HttpPost</span> 命令</li>
+                <li>系统在异步线程中发起HTTP网络请求</li>
+                <li>等待服务器响应（成功或失败）</li>
+                <li>将响应内容保存到指定的变量中</li>
+                <li>自动跳转到指定的NPC触发标签继续执行脚本</li>
+                <li>在触发标签中处理返回的数据（如显示或解析JSON）</li>
+            </ol>
+
+            <h3>JSON数据处理流程</h3>
+            <ol>
+                <li>通过HTTP请求或其他方式获取JSON数据并存入变量</li>
+                <li>使用条件命令（<span class="code-inline">CheckJsonNodeExists</span>等）验证数据结构</li>
+                <li>使用动作命令（<span class="code-inline">JsonGetNodeValue</span>等）提取具体数据</li>
+                <li>对提取的数据进行业务逻辑处理</li>
+                <li>处理过程中注意错误处理，特别是路径不存在的情况</li>
+            </ol>
+        </div>
+
+        <div class="warning">
+            <h4>重要注意事项</h4>
+            <ul>
+                <li>HTTP请求是异步执行的，请求发出后脚本会立即继续执行，响应处理在指定的NPC触发标签中进行</li>
+                <li>JSON路径区分大小写，必须与数据中的键名完全一致</li>
+                <li>使用 <span class="code-inline">JsonGetNodeValue</span> 和 <span class="code-inline">JsonGetNodeArrLen</span> 时，如果节点路径不存在，会使用默认值，不会报错</li>
+                <li>但如果JSON格式错误或路径非法（如对非数组使用数组索引），会导致脚本错误</li>
+                <li>在处理未知的JSON数据时，建议先使用条件命令检查节点存在性和类型</li>
+            </ul>
+        </div>
+
+        <h2>应用场景</h2>
+        <ul class="param-list">
+            <li><strong>与Web API交互</strong>: 调用外部服务的REST API获取数据或提交数据</li>
+            <li><strong>数据同步</strong>: 与中心服务器同步游戏数据、配置信息</li>
+            <li><strong>第三方登录验证</strong>: 通过OAuth等协议与第三方平台对接</li>
+            <li><strong>动态配置加载</strong>: 从远程服务器加载JSON格式的游戏配置</li>
+            <li><strong>数据统计上报</strong>: 向统计服务器上报游戏事件和数据</li>
+            <li><strong>复杂数据解析</strong>: 处理嵌套的JSON数据结构，提取所需信息</li>
+            <li><strong>条件分支逻辑</strong>: 根据JSON中的特定字段值决定脚本执行路径</li>
+        </ul>
+    </div>
+</body>
+</html>

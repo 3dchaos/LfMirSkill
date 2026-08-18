@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>假人登录脚本实例</TITLE>
+<style type="text/css">
+<!--
+.STYLE1 {color: #0000FF}
+-->
+</style>
+</HEAD>
+<BODY>
+<p><strong>假人登录脚本实例</strong></p>
+<p>[@Login]<br>
+  #IF<br>
+  ;检测是否是假人<br>
+  ISDUMMY<br>
+  #ACT<br>
+  ;从配置文件列表中随机获取一个配置文件<br>
+  GETRANDOMLINETEXT ..\QuestDiary\智能陪练\假人配置文件列表.txt &lt;$STR(S10)&gt;</p>
+<p>SETDUMMYCONFIGFILENAME &lt;$STR(S10)&gt;</p>
+<p>LOADDUMMYCONFIGFILE</p>
+MOVR&nbsp;D0&nbsp;6<br>
+  ChangeAttatckMode&nbsp;&lt;$STR(D0)&gt;
+  <p>;从配置文件列表中随机获取一个配置文件,给英雄使用<br>
+  GETRANDOMLINETEXT ..\QuestDiary\智能陪练\假人英雄配置文件列表.txt &lt;$STR(S11)&gt;</p>
+<p>;从假人列表或假人英雄列表中获取一个没有登录过的名称<br>
+  GETDUMMYNAME &lt;$STR(S11)&gt; 1 1</p>
+<p>;格式 SETDUMMYHERONAME 英雄名称<br>
+  SETDUMMYHERONAME &lt;$STR(S11)&gt;</p>
+<p>RECALLHERO</p>
+<p>DUMMYSTART<br>
+</p>
+<p>[@HeroLogin]<br>
+  #IF<br>
+  ;检测是否是假人英雄<br>
+  H.ISDUMMY<br>
+  #ACT<br>
+  ;&lt;$STR(S11)&gt; 是主人登录随机获取的一个配置文件<br>
+  H.SETDUMMYCONFIGFILENAME &lt;$STR(S11)&gt;</p>
+<p>H.LOADDUMMYCONFIGFILE</p>
+<p class="STYLE1">&nbsp;</p>
+</BODY>
+</HTML>
+
+ 

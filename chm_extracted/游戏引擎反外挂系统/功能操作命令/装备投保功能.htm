@@ -1,0 +1,49 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>装备投保功能</title>
+</head>
+
+<body>
+ </br> </br> </br> </br>
+<p><font color="#0000FF"><b>装备投保功能</b></font></p>
+<font face="Arial" size="2"> </br> </br> </br> </br> </br>
+
+DB字段: InsuranceCurrency 保金类型 0元宝 1金币 2泡点 3金刚石 4灵符 </br>
+DB字段:InsuranceGold 投保金额 设置大于0时 登陆器才会显示该装备是否已经投保 </br> </br>
+
+
+
+设置投保次数： </br>
+SETINSURANCECOUNTXX 位置 操作符(+，-，=)  数值 </br> </br>
+
+获取投保次数 </br>
+GETINSURANCECOUNTXX 位置 变量 </br> </br>
+
+
+英雄设置投保次数： </br>
+H.SETINSURANCECOUNTXX 位置 操作符(+，-，=)  数值  </br> </br>
+
+英雄获取投保次数 </br>
+H.GETINSURANCECOUNTXX 位置 变量 </br> </br>
+
+QF脚本触发投保装备掉落触发: </br>
+@DropInsuranceItem </br>
+@HeroDropInsuranceItem </br> </br>
+
+相关常量： </br>
+OK框的常量 保金类型:&lt;$BOXITEM[X].INSURANCECURRENCY&gt;  投保次数：&lt;$BOXITEM[X].INSURANCECOUNT&gt; 投保金额：&lt;$BOXITEM[X].INSURANCEGOLD&gt; </br> </br>
+
+变量： </br>
+投保物品名：$DROPINSURANCEITEMNAME </br>
+剩余投保数：$DROPINSURANCEITEMCOUNT </br>
+投保货币类型：$DROPINSURANCEITEMCURRENCY （StdItem.db) </br>
+单件投保单价： $DROPINSURANCEITEMGOLD  （StdItem.db) </br> </br> </br> </br> </br> </br>
+
+
+
+</body>
+
+</html>

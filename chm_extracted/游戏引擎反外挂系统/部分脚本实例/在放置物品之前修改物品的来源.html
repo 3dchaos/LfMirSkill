@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>ThrowItem在放置物品之前修改物品的来源</title>
+</head>
+
+<body>
+</br></br>
+功能说明：使用ThrowItem命令放置物品之前修改物品的来源</br></br>
+
+命令：SetThrowItemFrom 物品来源(0-9) 地图号 怪物人 杀人者 日期(yyyy-mm-dd) 时间(hh:nn:ss)</br></br>
+
+
+物品来源代码：</br>
+0未知; 1:GM制造; 2:脚本; 3:商店购买; 4:打怪掉落; 5:系统给予; 6:挖矿得到; 7:宝箱取得; 8:挖肉得到; 9捕捉得到</br></br>
+
+说明：本命令只对设置后的一条ThrowItem生效。执行一次ThrowItem后，设置还原。</br></br>
+
+</br></br>
+-----------------------------------------------------------------------------</br></br>
+示范：</br></br>
+[@物品]</br>
+#if</br>
+#act</br>
+SetThrowItemFrom 4 3 白野猪 杀人者 2021-01-11 10:00:00</br>
+ThrowItem &lt;$map&gt; &lt;$x&gt; &lt;$y&gt; 1 屠龙 1|0</br></br></br>
+
+
+
+[@KillMon]</br>
+#if</br>
+#act</br>
+SetThrowItemFrom 4 3 白野猪 杀人者 &lt;$Date&gt &lt;$Time&gt;</br>
+THROWITEM &lt;$MAP&gt; &lt;$KILLMONX&gt; &lt;$KILLMONY&gt; 1 力量戒指 1|120 2 1</br>
+sendmsg 7 测试下放置物品修改来源</br>
+SENDMSG 6 当前日期：&lt;$Date&gt;；当前时间&lt;$Time&gt;</br></br></br></br></br></br></br></br>
+
+
+</p>
+</body>
+</html>

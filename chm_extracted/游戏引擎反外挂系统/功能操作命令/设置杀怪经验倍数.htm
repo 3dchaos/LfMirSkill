@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>设置杀怪经验倍数</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>功能：</FONT></STRONG><BR><STRONG><FONT 
+color=#0000ff>&nbsp;&nbsp;&nbsp; </FONT></STRONG> 
+设置杀怪经验倍数.(支持内功经验，经络经验倍数)</FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT><BR></STRONG> 
+&nbsp;&nbsp;&nbsp; KILLMONEXPRATE 倍率 
+有效时间   是否保存剩余时间(1为保存，0或留空为不保存)   是否提示信息（0或者留空为给予时候提示，1为给予时候不提示）<BR>&nbsp;&nbsp;&nbsp; 倍率 为杀怪经验倍数，倍数除以100为真正的倍率(200 
+为 2 倍经验，150 
+为1.5倍)<BR><BR>;==========================================<BR>[@KILLMONEXPRATE]<BR>#IF<BR>#ACT<BR>&nbsp; 
+KILLMONEXPRATE 1000 600<BR>#SAY<BR>&nbsp; 您当前杀怪经验倍数为 10倍，有效时间 
+600秒。<BR><BR>
+
+[@KILLMONEXPRATE]<BR>
+#IF<BR>
+#ACT<BR>
+KILLMONEXPRATE 1000 0 1<BR>
+#SAY<BR>
+您当前杀怪经验倍数为 10倍，有效时间永久，下线保存剩余时间。<BR><BR>
+
+
+[@KILLMONEXPRATE]<BR>
+#IF<BR>
+#ACT<BR>
+KILLMONEXPRATE 1000 600 1<BR>
+#SAY<BR>
+您当前杀怪经验倍数为 10倍，有效时间600秒，下线保存剩余时间。<BR><BR>
+
+
+;==========================================<BR></FONT></P>
+</BODY>
+</HTML>
+
+  

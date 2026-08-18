@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>记忆石设置方法[!]</TITLE>
+</HEAD>
+<BODY>
+<P>功能演示：</P>
+<p>物品分类号:31<BR>
+  SHAPE   值:1<BR>
+  AN字段是触发.这个根据自己版本设置.我们以设置为99为例子<BR>
+  QFunction-0.txt脚本下面<BR>
+</p>
+<p>[@StdModeFunc99]<br>
+;#act<br>
+;关闭自定义NPC大对话框<br>
+;CloseBigDialogBox<br>
+;#say<br>
+  一： &lt;记录当前坐标/@TAGMAPINFO1&gt;     &lt;移动到/@PMOVE1&gt; -&gt; &lt;$TAGMAPNAME1&gt; &lt;$TAGX1&gt; &lt;$TAGY1&gt;\<br>
+  二： &lt;记录当前坐标/@TAGMAPINFO2&gt;     &lt;移动到/@PMOVE2&gt; -&gt; &lt;$TAGMAPNAME2&gt; &lt;$TAGX2&gt; &lt;$TAGY2&gt;\<br>
+  三： &lt;记录当前坐标/@TAGMAPINFO3&gt;     &lt;移动到/@PMOVE3&gt; -&gt; &lt;$TAGMAPNAME3&gt; &lt;$TAGX3&gt; &lt;$TAGY3&gt;\<br>
+  四： &lt;记录当前坐标/@TAGMAPINFO4&gt;     &lt;移动到/@PMOVE4&gt; -&gt; &lt;$TAGMAPNAME4&gt; &lt;$TAGX4&gt; &lt;$TAGY4&gt;\<br>
+  五： &lt;记录当前坐标/@TAGMAPINFO5&gt;     &lt;移动到/@PMOVE5&gt; -&gt; &lt;$TAGMAPNAME5&gt; &lt;$TAGX5&gt; &lt;$TAGY5&gt;\<br>
+  六： &lt;记录当前坐标/@TAGMAPINFO6&gt;     &lt;移动到/@PMOVE6&gt; -&gt; &lt;$TAGMAPNAME6&gt; &lt;$TAGX6&gt; &lt;$TAGY6&gt;\ \<br>
+&lt;成功传送后才会消失一点.安全无毒.放心使用&gt;\ <br>
+  [@PMOVE1]<br>
+  #ACT<br>
+  TAGMAPMOVE 1<br>
+  [@PMOVE2]<br>
+  #ACT<br>
+  TAGMAPMOVE 2<br>
+  [@PMOVE3]<br>
+  #ACT<br>
+  TAGMAPMOVE 3<br>
+  [@PMOVE4]<br>
+  #ACT<br>
+  TAGMAPMOVE 4<br>
+  [@PMOVE5]<br>
+  #ACT<br>
+  TAGMAPMOVE 5<br>
+  [@PMOVE6]<br>
+  #ACT<br>
+  TAGMAPMOVE 6<br>
+  [@TAGMAPINFO1]<br>
+  #ACT<br>
+  TAGMAPINFO 1<br>
+  GOTO @StdModeFunc99<br>
+  [@TAGMAPINFO2]<br>
+  #ACT<br>
+  TAGMAPINFO 2<br>
+  GOTO @StdModeFunc99<br>
+  [@TAGMAPINFO3]<br>
+  #ACT<br>
+  TAGMAPINFO 3<br>
+  GOTO @StdModeFunc99<br>
+  [@TAGMAPINFO4]<br>
+  #ACT<br>
+  TAGMAPINFO 4<br>
+  GOTO @StdModeFunc99<br>
+  [@TAGMAPINFO5]<br>
+  #ACT<br>
+  TAGMAPINFO 5<br>
+  GOTO @StdModeFunc99<br>
+  [@TAGMAPINFO6]<br>
+  #ACT<br>
+  TAGMAPINFO 6<br>
+GOTO @StdModeFunc99</p>
+</BODY>
+</HTML>
+
+ 

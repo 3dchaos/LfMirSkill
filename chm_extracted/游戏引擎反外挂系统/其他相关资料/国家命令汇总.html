@@ -1,0 +1,254 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>国战系统命令汇总</title>
+</head>
+
+<body>
+
+<p><font color="#0000FF"><b>国战系统</b></font></p>
+
+
+国战系统 常量如下、后附常量脚本：</br>
+国家系统检测是否加入国家、国家编号等变量，如果是0，就表示没有加入国家 非0表示加入了国家</br>
+-----------------------------------------------------------------</br>
+M2总控相关：</br>
+选项-参数设置-环境设置-是否监听国家说话</br>
+选项-参数设置-坐标范围-国家模式控制</br>
+选项-参数设置-文字颜色-国家说话颜色</br>
+选项-游戏命令-普通命令-国家相关命令</br>
+选项-参数设置-状态控制-国家人物名字颜色设置</br>
+-----------------------------------------------------------------</br>
+国家聊天命令：</br>
+!#要说的话发布国家信息</br>
+-----------------------------------------------------------------</br>
+Envir\Nations\Nations.ini中的NationalNames1 -- NationalNames255是国家的名字,只有定义了国家名字之后加入国家才有效!</br>
+Nations.ini默认信息如下：</br>
+[Names]</br>
+NationalNames1=沧月国</br>
+NationalNames2=凌风国</br>
+NationalNames3=炎天国</br>
+NationalNames4=</br>
+NationalNames5=</br>
+NationalNames6=</br>
+NationalNames7=</br>
+NationalNames8=</br>
+NationalNames9=</br>
+NationalNames10=</br>
+NationalNames11=</br>
+NationalNames12=</br>
+NationalNames13=</br>
+NationalNames14=</br>
+NationalNames15=</br>
+NationalNames16=</br>
+NationalNames17=</br>
+NationalNames18=</br>
+NationalNames19=</br>
+NationalNames20=</br>
+NationalNames21=</br>
+NationalNames22=</br>
+NationalNames23=</br>
+NationalNames24=</br>
+NationalNames25=</br>
+NationalNames26=</br>
+NationalNames27=</br>
+NationalNames28=</br>
+NationalNames29=</br>
+NationalNames30=</br>
+NationalNames31=</br>
+NationalNames32=</br>
+NationalNames33=</br>
+NationalNames34=</br>
+NationalNames35=</br>
+NationalNames36=</br>
+NationalNames37=</br>
+NationalNames38=</br>
+NationalNames39=</br>
+NationalNames40=</br>
+NationalNames41=</br>
+NationalNames42=</br>
+NationalNames43=</br>
+NationalNames44=</br>
+NationalNames45=</br>
+NationalNames46=</br>
+NationalNames47=</br>
+NationalNames48=</br>
+NationalNames49=</br>
+NationalNames50=</br>
+NationalNames51=</br>
+NationalNames52=</br>
+NationalNames53=</br>
+NationalNames54=</br>
+NationalNames55=</br>
+NationalNames56=</br>
+NationalNames57=</br>
+NationalNames58=</br>
+NationalNames59=</br>
+NationalNames60=</br>
+NationalNames61=</br>
+NationalNames62=</br>
+NationalNames63=</br>
+NationalNames64=</br>
+NationalNames65=</br>
+NationalNames66=</br>
+NationalNames67=</br>
+NationalNames68=</br>
+NationalNames69=</br>
+NationalNames70=</br>
+NationalNames71=</br>
+NationalNames72=</br>
+NationalNames73=</br>
+NationalNames74=</br>
+NationalNames75=</br>
+NationalNames76=</br>
+NationalNames77=</br>
+NationalNames78=</br>
+NationalNames79=</br>
+NationalNames80=</br>
+NationalNames81=</br>
+NationalNames82=</br>
+NationalNames83=</br>
+NationalNames84=</br>
+NationalNames85=</br>
+NationalNames86=</br>
+NationalNames87=</br>
+NationalNames88=</br>
+NationalNames89=</br>
+NationalNames90=</br>
+NationalNames91=</br>
+NationalNames92=</br>
+NationalNames93=</br>
+NationalNames94=</br>
+NationalNames95=</br>
+NationalNames96=</br>
+NationalNames97=</br>
+NationalNames98=</br>
+NationalNames99=</br>
+NationalNames100=</br>
+;....自己添加</br>
+;....最多255个</br></br>
+-----------------------------------------------------------------</br>
+国家基础变量：</br>
+国家编号：&lt;$NATION&gt;</br>
+国家名称：&lt;$NATIONNAME&gt; </br>
+国家人数：&lt;$NATIONPEOPLE&gt;</br>
+国家金币：&lt;$NationGold&gt;</br>
+建筑能力：&lt;$NationBuilding&gt;</br>
+军事能力：&lt;$NationArm&gt;</br>
+经济能力：&lt;$NationEconomy&gt;</br>
+政治能力：&lt;$NationPolitics&gt;</br>
+国家贡献：&lt;$NationContribution&gt;</br>
+地图数：&lt;$NationMaps&gt;</br>
+---------------------------------------------------------------</br>
+指定编号国家信息（编号用X表示（1-100））</br>
+国家名称：&lt;$NationNameX&gt; </br>
+国家人数：&lt;$NationPeopleX&gt;</br>
+国家金币：&lt;$NationGoldX&gt;</br>
+建筑能力：&lt;$NationBuildingX&gt;</br>
+军事能力：&lt;$NationArmX&gt;</br>
+经济能力：&lt;$NationEconomyX&gt;</br>
+政治能力：&lt;$NationPoliticsX&gt;</br>
+国家贡献：&lt;$NationContributionX&gt;</br>
+地图数：&lt;$NationMapsX&gt;</br>
+---------------------------------------------------------------</br>
+地图参数相关：</br>
+地图参数强制锁定攻击模式： NOSWITCHATTACKMODE  增加锁定攻击模式1-8（0或无括号表示不锁定），如下</br>
+NOSWITCHATTACKMODE(1)</br>
+
+地图参数：SHOWNATIONCOLOR   含此参数的地图会强制显示国家颜色（游戏参数——》状态控制——》国家名字颜色识别）</br>
+-----------------------------------------------------------------</br></br>
+国家相关命令：</br></br>
+
+检测是否加入国家（最多支持255个国家）：</br>
+CheckNation 国家编号</br></br>
+
+加入国家（最多支持255个国家）：</br>
+JoinNation 国家编号</br></br>
+
+检查是否国王：</br>
+IsNationKing 国家编号 （为空表示所有国家）</br></br>
+
+退出国家：</br>
+ExitNation</br></br>
+
+检查国家人数:</br>
+CheckNationHumCount > 人数</br></br>
+
+成为国王：</br>
+SetNationKing 国家编号</br></br>
+
+修改国家名称：</br>
+SetNationName 国家编号 国家名字</br></br>
+
+检测国家名字是否被使用</br>
+CheckNationNameExists 国家名称</br></br>
+
+设置国家相应的变量值</br>
+SetNationValue 国家编号(0表示人物所在的国家，1-100指定国家） 编号(0-6) 操作符(+,-,=) 值</br>
+参数2的编号如下：</br>
+0:金币   </br>
+1:建筑能力</br>
+2:军事能力</br>
+3:经济能力</br>
+4:政治能力</br>
+5:国家贡献</br>
+6:地图数</br></br>
+-----------------------------------------------------------------</br>
+国家脚本刷怪设定：</br>
+此命令支持怪物巡逻坐标攻击，设置多个指定坐标后，怪物会沿途巡逻(按照设定坐标行走到最后一个坐标停止)</br>
+格式: </br>
+MISSION 地图 x1;x2;x3...xn y1;y2;y3...yn (x和y的数量要一致）</br>
+PARAM1 刷新怪物座标X</br>
+PARAM2 刷新怪物座标Y</br>
+PARAM3 数量</br>
+PARAM4 范围</br>
+PARAM5 国家编号</br>
+PARAM6 是否攻击本国玩家(0,1)</br>
+PARAM7 不同国家怪物是否PK(0,1)</br>
+PARAM8 怪物名字颜色</br>
+PARAM9 是否允许本国玩家攻击(0,1)</br>
+MobPlace 怪物名称 </br>
+;;;;;;;;;;;;;;;;;;;;刷怪命令扩展最后一个参数，为空表示可攻击所有可攻击的对象，指定名字表示只攻击指定名称的可攻击对象</br>
+MOBPLACE 怪物名称 目标名称</br></br>
+
+
+示范：</br>
+[@国家刷怪]</br>
+#act</br>
+MISSION 3 319;319 320;340</br>
+PARAM1 333</br>
+PARAM2 333</br>
+PARAM3 10</br>
+PARAM4 0</br>
+PARAM5 1</br>
+PARAM6 0</br>
+PARAM7 1</br>
+PARAM8 242</br>
+PARAM9 0</br>
+MOBPLACE 国家士兵</br>
+
+-----------------------------------------------------------------</br>
+MonGen.txt 格式：地图 坐标X 坐标Y 怪物名字 范围 数量 间隔 集中刷新坐标机率 名字颜色(0~255) 内功怪物(0,1) 国家编号 同国家名玩家是否可攻击(0,1)</br>
+说明：最后一个参数为0时表示同国家玩家不能攻击该怪物，为1时在非国家攻击模式下可以攻击该怪物</br>
+-----------------------------------------------------------------</br>
+国家支持的信息：</br>
+格式: SendCenterMsg 前景色 背景色 消息文字 模式 显示时间 倒计时标签 是否替换模式（0或空为不替换，不等于0为替换模式) </br>
+模式: 0=发送给自己 1=发送所有人物 2=发送行会 3=发送国家 4=发送当前地图. </br>
+-----------------------------------------------------------------</br></br>
+
+以下命令和刷怪文件内关于 填写国家名字的修改为国家编号 更新引擎务必修改！！！！！</br>
+MobPlace</br>
+MonGen</br>
+MonGenEx</br>
+刷怪文件</br>
+管理员命令：Mob</br></br></br></br>
+-----------------------------------------------------------------</br></br>
+国王名称变量：</br>
+&lt;$NATIONKING&gt;</br>
+&lt;$NATIONKINGX&gt;</br>
+
+</body>
+
+</html>

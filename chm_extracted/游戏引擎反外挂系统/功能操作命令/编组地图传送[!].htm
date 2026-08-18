@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>编组地图传送</TITLE>
+</HEAD>
+<BODY>
+<P><FONT face=宋体>编组地图传送</FONT></P>
+<P><FONT face=宋体>GROUPMAPMOVE 地图号 X Y 可以传送最低等级(可以为空，为空时不检测队员的等级直接传送) 触发字段(可以为空)  范围（以队长为中心设置范围，只传送范围内的队友，留空或者0为不需要范围，大于0则按照范围传送）<BR><BR>
+</FONT>[@main]<BR>
+#IF<BR>
+#ACT<BR>
+GROUPMAPMOVE 3 333 333 @GROUPMAPMOVE</P>
+<p>[@GROUPMAPMOVE]<BR>
+  #IF<BR>
+  #ACT<BR>
+  SENDMSG 6 组队传送<FONT face=宋体>
+  <br>
+  
+  <BR>
+  相关命令：<BR>
+  编组地图随机传送：<A href="编组地图随机传送.htm">GROUPMOVE</A><BR>
+  检查是否为组长：<A 
+href="../脚本检测命令/检查是否为组长.htm"><FONT color=#000000>ISGROUPMASTER</FONT></A>   
+</FONT></p>
+</BODY>
+</HTML>
+

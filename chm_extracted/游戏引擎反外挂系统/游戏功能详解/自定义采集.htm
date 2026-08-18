@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>自定义采集功能</TITLE>
+</HEAD>
+<BODY>
+<P><STRONG><FONT 
+size=5>自定义采集</FONT></STRONG></P>
+命令格式：</br>
+SHOWPROGRESSBARDLG 时间(秒) 触发字段 提示信息 有动作是否中断(0不中断,1中断) 中断触发字段  参数1 参数2 参数3 参数4 参数5 参数6 参数7</br></br>
+
+参数1 =1 开启自定义素材    =0或留空时为 关闭</br>
+以下参数 参数1=1 时生效</br>
+参数2 采集背景所在文件WZL</br>
+参数3 采集背景序号</br>
+参数4 采集进度条所在文件WZL</br>
+参数5 采集进度条序号</br>
+参数6 采集进度条X坐标偏移,Y坐标偏移</br>
+参数7 采集文字X坐标偏移,Y坐标偏移</br>
+示例：</br>
+[@Main]</br>
+#ACT</br>
+Mov N$NEWUI 1</br>
+;15,12:文字偏移坐标    17,29:进度条偏移坐标</br>
+SHOWPROGRESSBARDLG 5 @采集完成 正在采集,进度%d%... 1 @采集中断 1 N$NEWUI 234 N$NEWUI 235 15,12  17,29</br></br></br></br></br>
+
+
+
+使用示例2：</br>
+[@Main]</br>
+#ACT</br>
+SHOWPROGRESSBARDLG 5 @采集完成 正在采集,进度%d%... 1 @采集中断</br>
+Break</p>
+
+
+
+
+
+QF触发</br>
+[@采集完成]</br>
+#ACT</br>
+Give 回城卷 1</br>
+SendMsg 5 你采集一个回城卷</br>
+Break</p>
+
+[@采集中断]</br>
+#ACT</br>
+SendMsg 5 采集被中断</br>
+Break</p>
+
+</br></br>
+
+终止采集命令：StopCollect</br>
+
+注：当玩家同时点多条采集时候则以最后一个采集为准！！</br></br></br></br>
+<P><FONT size=2>
+</BODY>
+</HTML>
+

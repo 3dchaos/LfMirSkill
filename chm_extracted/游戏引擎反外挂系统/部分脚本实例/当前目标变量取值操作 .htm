@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>当前目标变量取值操作[!]</TITLE>
+</HEAD>
+<BODY>
+</br></br>
+<P><FONT face=Arial size=5><FONT face=Fixedsys>功能: 当前目标变量取值操作C. （C.变量必须目标不为空且对象为人物）</FONT> 
+</FONT></P>
+
+</br></br></br></br>
+当前目标变量取值操作C. （C.变量必须目标不为空且对象为人物）</br>
+当前对象的所有私人的常量都可以使用在前面加“C.”的方式</br>
+当前对象的所有私人的变量使用&lt;$C.STR(S1)&gt;和查看自己的变量&lt;$STR(S1)&gt;多一个“C.”</br>
+比如在攻击触发，被攻击触发，死亡触发，还有查看出售角色的其他信息的触发时</br>
+
+当前对象的常量，例如：&lt;$C.HP&gt; &lt;$C.PKPOINT&gt; &lt;$C.GOLDCOUNT&gt; &lt;$C.GAMEGOLD&gt;</br>
+当前对象的变量，例如：&lt;$C.STR(S1)&gt; &lt;$C.STR(A1)&gt; &lt;$C.STR(T1)&gt; &lt;$C.STR(U1)&gt; &lt;$C.HUMAN(QQQQ)> &lt;$C.GUILD(WWWW)&gt; </br></br></br></br>
+
+
+;SetCurrTarget 名称 (名称空的情况下表示清空当前对象;设置指定人物为当前对象，要求和执行脚本的玩家在同一地图且坐标在20格以内)</br>
+;使用命令  ： SetCurrTarget设置当前对象</br></br></br></br>
+
+
+
+
+简易示例：</br>
+#IF</br>
+CHECKCURRTARGETRACE = 0</br>
+#ACT </br>
+;使用MOV命令调整当前对象的变量  ---MOV对象变量只可读不可写，所以不支持！！！！</br>
+;MOV &lt;$C.STR(S1)&gt;  &lt;$STR(S1)&gt; </br>
+;SENDMSG 6 把我的S1变量值传递给当前对象的S1变量里，MOV不支持这样操作，可用SetHumVar变量传递进行修改,如下</br>
+SetHumVar  &lt;$C.USERNAME&gt;  S1 S2</br>
+SENDMSG 6 把我的S2变量值传递给当前对象的S1变量里</br></br></br>
+
+
+#IF</br>
+CHECKCURRTARGETRACE = 0</br>
+#ACT </br>
+;使用MOV命令将自己的变量改为当前对象的变量  </br>
+MOV &lt;$STR(N1)&gt;  &lt;$C.STR(N1)&gt; </br>
+SENDMSG 6 把对方的的N1变量值传递给我的的N1变量里，使用“C.STR”代表当前对象的变量比自己的“STR”前面多一个“C.”</br></br></br></br>
+
+
+
+
+
+
+
+;查看他人装备触发：</br>
+[@QueryUserState]</br>
+#ACT</br>
+MOV S1 &lt;$UserStateName&gt;</br>
+;SetCurrTarget 名称 (名称空的情况下表示清空当前对象;设置指定人物为当前对象，要求和执行脚本的玩家在同一地图且坐标在20格以内)</br>
+;使用SetCurrTarget设置当前对象</br>
+SetCurrTarget S1</br></br>
+
+#IF</br>
+CompareText &lt;$C.USERNAME&gt;  S1</br>
+;检测设置的对象是否成功</br>
+#say</br>
+当前对象名称：\</br>
+【&lt;$C.USERNAME&gt; 】等级=【&lt;$C.LEVEL&gt; 】攻击=【&lt;$C.DC&gt;  - &lt;$C.MAXDC&gt;  】PK值=【&lt;$C.PKPOINT&gt; 】\</br>
+#ELSESAY</br>
+对象获取失败。</br></br></br></br>
+
+
+
+
+
+
+
+
+
+ 
+</P>
+</BODY>
+</HTML>

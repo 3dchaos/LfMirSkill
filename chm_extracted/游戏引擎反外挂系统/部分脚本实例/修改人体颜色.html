@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>修改人体颜色,改变人体颜色</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>修改人体颜色.</FONT></FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>说明：</FONT>SetBodyColor 颜色(1~255) 时间(秒) 类型（0、1）  【时间设置为0则为无限制，类型0或留空为 指定颜色  。1则为转生设置的颜色在人物身体上进行变色】
+</STRONG></FONT></P>
+<P>示列：<br>
+
+<P>[@SetBodyColor]<br>
+#IF<br>
+#ACT<br>
+SetBodyColor 151 120 0 <br>
+SendMsg 5 你身体颜色更改为黄色，有效时间120秒！<br>
+
+<P>[@SetBodyColor1]<br>
+#IF<br>
+#ACT<br>
+SetBodyColor 151 120 1 <br>
+SendMsg 5 你身体颜色更改为七彩变色，有效时间120秒！<br>
+
+<P>[@SetBodyColor2]<br>
+#IF<br>
+#ACT<br>
+SetBodyColor 151 0 1 <br>
+SendMsg 5 你身体颜色更改为七彩变色，时间为在线永久有效！<br>
+
+<P>[@SetBodyColor2]<br>
+#IF<br>
+#ACT<br>
+H.SetBodyColor 151 0 1 <br>
+SendMsg 5 你英雄的身体颜色更改为七彩变色，时间为在线永久有效！<br>
+</P>
+</BODY>
+</HTML>

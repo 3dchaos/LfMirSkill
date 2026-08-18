@@ -1,0 +1,30 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>调整装备升级次数[!]</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<BODY>
+<P><FONT face=Fixedsys size=2>功能: 调整装备升级次数或星星数量.<BR><BR>
+格式: ChangeItemUpgradeCount 位置(0~37,-1时为OK框物品) (+,-,=) 次数(0~255)<BR><BR><BR>
+#IF<br>
+CheckItem 金条 1<br>
+#ACT<br>
+Take 金条 1<br>
+ChangeItemUpgradeCount 0 + 10<br>
+SendMsg 5 盔甲升级次数增加10次<br>
+#ELSESAY<br>
+你没有金条<br><br><br></FONT></P>
+
+
+<b>位置如下：</b><br><br>
+-1 升级框<br>
+0--29：装备栏<br>
+30-36：首饰盒<br>
+40-51：神佑袋<br>
+boxitem0-boxitem7：OK框<br><br>
+</BODY>
+</html>

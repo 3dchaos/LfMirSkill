@@ -1,0 +1,35 @@
+<title>英雄宝宝攻击触发</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+<p><strong><font size="5">英雄宝宝攻击触发</font></strong></p>
+<p>-----------------------------------英雄宝宝攻击触发---和人物宝宝攻击触发用法一致，只是触发命令不同---------------------------<br /><br /><br /><br /><br />
+@HeroSlaveMagicStruck<br />
+@HeroSlaveStruck<br />
+@HeroSlaveMagicAttack<br />
+@HeroSlaveAttack<br /><br />
+
+增加变量&lt;$H.CurSlaveName&gt; 英雄当前宝宝名 。  仅用于 [@HeroSlaveMagicAttack] 及 [@HeroSlaveAttack]中<br /><br />
+
+增加英雄的宝宝死亡触发 @OnHeroSlaveDie<br /><br />
+增加英雄的分身死亡触发 @OnHeroCloneDie<br /><br />
+
+增加变量&lt;H.DIESLAVENAME&gt; 英雄当前死亡宝宝名（不去数字)<br /><br />
+
+[@HeroSlaveMagicStruck]<br />
+#act<br />
+sendmsg 5 英雄宝宝被魔法攻击<br /><br />
+
+[@HeroSlaveStruck]<br />
+#act<br />
+sendmsg 5 英雄宝宝被物理攻击<br />
+<br />
+[@HeroSlaveMagicAttack]<br />
+#act<br />
+sendmsg 5 英雄的宝宝 &lt;$H.CurSlaveName&gt; 正在用魔法攻击目标<br /><br />
+
+[@HeroSlaveAttack]<br />
+#act<br />
+sendmsg 5 英雄的宝宝 &lt;$H.CurSlaveName&gt; 正在砍目标<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

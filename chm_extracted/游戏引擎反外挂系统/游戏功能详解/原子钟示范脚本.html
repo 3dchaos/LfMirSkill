@@ -1,0 +1,218 @@
+<br><br><br>
+以下为NPC脚本讲解，常规高频率修改属性会非常消耗CPU资源，需要使用LockUpdateAbil和UpdateAbil对执行脚本进行锁定操作并解锁刷新来显著提高脚本性能<br>
+示范的脚本内容均增加了原子钟测试脚本性能和锁定与解锁，如果需要对比性能可以注释掉脚本中的LockUpdateAbil和UpdateAbil<br>
+如果你需要测试对比，发现脚本中的物品在你的服务端中没有，请自行修改物品名称进行测试<br>
+当然可以参考下面示范脚本内原子钟的运用对你的服务端脚本进行检验，高频脚本低于1毫秒为优，即时间越短越优秀！<br><br>
+
+
+[@main]<br>
+第一步(开启首饰盒,生肖盒)              &lt;开启/@开启&gt;\<br>
+第二步(刷物品)                         &lt;刷物品/@刷&gt; \<br>
+第三步(增加属性命令)          [耗时高] &lt;加属性/@加&gt; \<br>
+第四步(扣除属性命令)          [耗时高] &lt;扣属性/@扣&gt; \<br>
+第五步(增加属性命令)          [耗时高] &lt;EX加属性/@加2&gt; \<br>
+第六步(扣除属性命令)          [耗时高] &lt;EX扣属性/@扣2&gt; \<br>
+第七步(检测套装)              [耗时高] &lt;检测/@检测&gt; \  \ <br>
+
+清理物品(清理物品)                    &lt;清理/@删&gt;\<br><br><br>
+
+
+
+[@加2]<br>
+#IF<br>
+#ACT<br>
+PrintUseTime 1<br>
+LockUpdateAbil<br>
+<font face="楷体" color="#0000ff" size="4"><strong>;执行脚本前请加上LockUpdateAbil进行锁定，可显著提高脚本性能，防止高频率使用时游戏卡的问题</strong></font><br>
+ChangeHumAbilityEX 1  + 5<br>
+ChangeHumAbilityEX 2  + 5<br>
+ChangeHumAbilityEX 3  + 5<br>
+ChangeHumAbilityEX 4  + 5<br>
+ChangeHumAbilityEX 5  + 5<br>
+ChangeHumAbilityEX 6  + 5<br>
+ChangeHumAbilityEX 7  + 5<br>
+ChangeHumAbilityEX 8  + 5<br>
+ChangeHumAbilityEX 9  + 5<br>
+ChangeHumAbilityEX 10 + 5<br>
+ChangeHumAbilityEX 11 + 5<br>
+ChangeHumAbilityEX 12 + 5<br>
+UpdateAbil<br>
+<font face="楷体" color="#0000ff" size="4"><strong>;脚本执行完毕增加UpdateAbil命令进行解锁并刷新</strong></font><br>
+PrintUseTime 2 N0 S0<br>
+Sendmsg 6 提示:脚本执行耗时&lt;$STR(N0)&gt;微秒，自动单位为&lt;$STR(S0)&gt;<br>
+break<br><br>
+
+
+
+
+[@扣2]<br>
+#IF<br>
+#ACT<br>
+PrintUseTime 1<br>
+LockUpdateAbil<br>
+ChangeHumAbilityEX 1  = 0<br>
+ChangeHumAbilityEX 2  = 0<br>
+ChangeHumAbilityEX 3  = 0<br>
+ChangeHumAbilityEX 4  = 0<br>
+ChangeHumAbilityEX 5  = 0<br>
+ChangeHumAbilityEX 6  = 0<br>
+ChangeHumAbilityEX 7  = 0<br>
+ChangeHumAbilityEX 8  = 0<br>
+ChangeHumAbilityEX 9  = 0<br>
+ChangeHumAbilityEX 10 = 0<br>
+ChangeHumAbilityEX 11 = 0<br>
+ChangeHumAbilityEX 12 = 0<br>
+UpdateAbil<br>
+PrintUseTime 2 N0 S0<br>
+Sendmsg 6 提示:脚本执行耗时&lt;$STR(N0)&gt;微秒，自动单位为&lt;$STR(S0)&gt;<br>
+break<br><br>
+
+
+[@加]<br>
+#IF<br>
+#ACT<br>
+PrintUseTime 1<br>
+LockUpdateAbil<br>
+ChangeHumAbility 1  + 5<br>
+ChangeHumAbility 2  + 5<br>
+ChangeHumAbility 3  + 5<br>
+ChangeHumAbility 4  + 5<br>
+ChangeHumAbility 5  + 5<br>
+ChangeHumAbility 6  + 5<br>
+ChangeHumAbility 7  + 5<br>
+ChangeHumAbility 8  + 5<br>
+ChangeHumAbility 9  + 5<br>
+ChangeHumAbility 10 + 5<br>
+ChangeHumAbility 11 + 5<br>
+ChangeHumAbility 12 + 5<br>
+UpdateAbil<br>
+PrintUseTime 2 N0 S0<br>
+Sendmsg 6 提示:脚本执行耗时&lt;$STR(N0)&gt;微秒，自动单位为&lt;$STR(S0)&gt;<br>
+break<br><br>
+
+
+
+[@扣]<br>
+#IF<br>
+#ACT<br>
+PrintUseTime 1<br>
+LockUpdateAbil<br>
+ChangeHumAbility 1  = 0<br>
+ChangeHumAbility 2  = 0<br>
+ChangeHumAbility 3  = 0<br>
+ChangeHumAbility 4  = 0<br>
+ChangeHumAbility 5  = 0<br>
+ChangeHumAbility 6  = 0<br>
+ChangeHumAbility 7  = 0<br>
+ChangeHumAbility 8  = 0<br>
+ChangeHumAbility 9  = 0<br>
+ChangeHumAbility 10 = 0<br>
+ChangeHumAbility 11 = 0<br>
+ChangeHumAbility 12 = 0<br>
+UpdateAbil<br>
+PrintUseTime 2 N0 S0<br>
+Sendmsg 6 提示:脚本执行耗时&lt;$STR(N0)&gt;微秒，自动单位为&lt;$STR(S0)&gt;<br>
+break<br><br>
+
+[@检测]<br>
+#IF<br>
+#ACT<br>
+PrintUseTime 1<br>
+
+#IF<br>
+CheckGroupItem 1<br>
+#ACT<br>
+
+#IF<br>
+#ACT<br>
+PrintUseTime 2 N0 S0<br>
+Sendmsg 6 提示:脚本执行耗时&lt;$STR(N0)&gt;微秒，自动单位为&lt;$STR(S0)&gt;<br>
+break<br><br>
+
+
+
+[@删]<br>
+#IF<br>
+#ACT<br>
+TakeBagItemEX 1-9999 200 0 0 0 0 N1 0<br>
+MOV N$循环开始 0<br>
+WHILE N$循环开始 &lt; 52<br>
+TakePosW &lt;$Str(N$循环开始)&gt;<br>
+INC N$循环开始 1<br>
+ENDWHILE<br>
+break<br><br>
+
+
+
+[@开启]<br>
+#IF<br>
+#ACT<br>
+activationcasket <br>
+SetSndacasket 1<br>
+ShowGodBless 1 <br>
+OpenGodBless all<br>
+break<br><br>
+
+
+[@刷]<br>
+#IF<br>
+#ACT<br>
+LockUpdateAbil<br>
+<font face="楷体" color="#0000ff" size="4"><strong>;因为一次性自动穿戴物品过多，属性刷新次数过多导致性能有所下降，这时可以在执行前锁定后执行脚本内容</strong></font><br>
+GiveOnItem 00 布衣(男)<br>
+GiveOnItem 01 木剑<br>
+GiveOnItem 02 荣誉勋章11号<br>
+GiveOnItem 03 黑檀项链<br>
+GiveOnItem 04 魔法头盔<br>
+GiveOnItem 05 皮制手套<br>
+GiveOnItem 06 皮制手套<br>
+GiveOnItem 07 玻璃戒指<br>
+GiveOnItem 08 玻璃戒指<br>
+GiveOnItem 09 符<br>
+GiveOnItem 10 腰带<br>
+GiveOnItem 11 靴子<br>
+GiveOnItem 12 宝石<br>
+GiveOnItem 13 斗笠<br>
+GiveOnItem 14 军鼓<br>
+GiveOnItem 15 马牌<br>
+; GiveOnItem 16<br>
+GiveOnItem 17 灵玉<br>
+GiveOnItem 18 时装衣<br>
+GiveOnItem 19 时装武<br>
+GiveOnItem 20 时装项<br>
+GiveOnItem 21 时装头<br>
+GiveOnItem 22 时装手<br>
+GiveOnItem 23 时装手<br>
+GiveOnItem 24 时装戒<br>
+GiveOnItem 25 时装戒<br>
+GiveOnItem 26 时装勋<br>
+GiveOnItem 27 时装腰<br>
+GiveOnItem 28 时装靴<br>
+GiveOnItem 29 时装宝石<br>
+
+GiveOnItem 30 首饰盒1<br>
+GiveOnItem 31 首饰盒2<br>
+GiveOnItem 32 首饰盒3<br>
+GiveOnItem 33 首饰盒4<br>
+GiveOnItem 34 首饰盒5<br>
+GiveOnItem 35 首饰盒6<br>
+
+GiveOnItem 40 生肖1<br>
+GiveOnItem 41 生肖2<br>
+GiveOnItem 42 生肖3<br>
+GiveOnItem 43 生肖4<br>
+GiveOnItem 44 生肖5<br>
+GiveOnItem 45 生肖6<br>
+GiveOnItem 46 生肖7<br>
+GiveOnItem 47 生肖8<br>
+GiveOnItem 48 生肖9<br>
+GiveOnItem 49 生肖10<br>
+GiveOnItem 50 生肖11<br>
+GiveOnItem 51 生肖12<br>
+UpdateAbil<br>
+<font face="楷体" color="#0000ff" size="4"><strong>;执行完成后解锁并刷新，这样原本刷新几十次（每佩戴一件物品刷新一次）仅需一次刷新即可，不但提高脚本性能效率且减少发往客户端的流量（刷新一次发一次）</strong></font><br>
+PrintUseTime 2 N0 S0<br>
+Sendmsg 6 提示:脚本执行耗时&lt;$STR(N0)&gt;微秒，自动单位为&lt;$STR(S0)&gt;<br>
+break
+<br><br><br><br>
+<font face="楷体" color="#ff0000" size="5"><strong>;以上属性修改及原子钟例子.游戏卡都是脚本问题导致，在线人数低于1000人就卡请排查服务端耗时大于2毫秒的高频率执行的脚本，低于1500人卡就排查所有大于2毫秒的脚本，排查后如自己无法解决(或换更高效的方式实现该功能)请提供重现服务端（将你无法优化的脚本放入该服务端内并可以直接测试）到论坛</strong></font><br><br>

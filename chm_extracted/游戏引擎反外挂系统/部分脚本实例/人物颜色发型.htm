@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>人物颜色发型</TITLE>
+</HEAD>
+<BODY>
+<P>人物颜色发型<BR><BR></P>
+<P><FONT size=2>[@HumFace]<BR>请选择美容项目....\ \<BR>『&lt;名称颜色</FONT><A><FONT 
+size=2>/@changcolor</FONT></A><FONT size=2>&gt;』\<BR>『&lt;换 发 型</FONT><A><FONT 
+size=2>/@ChangHair</FONT></A><FONT size=2>&gt;』\ \<BR>〖&lt;返回</FONT><A><FONT 
+size=2>/@main</FONT></A><FONT size=2>&gt;〗</FONT></P>
+<P><FONT size=2>[@ChangColor]<BR></FONT><FONT size=2>是不是觉得自己名称的颜色太单调了，换换试试！\ 
+\<BR>『&lt;复原</FONT><A><FONT size=2>/@Color255</FONT></A><FONT 
+size=2>&gt;』\<BR>『&lt;蓝色</FONT><A><FONT size=2>/@Color0</FONT></A><FONT 
+size=2>&gt;』&nbsp; 『&lt;绿色</FONT><A><FONT size=2>/@Color1</FONT></A><FONT 
+size=2>&gt;』&nbsp; 『&lt;黄色</FONT><A><FONT size=2>/@Color2</FONT></A><FONT 
+size=2>&gt;』&nbsp; 『&lt;橙色</FONT><A><FONT size=2>/@Color3</FONT></A><FONT 
+size=2>&gt;』\<BR>『&lt;土黄</FONT><A><FONT size=2>/@Color4</FONT></A><FONT 
+size=2>&gt;』&nbsp; 『&lt;红色</FONT><A><FONT size=2>/@Color5</FONT></A><FONT 
+size=2>&gt;』&nbsp; 『&lt;淡兰</FONT><A><FONT size=2>/@Color6</FONT></A><FONT 
+size=2>&gt;』&nbsp; 『&lt;淡绿</FONT><A><FONT size=2>/@Color7</FONT></A><FONT 
+size=2>&gt;』\ \<BR>〖&lt;返回</FONT><A><FONT size=2>/@MemberFace</FONT></A><FONT 
+size=2>&gt;〗 〖&lt;关闭</FONT><A><FONT size=2>/@exit</FONT></A><FONT 
+size=2>&gt;〗</FONT></P>
+<P><FONT size=2>[@Color255]<BR>#ACT<BR>CHANGENAMECOLOR 
+255<BR>#SAY<BR>呵呵，你的颜色已经改变。\ \<BR>〖&lt;返回</FONT><A><FONT 
+size=2>/@ChangColor</FONT></A><FONT size=2>&gt;〗 〖&lt;关闭</FONT><A><FONT 
+size=2>/@exit</FONT></A><FONT 
+size=2>&gt;〗<BR>[@Color0]<BR>#ACT<BR>CHANGENAMECOLOR 
+252<BR>#SAY<BR>呵呵，你的颜色已经改变。\ \<BR>〖&lt;返回</FONT><A><FONT 
+size=2>/@ChangColor</FONT></A><FONT size=2>&gt;〗 〖&lt;关闭</FONT><A><FONT 
+size=2>/@exit</FONT></A><FONT 
+size=2>&gt;〗<BR>[@Color1]<BR>#ACT<BR>CHANGENAMECOLOR 
+217<BR>#SAY<BR>呵呵，你的颜色已经改变。\ \<BR>〖&lt;返回</FONT><A><FONT 
+size=2>/@ChangColor</FONT></A><FONT size=2>&gt;〗 〖&lt;关闭</FONT><A><FONT 
+size=2>/@exit</FONT></A><FONT 
+size=2>&gt;〗<BR>[@Color2]<BR>#ACT<BR>CHANGENAMECOLOR 
+251<BR>#SAY<BR>呵呵，你的颜色已经改变。\ \<BR>〖&lt;返回</FONT><A><FONT 
+size=2>/@ChangColor</FONT></A><FONT size=2>&gt;〗 〖&lt;关闭</FONT><A><FONT 
+size=2>/@exit</FONT></A><FONT 
+size=2>&gt;〗<BR>[@Color3]<BR>#ACT<BR>CHANGENAMECOLOR 
+253<BR>#SAY<BR>呵呵，你的颜色已经改变。\ \<BR>〖&lt;返回</FONT><A><FONT 
+size=2>/@ChangColor</FONT></A><FONT size=2>&gt;〗 〖&lt;关闭</FONT><A><FONT 
+size=2>/@exit</FONT></A><FONT size=2>&gt;〗</FONT></P>
+<P><FONT size=2>[@Color4]<BR>#ACT<BR>CHANGENAMECOLOR 
+125<BR>#SAY<BR>呵呵，你的颜色已经改变。\ \<BR>〖&lt;返回</FONT><A><FONT 
+size=2>/@ChangColor</FONT></A><FONT size=2>&gt;〗</FONT></P>
+<P><FONT size=2>[@Color5]<BR>#ACT<BR>CHANGENAMECOLOR 
+249<BR>#SAY<BR>呵呵，你的颜色已经改变。\ \<BR>〖&lt;返回</FONT><A><FONT 
+size=2>/@ChangColor</FONT></A><FONT 
+size=2>&gt;〗<BR>[@Color6]<BR>#ACT<BR>CHANGENAMECOLOR 
+254<BR>#SAY<BR>呵呵，你的颜色已经改变。\ \<BR>〖&lt;返回</FONT><A><FONT 
+size=2>/@ChangColor</FONT></A><FONT 
+size=2>&gt;〗<BR>[@Color7]<BR>#ACT<BR>CHANGENAMECOLOR 
+250<BR>#SAY<BR>呵呵，你的颜色已经改变。\ \<BR>〖&lt;返回</FONT><A><FONT 
+size=2>/@ChangColor</FONT></A><FONT size=2>&gt;〗<BR>[@ChangHair]<BR></FONT><FONT 
+size=2>#IF<BR>gender man<BR>#ACT<BR>goto @ChangHairMan<BR>#ELSEACT<BR>goto 
+@ChangHairWoman<BR>[@ChangHairMan]<BR>想不想来个光头呀，酷呆了！！！\ 
+\<BR>『&lt;光头</FONT><A><FONT size=2>/@hairman0</FONT></A><FONT 
+size=2>&gt;』\<BR>『&lt;长头发</FONT><A><FONT size=2>/@hairman1</FONT></A><FONT 
+size=2>&gt;』\ \<BR>〖&lt;返回</FONT><A><FONT size=2>/@MemberFace</FONT></A><FONT 
+size=2>&gt;〗 〖&lt;关闭</FONT><A><FONT size=2>/@exit</FONT></A><FONT 
+size=2>&gt;〗<BR>[@hairman0]<BR>#ACT<BR>&nbsp; HAIRSTYLE 
+0<BR>#SAY<BR>呵呵，光头是不是很酷呀！！！ \ \<BR>〖&lt;返回</FONT><A><FONT 
+size=2>/@ChangHairMan</FONT></A><FONT 
+size=2>&gt;〗<BR>[@hairman1]<BR>#ACT<BR>&nbsp; HAIRSTYLE 
+1<BR>#SAY<BR>呵呵，你的发型已经改变了... \ \<BR>〖&lt;返回</FONT><A><FONT 
+size=2>/@ChangHairMan</FONT></A><FONT size=2>&gt;〗</FONT></P>
+<P><FONT size=2>[@ChangHairWoman]<BR>『&lt;短发型</FONT><A><FONT 
+size=2>/@hairWoman0</FONT></A><FONT size=2>&gt;』\<BR>『&lt;长发型</FONT><A><FONT 
+size=2>/@hairWoman1</FONT></A><FONT size=2>&gt;』\ \<BR>〖&lt;返回</FONT><A><FONT 
+size=2>/@MemberFace</FONT></A><FONT size=2>&gt;〗 〖&lt;关闭</FONT><A><FONT 
+size=2>/@exit</FONT></A><FONT size=2>&gt;〗<BR>[@hairWoman0]<BR>#ACT<BR>&nbsp; 
+HAIRSTYLE 0<BR>#SAY<BR>呵呵，你的发型已经改变了... \ \<BR>〖&lt;返回</FONT><A><FONT 
+size=2>/@ChangHairWoman</FONT></A><FONT size=2>&gt;〗 〖&lt;关闭</FONT><A><FONT 
+size=2>/@Exit</FONT></A><FONT size=2>&gt;〗<BR>[@hairWoman1]<BR>#ACT<BR>&nbsp; 
+HAIRSTYLE 1<BR>#SAY<BR>呵呵，你的发型已经改变了... \ \<BR>〖&lt;返回</FONT><A><FONT 
+size=2>/@ChangHairWoman</FONT></A><FONT size=2>&gt;〗 〖&lt;关闭</FONT><A><FONT 
+size=2>/@Exit</FONT></A><FONT size=2>&gt;〗</FONT> </P>
+</BODY>
+</HTML>
+ 

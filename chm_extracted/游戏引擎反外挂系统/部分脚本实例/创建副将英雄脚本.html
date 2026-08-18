@@ -1,0 +1,398 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=gb2312">
+<META name="GENERATOR" content="QuickCHM">
+<TITLE>创建副将英雄脚本</TITLE>
+</HEAD>
+<BODY>
+<p>;@@BuHero 是创建和删除副将英雄的标志</p>
+;@HeroNameFilter 当创建英雄输入名称中有禁止字符或者名称超过14个字符触发此脚本</p>
+<p>;以下是酒馆_辰星的脚本</p>
+<p>(@@BuHero @PlayDrink )<br>
+  [@main]<br>
+  魔法不单是华丽的攻击，更需要在战斗中感受它的使用技巧。现\<br>
+  在是时间让年轻的卧龙英雄们去体会战斗中的艰辛了。如果能在修\<br>
+  行中遇到值追随一生的伙伴，对他们来说也许就更有意义！\ \<br>
+  &lt;召唤卧龙英雄/@召唤卧龙英雄&gt;\<br>
+  &lt;寄存领回英雄/@寄领英雄&gt; \<br>
+  &lt;主将副将英雄培养/@主副英雄培养&gt; \<br>
+&lt;我不想再带领卧龙英雄/@不带英雄&gt;\</p>
+<p>[@召唤卧龙英雄]<br>
+  &lt;我想找卧龙英雄做为我的历练伙伴/@领取卧龙英雄&gt;\ \<br>
+  &lt;返回/@main&gt;</p>
+<p>[@寄领英雄]<br>
+  &lt;我想找您帮个忙，我想寄放英雄/@寄放英雄&gt;\<br>
+  &lt;我想领回英雄/@领回英雄&gt; \ \<br>
+  &lt;返回/@main&gt;<br>
+</p>
+<p>[@主副英雄培养]<br>
+  #if<br>
+  CheckHeroAutoPractice<br>
+  #say<br>
+  看来你的副将英雄正在进行自我修炼....\ \<br>
+  &lt;我要停止副将英雄的自我修炼/@停止自我修炼&gt;\ \<br>
+  &lt;查看副将英雄修炼时间/@查看修炼时间&gt;<br>
+  #elsesay<br>
+  随着我们多年以来对英雄的训练，我们发现了一种新的培养方式和\<br>
+  战斗方式。新的培养方式能够让同一英雄以三职业不同状态出战。\<br>
+  新的战斗方式能够让你在战斗中召唤第二个英雄替换英雄进行战斗，\<br>
+  从而对战局产生变化。\<br>
+  当然，要想实现这一切的前提是必须对你的卧龙英雄和白日门英雄\<br>
+  进行评定，选出主将和副将，才能够进行新的培养方式。\<br>
+  &lt;主将副将英雄评定/@主副将评定&gt;        &lt;副将英雄自我修炼/@自我修炼&gt;       &lt;英雄的历史/@英雄历史&gt;\<br>
+  &lt;主将副将英雄指南/@英雄指南&gt;\<br>
+  &lt;返回/@main&gt;</p>
+<p>&nbsp;</p>
+<p>[@停止自我修炼]<br>
+  #if<br>
+  #ACT<br>
+  StopHeroAutoPractice<br>
+  Close</p>
+<p>[@StopHeroAuto]<br>
+  #if<br>
+  #ACT<br>
+  give 金创药 1<br>
+  Close</p>
+<p>[@查看修炼时间]<br>
+  你的副将英雄本次的修炼时间为:&lt;$HEROAUTOTIME&gt;秒\<br>
+  &lt;返回/@主副英雄培养&gt;</p>
+<p>[@主副将评定]<br>
+  #if<br>
+  #act<br>
+  ASSESSMENTHERO</p>
+<p>[@自我修炼]<br>
+  #if<br>
+  CheckDeputyHero<br>
+  ;检测当前在线的是卧龙英雄<br>
+  #say<br>
+  请注意：副将英雄的等级上限为主将英雄当前等级减三，副将\<br>
+  英雄的内功等级上限为主将英雄当前内功等级减三。一旦副将\<br>
+  英雄的等级或内功等级达到上限，自动修炼将不能获得相应的\<br>
+  经验或内功经验。\<br>
+  当且仅当副将英雄自动修炼满2小时，且在酒馆英雄NPC处终止\<br>
+  训练时，将有几率带回训练过程中拾取的物品。\ \<br>
+  &lt;副将英雄自动修炼/@自动修炼&gt;<br>
+  #elsesay<br>
+  请先召唤出你的副将英雄吧......\</p>
+<p>[@自动修炼]<br>
+  #if<br>
+  #ACT<br>
+  OpenHeroAutoPractice<br>
+  Close</p>
+<p>[@领回英雄]<br>
+  &lt;$USERNAME&gt;,想和你的英雄一起闯荡玛珐大陆吗？\ \<br>
+  &lt;是的，我是来接他走的/@GetHero&gt;\ \<br>
+  &lt;不了，还要托你照顾一段时间/@exit&gt;\<br>
+</p>
+<p>[@GetHero]<br>
+  #if<br>
+  #act<br>
+  GetHero<br>
+</p>
+<p>[~PlayDrink_Already]<br>
+  #if<br>
+  #act<br>
+  #Say<br>
+  嗯......真是香醇的美酒,令我心情舒畅。\&lt;寄放英雄/@SaveHero&gt;</p>
+<p>[~PlayDrink_Already_NotHero]<br>
+  #if<br>
+  #act<br>
+  #Say <br>
+  你没喝多吧？你身边空无一人，还说要把英雄\托付我？\</p>
+<p>[~PlayDrink_Already_HeroBegin]<br>
+  #if<br>
+  #act<br>
+  #Say<br>
+  你没喝多吧？你身边空无一人，还说要把英雄\托付我？\&lt;重新寄放英雄/@SaveHero&gt;<br>
+</p>
+<p>[@领取卧龙英雄]<br>
+  #if<br>
+  HAVHERO TRUE<br>
+  #say<br>
+  你已经有卧龙英雄了,还想再领取?\<br>
+  #elsesay<br>
+  &lt;$USERNAME&gt;，休息一下吧。不要忽视声明中的美好。\<br>
+  如同杯中的美酒一般，一起喝吗？\<br>
+　
+\  <br>
+  &lt;没有问题，我这里有上好的美酒/@请喝酒&gt;\<br>
+　
+\  <br>
+  &lt;我不会喝酒……/@exit&gt;\</p>
+<p>[@请喝酒]<br>
+  #if<br>
+  HAVHERO<br>
+  #say<br>
+  你精力有限,只能带领一位英雄在玛法大陆历练。\<br>
+  如果你想再带领一位英雄,可以先将身边的英雄安顿在我们这里\<br>
+  #elsesay<br>
+  好！好！快拿酒来，让小二倒进六个坛中。\<br>
+  每个坛里的酒有多有少，喝多喝少就看运气。\<br>
+  我们就来拿这六坛酒来斗一斗！\ \<br>
+  &lt;好的，来吧/@斗酒规则&gt;\</p>
+<p>[@斗酒规则]<br>
+  #if<br>
+  #act<br>
+  Mov M0 1 <br>
+  #say<br>
+  &lt;斗酒规则提示&gt;：双方猜拳胜者，将有权选择桌面上的一坛酒，\<br>
+  让双方的任一个人饮下，并会根据其酒精浓度，在酒量槽中相应显示。\<br>
+  在桌面上的全部饮完后，\<br>
+  且在双方均未喝醉（不超过酒槽内红线）的情况下，\<br>
+  如果玩家酒槽内酒值不超过NPC酒值，便可赢得斗酒。\<br>
+  &lt;操作提示&gt;：在选择出拳型后，点击出拳按钮，\<br>
+  双方将出猜拳胜负，如果赢了，\<br>
+  请单击桌面上的任一坛酒，并指定双方任一人喝下。\<br>
+  &lt;我明白了,摆酒吧/@PlayDrink&gt;\</p>
+<p>[@PlayDrink]<br>
+  请把酒放上去</p>
+<p>[~PlayDrink_Game]<br>
+  #if<br>
+  #act<br>
+  OPENPLAYDRINK 2 晨星 DRINK<br>
+  PLAYDRINKMSG 1 &lt;$USERNAME&gt;，酒之道也可以算作我修行的一部\分，让我看看你的表现吧。<br>
+  PLAYDRINKMSG 2 嘿嘿……我可不会比你先醉倒，保管陪\你喝爽了！</p>
+<p>[~PlayDrink_Self_Loss]<br>
+  #if<br>
+  #act<br>
+  PLAYDRINKMSG 1 这点酒量，我怎么放心让我的弟子\跟随你啊！<br>
+  PLAYDRINKMSG 2 惭愧惭愧，我一定努力!\&lt;招幕英雄/@CrHero&gt;</p>
+<p>[~PlayDrink_SelfToNpc]<br>
+  #if<br>
+  #act<br>
+  PLAYDRINKMSG 1 好！<br>
+  PLAYDRINKMSG 2 就这坛了！请前辈来喝!</p>
+<p>[~PlayDrink_SelfToSelf]<br>
+  #if<br>
+  #act<br>
+  PLAYDRINKMSG 1 ……<br>
+  PLAYDRINKMSG 2 就这坛了！我自己喝！</p>
+<p>[~PlayDrink_NpcToSelf]<br>
+  #if<br>
+  #act<br>
+  PLAYDRINKMSG 1 就这坛了！你来喝吧！<br>
+  PLAYDRINKMSG 2 谢谢前辈！</p>
+<p>[~PlayDrink_NpcToNpc]<br>
+  #if<br>
+  #act<br>
+  PLAYDRINKMSG 1 就这坛了！我来喝！<br>
+  PLAYDRINKMSG 2 前辈尽管喝！</p>
+<p>[~PlayDrink_Dogfall]<br>
+  #if<br>
+  #act<br>
+  PLAYDRINKMSG 1 那再来一局吧。<br>
+  PLAYDRINKMSG 2 来就来！</p>
+<p>[~PlayDrink_NpcWil]<br>
+  #if<br>
+  #act<br>
+  PLAYDRINKMSG 1 嗯，不错，那我选了。<br>
+  PLAYDRINKMSG 2 真倒霉，我就不信赢不了你。</p>
+<p>[~PlayDrink_PlayWil]<br>
+  #if<br>
+  #act<br>
+  PLAYDRINKMSG 1 &lt;$USERNAME&gt;，你选吧。<br>
+  PLAYDRINKMSG 2 哈哈哈，还是我厉害吧~\选哪一坛好呢？</p>
+<p>[~PlayDrink_Self_Drunk]<br>
+  #if<br>
+  #act<br>
+  PLAYDRINKMSG 1 看你这么努力，英雄我就交给你了\！<br>
+  PLAYDRINKMSG 2 惭愧惭愧，我一定努力!\&lt;招幕英雄/@CrHero&gt;</p>
+<p>[~PlayDrink_Npc_Drunk]<br>
+  #if<br>
+  #act<br>
+  PLAYDRINKMSG 1 呃,看来令天我是有点喝多了……！<br>
+  PLAYDRINKMSG 2 啊……前辈,您别醉呀……\&lt;招幕英雄/@CrHero&gt;</p>
+<p>[@CloseDrink]<br>
+  #if<br>
+  #act<br>
+  CLOSEDRINK<br>
+</p>
+<p>[~PlayDrink_Npc_Loss]<br>
+  #if<br>
+  equal M0 1<br>
+  #act<br>
+  PLAYDRINKMSG 1 好久没有这种感觉了,酒意可谓&quot;点到\即止&quot;,看来你也深明其理啦.！<br>
+  PLAYDRINKMSG 2 呵呵,这次陪前辈喝酒,前辈已经喝得\尽兴,不知可否帮我个忙?\&lt;招幕英雄/@CrHero&gt;!<br>
+  #elseact<br>
+  PLAYDRINKMSG 1 好久没有这种感觉了,酒意可谓&quot;点到\即止&quot;,看来你也深明其理啦.！<br>
+  PLAYDRINKMSG 2 呵呵,这次陪前辈喝酒,前辈已经喝得\尽兴,不知可否帮我个忙?\&lt;删除英雄/@DelMyHero&gt;!</p>
+<p>[@CrHero]<br>
+  #if<br>
+  #act<br>
+  CLOSEDRINK<br>
+  #say<br>
+  恩……好酒啊，既然你请我喝酒了。\<br>
+  请先给您的卧龙英雄取个名字吧。\<br>
+  &lt;英雄起名/@@buHero&gt;\</p>
+<p>[@@buHero]<br>
+  你要带一个男法师还是法师士卧龙英雄呢？\<br>
+  &lt;卧龙男法师英雄/@CREATEHERO_TAOS_MAN&gt;\<br>
+  &lt;卧龙女法师英雄/@CREATEHERO_TAOS_WOM&gt;\<br>
+  \</p>
+<p>[@CREATEHERO_TAOS_MAN]<br>
+  #ACT<br>
+  CREATEHERO 1 0 TRUE<br>
+  [@CREATEHERO_TAOS_WOM]<br>
+  #ACT<br>
+  CREATEHERO 1 1 TRUE<br>
+  //返回消息<br>
+</p>
+<p>[@HAVHERO]<br>
+  您已经有英雄了。\ \<br>
+  &lt;噢，也许是我记错了/@exit&gt;</p>
+<p>[@SetHeroName]<br>
+  请先给您的卧龙英雄取个名字吧。\ \<br>
+  &lt;关闭/@exit&gt;</p>
+<p>[@寄放英雄]<br>
+  &lt;$USERNAME&gt;，休息一下吧。不要忽视声明中的美好。\<br>
+  如同杯中的美酒一般，一起喝吗？\<br>
+　
+\  <br>
+  &lt;没有问题，我这里有上好的美酒/@Drink&gt;\<br>
+　
+\  <br>
+  &lt;我不会喝酒……/@exit&gt;\</p>
+<p>[@Drink]<br>
+  #if<br>
+  #act<br>
+  OPENPLAYDRINK 2 辰星<br>
+  PLAYDRINKMSG 1 酒意需要品味，生命的动人之处常会在不经意\之间显现。我们在小酌中慢慢体会\吧。<br>
+  PLAYDRINKMSG 2 小提示：请将包裹栏中的酒放至酒碟上。</p>
+<p>[~PlayDrink_Ok]<br>
+  #if<br>
+  #act<br>
+  PLAYDRINKMSG 1 天道自然，在自然之中追寻平衡本百易事，但\这酒令我有了一些顿悟。\&lt;寄放英雄/@SaveHero&gt;</p>
+<p>[@SaveHero]<br>
+  #if<br>
+  #act<br>
+  SAVEHERO<br>
+</p>
+<p>[@NoSaveHero2]<br>
+  还是不要寄放了吧，让你的主将英雄同你一起战斗吧......</p>
+<p>[@NoSaveHero3]<br>
+  还是不要寄放了吧，让你的副将英雄同你一起战斗吧......</p>
+<p>[~PlayDrink_HeroOk]<br>
+  #if<br>
+  #act<br>
+  CLOSEDRINK</p>
+<p>[~PlayDrink_NotHero]<br>
+  #if<br>
+  #act<br>
+  CLOSEDRINK<br>
+  PLAYDRINKMSG 1 你没喝多吧？你身边空无一人，还说要把英雄\托付我？\</p>
+<p>[~PlayDrink_HeroBegin]<br>
+  #if<br>
+  #act<br>
+  PLAYDRINKMSG 1 你你没喝多吧？你身边空无一人，还说要把英雄\托付我？\&lt;重新寄放英雄/@SaveHero&gt;</p>
+<p>[@不带英雄]<br>
+  你想把你的伙伴送回卧龙山庄？\<br>
+  你要知道，修行结束回到卧龙山庄的子弟,\<br>
+  不可能再次像现在这样随你一同探索玛法大陆了。\<br>
+  你真的想这样么？你要是决定了，我们就来斗上一盘酒!\<br>
+  待我喝好了，我就帮你的伙伴送回山庄。\<br>
+  &lt;是的，拜托你了/@是的&gt; \<br>
+　
+\  <br>
+  &lt;我还想与我的伙伴一起继续战斗/@exit&gt;\</p>
+<p>[@是的]<br>
+  好！好！快拿酒来，让小二倒进六个酒坛中。\<br>
+  没个酒坛中的酒有多有少，喝多喝少就看运气了。\<br>
+  我们就拿这六个酒坛中的酒来斗一斗！\ \<br>
+  &lt;好的，来吧/@DJSM&gt;\</p>
+<p>[@DJSM]<br>
+  #if<br>
+  #act<br>
+  Mov M0 2<br>
+  #say<br>
+  &lt;斗酒规则提示&gt;：双方猜拳胜者，将有权选择桌面上的一坛酒，\<br>
+  让双方的任一个人饮下，并会根据其酒精浓度，在酒量槽中相应显示。\<br>
+  在桌面上的全部饮完后，\<br>
+  且在双方均未喝醉（不超过酒槽内红线）的情况下，\<br>
+  如果玩家酒槽内酒值不超过NPC酒值，便可赢得斗酒。\<br>
+  &lt;操作提示&gt;：在选择出拳型后，点击出拳按钮，\<br>
+  双方将出猜拳胜负，如果赢了，\<br>
+  请单击桌面上的任一坛酒，并指定双方任一人喝下。\<br>
+  &lt;我明白了/@PlayDrink&gt;\<br>
+</p>
+<p>[@DelMyHero]<br>
+  #ACT<br>
+  DELETEHERO<br>
+  [@NotHAVHERO]<br>
+  你没有英雄。\ \<br>
+  &lt;噢，也许是我记错了/@exit&gt;<br>
+  [@LogOutHeroFirst]<br>
+  请将英雄设置下线！在来找我吧！\ <br>
+　　
+\  <br>
+  &lt;好的/@exit&gt;<br>
+  [@NotDelHero]<br>
+  评定主副将英雄后，不能进行删除英雄！\ <br>
+　　
+\  <br>
+  &lt;好的/@exit&gt;</p>
+<p>[@DeleteHeroOK]<br>
+  既然你请我喝酒了，那我就答应你的要求。\ <br>
+  我会尽快把你的英雄送回山庄的\\<br>
+  &lt;那谢谢你了/@exit&gt;</p>
+<p>[@英雄历史]<br>
+  玛法大陆上有两个重要的势力，白日门和卧龙山庄。\<br>
+  在这两个地方，勇士们都能够召唤到英雄来协助自已。\<br>
+  每一个势力最多只能领取一个英雄。一直以来，勇士们只能率领一\<br>
+  名英雄征战玛法。另一名的英雄被寄存在酒馆外的翔天等人处。\<br>
+  勇士们通过苍月岛仓库里的神秘人找到英雄地的长老，在他那里召\<br>
+  唤&lt;白日门英雄/fcolor=249&gt;，通过酒馆外的翔天等人处召唤&lt;卧龙英雄/fcolor=249&gt;。\<br>
+  现在，当你同时拥有两个英雄后，可以在酒馆外的翔天等人接受\<br>
+  &lt;新的英雄培养/fcolor=249&gt;。新英雄时代即将来临！\<br>
+  &lt;返回/@主副英雄培养&gt;</p>
+<p>[@英雄指南]<br>
+  《主将副将英雄指南》\ \<br>
+  1、&lt;如何将卧龙英雄、白日门英雄评定为主将英雄、副将英雄？/@如何评定&gt;\<br>
+  2、&lt;主将、副将英雄有何特色？/@有何特色&gt;\<br>
+  3、&lt;副将英雄的操作与训练。/@如何操作&gt;\<br>
+  4、&lt;什么时候是复仇模式?/@复仇模式&gt;\ \<br>
+  &lt;返回/@主副英雄培养&gt;</p>
+<p>[@如何评定]<br>
+  必须首先拥有白日门英雄和卧龙英雄，才能够对其进行评定，成为\<br>
+  主将英雄和副将英雄。白日门英雄可以通过苍月岛的仓库内神秘人获\<br>
+  得。卧龙英雄，可以通过酒馆外的翔天等人处召唤。拥有两名英雄名，\<br>
+  将其寄放在酒馆外的翔天等人处，即可使其参与英雄评定，\<br>
+  从而决定主将英雄和副将英雄的人选。\<br>
+  &lt;请注意：一旦评定成功，将不可更改，且英雄无法删除！/fcolor=249&gt;\ \<br>
+  &lt;我知道了/@英雄指南&gt;</p>
+<p>[@有何特色]<br>
+  一旦成功评定主将英雄和副将英雄，两个英雄将可轮流召唤出战。\<br>
+  主将英雄的实力决定了副将英雄成长的空间。只有当主将英雄的等级、\<br>
+  内功等级比副将英雄高3级，副将英雄才能分别获得经验、内功经验。\<br>
+  副将英雄可以战、法、道的不同形态出战。主将英雄累积的经验、\<br>
+  内功经验等，在召唤出副将英雄时，能够直接向副将英雄传功。\ \<br>
+  &lt;我知道了/@英雄指南&gt;</p>
+<p>[@如何操作]<br>
+  在英雄包裹按键右侧新增副将英雄的召唤按钮，也可在F12辅助\<br>
+  工具中，设置召唤的快捷键。成功评定出主将英雄和副将英雄后，\<br>
+  必须在酒馆外的翔天等人处参与副将英雄的初次训练后，\<br>
+  才能开始副将英雄的自我修炼。初次训练过程中获得的经验奖励\<br>
+  与副将英雄的等级相关，等级越高，获得的经验奖励越多。\<br>
+  副将英雄的自我修炼可根据不同的修炼地图和强度，选择适合的\<br>
+  修炼方式 。小退或下线将不计入修炼时间。\ \<br>
+  &lt;我知道了/@英雄指南&gt;</p>
+<p>[@复仇模式]<br>
+  当主将英雄死亡时，开始1分钟复仇倒计时。在倒计时时间内，\<br>
+  成功召唤出副将英雄，则副将英雄进入到复仇状态，\<br>
+  其基础属性将获得大幅提升，提升效果持续3分钟。\ \<br>
+  &lt;我知道了/@英雄指南&gt;</p>
+<p></p>
+
+[@HeroNameFilter]<br>
+创建英雄失败，名字中包含禁止字符或长度超过14位字符……\ \<br>
+<br>
+&lt;关闭/@exit&gt;<br>
+<br><br><br>
+
+
+</BODY>
+</HTML>
+<br><hr><br>
+
+
+

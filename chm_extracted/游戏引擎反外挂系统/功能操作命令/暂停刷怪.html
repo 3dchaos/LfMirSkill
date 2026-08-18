@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>暂停刷怪,停止刷怪</title>
+</head>
+
+<body>
+<p>说明: 暂停游戏刷怪</p>
+
+</BR></BR></BR>
+检测是否暂停刷怪：</BR>
+CheckStopM2MakeMon</BR>
+</BR></BR>
+
+暂停M2Server刷怪</BR>
+StopM2MakeMon 参数1(0:不暂停；1:暂停)</BR>
+</BR></BR>
+
+
+[@test]</BR>
+#if</BR>
+CheckStopM2MakeMon</BR>
+#act</BR>
+StopM2MakeMon 0</BR>
+sendmsg 6 现在已经恢复M2刷怪</BR>
+#elseact</BR>
+StopM2MakeMon 1</BR>
+sendmsg 6 现在已经暂停M2刷怪</BR></BR></BR></BR>
+
+
+
+
+
+
+</body>
+</html>

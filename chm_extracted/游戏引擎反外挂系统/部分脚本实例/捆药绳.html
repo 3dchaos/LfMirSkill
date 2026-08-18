@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>捆药绳[!]</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>捆药绳.</FONT></FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT>将多件物品捆绑为一件物品</STRONG></FONT></P>
+<P>示列：<br><br>
+
+DB：2 1 1 31  ....后面自己填写，持久为使用次数 注意：source = -1  时将不会被放入下面6格<br><br>
+[@STDMODEFUNC22]<BR>
+#IF<BR>
+CHECKITEM 强效太阳水 6<BR>
+#ACT<BR>
+TAKE 强效太阳水 6<BR>
+GIVE 太阳水包 1<BR>
+#ELSEACT<BR>
+AddFunItemDura 1000 <BR>
+
+</BODY>
+</HTML>

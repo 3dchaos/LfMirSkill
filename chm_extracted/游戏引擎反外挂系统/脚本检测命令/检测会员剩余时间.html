@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>检测会员剩余时间</title>
+</head>
+
+<body>
+<p>格式:   检测会员剩余时间 文件名称 过期是否删除(0不删除 1删除) 变量1(到期时间 字符变量) 变量2(剩余天数 数字变量) 变量3(剩余小时 数字变量)   变量4(剩余分钟 数字变量)</p>
+<p>&nbsp; </p>
+<p>例子:?</p>
+<p><br>
+#IF  <BR>
+  CHECKNAMEDATETIMELIST   ..\QuestDiary\会员名单.txt 1 &lt;$STR(S1)&gt; &lt;$STR(N1)&gt; &lt;$STR(N2)&gt;&lt;$STR(N3)&gt;<BR>
+  #ACT<BR>
+  SENDMSG 6   你的会员到期时间是&lt;$STR(S1)&gt;【剩余天数=&lt;$STR(N1)&gt;】【剩余小时=&lt;$STR(N2)&gt;】【剩余分钟=&lt;$STR(N3)&gt;】   255 253<BR>
+  #ELSEACT<BR>
+  SENDMSG 6 你不是会员或已过期，请及时充值！ 255 253</p>
+<p>删除会员还是使用原来的老命令DELNAMEDATELIST</p>
+
+<br><br><br>
+;----------------------------------------------------------------<br><br>
+以下命令支持绝对路径<br><br>
+
+ClearNameList 文件名 是否绝对路径（0或空：相对路径；1：绝对路径）<br>
+AddNameDateList  文件名 是否绝对路径（0或空：相对路径；1：绝对路径）<br>
+DelNameDateList  文件名 是否绝对路径（0或空：相对路径；1：绝对路径）<br><br><br><br>
+<br>
+</body>
+</html>

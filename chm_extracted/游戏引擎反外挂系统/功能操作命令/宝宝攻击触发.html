@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>宝宝攻击触发</title>
+</head>
+
+<body>
+<p>说明: 宝宝攻击触发</p>
+</br></br></br>
+
+
+[@SlaveMagicStruck]</br>
+#ACT </br>
+SENDMSG 6 你的宝宝被魔法攻击了</br>
+BREAK</br></br>
+
+[@SlaveMagicAttack]</br>
+#ACT </br>
+SENDMSG 6 你的宝宝魔法攻击了目标</br>
+BREAK</br></br>
+
+[@SlaveStruck]</br>
+#ACT </br>
+SENDMSG 6 你的宝宝被物理攻击了</br>
+BREAK</br></br>
+
+
+[@SlaveAttack]</br>
+#ACT </br>
+SENDMSG 6 你的宝宝物理攻击目标</br>
+BREAK</br></br></br></br></br>
+
+
+
+-----------------------宝宝攻击触发和魔法攻击触发中获取本次触发的宝宝名称-------------------</br></br>
+
+增加变量&lt;$CurSlaveName&gt;，仅用于[@SlaveAttack]及[@SlaveMagicAttack]中</br></br>
+
+[@SlaveAttack]</br>
+#ACT</br>
+SendMsg 5 当前攻击宝宝名为&lt;$CurSlaveName&gt;</br></br>
+
+[@SlaveAttack]</br>
+#IF</br>
+EQUAL &lt;$CurSlaveName&gt; 蜈蚣</br>
+#ACT </br>
+SENDMSG 6 你的蜈蚣宝宝在攻击目标</br></br>
+
+#IF</br>
+EQUAL &lt;$CurSlaveName&gt; 骷髅</br>
+#ACT </br>
+SENDMSG 6 你的骷髅宝宝在攻击目标</br></br></br>
+
+
+显示完整宝宝名称不去数字的变量：&lt;$CurSlaveFullName&gt; 按需使用</br></br></br></br></br></br></br></br></br>
+
+
+-----------------------宝宝攻击前\掉血前触发(含分身)-------------------</br></br>
+
+@SlaveAttackDamage   宝宝（含分身）</br>
+@SlaveStruckDamage   宝宝（含分身）</br></br></br></br>
+
+[@GamePetStruckDamage]</br>
+#ACT</br>
+;****** 宠物</br>
+SENDMSG 6 宠物被攻击，掉血量为&lt;$Pet.DamageValue&gt;，抵御掉血量的50%</br>
+Pet.ChangeDamageValue 1 - 50</br>
+</br></br></br>
+[@SlaveStruckDamage]</br>
+#ACT</br>
+;****** 宝宝不像宠物或英雄，只有一个，可以用H.或Pet.直接访问到这个宠物；而宝宝可能存在多个，多级脚本中就不好处理，所以宝宝用人物的</br>
+;SENDMSG 6 宝宝被攻击，掉血量为&lt;$DamageValue&gt;，抵御掉血量的50%</br>
+ChangeDamageValue 1 - 50</br>
+</br></br>
+
+[@SlaveAttackDamage]</br>
+#ACT</br>
+;****** 宝宝不像宠物或英雄，只有一个，可以用H.或Pet.直接访问到这个宠物；而宝宝可能存在多个，多级脚本中就不好处理，所以宝宝用人物的</br>
+SENDMSG 6 你的宝宝攻击【&lt;$CURRRTARGETNAME&gt;】。，锁定目标&lt;$ATTACKMONSTER_NAMEEX&gt;。坐标：&lt;$ATTACKMONSTER_X&gt;:&lt;$ATTACKMONSTER_Y>掉血量为&lt;$DamageValue&gt;</br>
+;SENDMSG 6 宝宝攻击目标，掉血量为&lt;$DamageValue&gt;，攻击加成10点血量</br>
+ChangeDamageValue 0 + 10</br>
+</br></br>
+
+
+
+
+------------------------------------------</br>
+</br>
+</br>
+
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<title>天气效果[!]</title>
+<style type="text/css">
+<!--
+.STYLE1 {color: #FF0000}
+-->
+</style>
+<p><strong><font size="5">天气效果</font></strong></p>
+<p><font size="2"><span class="STYLE1"><strong>功能：</strong>天气效果</span><br />
+      <strong>格式：</strong>无<br />
+      <strong>说明：</strong>无<br />
+      <strong>例：</strong></font></p>
+<p>地图参数 DARK 黑暗效果<br />
+  地图参数 DAY 白天效果<br />
+如果同时存在以DAY参数效果为准</p>
+<p>以下三个效果读取客户端的Effect_EX.Wil和Effect_SE.Wil如果客户端没有这2个文件，效果显示不了</p>
+<p><span class="STYLE1">增加天气效果脚本命令</span>SETWEATHEREFFECT<br />
+  格式:SETWEATHEREFFECT 地图号 天气效果(0=关闭天气效果 1=黄沙效果 2=花瓣效果 3=下雪效果 扩展为4-21) 有效时间(秒)  是否黑暗(0正常 1黑暗)  wav\音乐文件.后缀(文件名长度不超过50) </p>
+示列1:脚本格式:SETWEATHEREFFECT 3 3 600 0 wav\刮风声音.wav  <br />            
+      脚本解释：    土城 下雪效果 时间10分钟 屏幕不暗 读取客户端wav内的刮风声音.wav)  --如声音文件不存在客户端不会播放声音</p>
+
+示列2:脚本格式:SETWEATHEREFFECT 3 3 600  (地图3 播放下雪效果 持续时间10分钟 ,后面参数如全不填写默认为不黑暗和不播放音乐 )</p>
+
+
+
+
+------------------------------------------以下为扩展------------------------------------------------------------------------------</p>
+<p><span class="STYLE1">天气效果扩展:</span>Effect_Weather.wzl<br />
+
+扩展一个文件特效为Effect_Weather.wzl 每30张图片为一组天气特效,特效代码为 4-21 如制作的图片不足30张可重复导入为30张即可.</p>
+
+特效代码4为Effect_Weather.wzl图片编号0-29,5为30-59以此类推...使用方法同上,如客户端无此补丁则显示不了效果.</p>
+
+
+注:地图变暗可用于下雨效果..</p>

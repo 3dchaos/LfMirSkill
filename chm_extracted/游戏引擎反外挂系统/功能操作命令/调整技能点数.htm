@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>调整技能点数</title>
+</head>
+
+<body>
+
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>&nbsp;&nbsp;&nbsp; 
+脚本调整技能点数。</FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT></STRONG><BR>&nbsp;&nbsp;&nbsp; </FONT><font size="2">
+CHANGETRANPOINT</font><FONT size=2> 
+控制符(+,-,=)&nbsp; 点数</FONT></P>
+
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>英雄相关格式：</FONT></STRONG><BR>&nbsp;&nbsp;&nbsp; </FONT><font size="2">
+H.CHANGETRANPOINT</font><FONT size=2> 
+控制符(+,-,=)&nbsp; 点数</FONT></P>
+<P><FONT size=2>;==========================================<BR>[@</FONT><font size="2">CHANGETRANPOINT1]<BR>#IF<BR>#ACT<BR>&nbsp; 
+CHANGETRANPOINT 雷电术 = 100<BR>;==========================================<BR><BR>;==========================================<BR>;<BR>[@</font><font size="2">CHANGETRANPOINT2]<BR>#IF<BR>#ACT<BR>&nbsp; 
+CHANGETRANPOINT 雷电术 + 200<BR><BR>;==========================================<BR><BR>;==========================================<BR>;<BR>[@</font><font size="2">CHANGETRANPOINT3]<BR>#IF<BR>#ACT<BR>&nbsp; 
+CHANGETRANPOINT 雷电术 - 10<BR><BR>;==========================================</font></P>
+<P>　</P>
+<BR><BR>
+
+检测技能点数命令: CheckTranPoint 技能名称 比较符(&gt; = &lt;) 值<BR><BR><BR>
+
+[@CHANGETRANPOINT31]<BR>
+#IF<BR>
+CHANGETRANPOINT 雷电术 &gt; 10<BR>
+#ACT<BR>
+SENDMSG 6 雷电术技能点数大于10<BR>
+#elseact<BR>
+SENDMSG 6 雷电术技能点数小于10<BR><BR><BR>
+
+
+
+</body>
+
+</html>

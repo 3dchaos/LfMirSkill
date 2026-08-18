@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>打开自定义NPC对话框</title>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<body><FONT face=Arial size=2>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT color=#0000ff>功能说明:</FONT> 
+打开自定义NPC对话框<BR><BR></FONT></FONT></P>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT 
+color=#0000ff>说明：</FONT>使用OpenBigDialogBox命令创建自定义NPC对话框<BR></FONT></FONT></P>
+<P><FONT face=Fixedsys size=2></br></br>
+
+
+</br></br>
+--------------------------------------------------------</br></br>
+ <B><font color="red" >命令格式</B></Font></br></br></br>
+
+OpenBigDialogBox 参数如下：</br></br>
+
+参数1：WIL文件序号</br>
+参数2：图片序号</br>
+参数3：是否可以移动</br>
+参数4：对话框在屏幕上的显示位置（0:左上角; 1:右上角; 2:左下角; 3:右下角; 4:居中)</br>
+参数5：对话框微调坐标X</br>
+参数6：对话框微调坐标Y</br>
+参数7：是否显示关闭按钮（不需要显示则需要填写0，显示为1）</br>
+参数8：关闭按钮  X</br>
+参数9：关闭按钮  Y</br></br></br></br>
+
+关闭自定义对话框命令：CloseBigDialogBox</br></br></br></br>
+
+--------------------------------------------------------</br></br>
+
+示例脚本：</br></br>
+
+[@测试1]</br>
+#IF</br>
+#ACT</br>
+Mov N$UI_N 24</br>
+OpenBigDialogBox &lt;$STR(N$UI_N)&gt; 0 1 0 0 0 1 590 26</br>
+#Say</br>
+这是测试脚本</br></br></br>
+
+
+[@测试2]</br>
+#IF</br>
+#Act</br>
+CloseBigDialogBox</br>
+;部分对话框运用可能需要用到先关闭再打开</br>
+OpenBigDialogBox 8 109  1  4 0 0 1 530 0 </br>
+#Say</br>
+这是测试脚本</br>
+
+
+
+
+
+
+
+
+
+
+
+</br></br></br></br></br></br></br>
+
+
+
+
+</br></br></br></br></br>
+
+
+</html>

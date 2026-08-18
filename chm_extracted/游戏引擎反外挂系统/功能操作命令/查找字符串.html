@@ -1,0 +1,54 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>复制字符串,获取字符串长度,查找字符串</title>
+</head>
+
+<body>
+
+<p>格式:</p>
+Ansi取字符串长度：TextLength 字符串 变量</br>
+Ansi复制字符串:TextCopy 字符串 起始位置(1开始) 长度  变量</br>
+Ansi字符串查找：TextPos 待查找的内容 源字符串 变量</br></br>
+ 
+Unicode取字符串长度：TextLengthW 字符串 变量</br>
+Unicode复制字符串:TextCopyW 字符串 起始位置(1开始) 长度  变量</br>
+Unicode字符串查找：TextPosW 待查找的内容 源字符串 变量</br></br>
+
+
+<br /><br /><br />
+
+
+示范脚本：<br /><br />
+
+
+
+Mov S1 测试文字<br />
+TextLength &lt;$STR(S1)&gt; N1<br />
+SendMsg 6 (单字节模式)&lt;$Str(S1)&gt;的长度为&lt;$Str(N1)&gt;<br /><br />
+
+TextLengthW &lt;$STR(S1)&gt; N1<br />
+SendMsg 6 (双字节模式）&lt;$Str(S1)&gt;的长度为&lt;$Str(N1)&gt;<br /><br />
+
+TextCopy &lt;$Str(S1)&gt; 1 4 S2<br />
+SendMsg 6 (单字节模式)&lt;$Str(S1)&gt;的前4位是:&lt;$Str(S2)&gt;<br /><br />
+
+TextCopyW &lt;$Str(S1)&gt; 1 4 S2<br />
+SendMsg 6 (双字节模式)&lt;$Str(S1)&gt;的前4位是:&lt;$Str(S2)&gt;<br /><br />
+
+TextPos 试 &lt;$Str(S1)&gt; N1<br />
+SendMsg 6 (单字节模式)"试"在字符串&lt;$Str(S1)&gt;的位置为&lt;$Str(N1)&gt;<br /><br />
+
+TextPosW 试 &lt;$Str(S1)&gt; N1<br />
+SendMsg 6 (双字节模式)"试"在字符串&lt;$Str(S1)&gt;的位置为&lt;$Str(N1)&gt;<br /><br />
+
+
+<br /><br /><br /><br />
+
+
+
+
+</body>
+</html>

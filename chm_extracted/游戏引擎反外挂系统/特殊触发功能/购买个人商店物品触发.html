@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>购买个人商店物品触发</title>
+</head>
+
+<body>
+</br></br></br>
+功能说明：购买个人商店物品触发，个人商店物品卖出后提款成功触发，个人商店出售物品触发</br>
+</br>
+</br></br></br>
+
+
+
+;例子</br></br>
+;购买物品触发</br>
+[@BuyUserItem]</br>
+#act</br>
+sendmsg 6 你购买了&lt;$CurUserName&gt; 出售的个人商店物品&lt;$CURITEMNAME&gt; (&lt;$G_CURITEMNAME&gt; ),ID:&lt;$CurItemMakeIndex&gt; ，花费&lt;$CurItemPrices&gt; &lt;$CurItemMoneyType&gt; (货币类型值：&lt;$CurItemMoneyTypeValue&gt; )，叠加数量&lt;$CurItemOverlapCount&gt;</br>
+</br></br>
+
+;出售物品成功后取款时触发</br>
+[@SellUserItemWithdrawals]</br>
+#act</br>
+sendmsg 6 &lt;$CurUserName&gt; 购买了你出售的物品&lt;$CURITEMNAME&gt; ,ID:&lt;$CurItemMakeIndex&gt; ，花费&lt;$CurItemPrices>&lt;$CurItemMoneyType&gt; (货币类型值：&lt;$CurItemMoneyTypeValue&gt; )，叠加数量&lt;$CurItemOverlapCount&gt;，提款成功</br></br>
+
+</br></br>
+;-----------------------------------------------------------------------</br></br>
+
+增加个人商店物品售出触发（仅当售卖人在线时，人物不在线是不会触发滴）：@SelledUserItem</br>
+
+增加售出物品结算完成命令（当直接给售卖者增加货币后）：SetUserItemSettled，此命令无参数，仅用于@SelledUserItem中</br>
+
+<p><font face="楷体" color="#0000ff" size="4"><strong>特别注意：卖家在线时触发@SelledUserItem，触发如果涉及给予交易货币的话，必须在结尾处增加SetUserItemSettled，不然可以再次取款，只要执行了SetUserItemSettled则表示已经结清本次交易或理解为已经取款！！！</strong></font></p>
+</br></br>
+示例QF触发代码：</br></br>
+
+
+[@SelledUserItem]</br>
+#IF </br>
+EQUAL &lt;$CurItemMoneyTypeValue&gt;  0</br>
+#ACT</br>
+GameGold + &lt;$CurItemPrices&gt; </br></br>
+
+#IF </br>
+EQUAL &lt;$CurItemMoneyTypeValue&gt;  1</br>
+#ACT</br>
+GamePoint + &lt;$CurItemPrices&gt; </br></br>
+
+#IF </br>
+EQUAL &lt;$CurItemMoneyTypeValue&gt;  2</br>
+#ACT</br>
+GoldCount + &lt;$CurItemPrices&gt; </br></br>
+
+#IF </br>
+EQUAL &lt;$CurItemMoneyTypeValue&gt;  3</br>
+#ACT</br>
+GameDiamond + &lt;$CurItemPrices&gt; </br></br>
+
+#IF </br>
+EQUAL &lt;$CurItemMoneyTypeValue&gt;  4</br>
+#ACT</br>
+GameGird + &lt;$CurItemPrices&gt; </br></br>
+
+#IF</br>
+#ACT</br>
+sendmsg 6 &lt;$CurUserName&gt;  购买了你的个人商店物品&lt;$CURITEMNAME&gt;  (&lt;$G_CURITEMNAME&gt;  ),ID:&lt;$CurItemMakeIndex&gt;  ，扣税后所得:&lt;$CurItemPrices&gt;  &lt;$CurItemMoneyType&gt;  (货币类型值：&lt;$CurItemMoneyTypeValue&gt;  )，叠加数量&lt;$CurItemOverlapCount&gt; </br>
+
+;当完成上面收款后，必须执行下面的命令来完成结算，否则售卖者可以再次取款</br>
+SetUserItemSettled</br>
+sendmsg 7 本次交易已经完成结算</br></br></br>
+
+
+
+
+
+
+</br></br></br></br>
+
+
+
+
+
+</p>
+</body>
+</html>

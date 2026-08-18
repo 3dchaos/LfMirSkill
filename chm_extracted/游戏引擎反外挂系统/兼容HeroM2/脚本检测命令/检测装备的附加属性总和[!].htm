@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>检测装备的附加属性总和[!]</title>
+<meta name="GENERATOR" content="WinCHM">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<body>
+<P>功能: 检测装备的附加属性总和(武器的诅咒不在计算范围之内).<BR>
+  格式: 格式: CheckItemAddValueEx 位置(0-51 -1升级框 ，boxitem0 -boxitem7自定义OK框) 操作符(&gt; = &lt;) 附加值(0-65000) 新属性(0,1)<BR>
+  说明:   第四个参数只在英雄M2下有效,1时计算附加的致命一击等属性.<BR>
+  <BR>
+  例子:<BR>
+  #IF<BR>
+  CheckItemAddValueEx 1   &gt; 5 1<BR>
+  #SAY<BR>
+武器的附加属性大于5点.</P>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>GOTOLABEL触发[!]</title>
+</head>
+
+<body>
+<p>GOTOLABEL 模式(0,1,2,3) 触发字段 范围(模式等于3时有效)</p>
+<p>模式=0 小组成员触发<br>
+  模式=1 行会成员触发<br>
+  模式=2 当前地图的人物触发<br>
+  模式=3 以自己坐标为中心指定范围人物触发</p>
+<p>[@main]<br>
+  #IF<br>
+  #ACT<br>
+  GOTOLABEL 0 @小组成员触发<br>
+  GOTOLABEL 1 @行会成员触发<br>
+  GOTOLABEL 2 @当前地图的人物触发<br>
+  GOTOLABEL 3 @指定范围人物触发 12</p></p></p>
+
+
+下面为新增加：<br><br>
+模式=4 小组成员触发 (自己除外)<br>
+模式=5 行会成员触发 (自己除外)<br>
+模式=6 当前地图的人物触发 (自己除外)<br>
+模式=7 以自己坐标为中心指定范围人物触发 (自己除外)<br>
+模式=8 模式触发指定范围<br>
+模式=9 国家成员触发(自己除外)<br>
+<br><br><br><br>
+
+
+
+
+
+<B>2015-12-18更新0-7全部支持范围，不填写范围则保持以前模式</B>
+<br><br>
+
+例<br><br>
+
+模式=0 小组成员触发 最后增加一个参数 为范围<br>
+GOTOLABEL 0 @触发字段 5 (最后的数字5表示 以自己坐标为中心指定范围人物触发)<br><br>
+
+模式=4 小组成员触发 (自己除外)<br>
+GOTOLABEL 4 @触发字段 5 (最后的数字5表示 以自己坐标为中心指定范围人物触发)<br><br>
+
+模式=9 国家成员触发(自己除外) 最后增加一个参数 为范围，范围小于1 则表示全地图触发给自己同国家角色<br>
+GOTOLABEL 9 @指定范围同一国家人物触发 5  (最后的数字5表示 以自己坐标为中心指定范围人物触发，范围小于1 则表示全地图触发给自己同国家角色)<br><br>br><br><br>
+
+
+---------------------------------20200925增加模式8 ---------------------------------<br><br>
+模式=8脚本例子<br>
+模式=8 模式触发指定范围<br>
+GOTOLABEL 8 @触发字段 X Y 范围  是否包含自己(0包含/1不包含)   传递的变量(允许为空)   接受的变量(允许为空)<br><br>
+
+[@main]<br>
+#IF<br>
+#ACT<br>
+mov n1 &lt;$X&gt;<br>
+mov n2 &lt;$Y&gt;<br>
+mov S1 &lt;$USERNAME&gt;<br>
+GOTOLABEL 8 @触发字段 &lt;$STR(N1)&gt; &lt;$STR(N2)&gt; 5 1 S1 S2<br><br>
+
+[@触发字段]<br>
+#ACT<br>
+SENDMSG 6 传递的变量和接受的变量是同一个，对方名称&lt;$STR(S2)&gt;<br><br>
+
+
+
+
+
+<br><br><br>
+</body>
+
+</html>

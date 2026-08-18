@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>获取人物全身星星数量[!]</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>获取人物全身星星数量.</FONT></FONT></P>
+
+
+格式:GetUpgradeCount 位置  变量</P>
+说明：位置支持OK框，装备，首饰，神佑，all或*表示取得身上所有装备星星的数量</P>
+
+<P>示列：<br>
+
+
+
+
+<P>[@mail]<br>
+#ACT<br>
+GetUpgradeCount 1  n1<br>
+SENDMSG 6 武器一共有&lt;$STR(N1)&gt;个星星<br><br><br><br>
+
+
+
+
+
+------------------------------------------------------------------<br><br>
+全身星星数量变量人物：&lt;$UpgradeCount&gt;  英雄：&lt;$H.UpgradeCount&gt;<br><br><br>
+
+</P>
+</BODY>
+</HTML>

@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>掉血的地图参数</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font size="5">掉血的地图参数</font></strong> </p>
+<font size="3"><span class="STYLE2"><strong>功能：</strong>掉血的地图参数</span><br />
+<strong>说明：</strong>地图设置掉血并且支持自定义特效<br />
+<strong>参数：</strong>掉血数值,百分比掉血,掉血范围 | 每波数量,每波间隔(秒) | WIL文件序号,开始图片数,播放图片张数,播放速度(毫秒),播放效果(0普通 1特效)<br /><br /><br />
+
+
+
+参数：</strong>掉血数值,百分比掉血,掉血范围 | 每波数量,每波间隔(秒) | WIL文件序号,开始图片数,播放图片张数,播放速度(毫秒),播放效果(0普通 1特效)<br />
+参数说明：<br />
+百分比掉血	0掉血数值为固定点数	1掉血数值视为百分比<br />
+掉血范围	0仅当前坐标掉血		>0影响范围<br />
+每波数量	每波在n个坐标上播放并造成掉血<br /><br />
+
+;------------------------------------------------------------<br />
+<p><font face="楷体" color="#0000ff" size="5"><strong>例子:</strong></font></p>
+
+[盟重省	3]	CustomEffect(10,0,1|10,2|0,1190,7,60,0)<br /><br />
+
+;------------------------------------------------------------<br /><br /><br />
+<p><font face="楷体" color="#0000ff" size="5"><strong>例子说明:</strong></font></p>
+10,0,1		受影响的坐标范围(1)内的对象(怪物除外 因为地图参数伤害是不攻击怪物的，类似于顶部2个地图参数，无非这个是自定义) 固定掉血10点<br />
+
+10,2		每波随机取10个坐标掉血并播放特效，2秒一波<br />
+
+0,1190,7,60,0	NewopUI.pak（资源序号：0）从1190号图开始播放7张，播放间隔60ms，普通播放<br />
+
+
+
+
+
+
+
+
+
+
+<br /><br /><br />
+
+
+
+
+</body>
+
+</html>

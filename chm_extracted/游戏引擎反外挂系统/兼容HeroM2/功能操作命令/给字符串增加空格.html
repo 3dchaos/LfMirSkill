@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>给字符串增加空格</title>
+<style>
+<!--
+div{word-break:break-all;word-wrap:break-word}.t{border:1px solid #c7d6e1;margin:0px auto 8px;}.t2{border-top:#c7d6e1 1px solid;margin:0px auto 5px;}.t{padding:1px}.t {padding:0}th{word-break:break-all;word-wrap:break-word}.r_one{background:#f9f9f9;}.tr1 th{padding:5px 10px;text-align:left;vertical-align:top;font-weight:normal;}.tr1 th{border-right:1px solid #e6e6e6;}.tpc_content{font-size:14px;font-family:Arial;padding:0 2% 0 0.5%;margin:0 0 2%}.STYLE1 {
+	color: #0000FF;
+	font-weight: bold;
+}
+-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font color="#0000ff" size="2">功</font></strong><font color="#0000ff" size="2"><strong>能：</strong></font> 给字符串在前面或者后面增加指定个数的空格. </p>
+<p><span class="STYLE1">格式:</span> SetStringBlank 变量(S,A) 长度(1-100) 格式(0, 1)?<br>
+  <span class="STYLE1">说明:</span> 可支持人物S变量或者全局A变量,格式0=前面,1=后面<br>
+  <span class="STYLE1">注意:</span> 第二个参数长度是指增加空格后整个字符串的长度,例如字符串MirYQ引擎长度是9,<br>
+  如果第二个参数设置1 那么实际增加6个空格.<br>
+  <span class="STYLE1">注意:</span> 英文字母和数字占用1个字节(长度),汉字占用2个字节(长度). </p>
+<p><br>
+  <font color="#0000ff" size="2"><strong><br>
+例子：<br>
+</strong></font><br>
+[@Test]<font color="#0000ff" size="2"><strong><br>
+</strong></font>#IF<br>
+#ACT<br>
+MOV S10 MirYQ引擎<br>
+SetStringBlank &lt;$STR(S10)&gt; 15 0<br>
+SendMsg 5 &lt;$STR(S10)&gt;</p>
+<p>MOV S10 MirYQ引擎<br>
+  SetStringBlank &lt;$STR(S10)&gt; 15 1<br>
+  SendMsg 5 &lt;$STR(S10)&gt;</p>
+</body>
+
+</html>

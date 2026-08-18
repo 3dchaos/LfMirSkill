@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>NPC界面调用怪物外观</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font size="5">NPC界面调用怪物外观</font></strong> </p>
+<font size="2"><span class="STYLE2"><strong>功能：</strong>NPC界面调用怪物外观</span><br />
+<strong>格式：</strong>无<br />
+<strong>说明：</strong>无<br /><br /><br /><br />
+
+
+Npc对框增加怪物显示元素<br /><br />
+
+格式：Monster:RaceImg:Appr:F:Dir:X:Y<br /><br />
+
+F:显示方式；0：显示怪物站立第一张图; 1：显示怪物站立动作， 10:怪物走路第一张图; 11:怪物走路动作<br />
+Dir: 怪物方向（0-7）<br />
+X: X坐标偏移<br />
+Y: Y坐标偏移<br /><br />
+
+;--------------------------------------------------------------------------------------------<br /><br />
+;显示鸡<br />
+&lt;Monster:11:160:1:1:10:60&gt;<br /><br /><br />
+
+<p><font face="楷体" color="#ff0000" size="4"><strong>*例子2</strong></font></p><br />
+[@main]<br />
+#if<br />
+#act<br />
+GetDBMonsterFieldValue 暗之双头血魔 appr &lt;$STR(N$怪物APPR)&gt;<br />
+GetDBMonsterFieldValue 暗之双头血魔 raceImg &lt;$STR(N$怪物RaceImg)&gt;<br />
+#say<br />
+&lt;MONSTER:&lt;$STR(N$怪物RaceImg)&gt;:&lt;$STR(N$怪物APPR)&gt;:1:4:50:100&gt;<br /><br /><br /><br />
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>检测当前目标类型</title>
+</head>
+
+<body>
+<p>格式: CHECKCURRTARGETRACE 控制符(=,&gt;,&lt;) 数据库Race值 </p>
+<p>该命令只有在死亡触发和攻击触发中使用</p>
+<p><br />
+[@MagicStruck]  <br />
+  #IF<br />
+  CHECKCURRTARGETRACE = 0 <br />
+  #SAY<br />
+  当前是人物<br />
+  BREAK</p>
+<p>#IF<br />
+  CHECKCURRTARGETRACE = 1 <br />
+  #SAY<br />
+  当前是英雄<br />
+  BREAK</p>
+<p>#IF<br />
+  CHECKCURRTARGETRACE = 150 <br />
+  #SAY<br />
+  当前是人形怪<br />
+  BREAK</p>
+<p>#IF<br />
+  CHECKCURRTARGETRACE = 151 <br />
+  #SAY<br />
+  当前是分身<br />
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

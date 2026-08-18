@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>打开OK对话框</title>
+</head>
+
+<body>
+<p>格式: OPENUPGRADEDLG 显示的名称</p>
+
+;打开可以放物品的对话框，也就是装备修理或出售物品的那个对话框</br>
+OPENUPGRADEDLG 装备升级(显示的名称)</br></br>
+
+;收回OK框中的物品</br>
+TAKEDLGITEM</br></br>
+
+;返回OK框中的物品到包裹</br>
+RECLAIMITEM </br></br></br></br>
+
+点击OK键后触发字段[@UpgradeDlgItem]</br></br>
+
+触发脚本为当前NPC脚本中的@UpgradeDlgItem </br></br>
+
+OK升级框位置  -1</br></br></br></br>
+
+<p>例：<br />
+  [@main] <br />
+  #ACT<br />
+  OPENUPGRADEDLG 装备升级(显示的名称)</p>
+
+[@UpgradeDlgItem]</br>
+#ACT</br>
+SetNewItemValue -1 0 + 10</br>
+RECLAIMITEM</br></br></br></br>
+
+
+</body>
+</html>

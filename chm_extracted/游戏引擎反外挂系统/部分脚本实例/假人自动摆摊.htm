@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>假人自动摆摊</title>
+<style type="text/css">
+<!--
+.STYLE1 {	color: #FF0000;
+	font-weight: bold;
+	font-size: 36px;
+}
+-->
+</style>
+</head>
+
+<body>
+<p>============================================================================================================================</p>
+<p class="STYLE1">假人摆摊 写点大点省的看不到了 </p>
+[@假人上线自动摆摊]<br />
+#IF<br />
+ISDUMMY<br />
+#ELSEACT<br />
+BREAK<br />
+;检测是否已经创建过个人商店<br />
+#IF<br />
+CHECKMYSHOP<br />
+#ACT<br />
+;停止挂机<br />
+DUMMYSTOP<br />
+;开始摆摊<br />
+SHOPSTALL<br />
+#ELSEACT<br />
+;如果没有个人商店开始用自己的名字做为商店的名字创建个人商店<br />
+CREATEMYSHOP &lt;$USERNAME&gt;<br />
+;停止挂机<br />
+DUMMYSTOP<br />
+;开始摆摊<br />
+SHOPSTALL
+</body>
+</html>

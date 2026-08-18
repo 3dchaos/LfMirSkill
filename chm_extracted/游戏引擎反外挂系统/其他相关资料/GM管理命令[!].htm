@@ -1,0 +1,258 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>新增GM命令[!]</TITLE>
+</HEAD>
+<BODY>
+<P align=center><FONT 
+size=5><STRONG>新增部分游戏相关命令</STRONG><BR></FONT></P><FONT 
+size=2>
+<HR id=undefined>
+</FONT><FONT size=2>
+<P>注：以下命令在(M2目录中)Command.ini文件中均可自由更改命令名称.<BR>
+<TABLE borderColor=#99ccff border=1>
+  
+  <TR>
+    <TD colSpan=2><STRONG>传送相关命令</STRONG></TD></TR>
+  <TR>
+    <TD>@recall</TD>
+    <TD><FONT size=2>将人物召唤到自己身边</FONT></TD></TR>
+  
+  <TR>
+    <TD><FONT size=2>@Regoto</FONT></TD>
+    <TD><FONT 
+      size=2>传送到对方身边&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      </FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@Ting</FONT></TD>
+    <TD><FONT size=2>将对方随机传送</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@SuperTing&nbsp;</FONT></TD>
+    <TD><FONT size=2>将指定范围内人物随机传送</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@Mapmove</FONT></TD>
+    <TD><FONT size=2>将指定地图所有人物传送到指定地图</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@Move</FONT></TD>
+    <TD><FONT size=2>移动到指定地图</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@PositionMove</FONT></TD>
+    <TD><FONT size=2>移动到指定地图座标</FONT></TD></TR>
+  <TR>
+    <TD colSpan=2><STRONG>人物控制相关命令</STRONG></TD></TR>
+  <TR>
+    <TD><FONT size=2>@GameMaster</FONT></TD>
+    <TD><FONT size=2>进入/退出管理员模式</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@Observer</FONT></TD>
+    <TD><FONT size=2>进入/退出隐身模式</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@Superman</FONT></TD>
+    <TD><FONT size=2>进入/退出无敌模式</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@Level</FONT></TD>
+    <TD><FONT size=2>调整自己的等级</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@Kick</FONT></TD>
+    <TD><FONT size=2>将指定的人物踢下线</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@Kill&nbsp;</FONT></TD>
+    <TD><FONT size=2>将指定的人物杀死</FONT></TD></TR>
+  <TR>
+    <TD>@Realive</TD>
+    <TD><FONT size=2>将死亡的人物复活</FONT></TD></TR>
+  <TR>
+    <TD>@Setpermission</TD>
+    <TD><FONT size=2>设置人物的游戏权限，可将普通人物提升为GM</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@Info</FONT></TD>
+    <TD><FONT size=2>显示人物详细信息</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@MobLevel</FONT></TD>
+    <TD><FONT size=2>显示身边所有怪物或人物信息</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@FreePK</FONT></TD>
+    <TD><FONT size=2>清除指定人物的PK点</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@PKpoint</FONT></TD>
+    <TD><FONT size=2>显示指定人物的PK点</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@IncPkPoint</FONT></TD>
+    <TD><FONT size=2>增加指定人物的PK点</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@AdjustLevel&nbsp;</FONT></TD>
+    <TD><FONT size=2>调整他人级别</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@AdjustExp&nbsp;</FONT></TD>
+    <TD><FONT size=2>调整他人经验</FONT></TD></TR>
+  <TR>
+    <TD colSpan=2><STRONG>怪物控制相关命令</STRONG></TD></TR>
+  <TR>
+    <TD><FONT size=2>@Mob</FONT></TD>
+    <TD><FONT size=2>在身边放置一个指定的怪物</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@RecallMob</FONT></TD>
+    <TD><FONT size=2>召唤一个怪物为宝宝</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@Mission</FONT></TD>
+    <TD><FONT size=2>设置怪物集中点(用于开展怪物攻城)</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@MobPlace</FONT></TD>
+    <TD><FONT size=2>放置怪物，怪物向集中点集中，大刀守卫不攻击怪物(用于开展怪物攻城)</FONT></TD></TR>
+  <TR>
+    <TD colSpan=2><STRONG>聊天信息相关命令</STRONG></TD></TR>
+  <TR>
+    <TD>@DisableSendMsg</TD>
+    <TD><FONT size=2>将指定人物加入禁言列表，人物发信息只能自己看到别人看不到</FONT></TD></TR>
+  <TR>
+    <TD>@EnableSendMsg</TD>
+    <TD><FONT size=2>将指定人物从禁言列表中删除</FONT></TD></TR>
+  <TR>
+    <TD>@DisableSendMsgList</TD>
+    <TD><FONT size=2>显示禁言列表中的人物名称</FONT></TD></TR>
+  <TR>
+    <TD>@ViewWhisper</TD>
+    <TD><FONT size=2>查看指定人物的私聊信息</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@MobNpc</FONT></TD>
+    <TD><FONT size=2>制造一个NPC（可不用重启M2做增加NPC制作脚本）；</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@DelNpc</FONT></TD>
+    <TD><FONT size=2>删除NPC</FONT></TD></TR>
+  <TR>
+    <TD colSpan=2><STRONG>重新加载设置相关命令</STRONG></TD></TR>
+  <TR>
+    <TD><FONT size=2>@ReloadAdmin</FONT></TD>
+    <TD><FONT size=2>重新加载管理员列表</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@ReloadNpc</FONT></TD>
+    <TD><FONT size=2>重新加载NPC脚本</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@ReloadMonItems</FONT></TD>
+    <TD><FONT size=2>重新加载怪物爆物品列表</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@ReloadLineNotice&nbsp; </FONT></TD>
+    <TD><FONT size=2>重新加载游戏公告</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@ReloadManage</FONT></TD>
+    <TD><FONT size=2>重新加载登录脚本</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@ReloadItemDB</FONT></TD>
+    <TD><FONT size=2>重新加载物品数据库</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@ReloadMagicDB</FONT></TD>
+    <TD><FONT size=2>重新加载魔法数据库(<FONT 
+      color=#ff0000>暂时无效</FONT>)</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@ReloadMonsterDB</FONT></TD>
+    <TD><FONT size=2>重新加载怪物数据库</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@ReloadRobotManage&nbsp;</FONT></TD>
+    <TD><FONT size=2>重新加载游戏登录文本</FONT></TD></TR>
+  <TR>
+    <TD colSpan=2><STRONG>物品控制相关命令</STRONG></TD></TR>
+  <TR>
+    <TD><FONT size=2>@make</FONT></TD>
+    <TD><FONT size=2>制造指定的物品</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@SuperMake</FONT></TD>
+    <TD><FONT size=2>调整给指定物品属性值</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@BindUseItem</FONT></TD>
+    <TD><FONT size=2><A 
+      href="物品绑定人物.htm">物品绑定人物信息</A></FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@GiveMine 数量 纯度</FONT></TD>
+    <TD><FONT size=2>给指定纯度的矿石.</FONT></TD></TR>
+  <TR>
+    <TD colSpan=2><STRONG>仓库、登录密码相关命令</STRONG></TD></TR>
+  <TR>
+    <TD><FONT size=2>@CLEARPASSWORD</FONT></TD>
+    <TD><FONT size=2>GM专用命令</FONT></TD></TR>
+  <TR>
+    <TD colSpan=2><STRONG>人物分配点数控制相关命令</STRONG></TD></TR>
+  <TR>
+    <TD><FONT size=2>@BonusPoint</FONT></TD>
+    <TD><FONT size=2>增加人物属性点</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@DelBonusPoint</FONT></TD>
+    <TD><FONT size=2>删除人物属性点(删除所有已分配及未分配的属性点)</FONT></TD></TR>
+  <TR>
+    <TD>@RestBonusPoint</TD>
+    <TD><FONT size=2>将人物属性点复位(已分配的复位到未分配的点数)</FONT></TD></TR>
+  <TR>
+    <TD colSpan=2><STRONG>地图控制相关命令</STRONG></TD></TR>
+  <TR>
+    <TD><FONT size=2>@SetMapMode</FONT></TD>
+    <TD><FONT size=2>设置地图模式</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@Map</FONT></TD>
+    <TD><FONT size=2>查看当前所在地图相关信息</FONT></TD></TR>
+  <TR>
+    <TD colSpan=2><STRONG>游戏点、币相关命令</STRONG></TD></TR>
+  <TR>
+    <TD>@GameGold</TD>
+    <TD><FONT size=2>调整人物游戏币数量</FONT></TD></TR>
+  <TR>
+    <TD>@GamePoint</TD>
+    <TD><FONT size=2>调整人物游戏点数量(泡点数量)</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@CREDITPOINT</FONT></TD>
+    <TD><FONT size=2>调整人物声望点(1-255)</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@DelGold&nbsp;</FONT></TD>
+    <TD><FONT size=2>减少人物金币</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@AddGold&nbsp;</FONT></TD>
+    <TD><FONT size=2>增加人物金币</FONT></TD></TR>
+  <TR>
+    <TD colSpan=2><STRONG>其他相关命令</STRONG></TD></TR>
+  <TR>
+    <TD><FONT size=2>@Showflag&nbsp;</FONT></TD>
+    <TD><FONT size=2>显示标识</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@showopen&nbsp;</FONT></TD>
+    <TD><FONT size=2>显示打开</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@showunit&nbsp;</FONT></TD>
+    <TD><FONT size=2>显示单位</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@setflag&nbsp;</FONT></TD>
+    <TD><FONT size=2>设置标识</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@setopen&nbsp;</FONT></TD>
+    <TD><FONT size=2>设置打开</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@setunit&nbsp;</FONT></TD>
+    <TD><FONT size=2>设置单位</FONT></TD></TR>
+	  <TR>
+    <TD><FONT size=2>@Reconnection</FONT></TD>
+    <TD><FONT size=2>更换网关的命令</FONT></TD>
+	  </TR>
+  <TR>
+    <TD colSpan=2><STRONG>行会相关命令</STRONG></TD></TR>
+  <TR>
+    <TD><FONT size=2>@AddGuild&nbsp;</FONT></TD>
+    <TD><FONT size=2>添加一个行会</FONT></TD></TR>
+  <TR>
+    <TD><FONT size=2>@DelGuild&nbsp;</FONT></TD>
+    <TD><FONT size=2>删除一个行会</FONT></TD></TR>
+  <TR>
+     <TD><FONT size=2>@SabukWallGold</FONT></TD>
+    <TD><FONT size=2>更改沙城所属性行会</FONT></TD></TR>
+  <TR>
+     <TD><FONT size=2>@ForcedWallconquest</FONT></TD>
+    <TD><FONT size=2>强行开始或结果攻城战</FONT></TD></TR>
+  <TR>
+     <TD><FONT size=2>@SabukWallGold</FONT></TD>
+    <TD><FONT size=2>查看沙城金币数</FONT></TD></TR>
+  <TR>
+    </TABLE></P>
+<P>&nbsp;</P>
+
+</BODY>
+</HTML>
+
+ 

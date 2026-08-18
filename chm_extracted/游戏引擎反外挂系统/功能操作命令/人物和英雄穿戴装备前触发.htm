@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>人物和英雄穿戴装备前触发</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>人物穿戴装备前触发/英雄穿戴装备前触发</FONT></FONT></P><BR><BR><BR>
+
+<P><FONT size=2><FONT color=#0000ff><STRONG>命令：</STRONG></FONT><BR>
+人物中止穿装备：StopTakeOn <BR>
+英雄中止穿装备：H.StopTakeOn<BR><BR><BR>
+<P><FONT size=2><FONT color=#0000ff><STRONG>QF触发：</STRONG></FONT><BR>
+人物穿戴装备前触发：[@BeginTakeOn]<BR>
+英雄穿戴装备前触发：[@HeroBeginTakeOn]<BR><BR><BR><BR>
+
+
+
+
+[@BeginTakeOn]<BR>
+#act<BR>
+SENDMSG 7 Begin穿装备：位置:&lt;$CurItemPos&gt;，物品:&lt;$CurItemName&gt;(&lt;$G_CurItemName&gt;)，ID:&lt;$CurItemMakeIndex&gt;<BR>
+StopTakeOn<BR>
+break<BR><BR>
+
+
+[@HeroBeginTakeOn]<BR>
+#act<BR>
+SENDMSG 7 英雄Begin穿装备：位置:&lt;$H.CurItemPos&gt;，物品:&lt;$H.CurItemName&gt;(&lt;$H.G_CurItemName&gt;)，ID:&lt;$H.CurItemMakeIndex&gt;<BR>
+H.StopTakeOn<BR>
+break<BR><BR><BR><BR><BR>
+
+
+
+装备栏穿戴和脱下触发顺序：<BR>
+[@BeginTakeOff]<BR>
+[@BeginTakeOn]<BR>
+[@TakeOffXXX]<BR>
+[@TakeOffEx]<BR>
+[@TakeOnXXX]<BR>
+[@TakeOnEx]<BR><BR><BR>
+
+
+
+</BODY>
+</HTML>

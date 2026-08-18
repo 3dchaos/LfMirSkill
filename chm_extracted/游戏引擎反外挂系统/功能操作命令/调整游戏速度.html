@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>调整游戏速度</title>
+</head>
+
+<body>
+<p>格式: ChangeSpeed 速度类型 速度值 有效时间(秒，该参数为空时表示不限制时间，小退失效)<br />
+  速度类型 1为 移动速度 2为攻击速度 3为魔法速度<br />
+速度值(-100 - 100之间，速度值间隔在M2-客户端控制-内挂控制-速度控制内设置速度间隔)</p>
+<p>[@main]<br />
+  #ACT<br />
+  CHANGESPEED 1 5<br />
+  #SAY<br />
+移动速度增加5,小退后失效！</p>
+<p>&nbsp;</p><br />
+
+[@加速]<br />
+#ACT<br />
+ChangeSpeed 2 10 10<br />
+SendMsg 5  攻击速度+10！时长10秒！<br /><br /><br />
+
+[@减速]<br />
+#ACT<br />
+ChangeSpeed 2 -10 10<br />
+SendMsg 5  攻击速度-10！时长10秒！<br /><br /><br />
+
+[@魔速]<br />
+#ACT<br />
+ChangeSpeed 3 10 10<br />
+SendMsg 5  魔法速度+10！时长10秒！<br /><br /><br /><br /><br />
+
+[@攻速总和]<br />
+#if<br />
+#act<br />
+changespeed 2 10 100<br />
+SENDMSG 6 您当前攻击速度(含装备加速)是：&lt;$AttackSpeed&gt;<br /><br /><br /><br /><br /><br />
+
+
+英雄速度调整命令H.CHANGESPEED<br />
+分身速度调整命令FS.CHANGESPEED<br /><br />
+
+
+
+
+</body>
+</html>

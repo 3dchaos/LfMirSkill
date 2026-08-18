@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>GOTO将传递参数返回值保存到变量，脚本参数回调</title>
+</head>
+
+<body>
+<p>GOTO将传递参数返回值保存到变量，脚本参数回调</p>
+
+<br /><br /><br /><br />
+
+
+
+[@run]<br />
+#act<br />
+goto @test(1,2|N$返回值1,S$返回值2)<br />
+sendmsg 7 ...&lt;$str(N$返回值1)&gt;,&lt;$str(S$返回值2)&gt;<br /><br />
+
+
+[@test]<br />
+#act<br />
+formulation &lt;$scriptparam1&gt;*2 N$计算结果1<br />
+formulation &lt;$scriptparam2&gt;*2 N$计算结果2<br />
+MOV S$计算结果 参数2返回值：&lt;$str(N$计算结果2)&gt;<br />
+return &lt;$str(N$计算结果1)&gt; &lt;$STR(S$计算结果)&gt;<br />
+;return返回N个参数保存到上面指定变量中，注意return等同break，脚本段使用return下方不再执行..<br />
+sendmsg 7 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa<br />
+
+
+
+
+
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # Codex knowledge workspace
-chm_extracted/
-knowledge_base/
+# chm_extracted/
+# knowledge_base/
 样本Mir200/
 .codex-kb/
 __pycache__/

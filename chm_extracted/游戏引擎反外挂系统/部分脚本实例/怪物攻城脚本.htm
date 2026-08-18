@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=gb2312">
+<META name="GENERATOR" content="QuickCHM">
+<TITLE>脚本控制怪物攻城</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><STRONG>功能：</STRONG><BR>&nbsp;&nbsp;&nbsp; <FONT 
+size=2>实现由脚本控制怪物攻城。</FONT></FONT></P>
+<P><FONT size=2><STRONG>格式：<BR></STRONG>&nbsp;&nbsp;&nbsp; 
+;怪物集中位置，怪物会自动向此位置集中<BR>MISSION&nbsp; 地图名 座标X 座标Y<BR><BR>;刷新怪物座标X<BR>PARAM1 
+X<BR><BR>;刷新怪物座标Y<BR>PARAM2 Y<BR><BR>;刷新怪物数量<BR>PARAM3 
+数量<BR><BR>;刷新怪物范围<BR>PARAM4 范围<BR><BR>;刷新怪物名称<BR>MobPlace 
+怪物名称<BR><BR>;=======================================<BR>[@MobMission]<BR>#if<BR>#act<BR>&nbsp; 
+MISSION 3 330 330<BR>&nbsp; PARAM1 360<BR>&nbsp; PARAM2 340<BR>&nbsp; PARAM3 
+10<BR>&nbsp; PARAM4 5<BR>&nbsp; MOBPLACE 
+半兽勇士<BR>;<BR>;<BR>;
+
+
+============================================2016-03-30扩展参数================================================<BR>;<BR>;<BR>;
+
+
+增加国家  国家相关控制参数<BR>;<BR>;
+
+
+MISSION 3 330 330<BR>;
+  PARAM1 360<BR>;
+  PARAM2 340<BR>;
+  PARAM3 10<BR>;
+  PARAM4 5<BR>;
+  PARAM5 1 国家编号<BR>;
+  PARAM6 同国家名玩家是否可攻击(0,1)<BR>;
+  PARAM7 不国家名怪物是否PK(0,1)<BR>;
+  PARAM8 怪物名字颜色<BR>;
+  PARAM9 禁止相同国家的人员攻击怪物（1：禁止；0：不禁止）用禁止可以保留以前的逻辑<BR>;
+  MOBPLACE 半兽勇士<BR>;<BR>;<BR>;
+
+--------------------------------------------------------------------------------------------------------------<BR>;<BR>;
+此命令支持怪物巡逻坐标攻击，设置多个指定坐标后，怪物会沿途巡逻(按照设定坐标行走到最后一个坐标停止)如下：<BR>;
+格式: MISSION 地图 x1;x2;x3...xn  y1;y2;y3...yn  (x和y的数量要一致）<BR>;<BR>;
+
+示范：<BR>;
+
+[@玄武刷怪5]<BR>;
+#act<BR>;
+MISSION 1v1 141;173;190;206;201 135;102;85;85;70<BR>;
+PARAM1 102<BR>;
+PARAM2 174<BR>;
+PARAM3 10<BR>;
+PARAM4 0<BR>;
+PARAM5 1<BR>;
+PARAM6 0<BR>;
+PARAM7 1<BR>;
+PARAM8 242<BR>;
+PARAM9 1<BR>;
+MOBPLACE 战士人形怪<BR>;<BR>;<BR>;
+
+
+<BR>;<BR>;<BR>;
+
+
+============================================2017扩展参数================================================<BR></br>
+;;;;;;;;;;;;;;;;;;;;刷怪命令扩展最后一个参数，为空表示可攻击所有可攻击的对象，指定名字表示只攻击指定名称的可攻击对象</br>
+MOBPLACE 怪物名称 目标名称</br></br>
+
+
+MISSION  &lt;$MAP&gt; 320 351</br>
+PARAM1 330</br>
+PARAM2 355</br>
+PARAM3 1</br>
+PARAM4 4</br>
+;;;;;;;;;;;;;;;;;;;;下面命令扩展最后一个参数，为空表示可攻击所有可攻击的对象，指定名字表示只攻击指定名称的可攻击对象</br>
+MOBPLACE 白野猪 紫色暗灵</br></br></br></br></br></br></br>
+
+=======================================</FONT></P></br></br></br></br></br></br></br></br>
+</BODY>
+</HTML>
+
+ 

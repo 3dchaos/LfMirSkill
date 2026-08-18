@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>个人商店物品上架触发、下架触发、停止个人商店物品上架、停止个人商店物品下架</title>
+</head>
+
+<body>
+</br></br></br>
+功能说明：个人商店物品上架触发、下架触发、停止个人商店物品上架、停止个人商店物品下架</br>
+</br>
+</br></br></br>
+QF触发：</br>
+个人商店上架物品到出售：@BeginShopItemUp</br>
+个人商店从出售下架物品：@BeginShopItemDown</br></br>
+
+变量：个人商店名称：&lt;$UserShopName&gt;</br></br>
+NPC命令：停止个人商店物品上架/下架 StopShopItem</br></br>
+;例子</br></br>
+</br></br>
+[@BeginShopItemUp]</br>
+#act</br>
+StopShopItem</br>
+SENDMSG 7 禁止上架物品到商铺&lt;$UserShopName&gt;，物品数据库名：&lt;$CURITEMNAME&gt;；物品名：&lt;$G_CURITEMNAME&gt;；ID：&lt;$CurItemMakeIndex&gt;；售价：&lt;$CurItemPrices&gt;&lt;$CurItemMoneyType&gt;(货币类型值：&lt;$CurItemMoneyTypeValue&gt;)</br>
+;SENDMSG 0 &lt;$USERNAME&gt;上架物品到商铺{[&lt;$CurItemName&gt;]/&lt;$CurItemMakeIndex&gt;},点击可查看&lt;$CURITEMNAME&gt;物品属性</br>
+
+</br></br>
+[@BeginShopItemDown]</br>
+#act</br>
+StopShopItem</br>
+SENDMSG 7 禁止商铺下架物品：&lt;$UserShopName&gt;，物品数据库名：&lt;$CURITEMNAME&gt;；物品名：&lt;$G_CURITEMNAME&gt;；ID：&lt;$CurItemMakeIndex&gt;；售价：&lt;$CurItemPrices&gt;&lt;$CurItemMoneyType&gt;(货币类型值：&lt;$CurItemMoneyTypeValue&gt;)</br>
+
+</br></br></br>
+
+
+;------------------------------------------------仿HERO摆摊物品上架前触发---------变量与个人商店的一致，只是触发标签不同-------------------------------</br></br>
+
+[@BeginHeroM2ItemUp]</br>
+#act</br>
+StopShopItem</br>
+SENDMSG 7 禁止上架物品到摊位，物品数据库名：&lt;$CURITEMNAME&gt;；物品名：&lt;$G_CURITEMNAME&gt;；ID：&lt;$CurItemMakeIndex&gt;；售价：&lt;$CurItemPrices&gt;&lt;$CurItemMoneyType&gt;；货币类型值：&lt;$CurItemMoneyTypeValue&gt;)</br>
+SENDMSG 0 &lt;$USERNAME&gt;上架物品到摊位{[&lt;$CurItemName&gt;]/&lt;$CurItemMakeIndex&gt;},点击可查看&lt;$CURITEMNAME&gt;物品属性</br></br></br>
+
+
+
+
+
+
+</br></br></br></br>
+
+
+
+
+
+</p>
+</body>
+</html>

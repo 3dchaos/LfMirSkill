@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>拍卖行</TITLE>
+</HEAD>
+<BODY>
+<P><STRONG><FONT 
+size=5>拍卖行</FONT></STRONG></P>
+;----------------------------------------------</br>
+
+允许拍卖物品请在M2列表信息2内的物品规则处添加！</br></br>
+
+打开拍卖行命令：OpenAuctionView    </P>  
+;----------------------------------------------</br>
+例：</br>
+[@main]</br>
+#act</br>
+OpenAuctionView</br></br></br>
+
+
+
+;----------------------------------------------</br>
+<B>相关QF触发：</b></br></br>
+以下2个触发只有成功时人物才线才触发：</br>
+;拍卖卖出成功</br>
+@AuctionSellItem</br></br>
+
+;拍卖买入成功</br>
+@AuctionBuyItem</br></br>
+
+;拍卖行竞价出价前触发</br>
+正常出价：@BeginAuctionItemBid</br>
+一口价出价：@BeginAuctionItemBidBuy</br></br>
+
+
+;例子</br>
+[@BeginAuctionItemBid]</br>
+#IF</br>
+#ACT </br>
+StopAuctionItemBid</br>
+SENDMSG 6 中止出价</br></br>
+
+
+;-----------------</br></br>
+;拍卖行物品取回前触发（流拍物品取回 和 拍卖成功物品取回）</br>
+@BeginRetrievedAuctionItem</br></br>
+
+
+;拍卖行中止取回物品命令</br>
+StopRetrievedAuctionItem</br></br>
+
+;例子</br>
+[@BeginRetrievedAuctionItem]</br>
+#IF</br>
+CheckInWarArea</br>
+#ACT </br>
+StopRetrievedAuctionItem</br>
+SENDMSG 6 攻城区域禁止取回物品</br></br>
+
+
+;----------------------------------------------</br>
+<B>相关命令</b></br>
+
+;拍卖行中止取回物品命令</br>
+StopRetrievedAuctionItem</br></br>
+
+;拍卖行中止出价命令</br>
+StopAuctionItemBid</br></br>
+
+
+;----------------------------------------------</br></br>
+
+<b>相关变量：</b></br>
+以下变量只支持 [@AuctionSellItem] ,  [@AuctionBuyItem] 中</br></br>
+
+拍卖物品名称(数据库)：&lt;$AuctionItemName&gt;</br>
+拍卖物品名称（当前）：&lt;$G_AuctionItemName&gt;</br>
+底价：   &lt;$AuctionItemStartPrice&gt;</br>
+一口价：&lt;$AuctionItemSellPrice&gt;</br>
+成交价：&lt;$AuctionItemFinaPrice&gt;</br>
+物品拍卖人:&lt;$AuctionItemHumanName&gt;</br>
+物品买入人/最后出价人:&lt;$AuctionItemBidHumanName&gt; </br>
+&lt;$AuctionItemFinaPrice&gt;：在@AuctionSellItem/@AuctionBuyItem为成交价。在 @AuctionInvalidItem 为最新出价</br>
+&lt;$AuctionItemMoneyType&gt;： 货币类型</br>
+&lt;$AuctionItemMoneyTypeValue&gt;：货币类型--整数（0:元宝  1:游戏点  2:金币  3:金刚石  4:灵符)判断货币类型</br>
+&lt;$AuctionItemInvalidPrice&gt;: 失效出价，仅@AuctionInvalidItem中使用</br>
+&lt;$AuctionItemSelled&gt;：物品是否被卖出，一般用于@AuctionInvalidItem中</br></br>
+</br>
+
+当成交价 = 一口价时，表示一口价成交</br></br></br></br>
+
+
+
+
+
+QF示范脚本</br></br>
+
+; 拍卖行出价被冲</br>
+[@AuctionInvalidItem]</br>
+#IF</br>
+; 物品被别人秒了</br>
+EQUAL &lt;$AuctionItemSelled&gt; 1</br>
+#ACT</br>
+sendmsg 7 很遗憾，你出价&lt;$AuctionItemInvalidPrice&gt;的竞拍物品【&lt;$AuctionItemName&gt;；底价：&lt;$AuctionItemStartPrice&gt;&lt;$AuctionItemMoneyType&gt;；一口价：&lt;$AuctionItemSellPrice&gt;】被人用秒拍</br>
+#ELSEACT</br>
+sendmsg 7 你出价&lt;$AuctionItemInvalidPrice&gt;的竞拍物品【&lt;$AuctionItemName&gt;；底价：&lt;$AuctionItemStartPrice&gt;&lt;$AuctionItemMoneyType&gt;；一口价：&lt;$AuctionItemSellPrice&gt;】被人出了更高的价格：&lt;$AuctionItemFinaPrice&gt;，赶快去加价吧</br></br>
+
+;拍卖人的物品被卖出</br>
+[@AuctionSellItem]</br>
+#ACT</br>
+sendmsg 7 你拍卖的物品【&lt;$AuctionItemName&gt;；底价：&lt;$AuctionItemStartPrice&gt;&lt;$AuctionItemMoneyType&gt;；一口价：&lt;$AuctionItemSellPrice&gt;】被人用&lt;$AuctionItemFinaPrice&gt;的价格买走</br></br>
+
+;竞拍人买到物品</br>
+[@AuctionBuyItem]</br>
+#ACT</br>
+sendmsg 7 恭喜。你参与竞拍的物品【&lt;$AuctionItemName&gt;；底价：&lt;$AuctionItemStartPrice&gt;&lt;$AuctionItemMoneyType&gt;；一口价：&lt;$AuctionItemSellPrice&gt;】竞拍成功。成交价：&lt;$AuctionItemFinaPrice&gt;
+</br></br></br>
+
+
+
+
+
+
+<P><FONT size=2>
+</BODY>
+</HTML>
+

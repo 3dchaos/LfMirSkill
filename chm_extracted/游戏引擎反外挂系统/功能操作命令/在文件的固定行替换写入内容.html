@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>在文件的固定行替换写入内容[!]</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>在文件的固定行替换写入内容.</FONT></FONT></P>
+
+
+格式: WriteLine 文件名 行号(0开始) 内容 是否绝对路径(0或空:不是，1:是)</P>
+说明：说明：文件不存在写入失败，行号从0开始，替换写入，当行不存在时，插入到最后一行</P>
+
+<P>示列：<br>
+
+
+
+
+<P>[@mail]<br>
+#ACT<br>
+WRITELINE d:\aaaa.txt 1 写入一段文字 1<br>
+SENDMSG 6 第2行内容被修改<br><br><br><br>
+
+
+</P>
+</BODY>
+</HTML>

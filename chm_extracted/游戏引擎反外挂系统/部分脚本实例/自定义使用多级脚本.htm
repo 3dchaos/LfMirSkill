@@ -1,0 +1,55 @@
+
+
+
+
+<B>自定义变量前可使用变量或者多级脚本调用，说明：M. 为当前攻击对象   L.当前攻击自己对象</B></P>
+
+
+
+
+【示例脚本】</br>
+==================================杀人触发==========================================================</br>
+[@KillPlay]</br>
+#if</br>
+&lt;$CURRRTARGETNAME&gt;.CHECKLEVELEX > 10      ;检测被杀者等级</br>
+CHECKVAR HUMAN GJZY = 1    ;检测自己</br>
+&lt;$CURRRTARGETNAME&gt;.CHECKVAR HUMAN GJZY = 1   ;检测被杀</br>
+#ACT</br>
+CHANGEPKPOINT + 500</br>
+SENDMSG 7 玩家【&lt;$USERNAME&gt;】杀死了【&lt;$CURRRTARGETNAME&gt;】</br>
+break</p>
+
+[@KillPlay]</br>
+#if</br>
+M.CHECKLEVELEX > 10      ;检测被杀者等级</br>
+CHECKVAR HUMAN GJZY = 1    ;检测自己</br>
+M.CHECKVAR HUMAN GJZY = 1   ;检测被杀</br>
+#ACT</br>
+CHANGEPKPOINT + 500</br>
+SENDMSG 7 玩家【&lt;$USERNAME&gt;】杀死了【&lt;$CURRRTARGETNAME&gt;】</br>
+break</p>
+
+
+
+==================================死亡触发==========================================================</br>
+
+[@PlayDie]</br>
+#if</br>
+L.CHECKVAR HUMAN GJZY = 1    ;检测杀人者的阵营</br>
+CHECKVAR HUMAN GJZY = 1              ;检测自己的阵营</br>
+#act</br>
+L.CHANGEPKPOINT + 100     ;给杀人者加PK值</br>
+L.GAMEGLORY + 2           ;给杀人者加荣誉</br>
+SENDMSG 6 你被[&lt;$KILLER&gt;]杀死了![&lt;$KILLER&gt;]荣誉值增加2点！</br>
+break</p>
+
+
+[@PlayDie]</br>
+#if</br>
+&lt;$KILLER&gt;.CHECKVAR HUMAN GJZY = 1    ;检测杀人者的阵营</br>
+CHECKVAR HUMAN GJZY = 1              ;检测自己的阵营</br>
+#act</br>
+&lt;$KILLER&gt;.CHANGEPKPOINT + 100     ;给杀人者加PK值</br>
+&lt;$KILLER&gt;.GAMEGLORY + 2           ;给杀人者加荣誉</br>
+SENDMSG 6 你被[&lt;$KILLER&gt;]杀死了![&lt;$KILLER&gt;]荣誉值增加2点！</br>
+break</br>

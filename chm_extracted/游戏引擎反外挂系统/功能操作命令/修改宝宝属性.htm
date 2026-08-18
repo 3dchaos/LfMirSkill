@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>设置修改宝宝属性</title>
+<style>
+<!--
+div{word-break:break-all;word-wrap:break-word}.t{border:1px solid #c7d6e1;margin:0px auto 8px;}.t2{border-top:#c7d6e1 1px solid;margin:0px auto 5px;}.t{padding:1px}.t {padding:0}th{word-break:break-all;word-wrap:break-word}.r_one{background:#f9f9f9;}.tr1 th{padding:5px 10px;text-align:left;vertical-align:top;font-weight:normal;}.tr1 th{border-right:1px solid #e6e6e6;}.tpc_content{font-size:14px;font-family:Arial;padding:0 2% 0 0.5%;margin:0 0 2%}-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font color="#0000ff" size="2">功</font></strong><font color="#0000ff" size="2"><strong>能：<br>
+&nbsp;&nbsp; </strong></font>设置宝宝属性<br>
+ChangeSlaveAbility 参数1  参数值  宝宝名（为空表示所有宝宝）<br>
+参数1表示值：<br>
+0: HP；   1: MaxHP；   2:MP；   3:MaxMP；   4:AC1；   5:AC2；   6:MAC1；   7:MAC2；   8:DC1；   9:DC2；   10:MC1；   11:MC2；   12:SC1；   13:SC2  14:攻击速度 15:移动速度 30:属性有效时间（秒，空或0表示不检测时间）<br><br>
+
+
+
+
+// 重算宝宝属性，ChangeSlaveAbility后不会重算宝宝属性，必须调用本命令<br>
+RecalcSlaveAbility 宝宝名（为空表示所有宝宝）<br>
+;------------------------------------------------<br><br>
+
+
+<font color="#0000ff" size="2"><strong><br>
+例子：<br>
+</strong></font><br>
+[@Test]<font color="#0000ff" size="2"><strong><br>
+</strong></font>#IF<br>
+#ACT<br>
+ChangeSlaveAbility 14 300<br>
+ChangeSlaveAbility 15 300<br>
+ChangeSlaveAbility 30 30<br>
+RecalcSlaveAbility <br>
+sendmsg 6 您的所有宝宝攻击速度和移动速间隔调整为300ms，有效时间30秒！<br>
+break<br>
+<br>
+<br>
+<br>
+<br>
+本命令为调整设置间隔，如需灵活修改间隔可以使用ChangeSlaveAbilityEX <br><br><br>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>巡逻怪物</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</head>
+
+<body>
+
+<p><strong><font size="5">巡逻怪物</font></strong> </p>
+<font size="3"><span class="STYLE2"><strong>功能：</strong>巡逻怪物</span><br />
+<strong>说明：</strong>支持怪物巡逻坐标攻击，设置多个指定坐标后，怪物会沿途巡逻(按照设定坐标行走到最后一个坐标停止)<br />
+<strong>格式：</strong>MISSIONEX 地图  x1:y1;x2:y2;x3:y3;x4:y4;xn:yn  是否循环(0:不循环;1循环);<br /><br /><br />
+
+
+
+
+
+
+
+<p><font face="楷体" color="#0000ff" size="5"><strong>说明:</strong></font></p>
+NPC命令：MISSIONEX 地图  x1:y1;x2:y2;x3:y3;x4:y4;xn:yn  是否循环(0:不循环;1循环);<br />
+MISSIONEX 3 315:348;325:348;325:356;315:356 1<br />
+循环时，当走到xn:yn，又重新走x1:y1<br />
+不循环	走到Xn:Yn结束巡逻<br /><br />
+
+
+<p><font face="楷体" color="#0000ff" size="5"><strong>例子:</strong></font></p>
+[@test]<br />
+#if<br />
+#act<br />
+MISSIONEX 3 315:348;325:348;325:356;315:356 1<br />
+PARAM1 315<br />
+PARAM2 348<br />
+PARAM3 1<br />
+PARAM4 1<br />
+PARAM5 1<br />
+PARAM6 0<br />
+PARAM7 1<br />
+PARAM8 1<br />
+PARAM9 0<br />
+MOBPLACE 黑野猪<br />
+sendmsg 6 刷新成功。<br />
+break<br /><br />
+
+
+
+
+
+
+
+
+
+
+
+
+<br /><br /><br />
+
+
+
+
+</body>
+
+</html>

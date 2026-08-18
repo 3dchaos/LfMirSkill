@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>特修装备</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>特修装备</FONT>,</FONT>在物品规则列表中限制物品的不会被修理 </P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>格式：</FONT><BR>
+</STRONG>&nbsp;&nbsp;&nbsp; REPAIRALL   兼容其它引擎的特殊修理命令</FONT></P>
+ &nbsp;&nbsp;&nbsp;ACTREPAIRALL 操作命令的修理<BR>
+CHECKREPAIRALLGOLD &lt;$STR(N99)&gt;   统计需要修理装备数据库设置价格*特修价格  、 变量为价格变量<BR>
+ <P><FONT size=2>  <font color="#FF0000">;特修装备</font><BR>
+  <BR>
+</FONT></P>
+<DIV> 
+  <p><FONT size=2>[@Test]</FONT><br>
+    #IF<br>
+    checkgold 2000<br>
+    #ACT<br>
+    take 金币 2000<br>
+    RepairAll<br>
+    #SAY<br>
+    你的装备修好了.<br>
+    #ELSESAY<br>
+    你是不是没有钱啊.<br>
+    <br>
+    #IF<br>
+     CHECKREPAIRALLGOLD &lt;$STR(N99)&gt;<br>
+    #ACT<br>
+    take 金币 &lt;$STR(N99)&gt; <br>
+    ACTREPAIRALL<br>
+    #SAY<br>
+  你的装备修好了.<FONT size=2><br>
+    #ELSESAY<br>
+    你是不是没有钱啊.修理需要&lt;$STR(N99)&gt;金币<br>
+</FONT></DIV>
+</BODY>
+</HTML>
+ 

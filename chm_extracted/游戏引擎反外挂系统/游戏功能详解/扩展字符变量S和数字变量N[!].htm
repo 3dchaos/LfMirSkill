@@ -1,0 +1,20 @@
+<title>扩展字符变量S和数字变量N[!]</title>
+<style type="text/css">
+<!--
+.STYLE2 {color: #FF0000}
+-->
+</style>
+<p><strong><font size="5">扩展字符变量S和数字变量N</font></strong> </p>
+<font size="2"><span class="STYLE2"><strong>功能：</strong>扩展字符变量S和数字变量N</span><br />
+<strong>格式：</strong>无<br />
+<strong>说明：</strong>扩展字符变量S和数字变量N，除了支持0~999以外，可以在S$变量或N$变量后面增加任意字符<br />
+<strong>例：</strong></font>
+<p>  [@test]<br />
+  #ACT<br />
+  MOV S$我的人物名称 &lt;$USERNAME&gt;<br />
+SENDMSG 0 &lt;$STR(S$我的人物名称)&gt; 255 253</p>
+<p>[@test1]<br />
+  #ACT<br />
+  MOV N$我的杀怪总数 100<br />
+  INC &lt;$STR(N$我的当前杀怪数)&gt; 1<br />
+  SENDMSG 6 【杀怪总数=&lt;$STR(N$我的杀怪总数)&gt;】【当前杀怪数=&lt;$STR(N$我的当前杀怪数)&gt;】 255 253</p>

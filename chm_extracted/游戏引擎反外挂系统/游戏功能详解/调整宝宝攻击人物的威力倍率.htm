@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>调整宝宝攻击人物的威力倍率</TITLE>
+</HEAD>
+<BODY>
+<P><STRONG><FONT 
+size=5>调整宝宝攻击人物的威力倍率</FONT></STRONG></P>
+命令格式：</br>
+SetSlaveAttackHumPowerRate 宝宝名称 攻击人物威力倍率(0不攻击人物,当前值除以100为实际倍数)</br></br>
+
+
+功能说明：调整宝宝攻击人物的威力倍率</br></br>
+
+示范脚本：</br></br>
+
+[@main]</br>
+#if</br>
+CHECKSLAVENAME 神兽</br>
+#act</br>
+SetSlaveAttackHumPowerRate 神兽 0</br>
+sendmsg 6 神兽不攻击人物</br>
+#elseact</br>
+sendmsg 6 请先把神兽召唤出来</br></br></br>
+
+注意：伤害倍数只对人物，和假人、英雄（怪物之外）有效！！！</br></br></br>
+
+-------------------------------------以下为调整数值----------------</br></br></br>
+
+调整宝宝攻击人物威力值命令 及 获取命令</br></br>
+
+调整宝宝攻击人物威力（具体数值 比如加50点攻击    + 50）</br></br>
+
+SetSlaveAttackHumPowerRateEx 宝宝名 操作符(+/-/=)  值</br></br>
+
+
+
+示范脚本：</br>
+
+[@main]</br>
+#if</br>
+CHECKSLAVENAME 神兽</br>
+#act</br>
+SetSlaveAttackHumPowerRateEx 神兽 + 50</br>
+sendmsg 6 神兽增加50点攻击人物威力</br>
+#elseact</br>
+sendmsg 6 请先把神兽召唤出来</br></br></br>
+
+
+
+
+
+获取宝宝攻击人物威力</br>
+GetSlaveAttackHumPowerRate 宝宝名 变量</br></br>
+
+
+[@main]</br>
+#if</br>
+CHECKSLAVENAME 神兽</br>
+#act</br>
+GetSlaveAttackHumPowerRate  神兽 N1</br>
+sendmsg 6 神兽增加&lt;$STR(N1)&gt;点攻击人物威力</br>
+#elseact</br>
+sendmsg 6 请先把神兽召唤出来</br></br></br></br></br></br></br></br></br></br></br></br>
+
+
+
+
+
+
+注意：伤害倍数只对人物，和假人、英雄（怪物之外）有效！！！</br></br></br>
+<P><FONT size=2>
+</BODY>
+</HTML>
+

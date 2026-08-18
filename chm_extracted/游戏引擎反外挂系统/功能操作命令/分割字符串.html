@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>分割字符串[!]</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG></FONT><BR>
+&nbsp;&nbsp;&nbsp; <FONT 
+size=2>分割字符串.</FONT></FONT></P>
+
+
+格式: TextSplit 分割符 源字符串 保存变量(只指定第一个，后面的递增) 返回分割数量</P>
+
+
+<P>示列：<br>
+
+
+
+
+<P>[@mail]<br>
+#ACT<br>
+TextSplit | aaa|bbb|ccc|ddddd|eeeeee s1  N$数量 <br>
+SENDMSG 6 &lt;$STR(s1)&gt;,&lt;$STR(s2)&gt;,&lt;$STR(s3)&gt;,&lt;$STR(s4)&gt;,&lt;$STR(s5)&gt; ,分成了&lt;$str(N$数量)&gt;个变量  <br><br><br><br>
+
+
+</P>
+</BODY>
+</HTML>

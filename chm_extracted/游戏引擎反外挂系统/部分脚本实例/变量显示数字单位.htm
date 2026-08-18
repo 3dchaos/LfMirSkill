@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<TITLE>变量支持数字单位</TITLE>
+</HEAD>
+<BODY>
+<P><FONT size=2><FONT 
+color=#0000ff><STRONG>功能：</STRONG><BR>
+</FONT>&nbsp;&nbsp;&nbsp; 
+变量支持数字单位,922京,大数值单位</FONT></P>
+<P><FONT size=2><STRONG><FONT 
+color=#0000ff>使用方法：</FONT></STRONG></FONT></P>
+<P>[@main]<br>
+#ACT<br>
+Mov N0 1234567891234567<br>
+#SAY<br>
+N0的值为:&lt;$stru(N0)&gt;\<br>
+<P>&nbsp;</P>
+
+<br><br><br><br>
+;---------------<br><br>
+NPC对话框增加BigNum:元素（用于将大数值进行单位显示）<br>
+
+&lt;BigNum:数值:X:Y:{FColor=249;FSize=9;FName=微软雅黑}><br><br>
+
+[@示例]<br>
+#IF<br>
+#ACT<br>
+Mov N1 10000000000<br>
+#SAY<br>
+&lt;$STRU(N1)&gt;\<br>
+&lt;BigNum:&lt;$STR(N1)&gt;:X:Y:{FColor=249;FSize=9;FName=微软雅黑}&gt;\<br><br><br><br>
+
+;---------------<br><br>
+
+悬浮框增加BigNum元素：（常用于自定义属性数字转换为单位显示）<br>
+&lt;BigNum:数字值:文字颜色&gt;<br><br><br><br>
+
+</BODY>
+</HTML>
+  

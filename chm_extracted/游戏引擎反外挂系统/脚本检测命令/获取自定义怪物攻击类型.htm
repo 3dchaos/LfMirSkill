@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>获取自定义怪物攻击类型</title>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<body><FONT face=Arial size=2>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT color=#0000ff>功能说明:</FONT> 
+获取自定义怪物攻击类型<BR><BR></FONT></FONT></P>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT 
+color=#0000ff>说明：</FONT>被自定义怪物攻击时，获取自定义怪物攻击类型<BR></FONT></FONT></P>
+<P><FONT face=Fixedsys size=2></br></br>
+
+
+</br></br>
+--------------------------------------------------------</br></br>
+
+
+
+
+示例脚本：</br></br>
+
+
+
+
+
+
+通常使用被攻击触发获取，由于翎风引擎的人物 分身 宝宝触发是分开触发，所以需要独立设置，下面仅为人物触发</br></br></br></br>
+
+
+
+;QFunction-0.txt</br></br>
+;人物被物理攻击触发</br>
+[@Struck]</br>
+#IF</br>
+CHECKCURRTARGETRACE = 156</br>
+#ACT </br>
+#CALL [\自定义怪物BUFF.txt]  @_@MONBUFF</br></br>
+
+;人物被魔法攻击触发</br>
+[@MagicStruck]</br>
+#IF</br>
+CHECKCURRTARGETRACE = 156</br>
+#ACT </br>
+#CALL [\自定义怪物BUFF.txt]  @_@MONBUFF</br></br>
+
+
+;分身被物理攻击触发</br>
+[@CloneStruck]</br>
+#IF</br>
+CHECKCURRTARGETRACE = 156</br>
+#ACT </br>
+#CALL [\自定义怪物BUFF.txt]  @_@MONBUFF分身</br></br>
+
+
+;分身被魔法攻击触发</br>
+[@CloneMagicStruck]</br>
+#IF</br>
+CHECKCURRTARGETRACE = 156</br>
+#ACT </br>
+#CALL [\自定义怪物BUFF.txt]  @_@MONBUFF分身</br></br>
+
+;宝宝被物理攻击触发</br>
+[@SlaveStruck]</br>
+#IF</br>
+CHECKCURRTARGETRACE = 156</br>
+#ACT </br>
+#CALL [\自定义怪物BUFF.txt]  @_@MONBUFF宝宝</br></br>
+
+;宝宝被魔法攻击触发</br>
+[@SlaveMagicStruck]</br>
+#IF</br>
+CHECKCURRTARGETRACE = 156</br>
+#ACT </br>
+#CALL [\自定义怪物BUFF.txt]  @_@MONBUFF宝宝</br></br></br></br>
+
+
+
+
+
+示范脚本为人物被自定义怪物触发  ，分身或宝宝自己添加</br>
+多级命令，分身：FS.     宝宝BB.</br></br>
+
+[@_@MONBUFF]</br>
+
+{</br></br>
+
+#IF</br>
+EQUAL  &lt;$CURRRTARGETFULLNAME&gt;    MON120</br>
+EQUAL  &lt;$CURRRUSEMAGICID&gt;  0</br>
+#ACT </br>
+SENDMSG 6 MON120对你施展了普通攻击</br>
+BREAK</br></br>
+
+#IF</br>
+EQUAL  &lt;$CURRRTARGETFULLNAME&gt;    MON120</br>
+EQUAL  &lt;$CURRRUSEMAGICID&gt;  1</br>
+#ACT </br>
+SENDMSG 7 MON120对你施展了攻击1</br>
+BREAK</br></br>
+
+#IF</br>
+EQUAL  &lt;$CURRRTARGETFULLNAME&gt;    MON120</br>
+EQUAL  &lt;$CURRRUSEMAGICID&gt;  2</br>
+#ACT </br>
+SENDMSG 7 MON120对你施展了攻击2</br>
+BREAK</br></br>
+
+#IF</br>
+EQUAL  &lt;$CURRRTARGETFULLNAME>    MON120</br>
+EQUAL  &lt;$CURRRUSEMAGICID> 3</br>
+#ACT </br>
+SENDMSG 7 MON120对你施展了攻击3</br>
+BREAK</br></br>
+
+#IF</br>
+EQUAL  &lt;$CURRRTARGETFULLNAME&gt;    MON120</br>
+EQUAL  &lt;$CURRRUSEMAGICID&gt;  4</br>
+#ACT </br>
+SENDMSG 7 MON120对你施展了攻击4</br>
+BREAK</br></br>
+
+#IF</br>
+EQUAL  &lt;$CURRRTARGETFULLNAME&gt;    MON120</br>
+EQUAL  &lt;$CURRRUSEMAGICID&gt;  5</br>
+#ACT </br>
+SENDMSG 7 MON120对你施展了攻击5</br>
+BREAK</br></br>
+
+#IF</br>
+EQUAL  &lt;$CURRRTARGETFULLNAME&gt;    MON120</br>
+EQUAL  &lt;$CURRRUSEMAGICID&gt;  6</br>
+#ACT </br>
+SENDMSG 7 MON120对你施展了攻击6</br>
+#if</br>
+random 5</br>
+#act</br>
+ChangeState 3 5</br>
+;多级脚本应用，分身：FS.ChangeState   宝宝：BB.ChangeState </br>
+SENDMSG 7 MON120对你施展了攻击6中了蜘蛛网 5秒内禁止跑动</br>
+BREAK</br>
+
+}</br>
+
+
+
+
+
+
+
+</br></br></br></br></br></br></br>
+
+
+
+
+</br></br></br></br></br>
+
+
+</html>

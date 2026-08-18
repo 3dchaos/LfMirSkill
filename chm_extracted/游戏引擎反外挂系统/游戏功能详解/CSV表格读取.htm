@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>CSV表格读取</title>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+
+</head>
+
+<body><FONT face=Arial size=2>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT color=#0000ff>功能说明:</FONT> 
+CSV表格读取<BR><BR></FONT></FONT></P>
+<P><FONT size=2><FONT 
+face=Fixedsys><FONT 
+color=#0000ff>说明：</FONT>CSV表格读取<BR></FONT></FONT></P>
+<P><FONT face=Fixedsys size=2></br></br>
+
+
+</br></br>
+--------------------------------------------------------</br></br>
+
+CSV相关命令 </br></br>
+
+;将文件设置为缓存，某一文件执行此命令后，所有的操作都是缓存操作（不使用缓存命令读取的文件可以实时操作）</br>
+;如果不经常更改的情况下建议放在QM的[@Startup]启动触发执行缓存命令，可加快脚本运行速度与效率</br>
+;修改文件后可使用CSVOpenCache重新加载文件命令更新缓存内容</br></br>
+加载csv表格内容到内存中</br>
+CSVOpenCache 文件路径</br></br>
+;-------------------------------------------</br>
+获取CSV文件的最大行数和最大列数</br>
+CSVGetCellInfo 文件路径  最大行数保存变量   最大列数保存变量</br></br>
+
+读取单元格的内容</br>
+CSVGetCellText 文件路径 行数  列数 保存变量</br></br>
+
+查找内容出在第几行</br>
+CSVFindTextRow 文件路径  字符串  开始行~结束行  列数(从第几列查找)  0/1(0:开始出现的行；1:最后出现的行)  保存变量</br></br>
+
+--------------------------------------------------------------</br></br>
+
+下面示范脚本的Test.csv内容</br></br>
+
+; 备注符号，读取时会忽略此行</br>
+; 转生等级,当前属性,下级属性,需求材料</br>
+0,当前攻击1.05倍,1.10倍,转生晶石,1</br>
+1,当前攻击1.10倍,1.15倍,转生晶石,2</br>
+2,当前攻击1.15倍,1.20倍,转生晶石,3</br>
+3,当前攻击1.20倍,1.25倍,转生晶石,4</br>
+4,当前攻击1.25倍,1.30倍,转生晶石,5</br>
+5,当前攻击1.30倍,1.35倍,转生晶石,6</br></br>
+
+-------------------------------------------------------------</br></br>
+;示范脚本</br></br>
+
+[@测试]</br></br>
+#act</br>
+;CSVOpenCache ..\QuestDiary\Test.csv</br>
+CSVGetCellInfo ..\QuestDiary\Test.csv  N$总行数 N$总列数</br>
+
+Mov N$行数 0</br>
+While N$行数 &lt; N$总行数</br>
+
+CSVGetCellText ..\QuestDiary\Test.csv  &lt;$STR(N$行数)&gt; 0 S0</br>
+CSVGetCellText ..\QuestDiary\Test.csv  &lt;$STR(N$行数)&gt; 1 S1</br>
+CSVGetCellText ..\QuestDiary\Test.csv  &lt;$STR(N$行数)&gt; 2 S2</br>
+
+Sendmsg 6 [&lt;$STR(N$行数)&gt;,0]&lt;$STR(S0)&gt;;[&lt;$STR(N$行数)&gt;,1]&lt;$STR(S1)&gt;;[&lt;$STR(N$行数)&gt;,2]&lt;$STR(S2)&gt;;</br>
+
+Inc N$行数 1</br>
+EndWhile</br>
+
+CSVFindTextRow ..\QuestDiary\Test.csv 1.25倍 0~10 2 0 N0</br>
+Sendmsg 6 "1.25倍"在&lt;$STR(N0)&gt;行,第2列中</br></br>
+
+
+
+;--------------------------------------------------------</br></br>
+;表格内容作为常量进行获取，仅对CSVOpenCache的可用...</br>
+;读取时会已常量形式存放在内存中(如果不经常更改的情况下建议放在QM的[@Startup]启动触发执行)</br>
+;修改CSV文件后可使用CSVOpenCache重新加载文件命令更新缓存内容</br>
+;通过以下去读相关内存中的表格常量值</br></br></br>
+
+
+[@测试]</br>
+#act</br>
+CSVOpenCache ..\QuestDiary\Test.csv</br>
+SendMsg 7 TEST表格内第一行第二列值为：&lt;$TEST(1,2)&gt;</br>
+Mov S1 &lt;$TEST(1,2)&gt;</br>
+SendMsg 5 1行2列的值为：&lt;$STR(S1)&gt;   &lt;$TEST(1,2)&gt;</br></br>
+
+
+;--------------------------------------------------------</br></br></br>
+
+CSVOpenCache ..\QuestDiary\Npc怪物.csv</br>
+CSVGetCellText ..\QuestDiary\Npc怪物.csv 3 0 S1</br>
+CSVGetCellText ..\QuestDiary\Npc怪物.csv 3 1 N2</br>
+CSVGetCellText ..\QuestDiary\Npc怪物.csv 3 2 N3</br>
+sendmsg 5 第三行;0列值为:&lt;$STR(S1)&gt;;1列值为&lt;$STR(n2)&gt;;2列值为&lt;$STR(N3)&gt;</br>
+sendmsg 5 直接取3行0列值为:&lt;$NPC怪物(3,0)&gt;</br>
+sendmsg 5 在第0列，从头开始查找“小鹿”，得到的行数为:&lt;$NPC怪物.ROW(0,小鹿,0)&gt;</br></br>
+
+
+$CSV文件名.Row(顺序,查找字符串,列数)</br>
+顺序：0:从头开始；1从尾开始找</br>
+列数：第几列，列数从0开始</br>
+结果：返回字符串所有的行数(0行开始）</br></br>
+
+
+$CSV文件名.Row(顺序,查找字符串,列数)</br>
+顺序：0:从头开始；1从尾开始找</br>
+列数：第几列，列数从0开始</br>
+结果：返回字符串在指定列中的首次出现的行数(0行开始）</br>
+
+
+
+</br></br></br></br></br>
+
+
+</html>

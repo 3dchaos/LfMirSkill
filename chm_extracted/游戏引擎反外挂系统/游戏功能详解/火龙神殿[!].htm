@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>火龙神殿[!]</title>
+<style>
+<!--
+.STYLE3 {color: #0000FF}
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</head>
+
+<body>
+
+<p><span class="STYLE3"><font size="2">NPC相关命令：</font></span><font size="2"><br>
+</font><span class="STYLE2"><strong><font size="2">功能：</font></strong><font size="2">关闭客户端'!'图标显示</font></span><font size="2"><br>
+<strong>格式：</strong>CLOSEMSGWINDOWS </font></p>
+<p><span class="STYLE2"><strong><font size="2">格式：</font></strong><font size="2">MESSAGEBOX 
+消息内容 QF触发段 QF触发段</font></span><font size="2"><br>
+<strong>例：</strong> MESSAGEBOX 使用10元宝，便可在当前地图内原位\置复活？ @确认 @取消<br>
+<strong>说明：</strong>在客户端显示一个提示框，点确定时，触发QFunction-0.txt的 @确认 代码<br>
+点取消时，触发QFunction-0.txt的 @取消 代码</font></p>
+<p><span class="STYLE3"><font size="2">物品ID</font></span><font size="2"><br>
+774;火龙凭证;41;0;1;0;0;0;269;0;0;0;0;0;0;0;0;0;0;0;0;0;5000;5;;0;</font></p>
+<p><span class="STYLE3"><font size="2">MonGen.txt</font></span><font size="2"><br>
+;地图名：火龙殿<br>
+D2083 82 44 火龙教主 0 1 30<br>
+D2083 65 48 恶魔蝙蝠 10 10 30<br>
+D2083 81 62 恶魔蝙蝠 10 10 30<br>
+D2083 66 62 恶魔蝙蝠 10 10 30<br>
+D2083 51 75 恶魔蝙蝠 10 10 30</font></p>
+<font size="2" color="#FF0000">火龙守护兽设置说明</font><br>
+<font size="2"><span class="STYLE2"><font color="#0000FF">Mir200\Envir\FireDragonGuard.txt (手动创建FireDragonGuard.txt 或开启引擎自动生成)设置方法</font></span><br>
+<p><font size="2">;名称 地图 x y dir(0-1) 攻击坐标x 攻击坐标Y(可以为多个以|分隔)<br>
+;----------------------------------<br>
+火龙守护兽 D2083 51,67 1 77,50|74,50|83,50|80,53|86,53|74,41|71,41|71,44|71,47<br>
+火龙守护兽 D2083 48,70 1 81,44|81,47|78,44|75,44|84,47|78,41|75,41|81,50|84,50<br>
+火龙守护兽 D2083 45,73 1 81,44|84,47|78,41|85,50|75,41|76,51|79,54|73,48<br>
+火龙守护兽 D2083 61,78 0 79,48|79,51|76,48|78,53|75,50|76,45|82,51|81,44|84,47|78,41<br>
+火龙守护兽 D2083 58,81 0 79,48|82,51|85,54|76,45|71,40|82,48|79,45|76,42|85,51|73,42<br>
+火龙守护兽 D2083 55,84 0 80,48|77,48|80,45|77,51|74,51|74,54|71,54|71,57</font></p>
+<p><font size="2"><span class="STYLE2"><font color="#0000FF">注：火龙守护兽不用MonGen.txt刷，如果用其它方式刷出来，无攻击效果及发亮效果(怪物血量以及一些其他配置请自行修改)<br>
+</font></span><br>
+灵魂收割者;81;19;240;100;1;1000;20000;20000;0;12;12;280;300;0;0;17;15;900;1;0;2000;<br>
+蓝影刀客;81;19;241;100;1;1000;20000;20000;0;12;12;280;300;0;0;17;15;900;1;0;2000;<br>
+恶魔蝙蝠;146;19;80;999;0;1000;2000;400;0;1000;1000;40;45;0;0;17;15;900;1;0;2000<br>
+火龙教主;144;83;800;200;1;0;10000;12000;0;70;100;120;170;0;0;25;30;0;1;0;1500<br>
+火龙守护兽;145;95;802;999;1;1000;0;18000;0;30;30;40;45;0;0;17;15;900;1;0;2000 </font></p>
+<p>　</p>
+
+</body>
+
+</html>

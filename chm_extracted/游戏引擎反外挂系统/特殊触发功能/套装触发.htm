@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Language" content="zh-cn">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>套装触发</title>
+</head>
+
+<body>
+
+<p>@GroupItemOn </p>
+<p>例如：</p>
+
+<p>[@GroupItemOn0]<br>
+#IF<br>
+#ACT<br>
+SENDMSG 0 圣战套装隐藏属性被激发:攻击上限增加5点!<br>
+<br>
+[@GroupItemOn1]<br>
+#IF<br>
+#ACT<br>
+SENDMSG 0 法神套装隐藏属性被激发:魔法上限增加5点!<br>
+<br>
+[@GroupItemOn2]<br>
+#IF<br>
+#ACT<br>
+SENDMSG 0 天尊套装隐藏属性被激发:道术上限增加5点!</p>
+
+
+<p>@GroupItemOff </p>
+<p>例如：</p>
+
+<p>[@GroupItemOff0]<br>
+#IF<br>
+#ACT<br>
+SENDMSG 0 圣战套装隐藏属性失效:攻击恢复正常!<br>
+<br>
+[@GroupItemOff1]<br>
+#IF<br>
+#ACT<br>
+SENDMSG 0 法神套装隐藏属性失效:魔法恢复正常!<br>
+<br>
+[@GroupItemOff2]<br>
+#IF<br>
+#ACT<br>
+SENDMSG 0 天尊套装隐藏属性失效:道术恢复正常!</p>
+
+
+
+
+
+<p><B>套装生效触发[@GroupItemOnX],套装失效触发[@GroupItemOffX],英雄对应[@HeroGroupItemOnX],[@HeroGroupItemOffX] X表示套装序号</B></p>
+
+##########################################################以下为全局触发，任意套装生效就触发##########################################################</p>
+
+<B>套装生效全局触发和检测命令</B><br><br>
+
+QF套装触发<br>
+@GroupItemOnEx @GroupItemOffEx<br>
+@HeroGroupItemOnEx  @HeroGroupItemOffEx<br><br>
+套装检测命令：<br>
+CheckGroupItem 套装编号<br>
+用于检测指定编号套装有没生效<br><br>
+
+例子：<br>
+[@GroupItemOnEx]<br>
+#IF<br>
+CheckGroupItem 1<br>
+#ACT<br>
+SENDMSG 7 1号套装生效<br>
+#ELSEACT<br>
+SENDMSG 5 1号套装未生效<br><br>
+
+
+[@GroupItemOffEx]<br>
+#IF<br>
+CheckGroupItem 1<br>
+#ACT<br>
+SENDMSG 7 1号套装生效<br>
+#ELSEACT<br>
+SENDMSG 5 1号套装未生效<br><br><br><br>
+
+
+
+
+</body>
+
+</html>
