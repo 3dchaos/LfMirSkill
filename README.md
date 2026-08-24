@@ -48,6 +48,18 @@ tests/test_lf_kb.py                # 静态工具测试
 - 修改或上传服务端二进制、数据库、授权文件、运行日志。
 - 凭空编造命令语法。回答前应先检索说明书或样本。
 
+## CodeGraph 技能
+
+仓库还提供一个独立的 `codex-skills/codegraph` 技能，用于在已有 `.codegraph/` 索引的代码库中查询符号、调用者/被调用者、调用路径和相关文件。
+
+安装到 Codex：
+
+```powershell
+Copy-Item -Recurse -Force "codex-skills\codegraph" "$env:USERPROFILE\.codex\skills\codegraph"
+```
+
+该技能只包含 Codex 的提示和界面元数据。CodeGraph CLI/MCP 服务端需要按其上游项目单独安装；安装后重启 Codex，已有项目可以直接使用 `.codegraph/` 索引。
+
 ## 本地知识根要求
 
 使用时需要在某个本地目录中准备两类内容：
