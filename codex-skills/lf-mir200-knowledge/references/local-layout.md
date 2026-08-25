@@ -2,11 +2,11 @@
 
 The expected knowledge root contains:
 
-- `knowledge_base/index.md`: Manual table of contents converted from CHM.
+- `knowledge_base/index.md`: Manual table of contents converted from CHM. This directory is required and is packaged inside the skill directory.
 - `knowledge_base/chapters/*.md`: One Markdown file per manual page.
 - `knowledge_base/assets/`: Images and attachments from the manual.
 - `knowledge_base/manifest.json`: Conversion counts and duplicate CHM targets.
-- `样本Mir200/`: Real Mir200 server sample.
+- `样本Mir200/`: Optional local Mir200 server sample. It is not included in the public package.
 - `.codex-kb/indexes/docs.json`: Derived manual search index.
 - `.codex-kb/indexes/sample.json`: Derived sample-script search index.
 - `.codex-kb/indexes/mapinfo-links.json`: Derived `MapInfo.txt` map-link index.

@@ -7,7 +7,7 @@ description: Use when answering or modifying LF/LFM2/翎风引擎 Mir200 server 
 
 ## Overview
 
-Use the local LF engine manual and sample `Mir200` server as the source of truth. Search before answering, cite local file paths, and prefer examples from the sample scripts when the user asks how to write or change scripts.
+Use the included LF engine manual as the syntax source of truth. When a local `样本Mir200` server sample is available, search it before answering and prefer its examples for project-specific implementation patterns. Cite local file paths and distinguish official manual behavior from sample-derived observations.
 
 This skill also learns a local script-thinking model from real sample files. The model is regenerated from the sample scripts and should be treated as a living summary of how Mir200 scripts are structured in practice.
 
@@ -17,10 +17,11 @@ Do not compile, launch, or run the Mir200 server. Perform static analysis only u
 
 ## Locate The Knowledge Root
 
-The root is the directory containing both:
+The root is the directory containing:
 
 - `knowledge_base/index.md`
-- `样本Mir200/`
+
+`样本Mir200/` is optional local material. It is not included in the public skill package because it may contain private server files.
 
 When paths are not obvious, run:
 
@@ -35,7 +36,7 @@ If the root moves, either pass `--root` or set `LF_MIR200_KB_ROOT`.
 1. Run `update` when the manual, sample scripts, or indexes may be stale.
 2. In a real project repo, read the nearest `AGENTS.md` / `CLAUDE.md` / `GEMINI.md` first, then relevant project docs such as `docs/*.md` named by the user or matching the feature.
 3. Search the manual for command syntax and official behavior.
-4. Search `样本Mir200` for working examples.
+4. If `样本Mir200` exists, search it for working examples; otherwise mark sample-derived conclusions as unavailable.
 5. Read `references/mir200-training.md` when learning or improving the skill from examples.
 6. Read `references/mir200-thinking.md` for the current local script-thinking summary.
 7. Read `references/script-deep-dives.md` when the user names a specific script to study deeply.

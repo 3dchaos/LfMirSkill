@@ -17,6 +17,7 @@ codex-skills/lf-mir200-knowledge
 ```text
 codex-skills/lf-mir200-knowledge/
   SKILL.md                         # Codex skill 主说明
+  knowledge_base/                  # 必须随 skill 发布的完整说明书知识库
   scripts/lf_kb.py                 # 本地索引、搜索、检查工具
   references/local-layout.md       # 本地知识库目录约定
   references/mir200-thinking.md    # 从真实脚本提炼出的思维模型
@@ -28,6 +29,7 @@ codex-skills/lf-mir200-knowledge/
 
 ```text
 tests/test_lf_kb.py                # 静态工具测试
+tests/test_install_codex_skill.py  # 安装包与知识库伴随关系测试
 ```
 
 ## 能力范围
@@ -50,43 +52,54 @@ tests/test_lf_kb.py                # 静态工具测试
 
 ## 本地知识根要求
 
-使用时需要在某个本地目录中准备两类内容：
+使用时 skill 目录内已经包含必需的说明书；如需样本分析，再额外准备本地样本：
 
 ```text
-knowledge_base/index.md            # 已转换好的说明书总目录
-样本Mir200/                        # 实际 Mir200 服务端脚本样本
+codex-skills/lf-mir200-knowledge/knowledge_base/
+                                  # 必须随 skill 安装的完整说明书知识库
+样本Mir200/                        # 可选的本地 Mir200 服务端脚本样本
 ```
 
 本仓库默认不提交这些大体积或敏感内容：
 
 - 原始 CHM 文件
 - CHM 解包目录
-- 完整转换后的说明书正文
-- `样本Mir200/` 服务端样本
+- `样本Mir200/` 服务端样本（公开仓库不包含）
 - `.exe`、`.db`、`.dat`、`.lic`、日志、缓存等运行文件
 
 这样做是为了让 GitHub 仓库保持轻量，也避免误传服务器私有文件。
 
 ## 安装到 Codex
 
-将 skill 目录复制到 Codex 的本地 skills 目录：
+`knowledge_base` 是 `lf-mir200-knowledge` 的必需内容，不能只复制 skill 外壳。推荐使用仓库内安装器：
 
 ```powershell
-Copy-Item -Recurse -Force "codex-skills\lf-mir200-knowledge" "$env:USERPROFILE\.codex\skills\lf-mir200-knowledge"
+python scripts\install_codex_skill.py `
+  --source . `
+  --dest "$env:USERPROFILE\.codex\skills\lf-mir200-knowledge"
+```
+
+兼容旧版 GitHub skill-installer 时，路径必须指向包含嵌套 `knowledge_base` 的目录：
+
+```powershell
+python install-skill-from-github.py `
+  --repo 3dchaos/LfMirSkill `
+  --path codex-skills/lf-mir200-knowledge `
+  --ref master
 ```
 
 安装后，在新任务中当你询问 LF/LFM2/Mir200 脚本、命令、NPC、地图、怪物刷新、机器人脚本、商人脚本等问题时，Codex 会根据 skill 描述加载这套知识库工作流。
 
 ## 常用命令
 
-在知识根目录运行，或用 `--root` 指定知识根：
+在 skill 知识根目录运行，或用 `--root` 指定 `codex-skills/lf-mir200-knowledge`：
 
 ```powershell
-python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root . validate
-python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root . update
-python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root . search "CHECKITEM GIVE 装备回收" --source all --limit 8
-python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root . search "0 308 264 0102" --source mapinfo --limit 5
-python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root . inspect "codex-skills/lf-mir200-knowledge/references/mir200-thinking.md"
+python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root codex-skills\lf-mir200-knowledge validate
+python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root codex-skills\lf-mir200-knowledge update
+python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root codex-skills\lf-mir200-knowledge search "CHECKITEM GIVE 装备回收" --source all --limit 8
+python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root codex-skills\lf-mir200-knowledge search "0 308 264 0102" --source mapinfo --limit 5
+python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root codex-skills\lf-mir200-knowledge inspect "references/mir200-thinking.md"
 ```
 
 命令用途：
@@ -103,8 +116,8 @@ python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root . inspect "codex
 当说明书或 `样本Mir200` 内容变化后，执行：
 
 ```powershell
-python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root . update
-python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root . validate
+python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root codex-skills\lf-mir200-knowledge update
+python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root codex-skills\lf-mir200-knowledge validate
 ```
 
 更新后重点查看：
@@ -157,4 +170,4 @@ python codex-skills\lf-mir200-knowledge\scripts\lf_kb.py --root . validate
 
 这个仓库适合公开保存 skill 本体、工具脚本、训练方法和项目说明。
 
-真实服务器样本、完整说明书、CHM 解包产物和运行文件应继续保留在本地，并通过 `.gitignore` 排除。
+真实服务器样本、CHM 解包产物和运行文件应继续保留在本地，并通过 `.gitignore` 排除。完整转换后的 `knowledge_base` 是公开 skill 的必需发布内容，不再排除。

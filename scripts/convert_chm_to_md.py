@@ -451,7 +451,11 @@ def convert(source: Path, output: Path) -> dict[str, object]:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Convert extracted CHM HTML files to a Markdown knowledge base.")
     parser.add_argument("--source", default="chm_extracted", help="Directory produced by hh.exe -decompile.")
-    parser.add_argument("--output", default="knowledge_base", help="Markdown knowledge base output directory.")
+    parser.add_argument(
+        "--output",
+        default="codex-skills/lf-mir200-knowledge/knowledge_base",
+        help="Markdown knowledge base output directory.",
+    )
     args = parser.parse_args()
 
     manifest = convert(Path(args.source), Path(args.output))

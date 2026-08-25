@@ -65,7 +65,7 @@ def validate(root: Path) -> dict[str, object]:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Statically validate a generated Markdown knowledge base.")
-    parser.add_argument("--root", default="knowledge_base")
+    parser.add_argument("--root", default="codex-skills/lf-mir200-knowledge/knowledge_base")
     args = parser.parse_args()
     report = validate(Path(args.root))
     print(json.dumps(report, ensure_ascii=False, indent=2))
