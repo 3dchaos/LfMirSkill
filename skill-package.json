@@ -1,0 +1,16 @@
+{
+  "name": "lf-mir200-knowledge",
+  "skillPath": "codex-skills/lf-mir200-knowledge",
+  "knowledgeBasePath": "codex-skills/lf-mir200-knowledge/knowledge_base",
+  "requiredCompanionPaths": [
+    "knowledge_base"
+  ],
+  "requiredFiles": [
+    "codex-skills/lf-mir200-knowledge/SKILL.md",
+    "codex-skills/lf-mir200-knowledge/knowledge_base/index.md",
+    "codex-skills/lf-mir200-knowledge/knowledge_base/manifest.json"
+  ],
+  "samplePath": "样本Mir200",
+  "sampleIncluded": false,
+  "sampleNote": "样本Mir200 is local/private and is not included in the public repository."
+}

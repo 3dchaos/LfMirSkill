@@ -218,12 +218,16 @@ def find_root(start: Path | None = None, explicit_root: str | None = None) -> Re
     current = (start or Path.cwd()).resolve()
     for parent in [current, *current.parents]:
         candidates.append((parent, "ancestor"))
+        candidates.append((parent / "codex-skills" / "lf-mir200-knowledge", "skill-package"))
 
     for candidate, source in candidates:
         root = candidate.resolve()
-        if (root / "knowledge_base" / "index.md").exists() and (root / "样本Mir200").exists():
+        if (root / "knowledge_base" / "index.md").exists():
             return ResolvedRoot(root=root, source=source)
-    raise FileNotFoundError("Cannot locate LF/Mir200 knowledge root. Pass --root or set LF_MIR200_KB_ROOT.")
+    raise FileNotFoundError(
+        "Cannot locate LF/Mir200 knowledge root with knowledge_base/index.md. "
+        "Pass --root or set LF_MIR200_KB_ROOT."
+    )
 
 
 def first_heading(markdown: str, fallback: str) -> str:
@@ -270,6 +274,8 @@ def classify_sample(path: Path, sample_root: Path) -> str:
 
 def build_sample_index(root: Path) -> list[dict[str, str]]:
     sample_root = root / "样本Mir200"
+    if not sample_root.is_dir():
+        return []
     records: list[dict[str, str]] = []
     for path in sorted(sample_root.rglob("*")):
         if not path.is_file():
@@ -700,10 +706,13 @@ def skill_root() -> Path:
 
 
 def render_thoughts_markdown(summary: dict[str, object], root: Path) -> str:
+    has_sample = (root / "样本Mir200").is_dir()
     lines = [
         "# Mir200 Script Thinking",
         "",
-        "Generated from the live `样本Mir200` scripts.",
+        "Generated from the live `样本Mir200` scripts."
+        if has_sample
+        else "This package includes the manual knowledge base; add local `样本Mir200` scripts to regenerate sample-derived patterns.",
         "",
         "## Principles",
         "",
@@ -724,16 +733,25 @@ def render_thoughts_markdown(summary: dict[str, object], root: Path) -> str:
     lines.extend(["", "## Dominant Categories", ""])
     for category, count in summary.get("dominant_categories", []):
         lines.append(f"- {category}: {count}")
-    lines.extend(
-        [
-            "",
-            "## Reading Discipline",
-            "",
-            "- Treat the manual as syntax authority and `样本Mir200` as practical usage authority. For arrays, the strongest evidence is `knowledge_base/chapters/192-多元数组元素变量.md` plus sample scripts such as `样本Mir200/Envir/Market_def/酒馆/翔天-3.txt` and `样本Mir200/Envir/Market_def/其它区域/踏云尊者-yssd.txt`.",
-            "- For any script, write down: entry, guards, actions, state writeback, failure path.",
-            "- If a pattern appears in multiple examples, prefer the repeated local style over a one-off shortcut.",
-        ]
-    )
+    reading_discipline = [
+        "",
+        "## Reading Discipline",
+        "",
+        "- Treat the manual as syntax authority and `样本Mir200` as practical usage authority when local samples are available.",
+        "- For any script, write down: entry, guards, actions, state writeback, failure path.",
+        "- If a pattern appears in multiple examples, prefer the repeated local style over a one-off shortcut.",
+    ]
+    if has_sample:
+        reading_discipline.insert(
+            4,
+            "- For arrays, the strongest evidence is `knowledge_base/chapters/192-多元数组元素变量.md` plus sample scripts such as `样本Mir200/Envir/Market_def/酒馆/翔天-3.txt` and `样本Mir200/Envir/Market_def/其它区域/踏云尊者-yssd.txt`.",
+        )
+    else:
+        reading_discipline.insert(
+            4,
+            "- The public package does not include `样本Mir200`; do not present sample-derived behavior as verified until a local sample root is supplied.",
+        )
+    lines.extend(reading_discipline)
     lines.extend(
         [
             "",
@@ -751,11 +769,14 @@ def render_thoughts_markdown(summary: dict[str, object], root: Path) -> str:
 
 
 def render_training_markdown(course: dict[str, object], root: Path) -> str:
+    has_sample = (root / "样本Mir200").is_dir()
     coverage = course.get("coverage", {})
     lines = [
         "# Mir200 Training Course",
         "",
-        "Generated from the live `样本Mir200` scripts.",
+        "Generated from the live `样本Mir200` scripts."
+        if has_sample
+        else "This package has no public `样本Mir200`; provide a local sample root before sample-based training.",
         "",
         f"- Method: {course.get('method')}",
         f"- Lessons: {coverage.get('lessons', 0)}",
@@ -917,7 +938,6 @@ def validate_root(root: Path) -> dict[str, object]:
         [
             report["knowledge_base_index"],
             report["chapters_dir"],
-            report["sample_mir200_dir"],
             report["docs_index"],
             report["sample_index"],
             report["mapinfo_links_index"],
@@ -959,7 +979,10 @@ def cmd_learn_script(root: Path, rel_path: str) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="LF/Mir200 local knowledge base maintenance and search.")
-    parser.add_argument("--root", help="Knowledge root containing knowledge_base/ and 样本Mir200/.")
+    parser.add_argument(
+        "--root",
+        help="Knowledge root containing knowledge_base/; 样本Mir200/ is optional and local-only.",
+    )
     sub = parser.add_subparsers(dest="command", required=True)
 
     sub.add_parser("update", help="Rebuild docs and sample-script indexes.")
