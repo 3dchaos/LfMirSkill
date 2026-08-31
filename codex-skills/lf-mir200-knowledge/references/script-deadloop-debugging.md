@@ -64,9 +64,25 @@ For jump-budget exhaustion:
 
 - Reduce repeated work first. A periodic equipment/buff timer should normally check only whether the slot is empty, whether the item identity changed, or whether a dirty flag is set.
 - Run the full refresh on login, item change, death/revival recovery, explicit state changes, and other real lifecycle events rather than on every timer tick.
+- Before removing the old full-refresh call, inventory everything that depended on its cadence. Explicit-duration `ChangeHumAbility`, `AddHumNewValue`, `ChangeSpeed`, and `ChangeState` commands need a lightweight unchanged-state renewal path; cooldown decrement, pet replacement, periodic healing, and similar tick-driven behavior need an intentional periodic path too.
+- Keep the renewal path separate from the full refresh. It should use cached, already validated module state, renew only the active class/direction contributions, and avoid config parsing, icon rebuilding, module open/close, or other deep call chains that caused the original budget failure.
 - Clear the dirty flag after a successful full refresh and during defensive cleanup. If the local script must clear it at refresh entry to prevent re-entry, every failure/abort path must set it again so the next timer tick can retry.
 - Raise the effective jump limit conservatively above the measured worst legitimate path. Keep a finite ceiling so genuine recursion is still stopped.
 - Treat `!Setup.txt` changes as startup configuration; tell the operator that a Mir200 restart is required before runtime verification.
+
+## Post-Repair Lifecycle Audit
+
+A dead-loop repair is incomplete until the optimized timer preserves the old feature contract. Use this audit after replacing a repeating full refresh with an identity/dirty check:
+
+1. Extract every command in the old refresh chain with an explicit duration. Treat the duration as a renewable lease rather than a one-time assignment.
+2. Compare the heartbeat interval with the shortest lease. Keep the heartbeat shorter with margin for timer jitter; for example, a 2-second heartbeat can renew a 3-second lease, but skipping the unchanged-state renewal makes the effect disappear on the first expiry.
+3. Map base contributions and direction-specific contributions separately. Verify that each route renews only its own attributes and cannot inherit another route's damage, resistance, accuracy, speed, or state effect.
+4. Trace non-attribute cadence work independently: cooldown counters, summon replacement, periodic HP/MP recovery, pet recovery, stack decay, and delayed cleanup.
+5. Revalidate the cheap path's assumptions. If job, mode, stage, or another eligibility condition can change without changing the item name, recheck that condition before renewal; on failure, clean up or request a full refresh.
+6. Keep removal behavior explicit. Unequip, drop, durability loss, invalid job, and invalid item should stop the timer and cleanup; death/revival behavior must follow the feature design rather than being inferred from ordinary unequip behavior.
+7. Recount the new call path and run the cycle check again. A lightweight dispatcher can still recreate a cross-file cycle if a module calls back into the full refresh.
+
+Do not solve this regression by simply removing all duration arguments. Online-indefinite assignments require complete, contribution-safe cleanup, and broad `= 0` resets can erase values owned by unrelated systems.
 
 If the user/operator authorizes runtime verification of an ambiguous effective config key, change only one candidate key at a time, restart Mir200, and compare the failure boundary. Do not simultaneously alter both keys and the call chain, because that destroys the evidence needed to identify the effective setting.
 
@@ -89,6 +105,9 @@ A focused checker should verify:
 - no reachable back-edge is unbounded; any allowed bounded back-edge has an explicit monotonic state change and finite upper bound;
 - the effective jump-limit key exists and is within the intended finite range;
 - high-frequency `QManage` timers call lightweight check labels rather than unconditional full-refresh labels;
+- every explicit-duration effect from the old full-refresh chain has an unchanged-state renewal counterpart under the correct class/direction guard;
+- every cooldown, summon, periodic heal, or other cadence-dependent action intentionally remains reachable after the timer optimization;
+- unchanged-item fast paths revalidate eligibility fields that can change independently of item identity, such as the player's current job;
 - dirty flags are set by lifecycle events and cleared by full refresh and cleanup;
 - timer start/stop pairs and callback label numbers match;
 - restored/unrelated scripts have no content diff;

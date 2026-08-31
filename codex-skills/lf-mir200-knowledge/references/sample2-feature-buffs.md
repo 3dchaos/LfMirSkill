@@ -127,6 +127,18 @@ For buffs driven by an equipped item slot rather than a consumable timer, separa
 - Item remarks for slot-driven buffs should disclose the player contract: equipped slot, build direction, trigger skills or trigger moments, visible effect, quality unlocks, and player feedback. Keep developer contract details such as refresh timers, temporary stat duration, audit/recheck wording, cleanup internals, script recovery, and diagnostic records in implementation docs or comments, not in player-facing `ItemDescList.txt` or buff hover text.
 - Validate generated item remarks against the runtime script/config source. `ItemDescList.txt` remains display text: it can explain a feature, but it is not proof that the feature is enforced.
 
+#### Lightweight Timer Checks And Effect Renewal
+
+Treat an explicit time argument on a persistent equipment effect as a renewable lease, not as permanent state. This includes `ChangeHumAbility`, `AddHumNewValue`, `ChangeSpeed`, `ChangeState`, and any other command whose manual defines a duration.
+
+- Split the lifecycle into three paths: full refresh on equip/change/dirty state, lightweight renewal while the same item remains equipped, and cleanup on removal/death/drop. The unchanged timer path must not simply `BREAK` when the active effects have finite durations.
+- Keep the renewal interval shorter than the effect duration with enough margin for timer jitter. A 2-second heartbeat renewing 3-second effects is a valid short-lease pattern; skipping one renewal makes the effect visibly disappear.
+- Inventory every time-bounded command in module refresh labels and mirror it in the lightweight renewal path. Audit base attributes, route-specific attributes, `ChangeSpeed`, `ChangeState`, and hidden/new values together; checking only MaxHP misses the same regression in speed, life steal, resistances, and other leased effects.
+- Restore intentional periodic behavior that previously ran through the full refresh, such as cooldown decrement, pet replacement, or periodic healing. Exclude one-time lifecycle work such as config parsing, icon rebuilding, module initialization, and unconditional state resets.
+- Keep the renewal call graph shallow and acyclic. Dispatch only the active class/module, use cached validated configuration values, end each branch with `BREAK`, and avoid re-entering the full refresh from an unchanged-state heartbeat.
+- Prefer short leases plus timer shutdown on cleanup when direct clearing would be unsafe. Changing leased effects to online-indefinite values requires complete removal handling, and broad `= 0` cleanup can overwrite another feature that contributes to the same engine attribute.
+- Statically validate both sides of the contract: the timer handler reaches the renewal dispatcher, every leased effect has a renewal counterpart, recurring gameplay actions still have a tick path, removal stops the timer, and the renewal graph stays below the configured script-jump budget.
+
 #### 老登军鼓 Reference Pattern
 
 For the 老登 project's 14-slot 军鼓 system, the reusable chain is:
@@ -141,6 +153,7 @@ Reusable rules from that pattern:
 
 - Match all equipment names exactly through the config table. Do not fuzzy-match quality or direction names.
 - Before any combat proc, re-read slot 14 and compare the item name against the current cached name. If the item is missing or changed, call refresh/cleanup and stop the proc.
+- When Timer87 performs only an equipment-name/dirty-state check, route the unchanged-item branch to a dedicated renewal dispatcher. Renew all 3-second class and direction effects, warrior attack speed, wizard cast speed, Taoist pet replacement cooldown, and intended periodic healing without rerunning config, icon, or module-open chains.
 - For the persistent self icon, use `SetArrBuff 1 87 ... -1 ...` and close with `CloseArrBuff 87`.
 - Use the local quiet flag for this feature's chat surface. In this project, 军鼓 trigger printing uses `[63]`.
 - Player-facing buff text should say what the player can act on: name, class, direction, quality, gameplay, and trigger effects. Keep safety/audit wording out of the hover text.
@@ -221,6 +234,7 @@ Do not infer runtime behavior from tooltip text alone. Preserve every `|` placeh
 - Search all feature names in `QuestDiary`, `Market_Def/QFunction-0.txt`, `ItemDescList.txt`, `CustomMagic`, and set/skill-power tables.
 - For every `SetArrBuff` affecting stats, find the matching `[@CloseArrBuffX]`.
 - For every equipment-slot persistent `SetArrBuff`, statically verify a close path for login refresh, timer refresh, unequip, drop, durability loss, script removal, and death checks. Search for stale `CloseArrBuff <group> <button>` forms when the local project expects `CloseArrBuff <button>`.
+- For every equipment-driven effect with an explicit duration, compare the full-refresh commands with the unchanged-state renewal label and verify the timer interval is shorter than the lease. Include recurring cooldown, summon, and healing work that depended on the old refresh cadence.
 - For every target-side `M.SetArrBuff`, verify `M.` marker writes and target recalculation labels.
 - For every player-facing hidden-property remark, locate a runtime source: custom item property table, item new-value command, attack trigger, set table, or skill-power table.
 - For player-facing remarks and buff hover text, grep for developer-only terms such as `复核`, `清理`, `基础`, `机制`, `安全`, `记录`, refresh intervals, temporary-duration internals, and script-recovery wording.
