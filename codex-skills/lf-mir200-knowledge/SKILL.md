@@ -44,9 +44,10 @@ If the root moves, either pass `--root` or set `LF_MIR200_KB_ROOT`.
 9. Read `references/envir-config-deep-dives.md` when the user names a specific `Envir` configuration file to study deeply.
 10. Read `references/sample2-feature-buffs.md` when the request involves `样本2Mir200`, feature buffs, awakening seals, flow-school builds, inscription-like custom properties, pet contracts, special hidden attributes, or build-oriented buff systems.
 11. Read `references/mir200-256-colors.md` when the request involves color values, `0-255` palettes, `/SCOLOR`, `{text|color}`, equipment name colors, item remarks, set remarks, custom item text colors, custom attributes, progress bars, monster name colors, or low-to-high rarity color presets.
-12. Inspect the most relevant project files before making claims or edits.
-13. For code/script edits, preserve original encoding and style, and modify only the requested files.
-14. Validate statically after edits with `validate` and targeted searches.
+12. Read `references/script-deadloop-debugging.md` when logs report `[脚本死循环]`, repeated `GOTO` failures, `QManage` timer failures, or a script starts failing after its refresh/call chain grows.
+13. Inspect the most relevant project files before making claims or edits.
+14. For code/script edits, preserve original encoding and style, and modify only the requested files.
+15. Validate statically after edits with `validate` and targeted searches.
 
 ## Durable Mir200 Rules
 
@@ -77,6 +78,10 @@ If the root moves, either pass `--root` or set `LF_MIR200_KB_ROOT`.
 - For `样本2Mir200` timed buffs and debuffs, pair every stat-affecting `SetArrBuff` with a `[@CloseArrBuffX]` cleanup that clears the marker/counter and reruns affected readers. Persistent buffs such as `苹果`, `满江红`, and `幸运药水` store expiry state and rebuild icons after login; the icon itself is not the source of truth.
 - For equipment-slot driven persistent buffs, confirm the equipped position before refresh and before combat procs, use `SetArrBuff` parameter 5 as `-1` for non-countdown self icons, and close the auto-arranged icon by button number only, for example `CloseArrBuff 87` for `SetArrBuff 1 87 ...`; do not use the group+button form `CloseArrBuff 1 87` for this project pattern.
 - For equipment-slot driven persistent buffs, treat unequip, item drop, durability exhaustion, script-side removal, death checks, login refresh, and timer refresh as one lifecycle. A missing or changed equipped item must close the module, clear feature variables, stop the refresh timer, and close the icon before any later refresh can rebuild it.
+- When Mir200 reports `[脚本死循环] ... 命令:GOTO @label`, do not treat the named label or the word `GOTO` as proof of a recursive cycle. First reconstruct the complete entry path through `QManage`, `#CALL`, and `GOTO`, then distinguish an unbounded cycle from a legitimate path that exceeded the configured jump budget; that path may be acyclic or contain a provably bounded loop. Follow `references/script-deadloop-debugging.md`.
+- Audit both `ScriptGotoCountLimit` and `LimitScriptGotoCount` when they coexist in `!Setup.txt`. Their effective behavior can be engine-version-specific; a large legacy value does not prove that a later low limit is inactive. Keep the effective limit finite and only raise it above the measured legitimate path after reducing avoidable high-frequency work.
+- Do not bulk-convert same-file `#CALL` statements to `GOTO` as a dead-loop fix. The manual documents `GOTO` label dispatch and callback-style `RETURN`, and project logs may report called labels as `GOTO`; changing the spelling does not prove that recursion or jump-budget consumption was reduced. Preserve established call semantics unless a verified engine rule requires a conversion.
+- `SetOnTimer` without an execution-count argument repeats indefinitely until `SetOffTimer`. High-frequency handlers should perform a cheap state check and call the full refresh only when the equipped object changed or a lifecycle event set a dirty flag. Adding `BREAK` or preventing duplicate timer registration does not reduce the work performed by an already repeating timer.
 - For buff/head-icon art resources, verify the resource table's index base before writing script numbers. In 老登军鼓, `EffectImageList.txt` image-file references were corrected to start from `0`, so `SetArrBuff`/`SETICON` file indexes should follow the local table rather than assuming `1`; clear stale icons before rebuilding (`CloseArrBuff`, `SETICON n -1`) and do not put chat `SENDMSG` or branch-stopping `BREAK` inside refresh/helper paths where timer refreshes or later description branches still need to run.
 - Keep player-facing `SetArrBuff` hover text and `ItemDescList.txt` remarks at the gameplay layer: equipped slot, direction/build, trigger skills, visible effect, quality unlock, and player feedback. Do not expose developer-maintenance details such as refresh intervals, temporary stat durations, audit/recheck wording, cleanup internals, script recovery, or diagnostic records unless the surface is explicitly GM/admin-only.
 - For feature proc chat feedback, use the project quiet flag that already controls similar player notices. In the 老登 project,军鼓 proc printing uses flag `[63]`; do not accidentally reuse unrelated quiet flags such as `[61]` without checking local helper scripts.
@@ -217,6 +222,7 @@ Use both Chinese feature names and script command keywords:
 - Items and rewards: `CHECKITEM`, `GIVE`, `TAKE`, `GAMEGOLD`, `CHECKBAGSIZE`
 - Maps and NPCs: `MapInfo`, `MerChant`, `Npcs`, `MAPMOVE`, `MonGen`
 - Timers and automation: `Robot_def`, `AutoRunRobot`, `RobotManage`
+- Script loop diagnosis: `[脚本死循环]`, `ScriptGotoCountLimit`, `LimitScriptGotoCount`, `#CALL`, `GOTO`, `BREAK`, `RETURN`, `SetOnTimer`, `SetOffTimer`, `QManage`, `OnTimer`
 - UI/dialog extensions: `OPENMERCHANTBIGDLG`, `ITEMBOX`, `Text`, `Img`
 - State/effect commands: `ChangeState`, `石化`, `冰冻`, `蛛网`, `红毒`, `绿毒`, `定身`, `瘫痪`, `禁锢`, `吸血`, `吸蓝`, `禁止使用技能`, `[@Struck]`, `[@StruckDamage]`, `M.ChangeState`, `H.ChangeState`, `FS.ChangeState`, `BB.ChangeState`
 - Colors and rarity palettes: `颜色值列表`, `256色值`, `SCOLOR`, `/SCOLOR`, `{文字|250}`, `{文字内容|文字颜色0-255}`, `SetCustomItemTextColor`, `SetCustomItemAbil`, `TzItemDescList`, `ItemDescList`, `BossNameColor`, `TZNoActiveItemColor`, `223,249`, `218`, `116`, `249`, `250`, `251`, `253`, `254`
