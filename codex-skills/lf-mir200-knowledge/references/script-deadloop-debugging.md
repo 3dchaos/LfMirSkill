@@ -88,6 +88,15 @@ If the user/operator authorizes runtime verification of an ambiguous effective c
 
 For mixed failures, remove the real cycle before increasing any limit. A larger budget only delays a genuine recursion failure.
 
+## Mismatched `{ }` Block Nesting and Label Fall-Through
+
+Two additional project-observed root causes that look like recursion but are not:
+
+- **A single `{ }` block spanning multiple labels.** In the engine, `{`/`}` delimit a callable script block. If one `{` opens under `[@A]` and the matching `}` only closes after a second label `[@B]` was declared inside it, the labels are nested inside one block. A `#CALL ... @B` (or falling into `@B`) then cannot return cleanly when the outer `}` closes, and the engine's transition accounting reports a dead loop. Fix: each label must own a balanced `{ }` pair, or drop the braces and use the flat label layout with `BREAK`/`#ELSEACT BREAK` terminals.
+- **A conditional `#IF` with no `#ELSEACT`/`BREAK` falls through into the next label.** When `#IF` is false and there is no `#ELSEACT` (and no `BREAK`), execution continues into whatever label/segment follows, which can re-enter a sibling `#CALL` target and create a convergence failure. Fix: give conditional blocks an explicit `#ELSEACT BREAK` (or a `BREAK` terminal) so a failed guard stops instead of falling through.
+
+Observed instance: `AutoRunRobot HOUR 1 @英雄偶遇` → `RobotManage [@英雄偶遇]` → `#CALL 随机英雄NPC.txt @英雄偶遇` → `#CALL @生成英雄引路人`, where `随机英雄NPC.txt` wrapped both labels in one `{ }` pair and the first label had no else-terminal; the log read `[脚本死循环] NPC:RobotManage ... 命令:GOTO @英雄偶遇`.
+
 ## Failed Fix Patterns
 
 - **Bulk `#CALL` to `GOTO` conversion:** changes syntax without proving fewer transitions and risks altering established return/dispatch behavior.
