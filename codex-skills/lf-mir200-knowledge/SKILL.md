@@ -46,6 +46,7 @@ If the root moves, either pass `--root` or set `LF_MIR200_KB_ROOT`.
 11. Read `references/sample2-feature-buffs.md` when the request involves `样本2Mir200`, feature buffs, awakening seals, flow-school builds, inscription-like custom properties, pet contracts, special hidden attributes, or build-oriented buff systems.
 12. Read `references/mir200-256-colors.md` when the request involves color values, `0-255` palettes, `/SCOLOR`, `{text|color}`, equipment name colors, item remarks, set remarks, custom item text colors, custom attributes, progress bars, monster name colors, or low-to-high rarity color presets.
 13. Read `references/script-deadloop-debugging.md` when logs report `[脚本死循环]`, repeated `GOTO` failures, `QManage` timer failures, or a script starts failing after its refresh/call chain grows.
+13a. Read `references/hero-autocall-slave.md` when the request involves hero pets/babies (`RECALLMOB` for heroes, `H.RECALLMOB`, `CHECKSLAVECOUNT`, `H.CHECKSKILL`, `@HeroLearnMagic`, `@OnHeroSlaveDie`, `@HeroSlaveAttack`, hero summon skills), hero pet count/occupancy, or auto-summon features.
 14. Inspect the most relevant project files before making claims or edits.
 15. For code/script edits, preserve original encoding and style, and modify only the requested files.
 16. Validate statically after edits with `validate` and targeted searches.
@@ -183,6 +184,13 @@ For this repository pattern, remember these reusable lessons:
 - For monster strengthening tasks, inspect `Monster` DB schema before updating values. In `GEEM2.db`, useful fields include `Lvl`, `HP`, `AC`, `MAC`, `DC`, `DCMAX`, `MC`, `SC`, `SPEED`, `WALK_SPD`, and `ATTACK_SPD`.
 - `QMission-0.txt` task pages should prefer direct labels over dispatcher labels. For progress pages such as `[@世界当前进度]`, repeat `#IF EQUAL G0 n` / `#SAY ...` / `#ACT BREAK` in the same label and keep fixed detail pages reachable by `<文本/@标签>` links.
 - When the late-game world splits across multiple maps, treat `G0=9/10/11/12` as a staged sequence instead of a single "all open" bucket; in this project that sequence is 雷炎 -> 雪域 -> 火龙 -> 狐月.
+- The manual's "hero commands usually add `H.`" is a weak heuristic, not proof. `H.RECALLMOB` worked on the live server, but `H.CHECKSKILL`, `H.CHECKSLAVECOUNT`, `<$H.SlaveCount>`, `H.KILLCALLMOB`, and `H.CLEARSLAVE` do not exist. Verify every hero-side command against the manual or a live test before using it; when a command has no manual page and no project precedent, assume it is absent until a real test proves otherwise.
+- `[@HeroMagSelfFuncX]` is documented in `832-英雄魔法触发功能.md` but did NOT fire for the hero summon skill on the live server. Treat hero magic self-triggers as version-dependent; use `[@HeroLearnMagic]` with `<$H.LearnMagicID>` as the dependable learn-time hook when a skill must set state.
+- There is no engine command to read the hero pet count or delete an already-summoned hero pet. Represent pet occupancy with dedicated personal flags `[n]` as slots, reset them on login and on `@OnHeroSlaveDie`, and bias cleanup toward clearing more state (under-summon is acceptable, overflow is not). Overflow can only be cleaned by the hero dying, map change, or GM kill.
+- `P0`/`P` variables do NOT persist across `[@OnTimerX]` callbacks; use personal flags `[n]` (which do persist) for any cross-callback counter or occupancy state. Reset them explicitly on login because they survive relog.
+- Flat `#IF/#ACT` blocks are sequential, not else-if. A high-level subject matches every `#IF CheckHerolevel > N` branch at once. For "derive one value from one input" logic, use arithmetic (`MOV`/`DEC`/`DIV`/`INC`) with `SMALL`/`LARGE` clamps instead of a flat branch chain, or use `#ELSEACT BREAK` for truly exclusive branches.
+- `DIV`/`MUL`/`MOV`/`INC`/`DEC` do not accept string variables: write `DIV N$X 5` (bare variable or literal), never `DIV N$X <$STR(N$X)> 5`. `SMALL`/`LARGE`/`EQUAL` take `变量 数值` with the variable first. `DIV` is integer division.
+- For a pet whose level derives from its owner's level, compute it with `MOV N$级 <$H.LEVEL>` then `DEC`/`DIV`/`INC`, and clamp with `SMALL N$级 1` / `LARGE N$级 7`. See `references/hero-autocall-slave.md` for the full hero auto-summon pattern.
 
 ## Efficient Editing Guidance
 
@@ -240,6 +248,7 @@ Use both Chinese feature names and script command keywords:
 - Timers and automation: `Robot_def`, `AutoRunRobot`, `RobotManage`
 - Script loop diagnosis: `[脚本死循环]`, `ScriptGotoCountLimit`, `LimitScriptGotoCount`, `#CALL`, `GOTO`, `BREAK`, `RETURN`, `SetOnTimer`, `SetOffTimer`, `QManage`, `OnTimer`
 - Hero lifecycle triggers: `HeroTakeOnEx`, `HeroTakeOffEx`, `HeroLogin`, `HeroDie`, `HeroStruckDamage`, `HeroAttackDamage`, `H.CHECKUSEITEM`, `H.GetItemFieldValue`, `LockUpdateAbil`, `UpdateAbil`
+- Hero pets/summon: `RECALLMOB`, `H.RECALLMOB`, `CHECKSLAVECOUNT`, `H.CHECKSKILL`, `@HeroLearnMagic`, `<$H.LearnMagicID>`, `@OnHeroSlaveDie`, `@HeroSlaveAttack`, `@HeroSlaveMagicAttack`, `<$H.CurSlaveName>`, `<$H.DIESLAVENAME>`, `@HeroMagSelfFuncX`, `CheckHerolevel`, `<$H.LEVEL>`, `KillCallMob`
 - UI/dialog extensions: `OPENMERCHANTBIGDLG`, `ITEMBOX`, `Text`, `Img`
 - State/effect commands: `ChangeState`, `石化`, `冰冻`, `蛛网`, `红毒`, `绿毒`, `定身`, `瘫痪`, `禁锢`, `吸血`, `吸蓝`, `禁止使用技能`, `[@Struck]`, `[@StruckDamage]`, `M.ChangeState`, `H.ChangeState`, `FS.ChangeState`, `BB.ChangeState`
 - Colors and rarity palettes: `颜色值列表`, `256色值`, `SCOLOR`, `/SCOLOR`, `{文字|250}`, `{文字内容|文字颜色0-255}`, `SetCustomItemTextColor`, `SetCustomItemAbil`, `TzItemDescList`, `ItemDescList`, `BossNameColor`, `TZNoActiveItemColor`, `223,249`, `218`, `116`, `249`, `250`, `251`, `253`, `254`
