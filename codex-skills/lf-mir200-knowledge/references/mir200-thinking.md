@@ -10,6 +10,8 @@ Generated from the live `样本Mir200` scripts.
 - 地图事件与自动化脚本常靠定时器、全局变量和场景条件驱动。
 - MapInfo 中的 `源地图 源X,源Y -> 目标地图 目标X,目标Y` 是地图链接；玩家踩到源坐标后进入目标坐标。
 - `QMission-0.txt` 这类任务页展示脚本不要用 `GOTO @标签` 做当前进度页分发；菜单用 `<文本/@标签>` 直连，进度页把 `#IF / #SAY / #ACT BREAK` 直接写在目标标签里。
+- 英雄装备常驻效果要按生命周期处理：登录、穿戴、卸下、死亡、定时续期、受击、攻击都要挂回调，3 秒限时属性必须靠独立 timer 续写，不能靠一次 `ChangeHumAbility` 直接当永久值。
+- `LockUpdateAbil` 在这个项目里有副作用，长持锁可能卡住英雄或月灵移动；如果必须使用，就尽量缩短到单次 `UpdateAbil` 的范围内。
 
 ## Patterns
 
@@ -44,6 +46,10 @@ Generated from the live `样本Mir200` scripts.
   - Example: `样本Mir200/Envir/MapQuest_def/QManage.txt` (OnTimer, SetOnTimer, Gmexecute, #CALL)
   - Example: `样本Mir200/Envir/QuestDiary/系统功能/老登辅助/辅助.txt` (OnTimer, SetOnTimer, Gmexecute, #CALL)
   - Example: `样本Mir200/Envir/Market_def/QFunction-0.txt` (Gmexecute, #CALL)
+- 英雄装备生命周期 (new): HeroTakeOnEx, HeroTakeOffEx, HeroLogin, HeroDie, HeroStruckDamage, HeroAttackDamage, H.CHECKUSEITEM, H.GetItemFieldValue, LockUpdateAbil, UpdateAbil
+  - Example: `Mir200/Envir/QuestDiary/系统功能/军鼓BUFF.txt` (hero equip/login/renewal/cleanup chain)
+  - Example: `Mir200/Envir/Market_def/QFunction-0.txt` (HeroTakeOnEx, HeroTakeOffEx, HeroDie, HeroStruckDamage, HeroAttackDamage)
+  - Example: `Mir200/Envir/MapQuest_def/QManage.txt` (HeroLogin + timer renewal entry)
 - 地图链接 (58): ->, MAPMOVE
   - Example: `样本Mir200/Envir/Market_def/其它区域/神秘老人-Q011.txt` (->, MAPMOVE)
   - Example: `样本Mir200/Envir/MapInfo.txt` (->)
