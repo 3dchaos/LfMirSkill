@@ -1,6 +1,6 @@
 ---
 name: lf-mir200-knowledge
-description: Use when answering or modifying LF/LFM2/翎风引擎 Mir200 server scripts, NPC scripts, MapInfo, MonGen, MerChant, QuestDiary, Market_def, Robot_def, item rules, command syntax, or engine help-document questions using the local Markdown manual, sample Mir200 directory, and learned script patterns.
+description: Use when answering or modifying LF/LFM2/翎风引擎 Mir200 server scripts, NPC scripts, MapInfo, MonGen, MerChant, QuestDiary, Market_def, Robot_def, item rules, command syntax, or engine help-document questions using the local Markdown manual, sample Mir200 directory, and learned script patterns. Also covers the bundled 老GOM PG插件使用说明书 (G盾/盘古 PG plugin 3.49: installation, feature switches, PG script commands, anti-cheat settings, troubleshooting).
 ---
 
 # LF Mir200 Knowledge
@@ -12,6 +12,11 @@ Use the included LF engine manual as the syntax source of truth. When a local `�
 This skill also learns a local script-thinking model from real sample files. The model is regenerated from the sample scripts and should be treated as a living summary of how Mir200 scripts are structured in practice.
 
 The skill includes a generated training course. Use it to practice on real sample scripts in a progressive order before making broad claims or designing complex script changes.
+
+Two manuals are bundled:
+
+- 翎风引擎帮助文档 → `knowledge_base/chapters/001-…` 至 `849-…`（引擎本体：脚本命令、MapInfo、MonGen、物品、颜色、英雄等）。
+- 老GOM PG插件使用说明书 → `knowledge_base/chapters/pg-plugin/`（G盾盘古 PG 插件 3.49：安装、功能开关、PG 脚本命令、防脱机/封号、常见问题），图片在 `knowledge_base/assets/pg-plugin/`。索引 `knowledge_base/index.md` 末尾有该章节的完整目录。
 
 Do not compile, launch, or run the Mir200 server. Perform static analysis only unless the user explicitly changes that constraint.
 
@@ -47,6 +52,7 @@ If the root moves, either pass `--root` or set `LF_MIR200_KB_ROOT`.
 12. Read `references/mir200-256-colors.md` when the request involves color values, `0-255` palettes, `/SCOLOR`, `{text|color}`, equipment name colors, item remarks, set remarks, custom item text colors, custom attributes, progress bars, monster name colors, or low-to-high rarity color presets.
 13. Read `references/script-deadloop-debugging.md` when logs report `[脚本死循环]`, repeated `GOTO` failures, `QManage` timer failures, or a script starts failing after its refresh/call chain grows.
 13a. Read `references/hero-autocall-slave.md` when the request involves hero pets/babies (`RECALLMOB` for heroes, `H.RECALLMOB`, `CHECKSLAVECOUNT`, `H.CHECKSKILL`, `@HeroLearnMagic`, `@OnHeroSlaveDie`, `@HeroSlaveAttack`, hero summon skills), hero pet count/occupancy, or auto-summon features.
+13b. Read `references/dialog-ui-layout.md` when the request involves big-dialog NPC menus built with `OpenBigDialogBox`/`OPENMERCHANTBIGDLG`, `Layout`/`#L0X` regions, `<Text:#L0X~:...>`, `<NewLine:#L0X~>`, `<MText:#L0X~:...>`, or adding/reordering buttons in such menus.
 14. Inspect the most relevant project files before making claims or edits.
 15. For code/script edits, preserve original encoding and style, and modify only the requested files.
 16. Validate statically after edits with `validate` and targeted searches.
@@ -104,6 +110,25 @@ If the root moves, either pass `--root` or set `LF_MIR200_KB_ROOT`.
 - Mir200 color values are numeric palette IDs from `0-255`, not arbitrary RGB input. For color work, use `references/mir200-256-colors.md` and the official color-related chapters before choosing numbers.
 - The local `256色值` source skips color `32`; do not use `32` for new scripts unless another official project source confirms its meaning. Color `255` appears as a white final table cell without explicit HTML `bgColor`, so prefer confirmed `246`/`254` when exact white text is not required.
 - Sample-backed readable presets include `218` for item remarks, `223,249` for active/inactive set remark states, `116` for equipment or set item names, `250` for positive/success values, `249` for danger/inactive/Boss warning, `251` for yellow headlines or timers, `253` for magenta rare callouts, and `254` for cyan labels.
+
+## PG (盘古) Plugin Manual
+
+`knowledge_base/chapters/pg-plugin/` is the 老GOM PG插件使用说明书 (G盾盘古插件 3.49) and is a separate manual from the LF engine chapters. Use it for G盾/盘古 plugin questions, not for LF engine syntax.
+
+Structure (chapter numbers restart at `001` inside the section):
+
+- `001-安装说明` … `041-组队列表`: 安装步骤、颜色值、`<$PGNPCPARAMX>` 扩展点击参数、`@PGMakeEx` 等 GM 命令、功能开关（大血条、背包分页、大背包、爆率透视、自动穿戴、自动挂机、在线列表等）。
+- `042-123`: 脚本命令类（爆率扩展、自动回收、自动捡物、各类触发、范围伤害、百分比切割、嘲讽吸怪、配置文件读写、云端记录等）。
+- `124-154`: G盾游戏安全防护（A/B 版安装、防脱机、封号取证、掉线/卡位/加速等常见问题）。
+- `155-161`: 脚本例子（防脱机验证脚本、自定义处罚封号、脚本实现 GM 命令、内挂自动挂机）。
+- `162-164`: 网络技术（建站、登录器自动更新、端口封闭）。
+
+Rules:
+
+- PG 命令和变量属于 G盾插件层，和 LF 原生命令同名不同义时以 pg-plugin 章节为准；查不到就说明没有对应说明，不要臆造 `PG` 前缀命令。
+- 安装顺序按 `001-安装说明`：`IPLocal.dll` → `945Engine.dll` → `PGM2Plugin.dll`，绿盟环境再加 `GdunExtendX86.dll`；单机测试不要装 `GdunExtendX86.dll`。
+- 插件装了不生效、光柱不显示、玩家掉线/被误 T 一类问题，先查 `124-154` 的 G盾安全防护章节，再查引擎章节。
+- 章节标题和图片路径可直接引用，例如 `knowledge_base/chapters/pg-plugin/005-新增GM命令.md`。
 
 ## Project Knowledge Workflow
 
@@ -236,6 +261,7 @@ python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/re
 python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/envir-config-deep-dives.md"
 python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/sample2-feature-buffs.md"
 python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/mir200-256-colors.md"
+python <skill-dir>\scripts\lf_kb.py inspect "codex-skills/lf-mir200-knowledge/references/dialog-ui-layout.md"
 ```
 
 ## Search Guidance
@@ -253,6 +279,7 @@ Use both Chinese feature names and script command keywords:
 - State/effect commands: `ChangeState`, `石化`, `冰冻`, `蛛网`, `红毒`, `绿毒`, `定身`, `瘫痪`, `禁锢`, `吸血`, `吸蓝`, `禁止使用技能`, `[@Struck]`, `[@StruckDamage]`, `M.ChangeState`, `H.ChangeState`, `FS.ChangeState`, `BB.ChangeState`
 - Colors and rarity palettes: `颜色值列表`, `256色值`, `SCOLOR`, `/SCOLOR`, `{文字|250}`, `{文字内容|文字颜色0-255}`, `SetCustomItemTextColor`, `SetCustomItemAbil`, `TzItemDescList`, `ItemDescList`, `BossNameColor`, `TZNoActiveItemColor`, `223,249`, `218`, `116`, `249`, `250`, `251`, `253`, `254`
 - Sample2 feature systems: `流派`, `觉醒之印`, `神剑BUFF`, `SetArrBuff`, `CloseArrBuff`, `BUFF检测`, `元素读取`, `五维读取`, `攻魔道读取`, `HPMP读取`, `防御读取`, `攻速读取`, `施法速度`, `吸血读取`, `技能威力读取`, `技能等级读取`, `BB读取`, `咒蛊术`, `体态压迫`, `撕裂`, `失心锁`, `苗疆蛊毒`, `苹果`, `满江红`, `幸运药水`, `远古契约`, `先祖契约`, `毒龙之殇`, `浴血狂攻`
+- PG/盘古插件: `PG插件`, `盘古插件`, `G盾`, `GdunExtend`, `PGM2Plugin`, `<$PGNPCPARAM`, `@PGMakeEx`, `大背包`, `背包分页`, `爆率透视`, `自动回收`, `自动捡物`, `自动挂机`, `防脱机`, `封机器码`, `无限刀`, `光柱`, `透明消息`, `百分比切割`, `嘲讽`, `吸怪`
 
 When a query returns too many hits, search the manual with exact command names and search samples with the feature name or folder name.
 
@@ -266,6 +293,14 @@ python <skill-dir>\scripts\lf_kb.py validate
 ```
 
 If the CHM is reconverted, run the project conversion scripts first, then run this skill's `update`.
+
+Extra manuals (for example the 老GOM PG 插件说明书) are imported with the repository script, which converts the extracted CHM, keeps only referenced images, rewrites links to `../../assets/<section>/`, and splices a marked section into `knowledge_base/index.md`:
+
+```powershell
+python scripts\import_manual_section.py --source "<extracted-chm-dir>" --section pg-plugin --title "老GOM PG插件使用说明书"
+```
+
+Re-running the same command replaces the section in place, so it is safe to refresh the manual after a version bump.
 
 After updating, use the regenerated `references/mir200-thinking.md` as the local thinking summary. It should be updated from real scripts, not from memory.
 
